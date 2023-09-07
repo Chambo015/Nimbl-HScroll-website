@@ -1,12 +1,12 @@
 
 <script setup lang="ts">
-import {HeroButton} from '../HeroButton';
+import HeroButton from '@/components/HeroButton.vue';
 import lightImg from '@/assets/light.png';
 import lightImgWebp from '@/assets/light.webp';
 </script>
 
 <template>
-  <section class="mt-20 max-sm:mt-[50px] relative">
+  <section class=" relative">
       <picture>
       <source :srcset="lightImgWebp" type="image/webp" />
         <img
@@ -21,23 +21,23 @@ import lightImgWebp from '@/assets/light.webp';
           <p  class="text-justify font-gilroy leading-none after:inline-block after:w-full text-white text-2xl max-sm:text-xs font-normal uppercase tracking-[.6em] max-sm:tracking-[.3em]">
             Flagship Social Media Platform
           </p>
-          <h1 class='main-title'>
+          <h1 class="main-title">
             NIMBL.TV
-            <h1 class='main-text-layer'>NIMBL.TV</h1>
+            <span class="main-text-layer">NIMBL.TV</span>
           </h1>
         </div>
       </div>
       <div >
        <!--  <SliderAppMobile /> -->
       </div>
-      <div  class="flex justify-center mt-11 gap-8 max-sm:flex-col items-center">
+      <!-- <div  class="flex justify-center mt-11 gap-8 max-sm:flex-col items-center">
         <HeroButton class="max-sm:!w-[85%]">
           <p class="font-rfdewi text-xl max-sm:text-sm font-bold">APPLY FOR CLOSED BETA</p>
         </HeroButton>
         <HeroButton regular class="max-sm:!w-[85%]">
           <p class="font-rfdewi text-xl max-sm:text-sm font-bold uppercase">Launch Desktop Demo App</p>
         </HeroButton>
-      </div>
+      </div> -->
     </section>
 </template>
 
@@ -66,7 +66,7 @@ import lightImgWebp from '@/assets/light.webp';
   @apply text-center font-rfdewi inline-block bg-clip-text text-white text-[145px] max-sm:text-[50px] leading-none font-black uppercase -translate-x-2 -translate-y-7 max-sm:-translate-x-0 max-sm:-translate-y-6
 }
 .main-text-layer {
-  background-image: url('../../assets/image1895.png');
+  background-image: url('../assets/image1895.png');
   background-size:  contain;
   position: absolute;
   width: 100%;
