@@ -8,13 +8,13 @@ const router = createRouter({
     history: createWebHistory(), // Способ сохранения истории переходов по маршрутам
     routes: [
         // Определяем маршруты
-        {
+      /*   {
             path: "/", // путь маршрута
             name: "preview", // имя маршрута
             component: PreviewView, // Каждый маршрут должен сопоставляться с компонентом.
-        },
+        }, */
         {
-            path: "/nimbltv", // путь маршрута
+            path: "/", // путь маршрута
             name: "nimbltv", // имя маршрута
             component: NimblTvView, // Каждый маршрут должен сопоставляться с компонентом.
         },

@@ -3,6 +3,8 @@
 import HeroButton from '@/components/HeroButton.vue';
 import lightImg from '@/assets/light.png';
 import lightImgWebp from '@/assets/light.webp';
+import HeroSliderApp from '@/components/HeroSliderApp.vue';
+import IconFiveDots from '@/components/icons/IconFiveDots.vue';
 </script>
 
 <template>
@@ -28,34 +30,17 @@ import lightImgWebp from '@/assets/light.webp';
         </div>
       </div>
       <div >
-       <!--  <SliderAppMobile /> -->
+       <HeroSliderApp />
       </div>
-      <!-- <div  class="flex justify-center mt-11 gap-8 max-sm:flex-col items-center">
-        <HeroButton class="max-sm:!w-[85%]">
-          <p class="font-rfdewi text-xl max-sm:text-sm font-bold">APPLY FOR CLOSED BETA</p>
-        </HeroButton>
-        <HeroButton regular class="max-sm:!w-[85%]">
-          <p class="font-rfdewi text-xl max-sm:text-sm font-bold uppercase">Launch Desktop Demo App</p>
-        </HeroButton>
-      </div> -->
+      <div class="absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center  mt-11 max-sm:flex-col items-center bg-[linear-gradient(90deg,#2B253A_0%,#3E3A6E_100%)]">
+        <HeroButton>APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template></HeroButton>
+        <HeroButton regular >LAUNCH DESKTOP DEMO APP</HeroButton>
+      </div>
     </section>
 </template>
 
 
 <style scoped>
-.fulljustify {
-  text-align: justify;
-}
-.fulljustify:after {
-  content: '';
-  display: inline-block;
-  width: 100%;
-}
-#tagline {
-  height: 80px;
-  overflow: hidden;
-  line-height: 80px; /* vert-center */
-}
 
 .main-title {
   background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.30) 100%);

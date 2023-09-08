@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-black relative w-screen h-screen">
-        <div class="w-screen h-screen left-0 top-0 absolute z-[1]">
+    <div  class="bg-black relative w-screen h-screen z-[99]">
+        <div class="w-screen monitor_wrap h-screen left-0 top-0 absolute z-[1]">
             <img :src="monitor" alt="monitor" class="w-full h-full object-contain object-bottom" />
         </div>
         <img
@@ -39,6 +39,7 @@
             :style="{transform: `translate(${coords.x},${coords.y})`}"
             class="w-[104px] h-[108px] absolute right-[20%] top-[5%] z-[2]" />
         <img
+        ref="container"
             :src="nearLeftImg"
             alt="nearLeftImg"
             :style="{transform: `translate(${coordsNear.x},${coordsNear.y})`}"
@@ -49,7 +50,7 @@
             :style="{transform: `translate(${coordsNear.x},${coordsNear.y})`}"
             class="w-[293px] h-[283px] absolute right-[6%] bottom-[4%] z-[4]" />
         <div
-            class="absolute w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.png')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity">
+            class="absolute smoke-clouds w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.png')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity">
             <img
                 class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                 alt="smoke-image1"
@@ -70,12 +71,12 @@
       <img class="smoke-cloud6 absolute mix-blend-screen" alt="smoke-image6" :src="leftSmoke"> -->
             <img class="smoke-cloud7 absolute mix-blend-overlay" alt="smoke-image7" :src="centerSmoke" />
         </div>
-        <button type="button" class="w-screen  h-screen z-50 fixed block" @click="router.push({name: 'nimbltv'})"></button>
+        <!-- <button type="button" class="w-screen  h-screen z-50 fixed block" @click="router.push({name: 'nimbltv'})"></button> -->
     </div>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, onUnmounted} from "vue";
 import monitor from "@/assets/preview/first-block-nimbl-landing.png";
 import rightImg from "@/assets/preview/rightImg.png";
 import imgPlayLeft from "@/assets/preview/imgPlayLeft.png";
@@ -89,7 +90,8 @@ import nearRight from "@/assets/preview/near-right.png";
 // import rightSmoke from '@/assets/preview/rightSmoke.png'
 import centerSmoke from "@/assets/preview/smokeCenter.png";
 import peopleImg from "@/assets/preview/people.png";
-import { useRouter } from 'vue-router';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
+import gsap from 'gsap'
 
 const router = useRouter()
 
@@ -101,12 +103,48 @@ const coordsNear = computed(() => ({x: `-${X.value * 150}px`, y: `-${Y.value * 1
 const coordsMiddle = computed(() => ({x: `-${X.value * 85}px`, y: `-${Y.value * 85}px`}));
 const coordsPeople = computed(() => ({x: `-${X.value * 50}px`, y: `-${Y.value * 0}px`}));
 
+const mouseEventHandle = (e: any) => {
+    X.value = e.clientX / window.innerWidth;
+    Y.value = e.clientY / window.innerHeight;
+}
 onMounted(() => {
-    window.addEventListener("mousemove", function (e) {
-        X.value = e.clientX / window.innerWidth;
-        Y.value = e.clientY / window.innerHeight;
-    });
+    window.addEventListener("mousemove", mouseEventHandle);
 });
+onUnmounted(() => {
+    window.removeEventListener("mousemove", mouseEventHandle)
+})
+
+// Animation container
+const container = ref()
+const control = ref()
+onMounted(() => {
+    control.value = gsap.to(container.value, {
+        duration: .2,
+        scale: 2,
+        opacity: 0.1
+    })
+    control.value.pause()
+})
+onUnmounted(() => {
+    gsap.to(container.value, {
+        duration: 3,
+        scale: 1.8,
+        opacity: 0,
+        onComplete: () => {
+            
+        }
+    })
+})
+/* onBeforeRouteLeave((to, from, next) => {
+    gsap.to(container.value, {
+        duration: 3,
+        scale: 1.8,
+        opacity: 0,
+        onComplete: () => {
+            next()
+        }
+    })
+}) */
 </script>
 
 <style scoped>

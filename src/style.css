@@ -6,6 +6,10 @@ body {
   background: #0F0722;
   color: white;
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
+}
+html {
+  overflow: hidden;
+  min-height: 100vh;
 }
 
