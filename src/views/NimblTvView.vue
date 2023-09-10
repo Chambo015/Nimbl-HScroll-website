@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import HeroButton from '@/components/HeroButton.vue';
 import lightImg from '@/assets/light.png';
@@ -8,7 +7,7 @@ import IconFiveDots from '@/components/icons/IconFiveDots.vue';
 </script>
 
 <template>
-  <section class=" relative">
+  <section class=" relative h-full w-full">
       <picture>
       <source :srcset="lightImgWebp" type="image/webp" />
         <img
@@ -63,6 +62,5 @@ import IconFiveDots from '@/components/icons/IconFiveDots.vue';
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
 }
 </style>

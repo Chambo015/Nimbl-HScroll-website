@@ -57,7 +57,7 @@ export default {
             padding: '0 25px'
           },
           ".gradient-nav-active" : {
-            "background": "linear-gradient(180deg, rgba(255, 255, 255, 1) 1.77%, rgba(255, 255, 255, 0.30) 98.23%)",
+            "background": "linear-gradient(180deg, rgba(255, 255, 255, 1) 1.77%, rgba(255, 255, 255, 0.65) 50.77%, rgba(255, 255, 255, 0.1) 100%)",
             "background-clip": "text",
             "-webkit-background-clip": "text",
             "-webkit-text-fill-color": "transparent"

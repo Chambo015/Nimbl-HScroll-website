@@ -90,22 +90,19 @@ import nearRight from "@/assets/preview/near-right.png";
 // import rightSmoke from '@/assets/preview/rightSmoke.png'
 import centerSmoke from "@/assets/preview/smokeCenter.png";
 import peopleImg from "@/assets/preview/people.png";
-import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import gsap from 'gsap'
-
-const router = useRouter()
 
 const X = ref();
 const Y = ref();
 
-const coords = computed(() => ({x: `-${X.value * 40}px`, y: `-${Y.value * 40}px`}));
-const coordsNear = computed(() => ({x: `-${X.value * 150}px`, y: `-${Y.value * 150}px`}));
-const coordsMiddle = computed(() => ({x: `-${X.value * 85}px`, y: `-${Y.value * 85}px`}));
-const coordsPeople = computed(() => ({x: `-${X.value * 50}px`, y: `-${Y.value * 0}px`}));
+const coords = computed(() => ({x: `${X.value * 40}px`, y: `${Y.value * 40}px`}));
+const coordsNear = computed(() => ({x: `${X.value * 150}px`, y: `${Y.value * 150}px`}));
+const coordsMiddle = computed(() => ({x: `${X.value * 85}px`, y: `${Y.value * 85}px`}));
+const coordsPeople = computed(() => ({x: `${X.value * 50}px`, y: `${Y.value * 0}px`}));
 
 const mouseEventHandle = (e: any) => {
-    X.value = e.clientX / window.innerWidth;
-    Y.value = e.clientY / window.innerHeight;
+    X.value = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+    Y.value = (e.clientY - window.innerHeight /2) / window.innerHeight;
 }
 onMounted(() => {
     window.addEventListener("mousemove", mouseEventHandle);
