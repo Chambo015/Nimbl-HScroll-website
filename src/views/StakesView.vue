@@ -10,10 +10,84 @@ import ChartLine2 from '@/components/StakesView/ChartLine2.vue';
 import ChartLine3 from '@/components/StakesView/ChartLine3.vue';
 import ChartLine4 from '@/components/StakesView/ChartLine4.vue';
 import ChartLine1 from '@/components/StakesView/ChartLine1.vue';
+import {onMounted, ref} from 'vue'
+import gsap from 'gsap';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const chartEl = ref()
+const titleEl = ref()
+const dotsChartEl = ref()
+
+onMounted(() => {
+    const tl = gsap.timeline();
+
+    tl.from(chartEl.value, {
+        autoAlpha: 0.0,
+        duration: 1.5,
+        yPercent: 100,
+        ease: "expo.inOut",
+        delay: route.meta.firstPage ? 2 : 0,
+    });
+    tl.from(
+      titleEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -100,
+            ease: "expo.inOut",
+            delay: route.meta.firstPage ? 2 : 0,
+        },
+        "0",
+    );
+    tl.from(
+      dotsChartEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 2,
+            yPercent: 80,
+            stagger: 0.2,
+            delay: route.meta.firstPage ? 2 : 0,
+        },
+        "0",
+    );
+});
+
+onBeforeRouteLeave((__, _, next) => {
+  const tl = gsap.timeline({onComplete: next});
+
+  tl.to(chartEl.value, {
+        autoAlpha: 0.0,
+        duration: 1,
+        yPercent: 100,
+        ease: "expo.inOut",
+    });
+    tl.to(
+      titleEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+            yPercent: -100,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(
+      dotsChartEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+            yPercent: 50,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+})
 </script>
 <template>
-  <section  class="pt-[200px] max-sm:pt-[100px]">
-      <div class="container">
+  <section class="py-[50px] flex flex-col justify-center h-full">
+      <div ref="titleEl" class="container">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">
           Introducing Stakes
         </h2>
@@ -22,7 +96,7 @@ import ChartLine1 from '@/components/StakesView/ChartLine1.vue';
           with the excitement of owning stakes in your favorite groups and influencers.
         </p>
       </div>
-      <div class="flex justify-center mt-28">
+      <div ref="chartEl" class="flex justify-center mt-28">
         <div class="relative">
           <ChartBackground />
           <div class="absolute top-[5%] left-0 w-full">
@@ -66,7 +140,7 @@ import ChartLine1 from '@/components/StakesView/ChartLine1.vue';
           </div>
         </div>
       </div>
-      <div class="flex justify-center gap-7 h-[150px] mt-8">
+      <div ref="dotsChartEl" class="flex justify-center gap-7 h-[150px] mt-8">
         <svg xmlns="http://www.w3.org/2000/svg" width="37" height="45" fill="none" viewBox="0 0 37 45">
           <circle cx="18" cy="11" r="11" fill="#FF8743" />
           <circle cx="18" cy="11" r="7" fill="#000" />

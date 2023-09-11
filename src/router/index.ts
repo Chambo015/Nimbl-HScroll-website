@@ -98,4 +98,12 @@ const router = createRouter({
     ],
 });
 
+router.afterEach((to, from) => {
+    if(!from.name) {
+        to.meta.firstPage = true
+    } else {
+        to.meta.firstPage = false
+    }
+  })
+
 export default router;
