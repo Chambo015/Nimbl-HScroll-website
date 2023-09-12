@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 
 import NimblTvView from "@/views/NimblTvView.vue";
 import StakesView from "@/views/StakesView.vue";
@@ -17,7 +17,7 @@ import TransfersView from '@/views/TransfersView.vue';
 
 
 const router = createRouter({
-    history: createWebHistory(), // Способ сохранения истории переходов по маршрутам
+    history: createWebHashHistory(import.meta.env.BASE_URL),  /* createWebHistory(), */ // Способ сохранения истории переходов по маршрутам
     routes: [
         // Определяем маршруты
       /*   {
