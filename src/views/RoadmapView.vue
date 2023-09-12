@@ -1,10 +1,10 @@
 <template>
-    <section class="pt-[200px] max-sm:pt-[100px]">
+    <section @wheel="onWheel" class="h-full flex items-center py-[50px]">
       <div class="container 2xl:max-w-[1600px] relative ">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent hidden max-sm:block bg-clip-text font-rfdewi font-black uppercase text-2xl text-center">
           ROADMAP
         </h2>
-        <div class="flex justify-between gap-8 max-sm:flex-col max-sm:w-[210px] max-sm:mt-7">
+        <div ref="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-[210px] max-sm:mt-7 relative">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 1
@@ -40,12 +40,13 @@
          <picture>
          <source :srcset="rocketWebp" type="image/webp" />
            <img
+           ref="rocketImgEl"
             :src="rocket"
             alt="rocket"
             class="mix-blend-screen w-[1000px] object-contain mx-auto max-sm:absolute max-sm:-rotate-90 max-sm:top-[150px]  max-sm:-right-[50px] max-sm:w-[350px] max-sm:block"
           /> 
          </picture>
-        <div class="flex justify-between gap-8 max-sm:flex-col max-sm:w-[210px] max-sm:mt-7">
+        <div ref="bottomListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-[210px] max-sm:mt-7">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 4
@@ -88,6 +89,82 @@
 <script setup lang="ts">
 import rocket from '@/assets/NIMBL-rocket.png';
 import rocketWebp from '@/assets/NIMBL-rocket.webp';
+import gsap from "gsap";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from "@/composables/mouseWheel";
+import { onMounted, ref } from 'vue';
+
+const {onWheel} = useMouseWheel({ toUpRoute: "token"});
+
+const topListEl = ref();
+const bottomListEl = ref();
+const rocketImgEl = ref();
+
+onMounted(() => {
+    const tl = gsap.timeline();
+    
+    tl.from(topListEl.value.children, {
+        yPercent: -100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "expo.inOut",
+    });
+    tl.from(
+      bottomListEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(
+      rocketImgEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -150,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+   
+    
+});
+
+onBeforeRouteLeave((__, _, next) => {
+    const tl = gsap.timeline({onComplete: next});
+
+    tl.to(topListEl.value, {
+        yPercent: -100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.to(
+      bottomListEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 100,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(
+      rocketImgEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: 150,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+});
 </script>
 
 <style scoped>

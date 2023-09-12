@@ -3,8 +3,10 @@ import {computed, onMounted, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
 import gsap from "gsap";
+import { useRouter } from 'vue-router';
 
 const ready = ref(false);
+const router = useRouter()
 
 // called when the leave transition starts.
 // use this to start the leaving animation.
@@ -49,10 +51,15 @@ function onLeave(el: any, done: any) {
         "+0.7",
     );
 }
+
+const handlePreviewClick = () => {
+    ready.value = true;
+    router.replace({name: 'nimbltv'})
+}
 </script>
 
 <template>
-    <button v-if="!ready" type="button" class="w-screen h-screen z-[100] fixed block" @click="ready = true"></button>
+    <button v-if="!ready" type="button" class="w-screen h-screen z-[100] fixed block" @click="handlePreviewClick"></button>
     <main class="h-[calc(100vh-35px)]">
         <Transition @leave="onLeave" mode="in-out">
             <PreviewView v-if="!ready" />

@@ -9,21 +9,117 @@ import cursor from '@/assets/cursor.png';
 import network from '@/assets/network.png';
 import pc from '@/assets/pc.png';
 import starShips from '@/assets/star-ships.png';
+import gsap from "gsap";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from "@/composables/mouseWheel";
+import { onMounted, ref } from 'vue';
+
+const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "handle"});
+
+const titleEl = ref();
+const listEl = ref();
+const starShipsEl = ref();
+const imgEarthEl = ref();
+
+onMounted(() => {
+    const tl = gsap.timeline();
+    
+    tl.from(imgEarthEl.value, {
+        xPercent: 100,
+        yPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.from(
+      starShipsEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 50,
+            xPercent: 170,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(
+        titleEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -150,
+            stagger: -0.3,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(listEl.value.children, {
+        xPercent: -100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        stagger: -0.1,
+        ease: "expo.inOut",
+    }, '0');
+    
+});
+
+onBeforeRouteLeave((__, _, next) => {
+    const tl = gsap.timeline({onComplete: next});
+
+    tl.to(imgEarthEl.value, {
+        xPercent: 100,
+        yPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.to(
+      starShipsEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -100,
+            xPercent: -250,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(
+        titleEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -150,
+            stagger: 0.3,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(listEl.value.children, {
+        xPercent: -100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        stagger: 0.1,
+        ease: "expo.inOut",
+    }, '0');
+});
 </script>
 
 <template>
-    <section class="pt-[200px]">
-      <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[88px] leading-none font-rfdewi font-black text-center max-sm:text-3xl">
-        NIMBL TOKEN
-      </h2>
-      <p class="text-center text-white font-gilroy text-3xl mt-3 max-sm:text-base">
-        $NIMBL is a utility token that acts as the platform currency
-      </p>
+    <section @wheel="onWheel" class="h-full flex flex-col justify-center pt-[150px]">
+      <div ref="titleEl">
+        <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[88px] leading-none font-rfdewi font-black text-center max-sm:text-3xl">
+          NIMBL TOKEN
+        </h2>
+        <p class="text-center text-white font-gilroy text-3xl mt-3 max-sm:text-base">
+          $NIMBL is a utility token that acts as the platform currency
+        </p>
+      </div>
       <div class="flex h-[1000px] relative max-sm:h-auto max-sm:flex-col">
-       <picture class="pointer-events-none"><source :srcset="imgEarthWebp" type="image/webp" /><img :src="imgEarth" alt="imgEarth" class="ml-auto absolute right-0 -top-[100px] max-sm:hidden" /></picture>
-        <img :src="starShips" alt="starShips" class='w-[380px] absolute left-1/2 top-[30%] -translate-x-1/2 max-sm:hidden pointer-events-none' />
+       <picture class="pointer-events-none"><source :srcset="imgEarthWebp" type="image/webp" /><img ref="imgEarthEl" :src="imgEarth" alt="imgEarth" class="ml-auto absolute right-0 -top-16 max-sm:hidden" /></picture>
+        <img ref="starShipsEl" :src="starShips" alt="starShips" class='w-[380px] absolute left-1/2 top-[30%] -translate-x-1/2 max-sm:hidden pointer-events-none' />
         <div class='container 2xl:max-w-[1600px] mx-auto'>
-            <div class='mt-28 max-sm:mt-8'>
+            <div ref="listEl" class='mt-28 max-sm:mt-8'>
               <div class="flex items-center gap-5">
                 <img :src="stake" alt="stake" class='w-[30px] h-[30px]' />
                 <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Stake $Nimbl to gain governance</p>

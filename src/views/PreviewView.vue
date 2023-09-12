@@ -6,7 +6,6 @@
         <img
             :src="peopleImg"
             alt="peopleImg"
-            :style="{transform: `translate(${coordsPeople.x},${coordsPeople.y})`}"
             class="absolute left-[30%] bottom-0 z-[2]" />
         <img
             :src="rightImg"

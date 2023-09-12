@@ -6,9 +6,10 @@ import HeroSliderApp from "@/components/HeroSliderApp.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
 import {onMounted, ref} from "vue";
-import {onBeforeRouteLeave, useRoute} from "vue-router";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from '@/composables/mouseWheel';
 
-const route = useRoute();
+const {onWheel} = useMouseWheel({toDownRoute: "stakes"});
 
 const sliderEl = ref();
 const buttonsEl = ref();
@@ -23,7 +24,6 @@ onMounted(() => {
         duration: 1.5,
         scale: 0.0,
         ease: "expo.inOut",
-        delay: route.meta.firstPage ? 2 : 0,
     });
     tl.from(
         buttonsEl.value,
@@ -32,7 +32,6 @@ onMounted(() => {
             duration: 1.5,
             yPercent: 100,
             ease: "expo.inOut",
-            delay: route.meta.firstPage ? 2: 0,
         },
         "0",
     );
@@ -43,7 +42,6 @@ onMounted(() => {
             duration: 1.5,
             yPercent: -100,
             ease: "expo.inOut",
-            delay: route.meta.firstPage ? 2 : 0,
         },
         "0",
     );
@@ -52,7 +50,6 @@ onMounted(() => {
         {
             autoAlpha: 0.0,
             duration: 1.5,
-            delay: route.meta.firstPage ? 2 : 0,
         },
         "0",
     );
@@ -99,7 +96,7 @@ onBeforeRouteLeave((__, _, next) => {
 </script>
 
 <template>
-    <section class="relative h-full w-full">
+    <section @wheel="onWheel" class="relative h-full w-full">
         <picture ref="lightEl">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img

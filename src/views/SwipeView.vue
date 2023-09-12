@@ -5,13 +5,66 @@ import swipeRight from '@/assets/swipe-toSave.png';
 import mobileImgWebp from '@/assets/swipe.webp';
 import swipeLeftWebp from '@/assets/swipe-toFilter.webp';
 import swipeRightWebp from '@/assets/swipe-toSave.webp';
+import gsap from "gsap";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from "@/composables/mouseWheel";
+import { onMounted, ref } from 'vue';
 
+const {onWheel} = useMouseWheel({toDownRoute: "teaser", toUpRoute: "moderation"});
+
+const mainImgEl = ref();
+const contentEl = ref();
+
+onMounted(() => {
+    const tl = gsap.timeline();
+
+    tl.from(mainImgEl.value, {
+        xPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.from(
+      contentEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    
+});
+
+onBeforeRouteLeave((__, _, next) => {
+    const tl = gsap.timeline({onComplete: next});
+
+    tl.to(mainImgEl.value, {
+        xPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.to(
+      contentEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+});
 </script>
 
 <template>
-    <section  class="pt-[200px]">
+    <section @wheel="onWheel" class="h-full flex">
       <div class="container flex gap-14 justify-between items-center max-sm:flex-col">
-        <div  class="w-[400px]">
+        <div ref="contentEl"  class="w-[500px]">
           <h2 class="bg-gradient-to-b from-white to-white/50 font-rfdewi text-transparent bg-clip-text text-5xl font-black uppercase max-sm:text-2xl max-sm:text-center">
             SWIPE
           </h2>
@@ -20,7 +73,7 @@ import swipeRightWebp from '@/assets/swipe-toSave.webp';
             <span class=" mt-4 block max-sm:inline max-sm:mt-0">Swipe left to filter, swipe right to save</span>
           </p>
         </div>
-        <div class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
+        <div ref="mainImgEl" class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
           <picture ><source :srcset="mobileImgWebp" type="image/webp" /><img :src="mobileImg" alt="mobileImg" class="w-[442px] h-[744px] max-sm:w-[230px] max-sm:h-[380px] object-contain" /></picture>
           <picture><source ::srcset="swipeLeftWebp" type="image/webp" /><img  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
           <picture><source ::srcset="swipeRightWebp" type="image/webp" /><img  :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>

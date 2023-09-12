@@ -1,14 +1,73 @@
 <script setup lang="ts">
 import handImg from "@/assets/hand.png";
+import handLgImg from "@/assets/hand_lg.png";
 import handImgWebp from "@/assets/hand.webp";
 import HeroButton from "@/components/HeroButton.vue";
 import IconFiveDots from '@/components/icons/IconFiveDots.vue';
+import gsap from "gsap";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from "@/composables/mouseWheel";
+import { onMounted, ref } from 'vue';
+
+const {onWheel} = useMouseWheel({toDownRoute: "transfers", toUpRoute: "swipe"});
+
+const mainImgEl = ref();
+const contentEl = ref();
+
+onMounted(() => {
+    const tl = gsap.timeline();
+
+    tl.from(mainImgEl.value, {
+        xPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        rotate: 180,
+        transformOrigin: 'bottom right',
+        ease: "expo.inOut",
+    });
+    tl.from(
+      contentEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    
+});
+
+onBeforeRouteLeave((__, _, next) => {
+    const tl = gsap.timeline({onComplete: next});
+
+    tl.to(mainImgEl.value, {
+        xPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        rotate: 180,
+        transformOrigin: 'bottom right',
+        ease: "expo.inOut",
+    });
+    tl.to(
+      contentEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+});
 </script>
 
 <template>
-    <section class="pt-40">
-        <div class="container flex items-center max-sm:flex-col">
-            <div class="shrink-0">
+    <section @wheel="onWheel" class="h-full pt-12">
+        <div class="container flex max-sm:flex-col h-full">
+            <div ref="contentEl" class="shrink-0 self-center">
                 <h2
                     class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text font-rfdewi font-black uppercase text-5xl max-sm:text-2xl max-sm:text-center">
                     clips<span class="text-2xl font-univers lowercase mx-1 max-sm:text-sm">to</span>Longs
@@ -24,18 +83,18 @@ import IconFiveDots from '@/components/icons/IconFiveDots.vue';
                     </HeroButton>
                 </div>
             </div>
-            <div class="shrink-0 max-sm:mt-5 relative">
+            <div ref="mainImgEl" class="shrink-0 max-sm:mt-5 relative">
                 <picture>
-                    <source :srcset="handImgWebp" type="image/webp" />
+                    <!-- <source :srcset="handImgWebp" type="image/webp" /> -->
                     <img
                         loading="lazy"
-                        :src="handImg"
+                        :src="handLgImg"
                         alt="handImg"
-                        class="w-[1045px] h-[833px] object-contain max-sm:max-w-[170%] max-sm:h-auto" />
+                        class="w-full h-full object-contain object-bottom  max-sm:h-auto" />
                 </picture>
                 <div
-                    class="absolute w-[32%] z-20 h-[85%] top-[7%] left-[12%] rounded-3xl overflow-hidden max-sm:w-[54%] max-sm:left-[20%]">
-                    <video width="360" height="640" muted loop autoplay >
+                    class="absolute w-[31%] z-20 h-[70%] top-[5%] left-[11%] rounded-[50px] overflow-hidden max-sm:w-[54%] max-sm:left-[20%]">
+                    <video class="w-full h-full" muted loop autoplay >
                         <source src="https://d2n3zca7e0phmo.cloudfront.net/lv_0_20230824191446.mp4" type="video/mp4" />
                     </video>
                 </div>

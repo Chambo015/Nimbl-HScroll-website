@@ -6,13 +6,67 @@ import imgMobileSm from '@/assets/Screen_crypto-sm.png'
 import imgCard from '@/assets/business-card.png'
 import imgCardFull from '@/assets/business-card-full.png'
 import imgCardWebp from '@/assets/business-card.webp'
+import gsap from "gsap";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from "@/composables/mouseWheel";
+import { onMounted, ref } from 'vue';
+
+const {onWheel} = useMouseWheel({toDownRoute: "gamification", toUpRoute: "teaser"});
+
+const mainImgEl = ref();
+const contentEl = ref();
+
+onMounted(() => {
+    const tl = gsap.timeline();
+
+    tl.from(mainImgEl.value, {
+        xPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.from(
+      contentEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    
+});
+
+onBeforeRouteLeave((__, _, next) => {
+    const tl = gsap.timeline({onComplete: next});
+
+    tl.to(mainImgEl.value, {
+        xPercent: 100,
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    tl.to(
+      contentEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+});
 </script>
 
 <template>
-     <section class="relative max-sm:mt-5 h-full flex items-end">
-      <div class="px-4 w-[80%] mx-auto flex items-center z-10">
-        <div class="flex pt-[90px] justify-between w-full max-sm:pt-5">
-          <div class='flex flex-col '>
+     <section @wheel="onWheel" class="relative max-sm:mt-5 h-full flex items-center">
+      <div class="container mx-auto flex items-center z-10 ">
+        <div class="flex pt-[90px] justify-between w-full max-sm:pt-5 gap-16 items-center">
+          <div ref='contentEl' class='flex flex-col w-[700px]'>
             <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl">
               in-app <br className='max-sm:hidden'/>crypto transfers
             </h2>
@@ -28,7 +82,7 @@ import imgCardWebp from '@/assets/business-card.webp'
             </div>
           </div>
           <div class="flex-shrink-0">
-           <picture><!-- <source :srcset="imgMobileWebp" type="image/webp" /> --><img :src="imgMobileLg" alt="imgMobile" class='max-sm:hidden h-[832px] object-contain object-bottom' loading="lazy" /></picture>
+           <picture><!-- <source :srcset="imgMobileWebp" type="image/webp" /> --><img ref="mainImgEl" :src="imgMobileLg" alt="imgMobile" class='max-sm:hidden h-[832px] object-contain object-bottom' loading="lazy" /></picture>
           </div>
         </div>
       </div>

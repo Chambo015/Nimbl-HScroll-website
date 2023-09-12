@@ -1,16 +1,17 @@
 <template>
-   <section  class="py-[50px] h-full">
-      <div class="container relative flex flex-col justify-between h-full">
-        
-       <div >
-          <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-7 text-5xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:mt-2">
-            Redefining Moderation with Transparent AI
-          </h2>
-          <p class="font-gilroy mt-6 text-center text-white text-2xl font-normal max-sm:text-base">
-            Embrace a new era of community governance with our AI-powered moderation system.
-          </p>
-          <div class="flex justify-between mt-16 max-sm:flex-col max-sm:items-center max-sm:gap-7">
-            <div class="w-[280px] flex flex-col  items-center gap-4">
+   <section @wheel="onWheel" class="py-[20px] h-full">
+      <div class="container relative flex flex-col justify-center h-full">
+       <div>
+          <div ref="titleEl">
+            <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-7 text-5xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:mt-2">
+              Redefining Moderation with Transparent AI
+            </h2>
+            <p class="font-gilroy mt-6 text-center text-white text-2xl font-normal max-sm:text-base">
+              Embrace a new era of community governance with our AI-powered moderation system.
+            </p>
+          </div>
+          <div ref="colsEl" class="flex justify-between mt-10 max-sm:flex-col max-sm:items-center max-sm:gap-7">
+            <div class="w-[300px] flex flex-col  items-center gap-4">
               <IconBlock />
               <p class=" text-center text-white text-2xl font-normal font-gilroy max-sm:text-base ">
                 Decisions are guided by clear, open-source guidelines
@@ -22,7 +23,7 @@
                 Every instance is committed on-chain, with explanation and post links
               </p>
             </div>
-            <div class="w-[250px] flex flex-col items-center gap-4">
+            <div class="w-[300px] flex flex-col items-center gap-4">
               <IconUserSearch />
               <p class=" text-center text-white text-2xl font-normal font-gilroy max-sm:text-base">
                 Moderation Guidelines developed by Nimbl Collective DAO
@@ -30,22 +31,23 @@
             </div>
           </div>
        </div>
-       <div>
-           <div  class="relative overflow-hidden rounded-tl-[1000px] rounded-tr-[1000px] mt-9">
+       <div ref="radarEl" class="mix-blend-lighten mt-5">
+           <div class="relative overflow-hidden rounded-tl-[1000px] rounded-tr-[1000px] ">
               <picture >
                 <source :srcset="radarImgWebp" type="image/webp" />
-                <img  :src="radarImg" alt="radarImg" class="w-full object-contain mix-blend-lighten" />
+                <img   :src="radarImg" alt="radarImg" class="w-full object-contain mix-blend-lighten" />
               </picture>
-              <div></div>
-              <div class="scanner"></div>
-              <ul class="scanner_points">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
+              <div >
+                <div class="scanner"></div>
+                <ul class="scanner_points">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
             </div>
             <picture>
               <source :srcset="radarIconWebp" type="image/webp" />
@@ -68,6 +70,87 @@ import radarIconWebp from '@/assets/radar-icon.webp';
 import IconBlock from '@/components/icons/IconBlock.vue';
 import IconSearch from '@/components/icons/IconSearch.vue';
 import IconUserSearch from '@/components/icons/IconUserSearch.vue';
+import gsap from "gsap";
+import {onBeforeRouteLeave} from "vue-router";
+import useMouseWheel from "@/composables/mouseWheel";
+import { onMounted, ref } from 'vue';
+
+const {onWheel} = useMouseWheel({toDownRoute: "swipe", toUpRoute: "data"});
+
+const radarEl = ref();
+const colsEl = ref();
+const titleEl = ref();
+
+onMounted(() => {
+    const tl = gsap.timeline();
+
+    tl.from(
+        colsEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(
+      titleEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(
+      radarEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+            ease: "expo.inOut",
+        }, "0"
+    )
+});
+
+onBeforeRouteLeave((__, _, next) => {
+    const tl = gsap.timeline({onComplete: next});
+
+    tl.to(
+        colsEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(
+      titleEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -100,
+            stagger: 0.2,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(
+      radarEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+            ease: "expo.inOut",
+        },
+        "0"
+    )
+});
 </script>
 
 <style scoped lang="scss">

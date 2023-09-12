@@ -12,9 +12,10 @@ import ChartLine4 from '@/components/StakesView/ChartLine4.vue';
 import ChartLine1 from '@/components/StakesView/ChartLine1.vue';
 import {onMounted, ref} from 'vue'
 import gsap from 'gsap';
-import { onBeforeRouteLeave, useRoute } from 'vue-router';
+import { onBeforeRouteLeave } from 'vue-router';
+import useMouseWheel from '@/composables/mouseWheel'
 
-const route = useRoute();
+const {onWheel} = useMouseWheel({toDownRoute: 'tokenized', toUpRoute: 'nimbltv'})
 
 const chartEl = ref()
 const titleEl = ref()
@@ -28,7 +29,6 @@ onMounted(() => {
         duration: 1.5,
         yPercent: 100,
         ease: "expo.inOut",
-        delay: route.meta.firstPage ? 2 : 0,
     });
     tl.from(
       titleEl.value,
@@ -37,7 +37,6 @@ onMounted(() => {
             duration: 1.5,
             yPercent: -100,
             ease: "expo.inOut",
-            delay: route.meta.firstPage ? 2 : 0,
         },
         "0",
     );
@@ -48,7 +47,6 @@ onMounted(() => {
             duration: 2,
             yPercent: 80,
             stagger: 0.2,
-            delay: route.meta.firstPage ? 2 : 0,
         },
         "0",
     );
@@ -86,7 +84,7 @@ onBeforeRouteLeave((__, _, next) => {
 })
 </script>
 <template>
-  <section class="py-[50px] flex flex-col justify-center h-full">
+  <section @wheel="onWheel" class="py-[50px] flex flex-col justify-center h-full">
       <div ref="titleEl" class="container">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">
           Introducing Stakes

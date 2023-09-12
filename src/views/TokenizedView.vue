@@ -10,12 +10,12 @@ import IconTokengated from '@/components/icons/IconTokengated.vue';
 import {onMounted, ref} from 'vue'
 import gsap from 'gsap';
 import { onBeforeRouteLeave, useRoute } from 'vue-router';
+import useMouseWheel from '@/composables/mouseWheel';
 
-const route = useRoute();
+const {onWheel} = useMouseWheel({toDownRoute: "data", toUpRoute: "stakes"});
 
 const monitorEl = ref()
 const contentEl = ref()
-const dotsChartEl = ref()
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -25,7 +25,6 @@ onMounted(() => {
         duration: 1.5,
         yPercent: 100,
         ease: "expo.inOut",
-        delay: route.meta.firstPage ? 2 : 0,
     });
     tl.from(
       contentEl.value.children,
@@ -35,7 +34,6 @@ onMounted(() => {
             xPercent: -100,
             ease: "expo.inOut",
             stagger: 0.2,
-            delay: route.meta.firstPage ? 2 : 0,
         },
         "0",
     );
@@ -64,7 +62,7 @@ onBeforeRouteLeave((__, _, next) => {
 </script>
 
 <template>
-     <section  class='pt-[200px] max-sm:pt-[50px] h-full flex items-end justify-center'>
+     <section @wheel="onWheel" class='pt-[200px] max-sm:pt-[50px] h-full flex items-end justify-center'>
       <div class="flex justify-center px-4 gap-9 max-sm:flex-col">
         <div ref="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center'>
           <span class="text-[#0061F0] text-2xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table ">
