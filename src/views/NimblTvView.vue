@@ -96,7 +96,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section @wheel="onWheel" class="relative h-full w-full">
+    <section @wheel="onWheel" class="relative h-[calc(100vh-35px)] w-full">
         <picture ref="lightEl" data="lightEl">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img

@@ -52,7 +52,7 @@ onMounted(() => {
     );
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
   const tl = gsap.timeline({onComplete: next});
 
   tl.to(chartEl.value, {
@@ -81,11 +81,11 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-})
+}) */
 </script>
 <template>
-  <section @wheel="onWheel" class="py-[50px] flex flex-col justify-center h-full">
-      <div ref="titleEl" class="container">
+  <section @wheel="onWheel" class="py-[50px] flex flex-col justify-center ">
+      <div ref="titleEl" data="titleEl" class="container">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">
           Introducing Stakes
         </h2>
@@ -94,7 +94,7 @@ onBeforeRouteLeave((__, _, next) => {
           with the excitement of owning stakes in your favorite groups and influencers.
         </p>
       </div>
-      <div ref="chartEl" class="flex justify-center mt-28">
+      <div ref="chartEl" data="chartEl" class="flex justify-center mt-28">
         <div class="relative">
           <ChartBackground />
           <div class="absolute top-[5%] left-0 w-full">
@@ -138,7 +138,7 @@ onBeforeRouteLeave((__, _, next) => {
           </div>
         </div>
       </div>
-      <div ref="dotsChartEl" class="flex justify-center gap-7 h-[150px] mt-8">
+      <div ref="dotsChartEl" data="dotsChartEl"  class="flex justify-center gap-7 h-[150px] mt-8">
         <svg xmlns="http://www.w3.org/2000/svg" width="37" height="45" fill="none" viewBox="0 0 37 45">
           <circle cx="18" cy="11" r="11" fill="#FF8743" />
           <circle cx="18" cy="11" r="7" fill="#000" />

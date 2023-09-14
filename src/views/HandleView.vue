@@ -1,11 +1,11 @@
 <template>
     <section @wheel="onWheel" class="relative flex items-center justify-center h-full">
-        <div ref="webEl" class="relative">
+        <div ref="webEl" data="webEl" class="relative max-2xl:-translate-y-[5%]">
             <HandleWeb />
             <picture>
                 <source :srcset="radarIconWebp" type="image/webp" />
                 <img
-                    ref="iconImgEl"
+                    ref="iconImgEl" data="iconImgEl"
                     loading="lazy"
                     :src="radarIcon"
                     alt="radarIcon"
@@ -13,7 +13,7 @@
             </picture>
             <div
                 ref="refImg5"
-                class="bg-[#20133E] pb-3 px-[5px] absolute left-[50%] -translate-x-[850px] top-[30%] rounded-md pt-7 max-sm:-translate-x-[100px] max-sm:top-[58%] max-sm:pt-2 max-sm:pb-1">
+                class="bg-[#20133E] pb-3 px-[5px] absolute left-[50%] -translate-x-[800px] top-[35%] rounded-md pt-7 max-sm:-translate-x-[100px] max-sm:top-[58%] max-sm:pt-2 max-sm:pb-1">
                 <img
                     loading="lazy"
                     :src="user1"
@@ -78,7 +78,7 @@
                 <p class="text-white text-xl font-gilroy font-medium max-sm:text-[8px]">@adilkhan.r</p>
             </div>
             <div
-                ref="refImg2Prime"
+                ref="refImg2Prime" data="refImg2Prime"
                 class="bg-[#20133E] pb-3 px-[7px] absolute right-[50%] top-[62%] rounded-md pt-7 max-sm:translate-x-[100px] max-sm:top-[54%] max-sm:pt-2 max-sm:pb-1">
                 <img
                     loading="lazy"
@@ -88,13 +88,17 @@
                 <p class="text-white text-xl font-gilroy font-medium max-sm:text-[8px]">@diasnkteam</p>
             </div>
         </div>
-        <h2 ref="titleEl"
-            class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-20 text-5xl font-rfdewi font-black uppercase absolute top-[30%] max-sm:top-[10%] max-sm:text-2xl">
+        <h2
+            ref="titleEl" data="titleEl"
+            class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-20 text-5xl font-rfdewi font-black uppercase absolute top-[30%] max-2xl:top-[10%] max-sm:text-2xl">
             Claim Your Handle
         </h2>
-        <div ref="buttonEl" class="flex justify-center absolute left-1/2 bottom-[20%] -translate-x-1/2 max-sm:bottom-[0%]">
-            <HeroButton>
-                <p class="font-rfdewi text-2xl font-bold max-sm:text-sm">DOWNLOAD APP</p>
+        <div
+            ref="buttonEl" data="buttonEl"
+            class="flex justify-center absolute left-1/2 bottom-[10%] -translate-x-1/2 max-sm:bottom-[0%]">
+            <HeroButton class="w-[500px] h-[95px]">
+                <p class="font-rfdewi text-2xl max-sm:text-sm font-bold">DOWNLOAD APP</p>
+                <template #icon><IconFiveDots class="w-[37px] h-[37px]" /></template>
             </HeroButton>
         </div>
     </section>
@@ -115,8 +119,8 @@ import user1Prime from "@/assets/user1-prime.png";
 import gsap from "gsap";
 import HeroButton from "@/components/HeroButton.vue";
 import HandleWeb from "@/components/HandleWeb.vue";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
+import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 
 const refImg2 = ref<HTMLDivElement | null>(null);
 const refImg3 = ref<HTMLDivElement | null>(null);
@@ -181,18 +185,26 @@ onMounted(() => {
         duration: 1.5,
         ease: "expo.inOut",
     });
-    tl.from(iconImgEl.value, {
-        scale: 1.5,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    }, '0');
-    tl.from(buttonEl.value, {
-        yPercent: 150,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    }, '0');
+    tl.from(
+        iconImgEl.value,
+        {
+            scale: 1.5,
+            autoAlpha: 0.0,
+            duration: 1.5,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(
+        buttonEl.value,
+        {
+            yPercent: 150,
+            autoAlpha: 0.0,
+            duration: 1.5,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
     tl.from(
         titleEl.value,
         {
@@ -204,7 +216,7 @@ onMounted(() => {
         "0",
     );
 });
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(webEl.value, {
@@ -212,18 +224,26 @@ onBeforeRouteLeave((__, _, next) => {
         duration: 1.5,
         ease: "expo.inOut",
     });
-    tl.to(iconImgEl.value, {
-        scale: 1.5,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    }, '0');
-    tl.to(buttonEl.value, {
-        yPercent: 150,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    }, '0');
+    tl.to(
+        iconImgEl.value,
+        {
+            scale: 1.5,
+            autoAlpha: 0.0,
+            duration: 1.5,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.to(
+        buttonEl.value,
+        {
+            yPercent: 150,
+            autoAlpha: 0.0,
+            duration: 1.5,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
     tl.to(
         titleEl.value,
         {
@@ -234,7 +254,7 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <style scoped></style>

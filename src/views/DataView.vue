@@ -1,15 +1,15 @@
 <template>
     <section @wheel="onWheel" class="h-full">
-        <div  class="flex justify-center -mb-[250px] max-sm:-mb-[70px]">
-            <picture class="flex justify-center pointer-events-none select-none">
+        <div  class="flex justify-center max-3xl:-mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
+            <picture class="flex justify-center pointer-events-none select-none ">
                 <source :srcset="imgBgWebp" type="image/webp" />
-                <img ref="mainImgEl" :src="imgBg" alt="imgBg" class="w-[1920px] max-sm:max-w-[150%] object-contain mix-blend-lighten" />
+                <img ref="mainImgEl" data="mainImgEl" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] object-contain mix-blend-lighten" />
             </picture>
         </div>
-        <div ref="contentEl" class="">
+        <div ref="contentEl" data="contentEl">
             <div class="text-center">
                 <span
-                    class="text-[#0061F0] text-center text-4xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table mx-auto">
+                    class="text-[#0061F0] text-center text-4xl max-2xl:text-3xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table mx-auto">
                     Powered by Lens Protocol
                 </span>
                 <h2
@@ -23,7 +23,7 @@
             </div>
             <div class="flex items-center justify-center gap-16 mt-16">
                 <div
-                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
+                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
                     <picture class="flex justify-center pointer-events-none select-none">
                         <!-- <source :srcset="imgBgWebp" type="image/webp" /> -->
                         <img :src="personData" alt="imgBg" class="w-[250px] h-[250px]" />
@@ -54,7 +54,7 @@
                         >History</span
                     >
                 </div>
-                <div><LocksCenter class="w-[770px] h-[380px]" /></div>
+                <div><LocksCenter class="w-[770px] h-[380px] max-2xl:w-[460px] max-2xl:h-[240px]" /></div>
                 <div
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
                     <picture class="flex justify-center pointer-events-none select-none">
@@ -146,7 +146,7 @@ onMounted(() => {
     );
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(mainImgEl.value, {
@@ -165,7 +165,7 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <style scoped></style>

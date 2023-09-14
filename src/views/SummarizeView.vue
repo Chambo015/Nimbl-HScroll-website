@@ -53,7 +53,7 @@ onMounted(() => {
     
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(bgLeftImgEl.value, {
@@ -89,19 +89,19 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <template>
-    <section @wheel="onWheel" class='py-[50px] h-full flex flex-col justify-center'>
-        <div ref="titleEl" class='container'>
+    <section @wheel="onWheel" class='py-[20px] h-full flex flex-col justify-center'>
+        <div ref="titleEl" data="titleEl" class='container'>
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi text-center max-sm:text-2xl">summarize video</h2>
-        <p class='text-center text-white text-2xl font-normal font-gilroy mt-6 max-sm:mt-3 max-sm:text-base'>Get video summaries, timestamps, and similar videos - powered by GPT4</p>
+        <p class='text-center text-white text-2xl max-2xl:text-xl font-normal max-2xl:mt-3 font-gilroy mt-6 max-sm:text-base'>Get video summaries, timestamps, and similar videos - powered by GPT4</p>
         </div>
-        <div class='flex justify-center items-center py-11 relative mt-16 max-sm:mt-8'>
-            <div ref="bgLeftImgEl" :style="{'--image-url': `url(${imgLeftBg})`}"  class="bg-[image:var(--image-url)] bg-cover absolute left-0 top-0 h-full w-1/2 z-0"></div>
-            <div ref="bgRightImgEl" class='absolute bg-[#1F283A] right-0 top-0 h-full w-1/2 z-0'></div>
-            <picture ref="mobileImgEl" class="pointer-events-none"><source :srcset="mobileSummWebp" type="image/webp" /><img :src="mobileSumm" alt="mobileSumm" class='w-[1150px] h-[612px] relative z-10 max-sm:w-full max-sm:h-auto' /></picture>
+        <div class='flex justify-center items-center py-11 relative mt-16 max-2xl:mt-5 max-sm:mt-8'>
+            <div ref="bgLeftImgEl" data="bgLeftImgEl" :style="{'--image-url': `url(${imgLeftBg})`}"  class="bg-[image:var(--image-url)] bg-cover absolute left-0 top-0 h-full w-1/2 z-0"></div>
+            <div ref="bgRightImgEl" data="bgRightImgEl" class='absolute bg-[#1F283A] right-0 top-0 h-full w-1/2 z-0'></div>
+            <picture ref="mobileImgEl" data="mobileImgEl" class="pointer-events-none"><source :srcset="mobileSummWebp" type="image/webp" /><img :src="mobileSumm" alt="mobileSumm" class='w-[1150px] h-[612px] max-2xl:w-[920px] max-2xl:h-[490px] relative z-10 max-sm:w-full max-sm:h-auto' /></picture>
         </div>
     </section>
 </template>

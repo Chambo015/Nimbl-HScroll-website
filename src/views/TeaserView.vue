@@ -5,7 +5,6 @@ import handImgWebp from "@/assets/hand.webp";
 import HeroButton from "@/components/HeroButton.vue";
 import IconFiveDots from '@/components/icons/IconFiveDots.vue';
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
@@ -39,7 +38,7 @@ onMounted(() => {
     
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(mainImgEl.value, {
@@ -61,13 +60,13 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <template>
     <section @wheel="onWheel" class="h-full pt-12">
-        <div class="container flex max-sm:flex-col h-full">
-            <div ref="contentEl" class="shrink-0 self-center">
+        <div class=" justify-end flex max-sm:flex-col h-full">
+            <div ref="contentEl" data="contentEl" class="shrink-0 self-center">
                 <h2
                     class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text font-rfdewi font-black uppercase text-5xl max-sm:text-2xl max-sm:text-center">
                     clips<span class="text-2xl font-univers lowercase mx-1 max-sm:text-sm">to</span>Longs
@@ -83,7 +82,7 @@ onBeforeRouteLeave((__, _, next) => {
                     </HeroButton>
                 </div>
             </div>
-            <div ref="mainImgEl" class="shrink-0 max-sm:mt-5 relative">
+            <div ref="mainImgEl" data="mainImgEl" class="shrink-0 max-sm:mt-5 relative">
                 <picture>
                     <!-- <source :srcset="handImgWebp" type="image/webp" /> -->
                     <img

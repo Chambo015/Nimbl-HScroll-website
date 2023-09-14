@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  section {
+    @apply !h-[calc(100vh-35px)] w-full
+  }
+}
+
 body {
   background: #0F0722;
   color: white;
@@ -12,4 +18,6 @@ html {
   overflow: hidden;
   min-height: 100vh;
 }
+
+
 

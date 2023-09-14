@@ -7,7 +7,6 @@ import imgCard from '@/assets/business-card.png'
 import imgCardFull from '@/assets/business-card-full.png'
 import imgCardWebp from '@/assets/business-card.webp'
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
@@ -39,7 +38,7 @@ onMounted(() => {
     
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(mainImgEl.value, {
@@ -59,14 +58,14 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <template>
      <section @wheel="onWheel" class="relative max-sm:mt-5 h-full flex items-center">
       <div class="container mx-auto flex items-center z-10 ">
-        <div class="flex pt-[90px] justify-between w-full max-sm:pt-5 gap-16 items-center">
-          <div ref='contentEl' class='flex flex-col w-[700px]'>
+        <div class="flex justify-between w-full max-sm:pt-5 gap-16 items-center">
+          <div ref='contentEl' data='contentEl' class='flex flex-col w-[700px]'>
             <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl">
               in-app <br className='max-sm:hidden'/>crypto transfers
             </h2>
@@ -82,7 +81,7 @@ onBeforeRouteLeave((__, _, next) => {
             </div>
           </div>
           <div class="flex-shrink-0">
-           <picture><!-- <source :srcset="imgMobileWebp" type="image/webp" /> --><img ref="mainImgEl" :src="imgMobileLg" alt="imgMobile" class='max-sm:hidden h-[832px] object-contain object-bottom' loading="lazy" /></picture>
+           <picture><!-- <source :srcset="imgMobileWebp" type="image/webp" /> --><img ref="mainImgEl" data="mainImgEl" :src="imgMobileLg" alt="imgMobile" class='max-sm:hidden h-[832px] max-2xl:h-[550px] object-contain object-bottom' loading="lazy" /></picture>
           </div>
         </div>
       </div>

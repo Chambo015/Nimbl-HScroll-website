@@ -1,24 +1,24 @@
 <template>
     <section @wheel="onWheel" class="relative flex flex-col justify-center h-full">
-        <div ref="levelEl"
-            class="bg-[linear-gradient(135deg,#C031FA_0%,#6529E0_100%)] mx-auto w-[181px] relative z-10 -mb-20 h-[324px] max-sm:h-[220px] max-sm:w-[123px] rounded-[175px] border-2 border-[#7351C8] overflow-hidden flex justify-center items-center flex-col gap-2 py-3">
-            <div class="w-[85px] max-sm:w-[57px]">
+        <div ref="levelEl" data="levelEl"
+            class="bg-[linear-gradient(135deg,#C031FA_0%,#6529E0_100%)] mx-auto w-[181px] relative z-10 -mb-20 h-[324px] max-sm:h-[220px] max-sm:w-[123px] max-2xl:h-[260px] max-2xl:w-[135px] rounded-[175px] border-2 border-[#7351C8] overflow-hidden flex justify-center items-center flex-col gap-2 py-3">
+            <div class="w-[85px] max-2xl:w-[70px] max-sm:w-[57px]">
                 <div
-                    class="bg-[rgba(217,217,217,.2)] font-tt-octosquares text-2xl leading-none py-1 text-center max-sm:text-base">
+                    class="bg-[rgba(217,217,217,.2)] font-tt-octosquares text-2xl max-2xl:text-lg leading-none py-1 text-center max-sm:text-base">
                     level
                 </div>
                 <div
-                    class="bg-[rgba(51,51,51,.5)] font-TTOctos text-[28px] leading-none text-center py-2 max-sm:text-lg">
+                    class="bg-[rgba(51,51,51,.5)] font-TTOctos text-[28px] max-2xl:text-lg leading-none text-center max-2xl:py-1 py-2 max-sm:text-lg">
                     10
                 </div>
             </div>
             <picture
                 ><source :srcset="levelXPWebp" type="image/webp" />
-                <img loading="lazy" :src="levelXP" alt="levelXP" class="max-sm:h-[95px] h-[]"
+                <img loading="lazy" :src="levelXP" alt="levelXP" class="max-sm:h-[95px] max-2xl:h-[120px]"
             /></picture>
         </div>
         <div
-            ref="contentEl"
+            ref="contentEl" data="contentEl"
             class="[clip-path:polygon(25%_0,75%_0,100%_50%,100%_100%,0_100%,0%_50%)] max-sm:[clip-path:polygon(40%_0,60%_0,100%_20%,100%_100%,0_100%,0%_20%)] flex flex-col items-center pt-[120px] bg-[#20133E] w-full h-[600px] relative overflow-visible max-sm:h-[500px]">
             <h2
                 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mx-auto w-[590px] text-5xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:w-[80%]">
@@ -28,7 +28,7 @@
                 No complex crypto ponzienomics, simply <span class="text-[#6529E0]">rewarding</span> our early creators
                 and users
             </p>
-            <img loading="lazy" :src="imgGroup" alt="imgGroup" class="w-[500px] mt-auto max-sm:w-[90%]" />
+            <img loading="lazy" :src="imgGroup" alt="imgGroup" class="w-[500px] max-2xl:w-[350px] mt-auto max-sm:w-[90%]" />
             <img
                 loading="lazy"
                 :src="creater1"
@@ -88,7 +88,7 @@
                 loading="lazy"
                 :src="creater12"
                 alt="creator12"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[5%] top-[70%] z-20 max-sm:right-[35%] max-sm:top-[16%]" />
+                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[22%] top-[56%] z-20 max-sm:right-[35%] max-sm:top-[16%]" />
             <img
                 loading="lazy"
                 :src="creater13"
@@ -121,29 +121,29 @@
                 class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[10%] top-[83%] z-20 max-sm:hidden" />
         </div>
         <img
-            ref="imgCoinRightEl"
+            ref="imgCoinRightEl" data="imgCoinRightEl"
             loading="lazy"
             :src="imgCoin"
             alt="imgCoin"
-            class="w-[136px] h-[136px] object-contain absolute right-[20px] top-[440px] z-20 max-sm:-right-[10px] max-sm:top-[520px] max-sm:w-[72px] max-sm:h-[72px]" />
+            class="w-[136px] h-[136px] object-contain absolute right-[20px] top-[40%] z-20 max-sm:-right-[10px] max-sm:top-[520px] max-sm:w-[72px] max-sm:h-[72px]" />
         <img
-            ref="imgGlassRightEl"
+            ref="imgGlassRightEl" data="imgGlassRightEl"
             loading="lazy"
             :src="imgGlass"
             alt="imgGlass"
             class="w-[129px] h-[129px] object-contain absolute right-[20px] bottom-[44px] z-20 max-sm:w-[72px] max-sm:h-[72px] max-sm:right-0 max-sm:-left-[20px] max-sm:top-[620px]" />
         <img
-            ref="imgCoinLeftEl"
+            ref="imgCoinLeftEl" data="imgCoinLeftEl"
             loading="lazy"
             :src="imgCoin"
             alt="imgCoin"
             class="w-[112px] h-[112px] object-contain absolute left-[30px] bottom-[40px] z-20 max-sm:hidden" />
         <img
-            ref="imgGlassLeftEl"
+            ref="imgGlassLeftEl" data="imgGlassLeftEl"
             loading="lazy"
             :src="imgCircle"
             alt="imgCircle"
-            class="w-[75px] h-[75px] object-contain absolute left-[50px] top-[500px] z-20 max-sm:hidden" />
+            class="w-[75px] h-[75px] object-contain absolute left-[50px] top-[42%] z-20 max-sm:hidden" />
     </section>
 </template>
 
@@ -175,7 +175,6 @@ import imgCoin from "@/assets/coin.png";
 import imgGlass from "@/assets/glass.png";
 import imgCircle from "@/assets/circle.png";
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
 
@@ -249,7 +248,7 @@ onMounted(() => {
     );
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(contentEl.value, {
@@ -308,7 +307,7 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <style scoped></style>

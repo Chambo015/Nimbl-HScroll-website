@@ -39,7 +39,7 @@ onMounted(() => {
     );
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
   const tl = gsap.timeline({onComplete: next});
 
   tl.to(monitorEl.value, {
@@ -58,13 +58,13 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-})
+}) */
 </script>
 
 <template>
      <section @wheel="onWheel" class='pt-[200px] max-sm:pt-[50px] h-full flex items-end justify-center'>
       <div class="flex justify-center px-4 gap-9 max-sm:flex-col">
-        <div ref="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center'>
+        <div ref="contentEl" data="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center'>
           <span class="text-[#0061F0] text-2xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table ">
             Stake’s Utility
           </span>
@@ -104,7 +104,7 @@ onBeforeRouteLeave((__, _, next) => {
             </div>
           </div>
         </div>
-        <div ref="monitorEl">
+        <div ref="monitorEl" data="monitorEl">
           <picture><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain' /></picture>
         </div>
       </div>

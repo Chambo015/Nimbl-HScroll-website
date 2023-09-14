@@ -6,7 +6,6 @@ import mobileImgWebp from '@/assets/swipe.webp';
 import swipeLeftWebp from '@/assets/swipe-toFilter.webp';
 import swipeRightWebp from '@/assets/swipe-toSave.webp';
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
@@ -38,7 +37,7 @@ onMounted(() => {
     
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(mainImgEl.value, {
@@ -58,13 +57,13 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-});
+}); */
 </script>
 
 <template>
     <section @wheel="onWheel" class="h-full flex">
       <div class="container flex gap-14 justify-between items-center max-sm:flex-col">
-        <div ref="contentEl"  class="w-[500px]">
+        <div ref="contentEl" data="contentEl"  class="w-[500px]">
           <h2 class="bg-gradient-to-b from-white to-white/50 font-rfdewi text-transparent bg-clip-text text-5xl font-black uppercase max-sm:text-2xl max-sm:text-center">
             SWIPE
           </h2>
@@ -73,7 +72,7 @@ onBeforeRouteLeave((__, _, next) => {
             <span class=" mt-4 block max-sm:inline max-sm:mt-0">Swipe left to filter, swipe right to save</span>
           </p>
         </div>
-        <div ref="mainImgEl" class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
+        <div ref="mainImgEl" data="mainImgEl" class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
           <picture ><source :srcset="mobileImgWebp" type="image/webp" /><img :src="mobileImg" alt="mobileImg" class="w-[442px] h-[744px] max-sm:w-[230px] max-sm:h-[380px] object-contain" /></picture>
           <picture><source ::srcset="swipeLeftWebp" type="image/webp" /><img  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
           <picture><source ::srcset="swipeRightWebp" type="image/webp" /><img  :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>

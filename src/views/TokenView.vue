@@ -63,7 +63,7 @@ onMounted(() => {
     
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
     const tl = gsap.timeline({onComplete: next});
 
     tl.to(imgEarthEl.value, {
@@ -102,12 +102,12 @@ onBeforeRouteLeave((__, _, next) => {
         stagger: 0.1,
         ease: "expo.inOut",
     }, '0');
-});
+}); */
 </script>
 
 <template>
-    <section @wheel="onWheel" class="h-full flex flex-col justify-center pt-[150px]">
-      <div ref="titleEl">
+    <section @wheel="onWheel" class="h-full flex flex-col justify-center pt-[150px] max-3xl:pt-9">
+      <div ref="titleEl" data="titleEl">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[88px] leading-none font-rfdewi font-black text-center max-sm:text-3xl">
           NIMBL TOKEN
         </h2>
@@ -116,29 +116,29 @@ onBeforeRouteLeave((__, _, next) => {
         </p>
       </div>
       <div class="flex h-[1000px] relative max-sm:h-auto max-sm:flex-col">
-       <picture class="pointer-events-none"><source :srcset="imgEarthWebp" type="image/webp" /><img ref="imgEarthEl" :src="imgEarth" alt="imgEarth" class="ml-auto absolute right-0 -top-16 max-sm:hidden" /></picture>
-        <img ref="starShipsEl" :src="starShips" alt="starShips" class='w-[380px] absolute left-1/2 top-[30%] -translate-x-1/2 max-sm:hidden pointer-events-none' />
+       <picture class="pointer-events-none"><source :srcset="imgEarthWebp" type="image/webp" /><img ref="imgEarthEl"  data="imgEarthEl" :src="imgEarth" alt="imgEarth" class="ml-auto absolute right-0 -top-16 max-sm:hidden" /></picture>
+        <img ref="starShipsEl" data="starShipsEl" :src="starShips" alt="starShips" class='w-[380px] max-2xl:w-[320px] absolute left-1/2 top-[30%] -translate-x-1/2 max-sm:hidden pointer-events-none' />
         <div class='container 2xl:max-w-[1600px] mx-auto'>
-            <div ref="listEl" class='mt-28 max-sm:mt-8'>
+            <div ref="listEl" data="listEl" class='mt-28 max-sm:mt-8'>
               <div class="flex items-center gap-5">
                 <img :src="stake" alt="stake" class='w-[30px] h-[30px]' />
-                <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Stake $Nimbl to gain governance</p>
+                <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Stake $Nimbl to gain governance</p>
               </div>
-              <div class="flex items-center gap-5 mt-20 max-sm:mt-4">
+              <div class="flex items-center gap-5 mt-20 max-2xl:mt-6 max-sm:mt-4">
                 <img :src="transfer" alt="transfer" class='w-[30px] h-[30px]'/>
-                <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Transfer $Nimbl to a username</p>
+                <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Transfer $Nimbl to a username</p>
               </div>
-              <div class="flex items-center gap-5 mt-20 max-sm:mt-4">
+              <div class="flex items-center gap-5 mt-20 max-2xl:mt-6 max-sm:mt-4">
                 <img :src="cursor" alt="cursor" class='w-[30px] h-[30px]'/>
-                <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Access token-gated content</p>
+                <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Access token-gated content</p>
               </div>
-              <div class="flex items-center gap-5 mt-20 max-sm:mt-4">
+              <div class="flex items-center gap-5 mt-20 max-2xl:mt-6 max-sm:mt-4">
                 <img :src="network" alt="network" class='w-[30px] h-[30px]'/>
-                <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Use $Nimbl to Tip creators</p>
+                <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Use $Nimbl to Tip creators</p>
               </div>
-              <div class="flex items-center gap-5 mt-20 max-sm:mt-4">
+              <div class="flex items-center gap-5 mt-20 max-2xl:mt-6 max-sm:mt-4">
                 <img :src="pc" alt="pc" class='w-[30px] h-[30px]'/>
-                <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Subscribe to Nimbl Ultra</p>
+                <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Subscribe to Nimbl Ultra</p>
               </div>
             </div>
         </div>

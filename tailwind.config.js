@@ -16,6 +16,9 @@ export default {
     },
     backgroundImage: {
       'btn-bg-liner': 'radial-gradient(119.98% 176.69% at 84.00% -4.95%, rgba(170, 214, 255, 0.81) 0%, rgba(170, 214, 255, 0.81) 0.01%, #0066FE 100%)',
+    },
+    screens: {
+      '3xl': '1950px',
     }
     },
     container: {
