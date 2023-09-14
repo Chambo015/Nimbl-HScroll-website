@@ -11,43 +11,43 @@
             :src="rightImg"
             alt="rightImg"
             :style="{transform: `translate(${coordsMiddle.x},${coordsMiddle.y})`}"
-            class="w-[195px] h-[130px] absolute right-[3%] top-[40%] z-[2]" />
+            class="w-[195px] h-[130px] absolute right-[3%] top-[40%] z-[2] right_cube" />
         <img
             :src="imgPlayLeft"
             alt="imgPlayLeft"
             :style="{transform: `translate(${coordsMiddle.x},${coordsMiddle.y})`}"
-            class="w-[162px] h-[111px] absolute left-[3%] top-[35%] z-[2]" />
+            class="w-[162px] h-[111px] absolute left-[3%] top-[35%] z-[2] left_cube" />
         <img
             :src="leftMiddleImg"
             alt="leftMiddleImg"
             :style="{transform: `translate(${coords.x},${coords.y})`}"
-            class="w-[103px] h-[97px] absolute left-[20%] top-1/2 z-[2]" />
+            class="w-[103px] h-[97px] absolute left-[20%] top-1/2 z-[2] left_cube" />
         <img
             :src="leftTopImg"
             alt="leftTopImg"
             :style="{transform: `translate(${coords.x},${coords.y})`}"
-            class="w-[93px] h-[67px] absolute left-[20%] top-[5%] z-[2]" />
+            class="w-[93px] h-[67px] absolute left-[20%] top-[5%] z-[2]  left_cube" />
         <img
             :src="rightMiddleImg"
             alt="rightMiddleImg"
             :style="{transform: `translate(${coords.x},${coords.y})`}"
-            class="w-[95px] h-[101px] absolute right-[20%] top-1/2 z-[2]" />
+            class="w-[95px] h-[101px] absolute right-[20%] top-1/2 z-[2] right_cube" />
         <img
             :src="topRightImg"
             alt="topRightImg"
             :style="{transform: `translate(${coords.x},${coords.y})`}"
-            class="w-[104px] h-[108px] absolute right-[20%] top-[5%] z-[2]" />
+            class="w-[104px] h-[108px] absolute right-[20%] top-[5%] z-[2] right_cube" />
         <img
         ref="container"
             :src="nearLeftImg"
             alt="nearLeftImg"
             :style="{transform: `translate(${coordsNear.x},${coordsNear.y})`}"
-            class="w-[279px] h-[298px] absolute left-[5%] bottom-[5%] z-[4]" />
+            class="w-[279px] h-[298px] absolute left-[5%] bottom-[5%] z-[4]  left_cube" />
         <img
             :src="nearRight"
             alt="nearRight"
             :style="{transform: `translate(${coordsNear.x},${coordsNear.y})`}"
-            class="w-[293px] h-[283px] absolute right-[6%] bottom-[4%] z-[4]" />
+            class="w-[293px] h-[283px] absolute right-[6%] bottom-[4%] z-[4] right_cube" />
         <div
             class="absolute smoke-clouds w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.png')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity">
             <img
@@ -55,20 +55,20 @@
                 alt="smoke-image1"
                 src="https://oleksandrpavlyshch.github.io/mouse-move-parallax_demo/img/smoke1.png" />
             <img
-                class="smoke-cloud2 absolute mix-blend-overlay"
+                class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                 alt="smoke-image2"
                 src="https://oleksandrpavlyshch.github.io/mouse-move-parallax_demo/img/smoke2.png" />
             <img
-                class="smoke-cloud4 absolute mix-blend-overlay"
+                class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                 alt="smoke-image4"
                 src="https://oleksandrpavlyshch.github.io/mouse-move-parallax_demo/img/smoke2.png" />
             <img
-                class="smoke-cloud3 absolute mix-blend-overlay"
+                class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                 alt="smoke-image3"
                 src="https://oleksandrpavlyshch.github.io/mouse-move-parallax_demo/img/smoke3.png" />
             <!--  <img class="smoke-cloud5 absolute mix-blend-screen w-[20%]" alt="smoke-image5" :src="rightSmoke">
       <img class="smoke-cloud6 absolute mix-blend-screen" alt="smoke-image6" :src="leftSmoke"> -->
-            <img class="smoke-cloud7 absolute mix-blend-overlay" alt="smoke-image7" :src="centerSmoke" />
+            <img class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none" alt="smoke-image7" :src="centerSmoke" />
         </div>
         <!-- <button type="button" class="w-screen  h-screen z-50 fixed block" @click="router.push({name: 'nimbltv'})"></button> -->
     </div>

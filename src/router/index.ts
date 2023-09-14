@@ -89,8 +89,7 @@ const router = createRouter({
             path: "/token",
             name: "token",
             component: TokenView,
-        },
-        {
+        },{
             path: "/transfers",
             name: "transfers",
             component: TransfersView,

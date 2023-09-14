@@ -212,7 +212,7 @@ const soundVolume = computed<SoundVolumeType>(() => {
               @mousemove="mousemoveHandler">
               <div class="relative h-full w-full overflow-hidden shadow">
                   <!-- crossorigin="anonymous" -->
-                  <video :autoplay="!lite" crossorigin="anonymous" ref="videoEl" class="block w-full h-full bg-transparent" @click="playing = !playing" />
+                  <video :autoplay="!lite" ref="videoEl" class="block w-full h-full bg-transparent" @click="playing = !playing" />
                   <audio ref="audioEl"></audio>
                   <div
                       v-if="waiting"

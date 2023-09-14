@@ -55,7 +55,7 @@ onMounted(() => {
     );
 });
 
-onBeforeRouteLeave((__, _, next) => {
+/* onBeforeRouteLeave((__, _, next) => {
   const tl = gsap.timeline({onComplete: next});
 
     tl.to(sliderEl.value, {
@@ -92,12 +92,12 @@ onBeforeRouteLeave((__, _, next) => {
         },
         "0",
     );
-})
+}) */
 </script>
 
 <template>
     <section @wheel="onWheel" class="relative h-full w-full">
-        <picture ref="lightEl">
+        <picture ref="lightEl" data="lightEl">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img
                 :src="lightImg"
@@ -105,7 +105,7 @@ onBeforeRouteLeave((__, _, next) => {
                 loading="lazy"
                 class="absolute top-0 left-1/2 -translate-x-1/2 z-40 select-none pointer-events-none" />
         </picture>
-        <div ref="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[40px]">
+        <div ref="titleEl" data="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[40px]">
             <div class="inline-flex flex-col">
                 <p
                     class="text-justify font-gilroy leading-none after:inline-block after:w-full text-white text-2xl max-sm:text-xs font-normal uppercase tracking-[.6em] max-sm:tracking-[.3em]">
@@ -117,11 +117,11 @@ onBeforeRouteLeave((__, _, next) => {
                 </h1>
             </div>
         </div>
-        <div ref="sliderEl">
-            <HeroSliderApp />
+        <div ref="sliderEl"  class="!relative">
+            <HeroSliderApp data="slider_h_El" />
         </div>
         <div
-            ref="buttonsEl"
+            ref="buttonsEl" data="buttonsEl"
             class="absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-[linear-gradient(90deg,#2B253A_0%,#3E3A6E_100%)]">
             <HeroButton
                 >APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template

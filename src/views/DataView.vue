@@ -54,7 +54,7 @@
                         >History</span
                     >
                 </div>
-                <div><LocksCenter class="w-[770px] h-[401px]" /></div>
+                <div><LocksCenter class="w-[770px] h-[380px]" /></div>
                 <div
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
                     <picture class="flex justify-center pointer-events-none select-none">

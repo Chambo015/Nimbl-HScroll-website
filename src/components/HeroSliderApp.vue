@@ -2,7 +2,7 @@
     <div ref="container" class="keen-slider !w-[80%] max-sm:!w-full items-center relative mx-auto">
         <div
             :class="[
-                'keen-slider__slide items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center ',
                 currentSlide === 0 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -15,7 +15,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
                 currentSlide === 1 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -28,7 +28,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
                 currentSlide === 2 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -41,7 +41,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
                 currentSlide === 3 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -54,7 +54,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
                 currentSlide === 4 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">

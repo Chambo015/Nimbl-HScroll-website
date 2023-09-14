@@ -5,7 +5,7 @@ export const video = {
     price: 988,
     avatar: import.meta.env.BASE_URL + 'img/users/3.png',
     poster: import.meta.env.BASE_URL + 'img/clip-card/8.png',
-    videoSrc: '/video/English/index.mp4',
+    videoSrc: 'https://d2n3zca7e0phmo.cloudfront.net/nimble_videos/index.mp4',
     audioSrc: [
         {
             language: 'it',
