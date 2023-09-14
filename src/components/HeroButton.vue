@@ -8,7 +8,7 @@
             alt="imgBg"
             class="absolute left-0 top-0 w-full object-cover mix-blend-color-burn h-full" />
         <div v-if="!regular" class="inner-border absolute inset-1"></div>
-        <div :class="['flex justify-center items-center', {'gap-5 max-sm:gap-1': $slots.icon}]">
+        <div :class="['flex justify-center items-center', {'gap-5 max-sm:gap-2': $slots.icon}]">
             <span class="font-rfdewi text-sm font-bold"><slot></slot></span>
             <slot name="icon"></slot>
         </div>

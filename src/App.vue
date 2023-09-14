@@ -9,8 +9,6 @@ import TransitionLeavePage from './components/TransitionLeavePage.vue';
 const ready = ref(false);
 const router = useRouter();
 
-// called when the leave transition starts.
-// use this to start the leaving animation.
 function onLeavePreviewPage(el: any, done: any) {
     const clouds = el.querySelector(".smoke-clouds");
     const leftCubs = el.querySelectorAll("&>.left_cube");
@@ -69,6 +67,10 @@ const handlePreviewClick = () => {
     ready.value = true;
     router.replace({name: "nimbltv"});
 };
+
+onMounted(() => {
+    router.replace({name: "nimbltv"});
+})
 </script>
 
 <template>
@@ -77,7 +79,7 @@ const handlePreviewClick = () => {
         type="button"
         class="w-screen h-screen z-[100] fixed block"
         @click="handlePreviewClick"></button>
-    <main class="h-[calc(100vh-35px)] relative">
+    <main class="h-[calc(100vh-35px)] max-sm:h-screen relative">
         <Transition @leave="onLeavePreviewPage" mode="in-out">
             <PreviewView v-if="!ready" />
         </Transition>

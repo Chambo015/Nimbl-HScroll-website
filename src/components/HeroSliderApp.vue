@@ -102,7 +102,7 @@ const isLargerXS = useMediaQuery("(min-width: 640px)");
 const [container] = useKeenSlider<HTMLDivElement>(
     {
         slides: {
-            perView: isLargerXS ? 5 : 2,
+            perView: isLargerXS.value ? 5 : 2,
             spacing: 15,
             origin: "center",
         },

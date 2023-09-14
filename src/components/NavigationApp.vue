@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[35px] bg-black relative z-50">
+  <div class="h-[35px] bg-black inset-x-0 z-50 fixed bottom-0 max-sm:hidden ">
         <nav class="h-full">
             <ul class="flex [&>li]:flex-grow justify-between items-center h-full">
                 <li><RouterLink :to="{name: 'nimbltv'}">NIMBL.TV</RouterLink></li>

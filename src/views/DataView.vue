@@ -56,7 +56,7 @@
                 </div>
                 <div><LocksCenter class="w-[770px] h-[380px] max-2xl:w-[460px] max-2xl:h-[240px]" /></div>
                 <div
-                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
+                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy  max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
                     <picture class="flex justify-center pointer-events-none select-none">
                         <!-- <source :srcset="imgBgWebp" type="image/webp" /> -->
                         <img :src="dataNimbl" alt="imgBg" class="w-[289px] h-[181px]" />

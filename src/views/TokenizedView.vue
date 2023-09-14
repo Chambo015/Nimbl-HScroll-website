@@ -72,33 +72,33 @@ onMounted(() => {
             Nimbl Channels <br/>Tokenized
           </h2>
           <div >
-            <div class='mt-28 max-sm:mt-8 flex gap-11'>
+            <div class='mt-28 max-2xl:mt-10 max-sm:mt-8 flex gap-11'>
               <div>
                   <div class="flex items-center gap-5">
                     <IconGiveaways />
-                    <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Giveaways</p>
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Giveaways</p>
                   </div>
                   <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
                     <IconAlphaContent />
-                    <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Alpha Content</p>
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Alpha Content</p>
                   </div>
                   <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
                     <IconChannelGrowth />
-                    <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Channel Growth</p>
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Channel Growth</p>
                   </div>
               </div>
              <div>
                   <div class="flex items-center gap-5 ">
                     <IconTokengated />
-                    <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Tokengated Communities</p>
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Tokengated Communities</p>
                   </div>
                   <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
                     <IconAlphaCalls />
-                    <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">Alpha Calls/Private content</p>
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Alpha Calls/Private content</p>
                   </div>
                   <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
                     <IconTheContent />
-                    <p class="text-3xl leading-none text-white font-gilroy max-sm:text-base">The Content</p>
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">The Content</p>
                   </div>
              </div>
             </div>

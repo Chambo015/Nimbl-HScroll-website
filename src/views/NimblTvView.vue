@@ -6,7 +6,6 @@ import HeroSliderApp from "@/components/HeroSliderApp.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
 import {onMounted, ref} from "vue";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from '@/composables/mouseWheel';
 
 const {onWheel} = useMouseWheel({toDownRoute: "stakes"});
@@ -96,7 +95,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section @wheel="onWheel" class="relative h-[calc(100vh-35px)] w-full">
+    <section @wheel="onWheel" class="relative w-full">
         <picture ref="lightEl" data="lightEl">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img
@@ -122,11 +121,16 @@ onMounted(() => {
         </div>
         <div
             ref="buttonsEl" data="buttonsEl"
-            class="absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-[linear-gradient(90deg,#2B253A_0%,#3E3A6E_100%)]">
+            class="max-sm:hidden absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-[linear-gradient(90deg,#2B253A_0%,#3E3A6E_100%)]">
             <HeroButton
                 >APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template
             ></HeroButton>
-            <HeroButton regular>LAUNCH DESKTOP DEMO APP</HeroButton>
+            <HeroButton regular >LAUNCH DESKTOP DEMO APP</HeroButton>
+        </div>
+        <div class="w-[266px] h-[55px] mx-auto mt-5">
+            <HeroButton
+                    >DOWNLOAD APP<template #icon><IconFiveDots /></template
+                ></HeroButton>
         </div>
     </section>
 </template>
