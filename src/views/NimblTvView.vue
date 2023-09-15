@@ -8,6 +8,10 @@ import gsap from "gsap";
 import {onMounted, ref} from "vue";
 import useMouseWheel from '@/composables/mouseWheel';
 
+const props = defineProps({
+    ready: Boolean
+})
+
 const {onWheel} = useMouseWheel({toDownRoute: "stakes"});
 
 const sliderEl = ref();
@@ -54,48 +58,10 @@ onMounted(() => {
     );
 });
 
-/* onBeforeRouteLeave((__, _, next) => {
-  const tl = gsap.timeline({onComplete: next});
-
-    tl.to(sliderEl.value, {
-        autoAlpha: 0.0,
-        duration: 1,
-        scale: 0.0,
-        ease: "expo.inOut",
-    });
-    tl.to(
-        buttonsEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            yPercent: 100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      titleEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            yPercent: -100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      lightEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-        },
-        "0",
-    );
-}) */
 </script>
 
 <template>
-    <section @wheel="onWheel" class="relative w-full">
+    <section @wheel="onWheel" class="relative w-full transition-transform duration-[1.5s] delay-100"  :class="ready ? 'scale-100' : 'scale-[0.48]'">
         <picture ref="lightEl" data="lightEl">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img
@@ -116,7 +82,7 @@ onMounted(() => {
                 </h1>
             </div>
         </div>
-        <div ref="sliderEl"  class="!relative">
+        <div ref="sliderEl"  class="relative">
             <HeroSliderApp data="slider_h_El" />
         </div>
         <div
@@ -127,7 +93,7 @@ onMounted(() => {
             ></HeroButton>
             <HeroButton regular >LAUNCH DESKTOP DEMO APP</HeroButton>
         </div>
-        <div class="w-[266px] h-[55px] mx-auto mt-5">
+        <div class="w-[266px] h-[55px] mx-auto mt-5 hidden max-sm:block">
             <HeroButton
                     >DOWNLOAD APP<template #icon><IconFiveDots /></template
                 ></HeroButton>

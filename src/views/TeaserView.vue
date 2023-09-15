@@ -37,35 +37,11 @@ onMounted(() => {
     );
     
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(mainImgEl.value, {
-        xPercent: 100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        rotate: 180,
-        transformOrigin: 'bottom right',
-        ease: "expo.inOut",
-    });
-    tl.to(
-      contentEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            xPercent: -100,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <template>
     <section @wheel="onWheel" class="h-full pt-12">
-        <div class=" justify-end flex max-sm:flex-col h-full">
+        <div class="container justify-between flex max-sm:flex-col h-full">
             <div ref="contentEl" data="contentEl" class="shrink-0 self-center">
                 <h2
                     class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text font-rfdewi font-black uppercase text-5xl max-sm:text-2xl max-sm:text-center">
@@ -97,6 +73,7 @@ onMounted(() => {
                         <source src="https://d2n3zca7e0phmo.cloudfront.net/lv_0_20230824191446.mp4" type="video/mp4" />
                     </video>
                 </div>
+                <div class="from-transparent to-[#0F0722] bg-gradient-to-r absolute right-0 inset-y-0 w-[200px]"></div>
             </div>
         </div>
     </section>

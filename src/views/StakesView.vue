@@ -12,7 +12,6 @@ import ChartLine4 from "@/components/StakesView/ChartLine4.vue";
 import ChartLine1 from "@/components/StakesView/ChartLine1.vue";
 import {onMounted, ref} from "vue";
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 
 const {onWheel} = useMouseWheel({toDownRoute: "tokenized", toUpRoute: "nimbltv"});
@@ -52,39 +51,10 @@ onMounted(() => {
     );
 });
 
-/* onBeforeRouteLeave((__, _, next) => {
-  const tl = gsap.timeline({onComplete: next});
 
-  tl.to(chartEl.value, {
-        autoAlpha: 0.0,
-        duration: 1,
-        yPercent: 100,
-        ease: "expo.inOut",
-    });
-    tl.to(
-      titleEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            yPercent: -100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      dotsChartEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            yPercent: 50,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}) */
 </script>
 <template>
-    <section @wheel="onWheel" class="py-[50px] flex flex-col justify-start">
+    <section @wheel="onWheel" class="py-[50px] flex flex-col justify-center">
         <div ref="titleEl" data="titleEl" class="container">
             <h2
                 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">
@@ -95,7 +65,7 @@ onMounted(() => {
                 interaction with the excitement of owning stakes in your favorite groups and influencers.
             </p>
         </div>
-        <div ref="chartEl" data="chartEl" class="flex justify-center mt-28 max-2xl:mt-8 max-2xl:w-full">
+        <div ref="chartEl" data="chartEl" class="flex justify-center mt-28 max-2xl:mt-8 max-2xl:w-full relative">
             <div class="relative w-full">
                 <ChartBackground class="max-2xl:w-full" />
                 <picture>
@@ -125,8 +95,7 @@ onMounted(() => {
                         loading="lazy" />
                 </picture>
             </div>
-        </div>
-        <div ref="dotsChartEl" data="dotsChartEl" class="flex justify-center gap-7 h-[150px] mt-8">
+            <div ref="dotsChartEl" data="dotsChartEl" class="absolute bottom-0  flex justify-center gap-7 h-[150px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="37" height="45" fill="none" viewBox="0 0 37 45">
                 <circle cx="18" cy="11" r="11" fill="#FF8743" />
                 <circle cx="18" cy="11" r="7" fill="#000" />
@@ -156,6 +125,8 @@ onMounted(() => {
                     d="M11.264 42H9.78l-2.408-3.864L4.964 42h-1.47l3.15-5.04-2.968-4.76h1.47l2.226 3.57 2.226-3.57h1.47l-2.954 4.746L11.264 42Zm4.842-9.8c.905 0 1.657.303 2.254.91.607.597.91 1.344.91 2.24 0 .887-.303 1.633-.91 2.24-.597.607-1.349.91-2.254.91h-2.254V42H12.55v-9.8h3.556Zm0 5.082c.541 0 .99-.182 1.344-.546.355-.373.532-.835.532-1.386 0-.56-.177-1.022-.532-1.386-.355-.364-.803-.546-1.344-.546h-2.254v3.864h2.254Z" />
             </svg>
         </div>
+        </div>
+        
     </section>
 </template>
 

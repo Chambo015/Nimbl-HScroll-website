@@ -2,7 +2,7 @@
     <div ref="container" class="keen-slider !w-[80%] max-sm:!w-full items-center relative mx-auto">
         <div
             :class="[
-                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center ',
+                'keen-slider__slide !w-auto items-center flex-grow  aspect-[0.53] flex shrink-0 justify-center ',
                 currentSlide === 0 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -15,7 +15,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex-grow  aspect-[0.53] flex shrink-0 justify-center',
                 currentSlide === 1 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -28,7 +28,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex-grow  aspect-[0.53] flex shrink-0 justify-center',
                 currentSlide === 2 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -41,7 +41,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex-grow  aspect-[0.53] flex shrink-0 justify-center',
                 currentSlide === 3 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -54,7 +54,7 @@
         </div>
         <div
             :class="[
-                'keen-slider__slide !w-auto items-center flex shrink-0 justify-center',
+                'keen-slider__slide !w-auto items-center flex-grow  aspect-[0.53] flex shrink-0 justify-center',
                 currentSlide === 4 ? styles.activeWrap : styles.unActiveWrap,
             ]">
             <picture class="w-full">
@@ -90,8 +90,8 @@ import screen4Webp from "@/assets/app-screens/screen-4-lg.webp";
 import screen5Webp from "@/assets/app-screens/screen-5-lg.webp";
 
 const styles = {
-    activeWrap: "aspect-[0.53] items-center px-0 max-sm:w-[225px] max-sm:h-[400px]",
-    unActiveWrap: "aspect-[0.53] max-sm:w-[172px] max-sm:h-[320px] ",
+    activeWrap: "max-sm:w-[225px] max-sm:h-[400px]",
+    unActiveWrap: "  max-sm:w-[172px] max-sm:h-[320px] ",
     activeImg: "w-[100%] mx-auto  max-sm:w-[204px]",
     unActiveImg: "w-[90%] mx-auto ",
 };

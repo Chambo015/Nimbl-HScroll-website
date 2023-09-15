@@ -41,7 +41,6 @@ const imgBase64 = {
     selected: 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzIgMzInIHdpZHRoPScxLjJlbScgaGVpZ2h0PScxLjJlbScgZmlsbD0nIzhDOThGRicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyA+PHBhdGggZmlsbD0nIzhDOThGRicgZD0nbTEzIDI0bC05LTlsMS40MTQtMS40MTRMMTMgMjEuMTcxTDI2LjU4NiA3LjU4NkwyOCA5TDEzIDI0eicvPjwvc3ZnPg=='
 }
 
-
 /* Video ******************************************************************************************* */
 const audioEl = ref<HTMLAudioElement>();
 
@@ -106,16 +105,6 @@ onMounted(() => {
 /* Full Screen */
 const { isFullscreen, toggleFullscreen } = useCustomFullscreen(videoWrap);
 
-// const { width: widthVideo, height: heightVideo } = useElementSize(videoWrap);
-
-const controlsVideo = useMediaControls(videoEl, {
-    src: {
-        src: props.videoSrc ,
-        type: 'video/mp4',
-    },
-    tracks: props.subtitles,
-});
-
 const {
     playing,
     buffered,
@@ -130,12 +119,17 @@ const {
     selectedTrack,
     tracks,
     enableTrack
-} = controlsVideo;
+} = useMediaControls(videoEl, {
+    src: {
+        src: props.videoSrc ,
+        type: 'video/mp4',
+    },
+    tracks: props.subtitles,
+});
 
 /* Computed for duration Video */
 const endBuffer = computed(() => (buffered.value.length > 0 ? buffered.value[buffered.value.length - 1][1] : 0));
 const formatDuration = (seconds: number) => new Date(1000 * seconds).toISOString().slice(14, 19);
-
 
 /* Visible Controls and Menu */
 const [visibleChatGPT, toggleChatGPT] = useToggle()
@@ -166,7 +160,6 @@ watch([scrubberVolume, currentVoiceSrc], () => {
         } else {
             volume.value = scrubberVolume.value - 0.6
         }
-        
     } else {
         volume.value = scrubberVolume.value
     }
@@ -194,10 +187,10 @@ const soundVolume = computed<SoundVolumeType>(() => {
     }
 });
 
-/* Change initial media properties */
-/* onMounted(() => {
-    volume.value = 0.5;
-}); */
+/* Change initial volume audio */
+onMounted(() => {
+    muted.value = true;
+});
 </script>
 
 <template>
@@ -267,18 +260,6 @@ const soundVolume = computed<SoundVolumeType>(() => {
                           </div>
                           <!-- ---  -->
 
-                          <!-- toggle ChatGPT -->
-                          <button class="flex items-center justify-center rounded-sm bg-white p-[2px]" title="ChatGPT" @click="toggleChatGPT()" v-if="isFullscreen">
-                              <IconChatGPT class="inline-block h-6 w-6 align-middle text-black" />
-                          </button>
-                          <!-- --- -->
-      
-                          <!-- toggle Picture In Picture -->
-                          <button @click="togglePictureInPicture" v-if="supportsPictureInPicture" title="Picture In Picture">
-                              <IconAirPlay class="inline-block h-8 w-8 align-middle ml-4" />
-                          </button>
-                          <!-- --- -->
-
                         <Controls.Menu v-if="subtitles" class="ml-4">
                             <template #default="{ open }">
                                 <button @click="open">
@@ -336,34 +317,11 @@ const soundVolume = computed<SoundVolumeType>(() => {
                         </Controls.Menu>
                         <!-- --- -->
       
-                          <!-- toggle Settings -->
-                          <button title="Settings" class="ml-4">
-                              <IconSettingsSolid class="inline-block h-8 w-8 align-middle" />
-                          </button>
-                          <!-- --- -->
-      
-                          <!-- toggle FullScreen toggle  -->
-                          <button @click="toggleFullscreen" title="Fullscreen" class="ml-4">
-                              <IconFullScreenOn v-if="!isFullscreen" class="inline-block h-8 w-8 align-middle" />
-                              <IconFullScreenOff v-else class="inline-block h-8 w-8 align-middle" />
-                          </button>
-                          <!-- --- -->
                       </div>
-                      <!--  -->
                   </div>
-                  <!--  -->
-                  
-                  <!-- Video Title -->
-             
-                  <!-- --- -->
               </div>
           </div>
-          <!-- ChatGPT Sidebar -->
-        <!--   <Transition enter-from-class="!flex-[0_0_0px] !max-w-[0%]"  enter-active-class="!flex-[111_0_27%] !w-[27%]" leave-from-class="flex-[111_0_27%] max-w-[27%]" leave-active-class="flex-[0_0_0px] max-w-[0%]"><div v-if="visibleChatGPT && isFullscreen" :class="['overflow-hidden flex-[111_0_27%] max-w-[27%] duration-200 -mr-[15px] ']"><AppChatGPTVideo /></div></Transition> -->
-          <!--  -->
       </div>
-
-    <!-- <pre class="code-block" lang="yaml">{{ text }}</pre> -->
 </template>
 
 

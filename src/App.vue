@@ -4,7 +4,7 @@ import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
 import gsap from "gsap";
 import {useRouter} from "vue-router";
-import TransitionLeavePage from './components/TransitionLeavePage.vue';
+import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 
 const ready = ref(false);
 const router = useRouter();
@@ -54,9 +54,10 @@ function onLeavePreviewPage(el: any, done: any) {
     tl.to(
         el,
         {
-            scale: 2, opacity: 0,
-                ease: "expo.inOut",
-            duration: 2,
+            scale: 2,
+            opacity: 0,
+            ease: "expo.inOut",
+            duration: 1,
             position: "absolute",
         },
         "0",
@@ -70,7 +71,7 @@ const handlePreviewClick = () => {
 
 onMounted(() => {
     router.replace({name: "nimbltv"});
-})
+});
 </script>
 
 <template>
@@ -79,31 +80,23 @@ onMounted(() => {
         type="button"
         class="w-screen h-screen z-[100] fixed block"
         @click="handlePreviewClick"></button>
-    <main class="h-[calc(100vh-35px)] max-sm:h-screen relative">
+    <main class="h-screen max-sm:h-screen relative bg-[#0F0722]">
         <Transition @leave="onLeavePreviewPage" mode="in-out">
             <PreviewView v-if="!ready" />
         </Transition>
-        <router-view v-slot="{Component, route }">
-            <TransitionLeavePage :prev-page-name="route.meta"  ><component :is="Component" /></TransitionLeavePage>
-        </router-view>
+      <!--   <main class="w-screen h-screen transition-transform duration-[1.5s] delay-100"  :class="ready ? 'scale-100' : 'scale-[0.48]'"> -->
+            <router-view v-slot="{Component, route}">
+                <TransitionLeavePage :prev-page-name="route.meta"
+                    ><component :ready="ready" :is="Component"
+                /></TransitionLeavePage>
+            </router-view>
+            <NavigationApp />
+      <!--   </main> -->
     </main>
-    <NavigationApp />
 </template>
 
 <style scoped>
 main {
     background: url("./assets/background-stars.png") 100px;
 }
-/* .fade-leave-active {
-    transition: all 0s ease;
-    position: absolute;
-}
-
-.fade-leave-to {
-    opacity: 0;
-    position: absolute;
-    z-index: 99999;
-} */
-
-
 </style>

@@ -12,7 +12,7 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
             sliderEl,
             {
                 autoAlpha: 0.0,
-                duration: 0.5,
+                duration: 0.3,
                 scale: 0.0,
                 ease: "expo.inOut",
             },

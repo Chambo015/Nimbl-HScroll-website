@@ -1,6 +1,6 @@
 <template>
     <section @wheel="onWheel" class="h-full">
-        <div  class="flex justify-center max-3xl:-mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
+        <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
             <picture class="flex justify-center pointer-events-none select-none ">
                 <source :srcset="imgBgWebp" type="image/webp" />
                 <img ref="mainImgEl" data="mainImgEl" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] object-contain mix-blend-lighten" />
