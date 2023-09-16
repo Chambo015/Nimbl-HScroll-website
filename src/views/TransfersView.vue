@@ -37,32 +37,10 @@ onMounted(() => {
     );
     
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(mainImgEl.value, {
-        xPercent: 100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-      contentEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            xPercent: -100,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <template>
-     <section @wheel="onWheel" class="relative max-sm:mt-5 h-full flex items-center">
+     <section @wheel="onWheel" class="relative h-full flex items-center">
       <div class="container mx-auto flex items-center z-10 ">
         <div class="flex justify-between w-full max-sm:pt-5 gap-16 items-center">
           <div ref='contentEl' data='contentEl' class='flex flex-col w-[700px]'>

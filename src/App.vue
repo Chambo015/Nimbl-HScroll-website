@@ -5,9 +5,12 @@ import PreviewView from "./views/PreviewView.vue";
 import gsap from "gsap";
 import {useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
+import AppJoystick from "./components/Joystick/AppJoystick.vue";
+import {useMediaQuery} from "@vueuse/core";
 
 const ready = ref(false);
 const router = useRouter();
+const isXS = useMediaQuery("(max-width: 640px)");
 
 function onLeavePreviewPage(el: any, done: any) {
     const clouds = el.querySelector(".smoke-clouds");
@@ -84,14 +87,13 @@ onMounted(() => {
         <Transition @leave="onLeavePreviewPage" mode="in-out">
             <PreviewView v-if="!ready" />
         </Transition>
-      <!--   <main class="w-screen h-screen transition-transform duration-[1.5s] delay-100"  :class="ready ? 'scale-100' : 'scale-[0.48]'"> -->
-            <router-view v-slot="{Component, route}">
-                <TransitionLeavePage :prev-page-name="route.meta"
-                    ><component :ready="ready" :is="Component"
-                /></TransitionLeavePage>
-            </router-view>
-            <NavigationApp />
-      <!--   </main> -->
+        <router-view v-slot="{Component, route}">
+            <TransitionLeavePage :prev-page-name="route.meta">
+                <component :ready="ready" :is="Component" />
+            </TransitionLeavePage>
+        </router-view>
+        <AppJoystick v-if="!isXS" />
+        <NavigationApp />
     </main>
 </template>
 

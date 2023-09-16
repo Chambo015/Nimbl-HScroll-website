@@ -40,9 +40,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <section @wheel="onWheel" class="h-full pt-12">
-        <div class="container justify-between flex max-sm:flex-col h-full">
-            <div ref="contentEl" data="contentEl" class="shrink-0 self-center">
+    <section @wheel="onWheel" class="pt-12 max-sm:pt-0">
+        <div class="container justify-between flex max-sm:flex-col h-full max-sm:justify-center">
+            <div ref="contentEl" data="contentEl" class="self-center flex-shrink-0 ">
                 <h2
                     class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text font-rfdewi font-black uppercase text-5xl max-sm:text-2xl max-sm:text-center">
                     clips<span class="text-2xl font-univers lowercase mx-1 max-sm:text-sm">to</span>Longs
@@ -52,28 +52,28 @@ onMounted(() => {
                     Post a short-form teaser leading to a long-form video, get the outreach of bite-sized content into
                     your longer piece of content.
                 </p>
-                <div class="mt-14 max-sm:flex max-sm:justify-center">
+                <div class="mt-14 max-sm:flex max-sm:justify-center max-sm:hidden">
                     <HeroButton class="w-[500px] h-[95px]">
                         <p class="font-rfdewi text-2xl max-sm:text-sm font-bold">DOWNLOAD APP</p><template #icon><IconFiveDots class="w-[37px] h-[37px]" /></template>
                     </HeroButton>
                 </div>
             </div>
-            <div ref="mainImgEl" data="mainImgEl" class="shrink-0 max-sm:mt-5 relative">
-                <picture>
+            <div ref="mainImgEl" data="mainImgEl" class="shrink-0 max-sm:mt-5 relative max-sm:w-[180%] " >
+                <picture class="relative ">
                     <!-- <source :srcset="handImgWebp" type="image/webp" /> -->
                     <img
                         loading="lazy"
                         :src="handLgImg"
                         alt="handImg"
-                        class="w-full h-full object-contain object-bottom  max-sm:h-auto" />
+                        class="w-full h-full object-contain object-bottom  max-sm:h-auto relative " />
                 </picture>
+                <div class="from-transparent to-[#0F0722] bg-gradient-to-r absolute right-0 inset-y-0 w-[200px] max-sm:hidden"></div>
                 <div
-                    class="absolute w-[31%] z-20 h-[70%] top-[5%] left-[11%] rounded-[50px] overflow-hidden max-sm:w-[54%] max-sm:left-[20%]">
-                    <video class="w-full h-full" muted loop autoplay >
-                        <source src="https://d2n3zca7e0phmo.cloudfront.net/lv_0_20230824191446.mp4" type="video/mp4" />
+                    class="absolute w-[31%] z-20 h-[70%] top-[5%] left-[11%] rounded-[50px] overflow-hidden max-sm:w-[31%] max-sm:left-[11%] max-sm:rounded-3xl ">
+                    <video class="w-full h-full max-sm:rounded-3xl" muted loop autoplay >
+                        <source src="https://d2n3zca7e0phmo.cloudfront.net/lv_0_20230824191446.mp4" type="video/mp4" class="max-sm:rounded-3xl" />
                     </video>
                 </div>
-                <div class="from-transparent to-[#0F0722] bg-gradient-to-r absolute right-0 inset-y-0 w-[200px]"></div>
             </div>
         </div>
     </section>

@@ -5,12 +5,12 @@ import lightImgWebp from "@/assets/light.webp";
 import HeroSliderApp from "@/components/HeroSliderApp.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
-import {onMounted, ref} from "vue";
-import useMouseWheel from '@/composables/mouseWheel';
+import {onMounted, ref, watchEffect} from "vue";
+import useMouseWheel from "@/composables/mouseWheel";
 
 const props = defineProps({
-    ready: Boolean
-})
+    ready: Boolean,
+});
 
 const {onWheel} = useMouseWheel({toDownRoute: "stakes"});
 
@@ -18,6 +18,16 @@ const sliderEl = ref();
 const buttonsEl = ref();
 const titleEl = ref();
 const lightEl = ref();
+
+watchEffect(() => {
+    if(props.ready) {
+        gsap.to(lightEl.value, {
+        autoAlpha: 1,
+        delay: 1.5,
+        duration: 1,
+    });
+    }
+});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -39,7 +49,7 @@ onMounted(() => {
         "0",
     );
     tl.from(
-      titleEl.value,
+        titleEl.value,
         {
             autoAlpha: 0.0,
             duration: 1.5,
@@ -48,21 +58,15 @@ onMounted(() => {
         },
         "0",
     );
-    tl.from(
-      lightEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-        },
-        "0",
-    );
 });
-
 </script>
 
 <template>
-    <section @wheel="onWheel" class="relative w-full transition-transform duration-[1.5s] delay-100"  :class="ready ? 'scale-100' : 'scale-[0.48]'">
-        <picture ref="lightEl" data="lightEl">
+    <section
+        @wheel="onWheel"
+        class="relative w-full transition-transform duration-[1.5s] delay-100"
+        :class="ready ? 'scale-100' : 'scale-[0.48]'">
+        <picture ref="lightEl" data="lightEl" class="opacity-0">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img
                 :src="lightImg"
@@ -82,21 +86,22 @@ onMounted(() => {
                 </h1>
             </div>
         </div>
-        <div ref="sliderEl"  class="relative">
+        <div ref="sliderEl" class="relative">
             <HeroSliderApp data="slider_h_El" />
         </div>
         <div
-            ref="buttonsEl" data="buttonsEl"
+            ref="buttonsEl"
+            data="buttonsEl"
             class="max-sm:hidden absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-[linear-gradient(90deg,#2B253A_0%,#3E3A6E_100%)]">
             <HeroButton
                 >APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template
             ></HeroButton>
-            <HeroButton regular >LAUNCH DESKTOP DEMO APP</HeroButton>
+            <HeroButton regular>LAUNCH DESKTOP DEMO APP</HeroButton>
         </div>
         <div class="w-[266px] h-[55px] mx-auto mt-5 hidden max-sm:block">
             <HeroButton
-                    >DOWNLOAD APP<template #icon><IconFiveDots /></template
-                ></HeroButton>
+                >DOWNLOAD APP<template #icon><IconFiveDots /></template
+            ></HeroButton>
         </div>
     </section>
 </template>

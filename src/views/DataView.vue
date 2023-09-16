@@ -3,7 +3,7 @@
         <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
             <picture class="flex justify-center pointer-events-none select-none ">
                 <source :srcset="imgBgWebp" type="image/webp" />
-                <img ref="mainImgEl" data="mainImgEl" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] object-contain mix-blend-lighten" />
+                <img ref="mainImgEl" data="mainImgEl" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] max-sm:mt-0 object-contain mix-blend-lighten" />
             </picture>
         </div>
         <div ref="contentEl" data="contentEl">
@@ -13,20 +13,20 @@
                     Powered by Lens Protocol
                 </span>
                 <h2
-                    class="mt-8 bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-5xl font-black uppercase font-rfdewi max-sm:text-2xl max-sm:w-full leading-none max-sm:text-center">
+                    class="mt-8 bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-5xl font-black uppercase font-rfdewi max-sm:text-2xl max-sm:w-full leading-none max-sm:text-center max-sm:mt-5">
                     DECENTRALIZED SOCIAL GRAPH
                 </h2>
                 <p
-                    class="font-gilroy mt-5 text-white/80 text-2xl font-normal max-sm:text-sm max-sm:w-full max-sm:text-center">
+                    class="font-gilroy mt-5 text-white/80 text-2xl font-normal max-sm:text-sm max-sm:w-full max-sm:text-center max-sm:mt-3">
                     Own your data <span><IconChain class="inline" /></span> Own your content
                 </p>
             </div>
-            <div class="flex items-center justify-center gap-16 mt-16">
+            <div class="flex items-center justify-center gap-16 mt-16 max-sm:flex-col">
                 <div
-                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
-                    <picture class="flex justify-center pointer-events-none select-none">
+                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
+                    <picture class="flex justify-center pointer-events-none select-none ">
                         <!-- <source :srcset="imgBgWebp" type="image/webp" /> -->
-                        <img :src="personData" alt="imgBg" class="w-[250px] h-[250px]" />
+                        <img :src="personData" alt="imgBg" class="w-[250px] h-[250px] max-sm:w-[160px] max-sm:h-[160px]" />
                     </picture>
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
@@ -54,12 +54,12 @@
                         >History</span
                     >
                 </div>
-                <div><LocksCenter class="w-[770px] h-[380px] max-2xl:w-[460px] max-2xl:h-[240px]" /></div>
+                <div class="max-sm:hidden"><LocksCenter class="w-[770px] h-[380px] max-2xl:w-[460px] max-2xl:h-[240px]" /></div>
                 <div
-                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy  max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1">
+                    class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy  max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
                     <picture class="flex justify-center pointer-events-none select-none">
                         <!-- <source :srcset="imgBgWebp" type="image/webp" /> -->
-                        <img :src="dataNimbl" alt="imgBg" class="w-[289px] h-[181px]" />
+                        <img :src="dataNimbl" alt="imgBg" class="w-[289px] h-[181px] max-sm:w-[200px] max-sm:h-[120px]" />
                     </picture>
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"

@@ -36,34 +36,12 @@ onMounted(() => {
     );
     
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(mainImgEl.value, {
-        xPercent: 100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-      contentEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            xPercent: -100,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <template>
-    <section @wheel="onWheel" class="h-full flex">
-      <div class="container flex gap-14 justify-between items-center max-sm:flex-col">
-        <div ref="contentEl" data="contentEl"  class="w-[500px]">
+    <section @wheel="onWheel" class=" flex">
+      <div class="container flex gap-14 justify-between items-center max-sm:flex-col max-sm:justify-center">
+        <div ref="contentEl" data="contentEl"  class="w-[500px] max-sm:w-full">
           <h2 class="bg-gradient-to-b from-white to-white/50 font-rfdewi text-transparent bg-clip-text text-5xl font-black uppercase max-sm:text-2xl max-sm:text-center">
             SWIPE
           </h2>

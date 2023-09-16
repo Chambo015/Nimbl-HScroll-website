@@ -66,14 +66,14 @@ onMounted(() => {
             </p>
         </div>
         <div ref="chartEl" data="chartEl" class="flex justify-center mt-28 max-2xl:mt-8 max-2xl:w-full relative">
-            <div class="relative w-full">
-                <ChartBackground class="max-2xl:w-full" />
+            <div class="relative w-full max-sm:w-[200vw]">
+                <ChartBackground class="max-2xl:w-full max-sm:w-[200vw]  max-sm:h-[400px]" />
                 <picture>
                     <source :srcset="userImg3Webp" type="image/webp" />
                     <img
                         :src="userImg3"
                         alt="user_chart"
-                        class="absolute max-2xl:top-[10%] left-[53%] top-[3%] z-20 w-[110px] h-[110px] max-2xl:w-[80px] max-2xl:h-[80px] max-sm:w-[60px] max-sm:h-[60px] max-sm:top-[5%]"
+                        class="absolute max-2xl:top-[10%] left-[53%] top-[3%] z-20 w-[110px] h-[110px] max-2xl:w-[80px] max-2xl:h-[80px] max-sm:w-[60px] max-sm:h-[60px] max-sm:top-[10%]"
                         loading="lazy" />
                 </picture>
 
@@ -82,7 +82,7 @@ onMounted(() => {
                     <img
                         :src="userImg1"
                         alt="user_chart"
-                        class="absolute max-2xl:top-[20%] left-[28%] top-[10%] z-20 w-[110px] h-[110px] max-2xl:w-[80px] max-2xl:h-[80px] max-sm:w-[60px] max-sm:h-[60px] max-sm:top-[12%] max-sm:left-[40%]"
+                        class="absolute max-2xl:top-[20%] left-[28%] top-[10%] z-20 w-[110px] h-[110px] max-2xl:w-[80px] max-2xl:h-[80px] max-sm:w-[60px] max-sm:h-[60px] max-sm:top-[35%] max-sm:left-[31%]"
                         loading="lazy" />
                 </picture>
 
@@ -95,7 +95,7 @@ onMounted(() => {
                         loading="lazy" />
                 </picture>
             </div>
-            <div ref="dotsChartEl" data="dotsChartEl" class="absolute bottom-0  flex justify-center gap-7 h-[150px]">
+            <div ref="dotsChartEl" data="dotsChartEl" class="absolute bottom-0 max-sm:-bottom-14  flex justify-center gap-7 h-[150px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="37" height="45" fill="none" viewBox="0 0 37 45">
                 <circle cx="18" cy="11" r="11" fill="#FF8743" />
                 <circle cx="18" cy="11" r="7" fill="#000" />

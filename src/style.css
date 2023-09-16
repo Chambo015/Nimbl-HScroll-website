@@ -4,7 +4,7 @@
 
 @layer base {
   section {
-    @apply !h-full w-full
+    @apply h-[calc(100%-35px)] w-full max-sm:h-full
   }
 }
 

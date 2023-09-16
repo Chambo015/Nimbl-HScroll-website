@@ -1,9 +1,9 @@
 <template>
    <section @wheel="onWheel" class="py-[20px] h-full">
-      <div class="px-10 relative flex flex-col justify-center h-full">
+      <div class="px-10 relative flex flex-col justify-center h-full max-sm:flex-col-reverse">
        <div>
           <div ref="titleEl" data="titleEl">
-            <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-7 text-5xl max-2xl:text-4xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:mt-2">
+            <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-7 text-5xl max-2xl:text-4xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:mt-3">
               Redefining Moderation with Transparent AI
             </h2>
             <!-- <p class="font-gilroy mt-6 text-center text-white text-2xl font-normal max-sm:text-base">
@@ -11,27 +11,27 @@
             </p> -->
           </div>
           <div ref="colsEl" data="colsEl" class="container flex justify-between mt-10 max-sm:flex-col max-sm:items-center max-sm:gap-7">
-            <div class=" flex flex-col  items-center gap-4">
-              <IconBlock class="max-2xl:w-[45px] max-2xl:h-[45px]" />
+            <div class=" flex flex-col  items-center gap-4 max-sm:gap-1">
+              <IconBlock class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
               <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base ">
                 Decisions are guided by clear, open-source guidelines
               </p>
             </div>
-            <div class=" flex flex-col items-center gap-4">
-              <IconSearch class="max-2xl:w-[45px] max-2xl:h-[45px]" />
+            <div class=" flex flex-col items-center gap-4 max-sm:gap-1">
+              <IconSearch class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
               <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base">
                 Every instance is committed on-chain, with explanation and post links
               </p>
             </div>
-            <div class=" flex flex-col items-center gap-4">
-              <IconUserSearch class="max-2xl:w-[45px] max-2xl:h-[45px]" />
+            <div class=" flex flex-col items-center gap-4 max-sm:gap-1">
+              <IconUserSearch class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
               <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base">
                 Moderation Guidelines developed by Nimbl Collective DAO
               </p>
             </div>
           </div>
        </div>
-       <div ref="radarEl" data="radarEl" class="max-3xl:max-w-[1000px] max-2xl:w-[800px] container mx-auto mix-blend-lighten mt-5 h-[500px]">
+       <div ref="radarEl" data="radarEl" class="max-3xl:max-w-[1000px] max-2xl:w-[800px] container mx-auto mix-blend-lighten mt-10 h-[500px] max-sm:w-full max-sm:mt-0 max-sm:h-auto">
            <div class="relative overflow-hidden rounded-tl-[1000px] rounded-tr-[1000px] ">
               <picture >
                 <source :srcset="radarImgWebp" type="image/webp" />

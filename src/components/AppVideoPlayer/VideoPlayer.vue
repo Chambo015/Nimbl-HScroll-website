@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import {  computed, onMounted, ref, watch, type PropType, nextTick } from 'vue';
+import { computed, onMounted, ref, watch, type PropType, nextTick } from 'vue';
 import { useMediaControls,  useToggle  } from '@vueuse/core';
 import Controls from './VideoPlayerControls';
 import {
     IconPlay,
     IconPause,
-    IconFullScreenOn,
-    IconFullScreenOff,
     IconVolume,
-    IconSettingsSolid,
-    IconChatGPT,
     IconSubtitles,
     IconVoice
 } from '@/components/icons';
-import IconAirPlay from '@/components/icons/IconAirPlay.vue';
 import type { AudioTrackType, SoundVolumeType } from '@/types';
-/* import  AppChatGPTVideo from './AppChatGPT/ChatGPTVideo.vue'; */
 import { useCustomFullscreen } from '@/composables/useCustomFullscreen';
 import type { UseMediaTextTrackSource } from '@vueuse/core';
 
@@ -113,8 +107,6 @@ const {
     waiting,
     volume,
     muted,
-    supportsPictureInPicture,
-    togglePictureInPicture,
     disableTrack,
     selectedTrack,
     tracks,
@@ -132,7 +124,7 @@ const endBuffer = computed(() => (buffered.value.length > 0 ? buffered.value[buf
 const formatDuration = (seconds: number) => new Date(1000 * seconds).toISOString().slice(14, 19);
 
 /* Visible Controls and Menu */
-const [visibleChatGPT, toggleChatGPT] = useToggle()
+const [visibleChatGPT] = useToggle()
 const visibleOfMousemove = ref(true);
 const mousemoveHandler = () => {
   if (!visibleOfMousemove.value) {
@@ -315,8 +307,6 @@ onMounted(() => {
                         </div>
                         </template>
                         </Controls.Menu>
-                        <!-- --- -->
-      
                       </div>
                   </div>
               </div>

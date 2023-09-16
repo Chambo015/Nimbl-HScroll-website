@@ -9,7 +9,6 @@ import IconTheContent from '@/components/icons/IconTheContent.vue';
 import IconTokengated from '@/components/icons/IconTokengated.vue';
 import {onMounted, ref} from 'vue'
 import gsap from 'gsap';
-import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import useMouseWheel from '@/composables/mouseWheel';
 
 const {onWheel} = useMouseWheel({toDownRoute: "data", toUpRoute: "stakes"});
@@ -38,33 +37,12 @@ onMounted(() => {
         "0",
     );
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-  const tl = gsap.timeline({onComplete: next});
-
-  tl.to(monitorEl.value, {
-        autoAlpha: 0.0,
-        duration: 1,
-        yPercent: 100,
-        ease: "expo.inOut",
-    });
-    tl.to(
-      contentEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            xPercent: -100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}) */
 </script>
 
 <template>
-     <section @wheel="onWheel" class='pt-[200px] max-sm:pt-[50px] h-full flex items-end justify-center'>
-      <div class="flex justify-center px-4 gap-9 max-sm:flex-col">
-        <div ref="contentEl" data="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center'>
+     <section @wheel="onWheel" class=' h-full flex items-end justify-center '>
+      <div class="flex justify-center px-4 gap-9 max-sm:flex-col w-full h-full ">
+        <div ref="contentEl" data="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center max-sm:flex-grow'>
           <span class="text-[#0061F0] text-2xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table ">
             Stake’s Utility
           </span>
@@ -104,8 +82,8 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <div ref="monitorEl" data="monitorEl">
-          <picture><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain' /></picture>
+        <div ref="monitorEl" data="monitorEl" class="flex items-end max-sm:flex-grow">
+          <picture><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain max-sm:h-[300px]' /></picture>
         </div>
       </div>
     </section>
