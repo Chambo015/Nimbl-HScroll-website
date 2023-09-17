@@ -79,14 +79,16 @@ onMounted(() => {
 
 <template>
     <button
-        v-if="!ready"
+        v-if="!isXS && !ready"
         type="button"
         class="w-screen h-screen z-[100] fixed block"
         @click="handlePreviewClick"></button>
-    <main class="h-screen max-sm:h-screen relative bg-[#0F0722]">
-        <Transition @leave="onLeavePreviewPage" mode="in-out">
-            <PreviewView v-if="!ready" />
-        </Transition>
+    <main class="h-screen w-screen relative bg-[#0F0722]">
+        <template v-if="!isXS">
+            <Transition @leave="onLeavePreviewPage" mode="in-out">
+                <PreviewView v-if="!ready" />
+            </Transition>
+        </template>
         <router-view v-slot="{Component, route}">
             <TransitionLeavePage :prev-page-name="route.meta">
                 <component :ready="ready" :is="Component" />

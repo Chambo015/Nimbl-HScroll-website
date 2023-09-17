@@ -7,11 +7,13 @@ import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
 import {onMounted, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
+import { useMediaQuery } from '@vueuse/core';
 
 const props = defineProps({
     ready: Boolean,
 });
 
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref()
 const sliderEl = ref();
@@ -68,7 +70,7 @@ onMounted(() => {
         ref="sectionEl"
         @wheel="onWheel"
         class="relative w-full transition-transform duration-[1.5s] delay-100"
-        :class="ready ? 'scale-100' : 'scale-[0.48]'">
+        :class="isXS ? 'scale-100' : ready ? 'scale-100' : 'scale-[0.48]'">
         <picture ref="lightEl" data="lightEl" class="opacity-0">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img
