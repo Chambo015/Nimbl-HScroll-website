@@ -6,20 +6,17 @@ import userImg1Webp from "@/assets/chart-user1.webp";
 import userImg2Webp from "@/assets/chart-user2.webp";
 import userImg3Webp from "@/assets/chart-user3.webp";
 import ChartBackground from "@/components/StakesView/ChartBackground.vue";
-import ChartLine2 from "@/components/StakesView/ChartLine2.vue";
-import ChartLine3 from "@/components/StakesView/ChartLine3.vue";
-import ChartLine4 from "@/components/StakesView/ChartLine4.vue";
-import ChartLine1 from "@/components/StakesView/ChartLine1.vue";
 import {onMounted, ref} from "vue";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 
-const {onWheel} = useMouseWheel({toDownRoute: "tokenized", toUpRoute: "nimbltv"});
 
+const sectionEl = ref();
 const chartEl = ref();
 const titleEl = ref();
 const dotsChartEl = ref();
 
+const {onWheel} = useMouseWheel({toDownRoute: "tokenized", toUpRoute: "nimbltv", target: sectionEl});
 onMounted(() => {
     const tl = gsap.timeline();
 
@@ -54,7 +51,7 @@ onMounted(() => {
 
 </script>
 <template>
-    <section @wheel="onWheel" class="py-[50px] flex flex-col justify-center">
+    <section ref="sectionEl" @wheel="onWheel" class="py-[50px] flex flex-col justify-center">
         <div ref="titleEl" data="titleEl" class="container">
             <h2
                 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">

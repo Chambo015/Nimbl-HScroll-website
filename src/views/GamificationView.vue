@@ -1,5 +1,5 @@
 <template>
-    <section @wheel="onWheel" class="relative flex flex-col justify-center h-full">
+    <section ref="sectionEl" @wheel="onWheel" class="relative flex flex-col justify-center h-full">
         <div ref="levelEl" data="levelEl"
             class="bg-[linear-gradient(135deg,#C031FA_0%,#6529E0_100%)] mx-auto w-[181px] relative z-10 -mb-20 h-[324px] max-sm:h-[220px] max-sm:w-[123px] max-2xl:h-[260px] max-2xl:w-[135px] rounded-[175px] border-2 border-[#7351C8] overflow-hidden flex justify-center items-center flex-col gap-2 py-3">
             <div class="w-[85px] max-2xl:w-[70px] max-sm:w-[57px]">
@@ -178,14 +178,15 @@ import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
 
-const {onWheel} = useMouseWheel({toDownRoute: "summarize", toUpRoute: "transfers"});
-
+const sectionEl = ref();
 const contentEl = ref();
 const levelEl = ref();
 const imgCoinRightEl = ref();
 const imgGlassRightEl = ref();
 const imgCoinLeftEl = ref();
 const imgGlassLeftEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "summarize", toUpRoute: "transfers", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -247,67 +248,6 @@ onMounted(() => {
         "0",
     );
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(contentEl.value, {
-        yPercent: 100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-        levelEl.value,
-        {
-            yPercent: -100,
-            autoAlpha: 0.0,
-            duration: 1.5,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-        imgCoinRightEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            xPercent: 100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      imgGlassRightEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.1,
-            xPercent: 100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      imgCoinLeftEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.1,
-            xPercent: -100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      imgGlassLeftEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.3,
-            xPercent: -100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <style scoped></style>

@@ -3,16 +3,16 @@ import imgLeftBg from '@/assets/bg-summarize-video.png'
 import mobileSumm from '@/assets/rotated-phone-summarize.png'
 import mobileSummWebp from '@/assets/rotated-phone-summarize.webp'
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
-const {onWheel} = useMouseWheel({toDownRoute: "ai", toUpRoute: "gamification"});
-
+const sectionEl = ref();
 const bgLeftImgEl = ref();
 const bgRightImgEl = ref();
 const mobileImgEl = ref();
 const titleEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "ai", toUpRoute: "gamification", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -52,48 +52,10 @@ onMounted(() => {
     );
     
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(bgLeftImgEl.value, {
-        xPercent: -100,
-        autoAlpha: 0.0,
-        duration: 1,
-        ease: "expo.inOut",
-    });
-    tl.to(bgRightImgEl.value, {
-        xPercent: 100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    }, '0');
-    tl.to(
-        mobileImgEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            yPercent: 100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-        titleEl.value.children,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            yPercent: -150,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <template>
-    <section @wheel="onWheel" class='py-[20px] h-full flex flex-col justify-center'>
+    <section ref="sectionEl" @wheel="onWheel" class='py-[20px] h-full flex flex-col justify-center'>
         <div ref="titleEl" data="titleEl" class='container'>
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi text-center max-sm:text-2xl">summarize video</h2>
         <p class='text-center text-white text-2xl max-2xl:text-xl font-normal max-2xl:mt-3 font-gilroy mt-6 max-sm:text-base'>Get video summaries, timestamps, and similar videos - powered by GPT4</p>

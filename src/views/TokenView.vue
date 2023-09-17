@@ -62,47 +62,6 @@ onMounted(() => {
     }, '0');
     
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(imgEarthEl.value, {
-        xPercent: 100,
-        yPercent: 100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-      starShipsEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: -100,
-            xPercent: -250,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-        titleEl.value.children,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: -150,
-            stagger: 0.3,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(listEl.value.children, {
-        xPercent: -100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        stagger: 0.1,
-        ease: "expo.inOut",
-    }, '0');
-}); */
 </script>
 
 <template>

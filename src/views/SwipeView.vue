@@ -9,10 +9,11 @@ import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
-const {onWheel} = useMouseWheel({toDownRoute: "teaser", toUpRoute: "moderation"});
-
+const sectionEl = ref();
 const mainImgEl = ref();
 const contentEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "teaser", toUpRoute: "moderation", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -39,7 +40,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section @wheel="onWheel" class=" flex">
+    <section ref="sectionEl" @wheel="onWheel" class=" flex">
       <div class="container flex gap-14 justify-between items-center max-sm:flex-col max-sm:justify-center">
         <div ref="contentEl" data="contentEl"  class="w-[500px] max-sm:w-full">
           <h2 class="bg-gradient-to-b from-white to-white/50 font-rfdewi text-transparent bg-clip-text text-5xl font-black uppercase max-sm:text-2xl max-sm:text-center">

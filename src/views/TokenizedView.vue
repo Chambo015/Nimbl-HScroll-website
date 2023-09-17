@@ -11,10 +11,11 @@ import {onMounted, ref} from 'vue'
 import gsap from 'gsap';
 import useMouseWheel from '@/composables/mouseWheel';
 
-const {onWheel} = useMouseWheel({toDownRoute: "data", toUpRoute: "stakes"});
-
+const sectionEl = ref()
 const monitorEl = ref()
 const contentEl = ref()
+
+const {onWheel} = useMouseWheel({toDownRoute: "data", toUpRoute: "stakes", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -40,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-     <section @wheel="onWheel" class=' h-full flex items-end justify-center '>
+     <section ref="sectionEl" @wheel="onWheel" class=' h-full flex items-end justify-center '>
       <div class="flex justify-center px-4 gap-9 max-sm:flex-col w-full h-full ">
         <div ref="contentEl" data="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center max-sm:flex-grow'>
           <span class="text-[#0061F0] text-2xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table ">
@@ -50,33 +51,33 @@ onMounted(() => {
             Nimbl Channels <br/>Tokenized
           </h2>
           <div >
-            <div class='mt-28 max-2xl:mt-10 max-sm:mt-8 flex gap-11'>
+            <div class='mt-28 max-2xl:mt-10 max-sm:mt-8 flex gap-11 max-sm:gap-5 max-sm:justify-between'>
               <div>
-                  <div class="flex items-center gap-5">
-                    <IconGiveaways />
-                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Giveaways</p>
+                  <div class="flex items-center gap-5  max-sm:gap-1 ">
+                    <IconGiveaways class="max-sm:w-[20px] max-sm:h-[20px]" />
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Giveaways</p>
                   </div>
-                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
-                    <IconAlphaContent />
-                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Alpha Content</p>
+                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 ">
+                    <IconAlphaContent class="max-sm:w-[23px] max-sm:h-[23px]" />
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Alpha Content</p>
                   </div>
-                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
-                    <IconChannelGrowth />
-                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Channel Growth</p>
+                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 ">
+                    <IconChannelGrowth class="max-sm:w-[23px] max-sm:h-[23px]" />
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Channel Growth</p>
                   </div>
               </div>
              <div>
-                  <div class="flex items-center gap-5 ">
-                    <IconTokengated />
-                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Tokengated Communities</p>
+                  <div class="flex items-center gap-5   max-sm:gap-1 ">
+                    <IconTokengated class="max-sm:w-[25px] max-sm:h-[25px] " />
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Tokengated Communities</p>
                   </div>
-                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
-                    <IconAlphaCalls />
-                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">Alpha Calls/Private content</p>
+                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 ">
+                    <IconAlphaCalls class="max-sm:w-[23px] max-sm:h-[23px]" />
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Alpha Calls/Private content</p>
                   </div>
-                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4">
-                    <IconTheContent />
-                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-base">The Content</p>
+                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 ">
+                    <IconTheContent class="max-sm:w-[25px] max-sm:h-[25px]" />
+                    <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">The Content</p>
                   </div>
              </div>
             </div>

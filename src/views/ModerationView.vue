@@ -1,5 +1,5 @@
 <template>
-   <section @wheel="onWheel" class="py-[20px] h-full">
+   <section ref="sectionEl" @wheel="onWheel" class="py-[20px] h-full">
       <div class="px-10 relative flex flex-col justify-center h-full max-sm:flex-col-reverse">
        <div>
           <div ref="titleEl" data="titleEl">
@@ -10,7 +10,7 @@
               Embrace a new era of community governance with our AI-powered moderation system.
             </p> -->
           </div>
-          <div ref="colsEl" data="colsEl" class="container flex justify-between mt-10 max-sm:flex-col max-sm:items-center max-sm:gap-7">
+          <div ref="colsEl" data="colsEl" class="container flex justify-between mt-10 max-sm:flex-col max-sm:items-center max-sm:gap-7 max-sm:mt-5">
             <div class=" flex flex-col  items-center gap-4 max-sm:gap-1">
               <IconBlock class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
               <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base ">
@@ -74,11 +74,12 @@ import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
-const {onWheel} = useMouseWheel({toDownRoute: "swipe", toUpRoute: "data"});
-
+const sectionEl = ref();
 const radarEl = ref();
 const colsEl = ref();
 const titleEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "swipe", toUpRoute: "data", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -114,42 +115,6 @@ onMounted(() => {
         }, "0"
     )
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(
-        colsEl.value.children,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: 100,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      titleEl.value.children,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: -100,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      radarEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-            ease: "expo.inOut",
-        },
-        "0"
-    )
-}); */
 </script>
 
 <style scoped lang="scss">

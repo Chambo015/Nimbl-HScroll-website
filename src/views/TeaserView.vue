@@ -8,10 +8,11 @@ import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
-const {onWheel} = useMouseWheel({toDownRoute: "transfers", toUpRoute: "swipe"});
-
+const sectionEl = ref();
 const mainImgEl = ref();
 const contentEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "transfers", toUpRoute: "swipe", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -40,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section @wheel="onWheel" class="pt-12 max-sm:pt-0">
+    <section ref="sectionEl" @wheel="onWheel" class="pt-12 max-sm:pt-0">
         <div class="container justify-between flex max-sm:flex-col h-full max-sm:justify-center">
             <div ref="contentEl" data="contentEl" class="self-center flex-shrink-0 ">
                 <h2
@@ -52,7 +53,8 @@ onMounted(() => {
                     Post a short-form teaser leading to a long-form video, get the outreach of bite-sized content into
                     your longer piece of content.
                 </p>
-                <div class="mt-14 max-sm:flex max-sm:justify-center max-sm:hidden">
+                <div class="mt-14 max-sm:flex max-sm:justify-center max-sm:hidden
+                ">
                     <HeroButton class="w-[500px] h-[95px]">
                         <p class="font-rfdewi text-2xl max-sm:text-sm font-bold">DOWNLOAD APP</p><template #icon><IconFiveDots class="w-[37px] h-[37px]" /></template>
                     </HeroButton>

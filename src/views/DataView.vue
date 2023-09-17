@@ -1,5 +1,5 @@
 <template>
-    <section @wheel="onWheel" class="h-full">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full">
         <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
             <picture class="flex justify-center pointer-events-none select-none ">
                 <source :srcset="imgBgWebp" type="image/webp" />
@@ -21,7 +21,7 @@
                     Own your data <span><IconChain class="inline" /></span> Own your content
                 </p>
             </div>
-            <div class="flex items-center justify-center gap-16 mt-16 max-sm:flex-col">
+            <div class="flex items-center justify-center gap-16 mt-16 max-sm:flex-col max-sm:mt-8">
                 <div
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
                     <picture class="flex justify-center pointer-events-none select-none ">
@@ -30,22 +30,22 @@
                     </picture>
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
-                        class="-left-5 -top-5 transition-transform duration-75"
+                        class="-left-5 -top-5 transition-transform duration-75 max-sm:-left-3 max-sm:-top-3"
                         >Interests</span
                     >
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
-                        class="-right-10 top-0 transition-transform duration-[40ms]"
+                        class="-right-10 top-0 transition-transform duration-[40ms] max-sm:-right-5 "
                         >Cookies</span
                     >
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
-                        class="-left-14 bottom-8 transition-transform duration-[50ms]"
+                        class="-left-14 bottom-8 transition-transform duration-[50ms] max-sm:-left-7 max-sm:bottom-8"
                         >Data</span
                     >
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
-                        class="-left-1 -bottom-8 transition-transform duration-[60ms]"
+                        class="-left-1 -bottom-8 transition-transform duration-[60ms] max-sm:-left-0 max-sm:-bottom-5"
                         >Chats</span
                     >
                     <span
@@ -101,8 +101,11 @@ import dataNimbl from "@/assets/data-nimbl.png";
 import IconChain from "@/components/DataView/IconChain.vue";
 import LocksCenter from "@/components/DataView/LocksCenter.vue";
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
+
+const sectionEl = ref();
+const mainImgEl = ref();
+const contentEl = ref();
 
 const X = ref();
 const Y = ref();
@@ -120,10 +123,7 @@ onUnmounted(() => {
     window.removeEventListener("mousemove", mouseEventHandle);
 });
 
-const {onWheel} = useMouseWheel({toDownRoute: "moderation", toUpRoute: "tokenized"});
-
-const mainImgEl = ref();
-const contentEl = ref();
+const {onWheel} = useMouseWheel({toDownRoute: "moderation", toUpRoute: "tokenized", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -145,27 +145,6 @@ onMounted(() => {
         "0",
     );
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(mainImgEl.value, {
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-        contentEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: 100,
-            stagger: 0.2,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <style scoped></style>

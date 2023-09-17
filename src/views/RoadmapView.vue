@@ -1,15 +1,15 @@
 <template>
-    <section @wheel="onWheel" class="h-full flex items-center py-[50px]">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full flex items-center py-[50px]">
       <div class="container 2xl:max-w-[1600px] relative ">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent hidden max-sm:block bg-clip-text font-rfdewi font-black uppercase text-2xl text-center">
           ROADMAP
         </h2>
-        <div ref="topListEl" data="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-[210px] max-sm:mt-7 relative">
+        <div ref="topListEl" data="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-7 relative max-sm:gap-3">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 1
             </p>
-            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-base max-2xl:text-xl">
+            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-sm max-2xl:text-xl max-sm:mt-1">
               <li>- Assembling the team</li>
               <li>- Team role assignment</li>
               <li>- Set up sprints and systems for building</li>
@@ -19,7 +19,7 @@
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 2
             </p>
-            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-base max-2xl:text-xl">
+            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-sm max-2xl:text-xl max-sm:mt-1">
               <li>- Web demo release</li>
               <li>- Building Software Architecture</li>
               <li>- Initiate Mobile App development</li>
@@ -29,7 +29,7 @@
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 3
             </p>
-            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-base max-2xl:text-xl">
+            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-sm max-2xl:text-xl max-sm:mt-1">
               <li>- App V1 Prototype closed testing</li>
               <li>- Finalize Nimbl Genesis UI</li>
               <li>- AppWorks Acceleration program</li>
@@ -37,7 +37,7 @@
             </ul>
           </div>
         </div>
-         <picture>
+         <picture class="max-sm:hidden">
          <source :srcset="rocketWebp" type="image/webp" />
            <img
            ref="rocketImgEl"   data="rocketImgEl"
@@ -46,12 +46,12 @@
             class="mix-blend-screen w-[1000px] max-2xl:w-[687px] max-2xl:h-[237px] object-contain mx-auto max-sm:absolute max-sm:-rotate-90 max-sm:top-[150px]  max-sm:-right-[50px] max-sm:w-[350px] max-sm:block"
           /> 
          </picture>
-        <div ref="bottomListEl" data="bottomListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-[210px] max-sm:mt-7">
+        <div ref="bottomListEl" data="bottomListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-3 max-sm:gap-3">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 4
             </p>
-            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-base max-2xl:text-xl">
+            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-sm max-2xl:text-xl max-sm:mt-1">
               <li>- Assembling the team</li>
               <li>- Nimbl Genesis Open Alpha</li>
               <li>- Bounty Program</li>
@@ -62,7 +62,7 @@
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 5
             </p>
-            <ul class="font-gilroy text-2xl max-2xl:text-xl text-white mt-4 max-sm:text-base">
+            <ul class="font-gilroy text-2xl max-2xl:text-xl text-white mt-4 max-sm:text-sm max-sm:mt-1">
               <li>- Bounty Campaign Snapshot</li>
               <li>- V2 release</li>
               <li>- Nimbl AR development</li>
@@ -73,7 +73,7 @@
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 6
             </p>
-            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-base max-2xl:text-xl">
+            <ul class="font-gilroy text-2xl text-white mt-4 max-sm:text-sm max-2xl:text-xl max-sm:mt-1">
               <li>- List on tier 1/2 CEX</li>
               <li>- User Data Decentralization</li>
               <li>- In-chat Crypto transfers</li>
@@ -90,15 +90,16 @@
 import rocket from '@/assets/NIMBL-rocket.png';
 import rocketWebp from '@/assets/NIMBL-rocket.webp';
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
-const {onWheel} = useMouseWheel({ toUpRoute: "token"});
 
+const sectionEl = ref();
 const topListEl = ref();
 const bottomListEl = ref();
 const rocketImgEl = ref();
+
+const {onWheel} = useMouseWheel({ toUpRoute: "token", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -134,37 +135,6 @@ onMounted(() => {
    
     
 });
-
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(topListEl.value, {
-        yPercent: -100,
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-      bottomListEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: 100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-      rocketImgEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            xPercent: 150,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
-    <section @wheel="onWheel" class="relative flex items-center justify-center h-full">
+    <section ref="sectionEl" @wheel="onWheel" class="relative flex items-center justify-center h-full">
         <div ref="webEl" data="webEl" class="relative max-2xl:-translate-y-[5%]">
-            <HandleWeb />
+            <HandleWeb class='max-sm:w-[750px] max-sm:h-[365px]' />
             <picture>
                 <source :srcset="radarIconWebp" type="image/webp" />
                 <img
@@ -23,7 +23,7 @@
             </div>
             <div
                 ref="refImg4"
-                class="bg-[#20133E] pb-3 px-[7px] absolute left-[50%] -translate-x-[700px] top-[50%] rounded-md pt-7">
+                class="bg-[#20133E] pb-3 px-[7px] absolute left-[50%] -translate-x-[700px] top-[50%] rounded-md pt-7 max-sm:hidden">
                 <img
                     loading="lazy"
                     :src="user2"
@@ -33,7 +33,7 @@
             </div>
             <div
                 ref="refImg3"
-                class="bg-[#20133E] pb-3 px-[7px] absolute left-[50%] -translate-x-[500px] top-[65%] rounded-md pt-7">
+                class="bg-[#20133E] pb-3 px-[7px] absolute left-[50%] -translate-x-[500px] top-[65%] rounded-md pt-7  max-sm:hidden">
                 <img
                     loading="lazy"
                     :src="user3"
@@ -61,7 +61,7 @@
                     class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 max-sm:w-8 max-sm:h-8" />
                 <p class="text-white text-xl font-gilroy font-medium max-sm:text-[8px]">@buman</p>
             </div>
-            <div ref="refImg4Prime" class="bg-[#20133E] pb-3 px-[7px] absolute right-[50%] top-[55%] rounded-md pt-7">
+            <div ref="refImg4Prime" class="bg-[#20133E] pb-3 px-[7px] absolute right-[50%] top-[55%] rounded-md pt-7  max-sm:hidden">
                 <img
                     loading="lazy"
                     :src="user3Prime"
@@ -69,7 +69,7 @@
                     class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 max-sm:w-5 max-sm:h-5" />
                 <p class="text-white text-xl font-gilroy font-medium max-sm:text-[8px]">@kairkuka</p>
             </div>
-            <div ref="refImg3Prime" class="bg-[#20133E] pb-3 px-[7px] absolute right-[50%] top-[65%] rounded-md pt-7">
+            <div ref="refImg3Prime" class="bg-[#20133E] pb-3 px-[7px] absolute right-[50%] top-[65%] rounded-md pt-7  max-sm:hidden">
                 <img
                     loading="lazy"
                     :src="user2Prime"
@@ -90,12 +90,12 @@
         </div>
         <h2
             ref="titleEl" data="titleEl"
-            class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-20 text-5xl font-rfdewi font-black uppercase absolute top-[30%] max-2xl:top-[10%] max-sm:text-2xl">
+            class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-20 text-5xl font-rfdewi font-black uppercase absolute top-[30%] max-2xl:top-[25%] max-sm:text-2xl">
             Claim Your Handle
         </h2>
         <div
             ref="buttonEl" data="buttonEl"
-            class="flex justify-center absolute left-1/2 bottom-[10%] -translate-x-1/2 max-sm:bottom-[0%]">
+            class="flex justify-center absolute left-1/2 bottom-[10%] -translate-x-1/2 max-sm:bottom-[30%]">
             <HeroButton class="w-[500px] h-[95px]">
                 <p class="font-rfdewi text-2xl max-sm:text-sm font-bold">DOWNLOAD APP</p>
                 <template #icon><IconFiveDots class="w-[37px] h-[37px]" /></template>
@@ -121,6 +121,9 @@ import HeroButton from "@/components/HeroButton.vue";
 import HandleWeb from "@/components/HandleWeb.vue";
 import useMouseWheel from "@/composables/mouseWheel";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const refImg2 = ref<HTMLDivElement | null>(null);
 const refImg3 = ref<HTMLDivElement | null>(null);
@@ -132,7 +135,7 @@ const refImg3Prime = ref<HTMLDivElement | null>(null);
 const refImg5Prime = ref<HTMLDivElement | null>(null);
 const refImg4Prime = ref<HTMLDivElement | null>(null);
 
-onMounted(() => {
+const startAnimationUsers = () => {
     const tl1 = gsap.timeline({repeat: -1});
     tl1.to(refImg2.value, {x: 0, autoAlpha: 0, duration: 3, scale: 0.5});
     tl1.fromTo(
@@ -168,14 +171,22 @@ onMounted(() => {
         {x: 650, autoAlpha: 1, duration: 4, y: 100, scale: 1},
         "<.2",
     );
+}
+
+onMounted(() => {
+   if(!isXS.value) {
+    startAnimationUsers()
+} 
+    
 });
 
-const {onWheel} = useMouseWheel({toDownRoute: "token", toUpRoute: "ai"});
-
+const sectionEl = ref();
 const webEl = ref();
 const iconImgEl = ref();
 const titleEl = ref();
 const buttonEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "token", toUpRoute: "ai", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -216,45 +227,6 @@ onMounted(() => {
         "0",
     );
 });
-/* onBeforeRouteLeave((__, _, next) => {
-    const tl = gsap.timeline({onComplete: next});
-
-    tl.to(webEl.value, {
-        autoAlpha: 0.0,
-        duration: 1.5,
-        ease: "expo.inOut",
-    });
-    tl.to(
-        iconImgEl.value,
-        {
-            scale: 1.5,
-            autoAlpha: 0.0,
-            duration: 1.5,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-        buttonEl.value,
-        {
-            yPercent: 150,
-            autoAlpha: 0.0,
-            duration: 1.5,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.to(
-        titleEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: -150,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-}); */
 </script>
 
 <style scoped></style>

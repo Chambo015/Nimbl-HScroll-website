@@ -12,12 +12,14 @@ const props = defineProps({
     ready: Boolean,
 });
 
-const {onWheel} = useMouseWheel({toDownRoute: "stakes"});
 
+const sectionEl = ref()
 const sliderEl = ref();
 const buttonsEl = ref();
 const titleEl = ref();
 const lightEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "stakes", target: sectionEl});
 
 watchEffect(() => {
     if(props.ready) {
@@ -63,6 +65,7 @@ onMounted(() => {
 
 <template>
     <section
+        ref="sectionEl"
         @wheel="onWheel"
         class="relative w-full transition-transform duration-[1.5s] delay-100"
         :class="ready ? 'scale-100' : 'scale-[0.48]'">

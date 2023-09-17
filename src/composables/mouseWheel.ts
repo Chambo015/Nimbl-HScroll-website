@@ -1,17 +1,19 @@
 import { useSwipe } from '@vueuse/core';
-import { watchEffect } from 'vue';
+import { watchEffect, Ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 
-export default function useMouseWheel({toDownRoute, toUpRoute}: {toDownRoute?: string, toUpRoute?: string}) {
-  const { isSwiping, direction,  lengthY } = useSwipe(window)
+export default function useMouseWheel({toDownRoute, toUpRoute, target}: {toDownRoute?: string, toUpRoute?: string, target?: Ref<HTMLElement>}) {
+  const { isSwiping, direction,  lengthY } = useSwipe(target)
   const router = useRouter()
 
   watchEffect(() => {
     if(isSwiping.value) {
-  
-      
-    
+      if(direction.value === 'up') {
+        router.push({name: toDownRoute})
+      } else if (direction.value === 'down') {
+        router.push({name: toUpRoute})
+      }
     }
   })
   const onWheel = (el: any) => {

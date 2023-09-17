@@ -97,7 +97,7 @@ onMounted(() => {
 /* **************************************************************************************** */
 
 /* Full Screen */
-const { isFullscreen, toggleFullscreen } = useCustomFullscreen(videoWrap);
+const { isFullscreen } = useCustomFullscreen(videoWrap);
 
 const {
     playing,
@@ -228,26 +228,26 @@ onMounted(() => {
                       <!-- --- -->
       
                       <!-- Строка Контролеров -->
-                      <div :class="['flex flex-row  items-center mt-1', isFullscreen ? 'py-3 px-4' : 'h-10 py-1 px-2']">
+                      <div :class="['flex flex-row  items-center mt-1', isFullscreen ? 'py-3 px-4' : 'h-10 py-1 px-2 max-sm:h-8']">
                           <!-- toggle Play -->
                           <button @click=" playing = !playing ">
-                              <IconPlay v-if="!playing" class="inline-block h-8 w-8 align-middle" />
-                              <IconPause v-else class="inline-block h-8 w-8 align-middle" />
+                              <IconPlay v-if="!playing" class="inline-block h-8 w-8 align-middle max-sm:w-5 max-sm:h-5" />
+                              <IconPause v-else class="inline-block h-8 w-8 align-middle max-sm:w-5 max-sm:h-5" />
                           </button>
                           <!--  -->
       
                           <!-- toggle Muted -->
                           <button @click="muted = !muted" title="Volume" class="ml-4">
-                              <IconVolume class="inline-block h-8 w-8 align-middle" :volume="soundVolume" />
+                              <IconVolume class="inline-block h-8 w-8 align-middle max-sm:w-5 max-sm:h-5" :volume="soundVolume" />
                           </button>
                           <!--  -->
       
                           <!-- Линия звука -->
-                          <Controls.Scrubber v-model="scrubberVolume" :max="1" class="ml-2 w-24" />
+                          <Controls.Scrubber v-model="scrubberVolume" :max="1" class="ml-2 w-24 max-sm:w-10" />
                           <!-- --- -->
 
                           <!--Время видео  -->
-                          <div class="ml-2 flex flex-1 flex-col text-sm">
+                          <div class="ml-2 flex flex-1 flex-col text-sm max-sm:text-xs">
                               {{ formatDuration(currentTime) }} / {{ formatDuration(duration) }}
                           </div>
                           <!-- ---  -->
@@ -255,7 +255,7 @@ onMounted(() => {
                         <Controls.Menu v-if="subtitles" class="ml-4">
                             <template #default="{ open }">
                                 <button @click="open">
-                                    <IconSubtitles  class="inline-block h-8 w-8 align-middle" />
+                                    <IconSubtitles  class="inline-block h-8 w-8 align-middle max-sm:w-5 max-sm:h-5" />
                                 </button>
                             </template>
                         <template #menu="{ close }">
@@ -273,7 +273,7 @@ onMounted(() => {
                         @keydown.stop.prevent.enter.space="enableTrack(track)"
                         @click="() => { enableTrack(track); close() }"
                         >
-                        <span class="flex-1">{{ track.label }}</span>
+                        <span class="flex-1 max-sm:text-xs">{{ track.label }}</span>
                         <img :src="imgBase64.selected" alt="" :class="{'opacity-0': track.mode !== 'showing' , 'w-5 h-5 mx-4': true}">
                         </Controls.MenuItem>
                         </div>
@@ -284,11 +284,11 @@ onMounted(() => {
                         <Controls.Menu v-if="voiceTracks" class="ml-4">
                             <template #default="{ open }">
                                 <button @click="open">
-                                    <IconVoice  class="inline-block h-8 w-8 align-middle" />
+                                    <IconVoice  class="inline-block h-8 w-8 align-middle max-sm:w-5 max-sm:h-5" />
                                 </button>
                             </template>
                         <template #menu="{ close }">
-                        <div class="absolute bottom-0 right-0 bg-black rounded py-2 shadow">
+                        <div class="absolute bottom-0 right-0 bg-black rounded py-2 shadow max-sm:py-1">
                             <Controls.MenuItem
                             @click="() => {enableVoice = null ; close() }"
                         >
@@ -300,8 +300,8 @@ onMounted(() => {
                         :key="v.language"
                         @click="() => { enableVoice = idx; close() }"
                         >
-                        <img :src="v.flag" alt="" width="28" height="21" class="flex-shrink-0">
-                        <span class="flex-shrink-0">{{ v.label }}</span>
+                        <img :src="v.flag" alt="" width="28" height="21" class="flex-shrink-0  max-sm:w-5 max-sm:h-5">
+                        <span class="flex-shrink-0 max-sm:text-xs">{{ v.label }}</span>
                         <img :src="imgBase64.selected" alt="" :class="{'opacity-0': idx !== enableVoice , ' flex-shrink-0 w-5 h-5 mx-10': true}">
                         </Controls.MenuItem>
                         </div>
