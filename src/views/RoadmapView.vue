@@ -4,7 +4,7 @@
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent hidden max-sm:block bg-clip-text font-rfdewi font-black uppercase text-2xl text-center">
           ROADMAP
         </h2>
-        <div ref="topListEl" data="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-7 relative max-sm:gap-3">
+        <div ref="topListEl" data="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-5 relative max-sm:gap-3">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 1

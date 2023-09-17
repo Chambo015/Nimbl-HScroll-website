@@ -10,16 +10,16 @@ import network from '@/assets/network.png';
 import pc from '@/assets/pc.png';
 import starShips from '@/assets/star-ships.png';
 import gsap from "gsap";
-import {onBeforeRouteLeave} from "vue-router";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
 
-const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "handle"});
-
+const sectionEl = ref();
 const titleEl = ref();
 const listEl = ref();
 const starShipsEl = ref();
 const imgEarthEl = ref();
+
+const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "handle", target: sectionEl});
 
 onMounted(() => {
     const tl = gsap.timeline();
@@ -65,7 +65,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section @wheel="onWheel" class="h-full flex flex-col justify-center pt-[150px] max-3xl:pt-9">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full flex flex-col justify-center pt-[150px] max-3xl:pt-9">
       <div ref="titleEl" data="titleEl">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[88px] leading-none font-rfdewi font-black text-center max-sm:text-3xl">
           NIMBL TOKEN

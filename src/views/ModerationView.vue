@@ -1,6 +1,6 @@
 <template>
    <section ref="sectionEl" @wheel="onWheel" class="py-[20px] h-full">
-      <div class="px-10 relative flex flex-col justify-center h-full max-sm:flex-col-reverse">
+      <div class="px-10 relative flex flex-col justify-center h-full max-sm:flex-col-reverse max-sm:justify-end">
        <div>
           <div ref="titleEl" data="titleEl">
             <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-7 text-5xl max-2xl:text-4xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:mt-3">

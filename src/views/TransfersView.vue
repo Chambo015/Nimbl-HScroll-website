@@ -52,8 +52,8 @@ onMounted(() => {
               Send <span class='text-[#6529E0]'>$NIMBL </span>to your friend’s username in a few easy taps. Sign transactions with your fingerprint or
               face-id.
             </p>
-            <div class='mt-20 max-sm:mt-5 gap-20 flex max-sm:items-end  '>
-              <picture><!-- <source :srcset="imgCardWebp" type="image/webp" /> --><img :src="imgCardFull" alt="imgCard" class='w-[355px] max-sm:w-[180px]' loading="lazy" /></picture>
+            <div class='mt-20 max-sm:mt-5 gap-20 flex max-sm:items-end '>
+              <picture><!-- <source :srcset="imgCardWebp" type="image/webp" /> --><img :src="imgCardFull" alt="imgCard" class='h-[212px] max-sm:h-[120px]' loading="lazy" /></picture>
             </div>
           </div>
           <div class="flex-shrink-0 max-sm:h-[300px]">
