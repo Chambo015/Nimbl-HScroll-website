@@ -177,6 +177,9 @@ import imgCircle from "@/assets/circle.png";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const contentEl = ref();
@@ -189,6 +192,7 @@ const imgGlassLeftEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "summarize", toUpRoute: "transfers", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(contentEl.value, {

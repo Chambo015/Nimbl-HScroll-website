@@ -1,5 +1,5 @@
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="h-full flex items-center py-[50px]">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full flex items-center py-[50px] max-sm:py-1 max-sm:items-start">
       <div class="container 2xl:max-w-[1600px] relative ">
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent hidden max-sm:block bg-clip-text font-rfdewi font-black uppercase text-2xl text-center">
           ROADMAP
@@ -92,7 +92,9 @@ import rocketWebp from '@/assets/NIMBL-rocket.webp';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
 
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const topListEl = ref();
@@ -102,6 +104,7 @@ const rocketImgEl = ref();
 const {onWheel} = useMouseWheel({ toUpRoute: "token", target: sectionEl});
 
 onMounted(() => {
+  if(isXS.value) return
     const tl = gsap.timeline();
     
     tl.from(topListEl.value.children, {

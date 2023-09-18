@@ -102,6 +102,9 @@ import IconChain from "@/components/DataView/IconChain.vue";
 import LocksCenter from "@/components/DataView/LocksCenter.vue";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const mainImgEl = ref();
@@ -126,6 +129,7 @@ onUnmounted(() => {
 const {onWheel} = useMouseWheel({toDownRoute: "moderation", toUpRoute: "tokenized", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(mainImgEl.value, {

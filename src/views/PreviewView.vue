@@ -133,16 +133,6 @@ onUnmounted(() => {
         }
     })
 })
-/* onBeforeRouteLeave((to, from, next) => {
-    gsap.to(container.value, {
-        duration: 3,
-        scale: 1.8,
-        opacity: 0,
-        onComplete: () => {
-            next()
-        }
-    })
-}) */
 </script>
 
 <style scoped>

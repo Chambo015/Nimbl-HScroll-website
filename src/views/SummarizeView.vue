@@ -5,6 +5,9 @@ import mobileSummWebp from '@/assets/rotated-phone-summarize.webp'
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const bgLeftImgEl = ref();
@@ -15,6 +18,7 @@ const titleEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "ai", toUpRoute: "gamification", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(bgLeftImgEl.value, {

@@ -176,8 +176,7 @@ const startAnimationUsers = () => {
 onMounted(() => {
    if(!isXS.value) {
     startAnimationUsers()
-} 
-    
+    } 
 });
 
 const sectionEl = ref();
@@ -189,6 +188,7 @@ const buttonEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "token", toUpRoute: "ai", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(webEl.value, {

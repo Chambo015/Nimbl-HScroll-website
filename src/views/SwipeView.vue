@@ -8,6 +8,9 @@ import swipeRightWebp from '@/assets/swipe-toSave.webp';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const mainImgEl = ref();
@@ -16,6 +19,7 @@ const contentEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "teaser", toUpRoute: "moderation", target: sectionEl});
 
 onMounted(() => {
+  if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(mainImgEl.value, {

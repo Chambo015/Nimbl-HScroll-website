@@ -34,6 +34,7 @@ watchEffect(() => {
 });
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(sliderEl.value, {

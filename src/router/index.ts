@@ -15,6 +15,9 @@ import TokenizedView from "@/views/TokenizedView.vue";
 import TokenView from "@/views/TokenView.vue";
 import TransfersView from "@/views/TransfersView.vue";
 
+const routerArr = ['nimbltv', 'stakes', 'tokenized', 'data', 'moderation', 'swipe', 'teaser', 
+'transfers', 'gamification', 'summarize', 'ai', 'handle', 'token', 'roadmap']
+
 const router = createRouter({
     history: createWebHashHistory(import.meta.env.BASE_URL) /* createWebHistory(), */, // Способ сохранения истории переходов по маршрутам
     routes: [
@@ -100,6 +103,14 @@ const router = createRouter({
 router.afterEach((to, from) => {
     if (from.name) {
         to.meta.previousPage = from.name;
+    }
+    const fromIdx = routerArr.indexOf(from.name as string)
+    const toIdx =  routerArr.indexOf(to.name as string)
+    if(fromIdx < toIdx) {
+        to.meta.transition = 'slide-up'
+    } else {
+        to.meta.transition = 'slide-down'
+
     }
 });
 

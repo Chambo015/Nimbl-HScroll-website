@@ -5,19 +5,19 @@ import type { PropType} from 'vue'
 import  { computed} from 'vue'
 
 const props = defineProps({
-  prevPageName: Object as PropType<any>
+  toMeta: Object as PropType<any>
 })
 
 const isXS = useMediaQuery("(max-width: 640px)");
 
 const onLeaveHook = computed(() => {
     if(isXS.value) return undefined
-   return leaveHooks[(props.prevPageName.previousPage as string)]
+   return leaveHooks[(props.toMeta.previousPage as string)]
 })
 </script>
 
 <template>
-    <Transition @leave="onLeaveHook" :name="isXS ?'slide':'fade'" :mode="isXS ? 'in-out':'in-out'">
+    <Transition @leave="onLeaveHook" :name="isXS ? toMeta.transition :'fade'" :mode="isXS ? 'out-in':'in-out'">
         <slot />
     </Transition>
 </template>
@@ -32,20 +32,40 @@ const onLeaveHook = computed(() => {
     position: absolute !important;
 } 
 
-:global(.slide-enter-active) {
-  transition: all .25s ease-out;
+:global(.slide-up-enter-active) {
+  transition: all .3s ease-out;
 }
-:global(.slide-leave-active) {
-  transition: all .25s ease-out;
+:global(.slide-up-leave-active) {
+  transition: all .3s ease-out;
+}
+:global(.slide-down-leave-active) {
+  transition: all .3s ease-out;
+ position: absolute;
 }
 
-:global(.slide-enter-from) {
-  opacity: 0;
-  transform: translateY(30px);
+:global(.slide-down-enter-active){
+  transition: all .3s ease-out;
+ position: absolute;
 }
 
-:global(.slide-leave-to) {
+
+:global(.slide-up-enter-from) {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateY(300px);
+}
+
+:global(.slide-up-leave-to) {
+  opacity: 0;
+  transform: translateY(-300px);
+}
+
+:global(.slide-down-enter-from) {
+  opacity: 0;
+  transform: translateY(-300px);
+}
+
+:global(.slide-down-leave-to) {
+  opacity: 0;
+  transform: translateY(300px);
 }
 </style>

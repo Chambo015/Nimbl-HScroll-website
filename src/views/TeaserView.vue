@@ -7,6 +7,9 @@ import IconFiveDots from '@/components/icons/IconFiveDots.vue';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const mainImgEl = ref();
@@ -15,6 +18,7 @@ const contentEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "transfers", toUpRoute: "swipe", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(mainImgEl.value, {
@@ -42,7 +46,7 @@ onMounted(() => {
 
 <template>
     <section ref="sectionEl" @wheel="onWheel" class="pt-12 max-sm:pt-0">
-        <div class="container justify-between flex max-sm:flex-col h-full max-sm:justify-center">
+        <div class="container justify-between flex max-sm:flex-col h-full max-sm:justify-start max-sm:pt-5">
             <div ref="contentEl" data="contentEl" class="self-center flex-shrink-0 ">
                 <h2
                     class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text font-rfdewi font-black uppercase text-5xl max-sm:text-2xl max-sm:text-center">

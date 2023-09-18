@@ -9,7 +9,9 @@ import ChartBackground from "@/components/StakesView/ChartBackground.vue";
 import {onMounted, ref} from "vue";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
+import { useMediaQuery } from '@vueuse/core';
 
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const chartEl = ref();
@@ -18,6 +20,7 @@ const dotsChartEl = ref();
 
 const {onWheel} = useMouseWheel({toDownRoute: "tokenized", toUpRoute: "nimbltv", target: sectionEl});
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(chartEl.value, {
@@ -51,8 +54,8 @@ onMounted(() => {
 
 </script>
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="py-[50px] flex flex-col justify-center">
-        <div ref="titleEl" data="titleEl" class="container">
+    <section ref="sectionEl" @wheel="onWheel" class="pt-44 max-sm:pt-7 max-sm:pb-7 flex flex-col justify-center">
+        <div ref="titleEl" data="titleEl" class="container flex-grow">
             <h2
                 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">
                 Introducing Stakes
@@ -62,8 +65,8 @@ onMounted(() => {
                 interaction with the excitement of owning stakes in your favorite groups and influencers.
             </p>
         </div>
-        <div ref="chartEl" data="chartEl" class="flex justify-center mt-28 max-2xl:mt-8 max-2xl:w-full relative">
-            <div class="relative w-full max-sm:w-[200vw]">
+        <div ref="chartEl" data="chartEl" class="flex justify-center mt-28 max-3xl:mt-8 max-2xl:w-full relative">
+            <div class="relative max-sm:w-[200vw] aspect-[2.9]">
                 <ChartBackground class="max-2xl:w-full max-sm:w-[200vw]  max-sm:h-[400px]" />
                 <picture>
                     <source :srcset="userImg3Webp" type="image/webp" />

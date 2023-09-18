@@ -1,5 +1,5 @@
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="h-full py-5 flex items-center">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full py-5 flex items-center max-sm:items-start">
         <div class="mx-auto px-9">
             <h2
                 ref="titleEl"
@@ -21,7 +21,7 @@
                     <h3 class="text-[40px] max-2xl:text-3xl mt-10 max-2xl:mt-6 font-rfdewi font-bold uppercase max-sm:text-lg max-sm:mt-3">
                         longs to clips
                     </h3>
-                    <p class="text-white text-2xl font-normal font-gilroy mt-6 max-sm:mt-2 max-sm:text-base">
+                    <p class="text-white text-2xl font-normal font-gilroy mt-6 max-sm:mt-2 max-sm:text-sm">
                         Auto Clipper AI automatically edits your long-form videos into polished, vertical clips
                     </p>
                 </div>
@@ -52,7 +52,7 @@
                     <h3 class="text-[40px] max-2xl:text-3xl max-2xl:mt-6 mt-10 font-rfdewi font-bold uppercase max-sm:text-lg max-sm:mt-3">
                         ai translate
                     </h3>
-                    <p class="text-white text-2xl font-normal font-gilroy mt-6 max-sm:mt-2  max-sm:text-base">
+                    <p class="text-white text-2xl font-normal font-gilroy mt-6 max-sm:mt-2  max-sm:text-sm">
                         LLM tool translates your videos into 40 languages, making your content globally accessible.
                     </p>
                 </div>
@@ -70,6 +70,9 @@ import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
 import {video} from "@/video";
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const leftVideoEl = ref();
@@ -80,6 +83,7 @@ const readyToShowVideo = ref(false);
 const {onWheel} = useMouseWheel({toDownRoute: "handle", toUpRoute: "summarize", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline({
         onComplete: () => {
             readyToShowVideo.value = true;

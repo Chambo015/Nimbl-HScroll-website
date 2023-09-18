@@ -13,19 +13,19 @@
           <div ref="colsEl" data="colsEl" class="container flex justify-between mt-10 max-sm:flex-col max-sm:items-center max-sm:gap-7 max-sm:mt-5">
             <div class=" flex flex-col  items-center gap-4 max-sm:gap-1">
               <IconBlock class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
-              <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base ">
+              <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-sm ">
                 Decisions are guided by clear, open-source guidelines
               </p>
             </div>
             <div class=" flex flex-col items-center gap-4 max-sm:gap-1">
               <IconSearch class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
-              <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base">
+              <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-sm">
                 Every instance is committed on-chain, with explanation and post links
               </p>
             </div>
             <div class=" flex flex-col items-center gap-4 max-sm:gap-1">
               <IconUserSearch class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
-              <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-base">
+              <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-sm">
                 Moderation Guidelines developed by Nimbl Collective DAO
               </p>
             </div>
@@ -73,6 +73,9 @@ import IconUserSearch from '@/components/icons/IconUserSearch.vue';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const radarEl = ref();
@@ -82,6 +85,7 @@ const titleEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "swipe", toUpRoute: "data", target: sectionEl});
 
 onMounted(() => {
+    if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(

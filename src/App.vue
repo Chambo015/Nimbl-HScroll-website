@@ -90,7 +90,7 @@ onMounted(() => {
             </Transition>
         </template>
         <router-view v-slot="{Component, route}">
-            <TransitionLeavePage :prev-page-name="route.meta">
+            <TransitionLeavePage :to-meta="route.meta">
                 <component :ready="ready" :is="Component" />
             </TransitionLeavePage>
         </router-view>

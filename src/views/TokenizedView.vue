@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import monitorImgLarge from '@/assets/monitor-large.png';
 import monitorImgLargeWebp from '@/assets/monitor-large.webp';
+import monitorXs from '@/assets/monitor-xs.png';
 import IconAlphaCalls from '@/components/icons/IconAlphaCalls.vue';
 import IconAlphaContent from '@/components/icons/IconAlphaContent.vue';
 import IconChannelGrowth from '@/components/icons/IconChannelGrowth.vue';
@@ -10,6 +11,9 @@ import IconTokengated from '@/components/icons/IconTokengated.vue';
 import {onMounted, ref} from 'vue'
 import gsap from 'gsap';
 import useMouseWheel from '@/composables/mouseWheel';
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref()
 const monitorEl = ref()
@@ -18,6 +22,7 @@ const contentEl = ref()
 const {onWheel} = useMouseWheel({toDownRoute: "data", toUpRoute: "stakes", target: sectionEl});
 
 onMounted(() => {
+  if(isXS.value) return
     const tl = gsap.timeline();
 
     tl.from(monitorEl.value, {
@@ -41,9 +46,9 @@ onMounted(() => {
 </script>
 
 <template>
-     <section ref="sectionEl" @wheel="onWheel" class=' h-full flex items-end justify-center '>
+     <section ref="sectionEl" @wheel="onWheel" class='h-full flex items-end justify-center '>
       <div class="flex justify-center px-4 gap-9 max-sm:flex-col w-full h-full">
-        <div ref="contentEl" data="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center max-sm:mt-auto'>
+        <div ref="contentEl" data="contentEl" class=' flex flex-col items-start justify-center max-sm:items-center'>
           <span class="text-[#0061F0] text-2xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table ">
             Stake’s Utility
           </span>
@@ -83,8 +88,9 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <div ref="monitorEl" data="monitorEl" class="flex items-end max-sm:justify-center max-sm:mt-auto">
-          <picture><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain max-sm:h-[300px]' /></picture>
+        <div ref="monitorEl" data="monitorEl" class="flex items-end max-sm:justify-center max-sm:w-full ">
+          <picture class="max-sm:hidden"><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain max-sm:h-[300px]' /></picture>
+          <picture class="max-sm:block hidden"><!-- <source :srcset="monitorImgLargeWebp" type="image/webp" /> --><img :src="monitorXs" alt="monitorImgLarge" class='w-full' /></picture>
         </div>
       </div>
     </section>

@@ -12,6 +12,9 @@ import starShips from '@/assets/star-ships.png';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
+
+const isXS = useMediaQuery("(max-width: 640px)");
 
 const sectionEl = ref();
 const titleEl = ref();
@@ -22,6 +25,7 @@ const imgEarthEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "handle", target: sectionEl});
 
 onMounted(() => {
+  if(isXS.value) return
     const tl = gsap.timeline();
     
     tl.from(imgEarthEl.value, {
