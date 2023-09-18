@@ -4,7 +4,7 @@
         <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent hidden max-sm:block bg-clip-text font-rfdewi font-black uppercase text-2xl text-center">
           ROADMAP
         </h2>
-        <div ref="topListEl" data="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-5 relative max-sm:gap-3">
+        <div ref="topListEl" data="topListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-5 relative max-sm:gap-3 max-sm:text-center">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 1
@@ -46,7 +46,7 @@
             class="mix-blend-screen w-[1000px] max-2xl:w-[687px] max-2xl:h-[237px] object-contain mx-auto max-sm:absolute max-sm:-rotate-90 max-sm:top-[150px]  max-sm:-right-[50px] max-sm:w-[350px] max-sm:block"
           /> 
          </picture>
-        <div ref="bottomListEl" data="bottomListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-3 max-sm:gap-3">
+        <div ref="bottomListEl" data="bottomListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-3 max-sm:gap-3 max-sm:text-center">
           <div>
             <p class="bg-gradient-to-b from-[#9B6AFF] to-[#6529E0] text-transparent bg-clip-text font-rfdewi text-2xl uppercase font-black max-sm:text-sm">
               phase 4

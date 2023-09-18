@@ -71,7 +71,7 @@ onMounted(() => {
         ref="sectionEl"
         @wheel="onWheel"
         class="relative w-full transition-transform duration-[1.5s] delay-100"
-        :class="isXS ? 'scale-100' : ready ? 'scale-100' : 'scale-[0.48]'">
+        :class=" ready ? 'scale-100' : isXS? 'scale-75': 'scale-[0.48] max-2xl:scale-[0.4]'">
         <picture ref="lightEl" data="lightEl" class="opacity-0">
             <source :srcset="lightImgWebp" type="image/webp" />
             <img

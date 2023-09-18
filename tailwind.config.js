@@ -6,6 +6,14 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      sm: '645px',
+      md: '770px',
+      lg: '1025px',
+      xl: '1290px',
+      '2xl': '1540px',
+      '3xl': '1950px'
+    },
     extend: {
       fontFamily: {
         rfdewi: ['RFDewi', 'Inter', '-apple-system', 'Helvetica Neue', 'sans-serif'],
@@ -16,9 +24,6 @@ export default {
     },
     backgroundImage: {
       'btn-bg-liner': 'radial-gradient(119.98% 176.69% at 84.00% -4.95%, rgba(170, 214, 255, 0.81) 0%, rgba(170, 214, 255, 0.81) 0.01%, #0066FE 100%)',
-    },
-    screens: {
-      '3xl': '1950px',
     }
     },
     container: {

@@ -54,10 +54,10 @@ onMounted(() => {
 
 </script>
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="pt-44 max-sm:pt-7 max-sm:pb-7 flex flex-col justify-center">
-        <div ref="titleEl" data="titleEl" class="container flex-grow">
+    <section ref="sectionEl" @wheel="onWheel" class="pt-44 max-sm:pt-7 max-sm:pb-7 flex flex-col justify-center max-sm:justify-start">
+        <div ref="titleEl" data="titleEl" class="container">
             <h2
-                class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center">
+                class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center max-2xl:text-4xl">
                 Introducing Stakes
             </h2>
             <p class="font-gilroy text-[28px] max-2xl:text-2xl leading-tight text-center mt-8 max-sm:text-base">
@@ -67,7 +67,7 @@ onMounted(() => {
         </div>
         <div ref="chartEl" data="chartEl" class="flex justify-center mt-28 max-3xl:mt-8 max-2xl:w-full relative">
             <div class="relative max-sm:w-[200vw] aspect-[2.9]">
-                <ChartBackground class="max-2xl:w-full max-sm:w-[200vw]  max-sm:h-[400px]" />
+                <ChartBackground class="max-2xl:w-full max-sm:w-[200vw] max-sm:h-[400px] h-full" />
                 <picture>
                     <source :srcset="userImg3Webp" type="image/webp" />
                     <img
@@ -95,7 +95,7 @@ onMounted(() => {
                         loading="lazy" />
                 </picture>
             </div>
-            <div ref="dotsChartEl" data="dotsChartEl" class="absolute bottom-0 max-sm:-bottom-14  flex justify-center gap-7 h-[150px]">
+            <div ref="dotsChartEl" data="dotsChartEl" class="absolute bottom-0 max-sm:-bottom-14 justify-center gap-7 h-[150px] max-sm:flex hidden">
             <svg xmlns="http://www.w3.org/2000/svg" width="37" height="45" fill="none" viewBox="0 0 37 45">
                 <circle cx="18" cy="11" r="11" fill="#FF8743" />
                 <circle cx="18" cy="11" r="7" fill="#000" />

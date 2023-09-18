@@ -6,7 +6,8 @@ import gsap from "gsap";
 import {useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
-import {useMediaQuery} from "@vueuse/core";
+import {useMediaQuery, onKeyStroke} from "@vueuse/core";
+import PreviewViewMobile from './views/PreviewViewMobile.vue';
 
 const ready = ref(false);
 const router = useRouter();
@@ -72,6 +73,11 @@ const handlePreviewClick = () => {
     router.replace({name: "nimbltv"});
 };
 
+onKeyStroke('Enter', (e) => {
+  e.preventDefault()
+  handlePreviewClick()
+})
+
 onMounted(() => {
     router.replace({name: "nimbltv"});
 });
@@ -79,7 +85,7 @@ onMounted(() => {
 
 <template>
     <button
-        v-if="!isXS && !ready"
+        v-if="!ready"
         type="button"
         class="w-screen h-screen z-[100] fixed block"
         @click="handlePreviewClick"></button>
@@ -87,6 +93,11 @@ onMounted(() => {
         <template v-if="!isXS">
             <Transition @leave="onLeavePreviewPage" mode="in-out">
                 <PreviewView v-if="!ready" />
+            </Transition>
+        </template>
+        <template v-if="isXS">
+            <Transition @leave="onLeavePreviewPage" mode="in-out">
+                <PreviewViewMobile v-if="!ready" />
             </Transition>
         </template>
         <router-view v-slot="{Component, route}">
