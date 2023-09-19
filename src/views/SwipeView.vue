@@ -45,7 +45,7 @@ onMounted(() => {
 
 <template>
     <section ref="sectionEl" @wheel="onWheel" class=" flex">
-      <div class="container flex gap-14 justify-between items-center max-sm:flex-col max-sm:justify-center">
+      <div class="container flex gap-14 justify-between items-center max-sm:flex-col max-xl:justify-center">
         <div ref="contentEl" data="contentEl"  class="w-[500px] max-sm:w-full">
           <h2 class="bg-gradient-to-b from-white to-white/50 font-rfdewi text-transparent bg-clip-text text-5xl font-black uppercase max-sm:text-2xl max-sm:text-center">
             SWIPE
@@ -56,9 +56,9 @@ onMounted(() => {
           </p>
         </div>
         <div ref="mainImgEl" data="mainImgEl" class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
-          <picture ><source :srcset="mobileImgWebp" type="image/webp" /><img :src="mobileImg" alt="mobileImg" class="w-[442px] h-[744px] max-sm:w-[230px] max-sm:h-[380px] object-contain" /></picture>
-          <picture><source ::srcset="swipeLeftWebp" type="image/webp" /><img  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
-          <picture><source ::srcset="swipeRightWebp" type="image/webp" /><img  :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>
+          <picture><source :srcset="mobileImgWebp" type="image/webp" /><img :src="mobileImg" alt="mobileImg" class=" max-h-[744px] max-2xl:max-h-[100vh]  max-sm:w-[230px] max-sm:h-[380px] object-contain" /></picture>
+          <picture><source :srcset="swipeLeftWebp" type="image/webp" /><img  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
+          <picture><source :srcset="swipeRightWebp" type="image/webp" /><img  :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>
         </div>
       </div>
     </section>

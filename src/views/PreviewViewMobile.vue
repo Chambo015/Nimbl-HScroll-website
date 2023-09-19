@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import prevImgMobile from '@/assets/mobile-intro-transperent.png'
 import leftMiddleImg from "@/assets/preview/leftMiddleImg.png";
+import centerSmoke from "@/assets/preview/smokeCenter.png"
 </script>
 
 
@@ -29,7 +30,7 @@ import leftMiddleImg from "@/assets/preview/leftMiddleImg.png";
                 class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                 alt="smoke-image3"
                 src="https://oleksandrpavlyshch.github.io/mouse-move-parallax_demo/img/smoke3.png" />
-            
+                <img class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none" alt="smoke-image7" :src="centerSmoke" />
         </div>
   </div>
 </template>
