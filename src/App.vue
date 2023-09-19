@@ -7,7 +7,7 @@ import {useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
-import PreviewViewMobile from './views/PreviewViewMobile.vue';
+import PreviewViewMobile from "./views/PreviewViewMobile.vue";
 
 const ready = ref(false);
 const router = useRouter();
@@ -73,10 +73,10 @@ const handlePreviewClick = () => {
     router.replace({name: "nimbltv"});
 };
 
-onKeyStroke('Enter', (e) => {
-  e.preventDefault()
-  handlePreviewClick()
-})
+onKeyStroke("Enter", (e) => {
+    e.preventDefault();
+    handlePreviewClick();
+});
 
 onMounted(() => {
     router.replace({name: "nimbltv"});
@@ -90,6 +90,17 @@ onMounted(() => {
         class="w-screen h-screen z-[100] fixed block"
         @click="handlePreviewClick"></button>
     <main class="h-screen w-screen relative bg-[#0F0722]">
+        
+        <div class="h-screen w-screen">
+            <router-view v-slot="{Component, route}">
+                <TransitionLeavePage :to-meta="route.meta">
+                    <component :ready="ready" :is="Component" />
+                </TransitionLeavePage>
+            </router-view>
+        </div>
+        <AppJoystick v-if="!isXS" />
+        <NavigationApp />
+
         <template v-if="!isXS">
             <Transition @leave="onLeavePreviewPage" mode="in-out">
                 <PreviewView v-if="!ready" />
@@ -100,13 +111,6 @@ onMounted(() => {
                 <PreviewViewMobile v-if="!ready" />
             </Transition>
         </template>
-        <router-view v-slot="{Component, route}">
-            <TransitionLeavePage :to-meta="route.meta">
-                <component :ready="ready" :is="Component" />
-            </TransitionLeavePage>
-        </router-view>
-        <AppJoystick v-if="!isXS" />
-        <NavigationApp />
     </main>
 </template>
 

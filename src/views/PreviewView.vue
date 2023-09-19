@@ -1,5 +1,6 @@
 <template>
     <div  class="bg-transparent fixed left-0 top-0 w-screen h-screen z-[99]">
+        <div class="bg-black/30 fixed inset-0 backdrop-blur-2xl z-[555] transition-all"></div>
         <div class="absolute left-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="absolute right-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="w-screen monitor_wrap h-screen left-0 top-0 absolute z-[1]">
