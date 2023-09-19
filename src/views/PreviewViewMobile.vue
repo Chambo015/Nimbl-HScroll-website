@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import prevImgMobile from '@/assets/mobile-intro-transperent.png'
+import prevImgMobile from '@/assets/preview/mobile-intro-transperent.png'
+import prevImgMobileWebp from '@/assets/preview/mobile-intro-transperent.webp'
 import leftMiddleImg from "@/assets/preview/leftMiddleImg.png";
 import centerSmoke from "@/assets/preview/smokeCenter.png"
 </script>
@@ -7,7 +8,7 @@ import centerSmoke from "@/assets/preview/smokeCenter.png"
 
 <template>
   <div class="fixed left-0 top-0 w-screen h-screen z-[99]">
-    <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover">
+    <picture><source :srcset="prevImgMobileWebp" type="image/webp" /><img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"></picture>
     <img
             :src="leftMiddleImg"
             alt="leftMiddleImg"

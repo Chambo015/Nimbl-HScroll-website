@@ -3,7 +3,7 @@
         <div class="absolute left-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="absolute right-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="w-screen monitor_wrap h-screen left-0 top-0 absolute z-[1]">
-            <img :src="monitor" alt="monitor" class="w-full h-full object-contain" />
+            <picture><source :srcset="monitorWebp" type="image/webp" /><img :src="monitor" alt="monitor" class="w-full h-full object-contain" /></picture>
         </div>
         <img
             :src="peopleImg"
@@ -79,6 +79,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref, onUnmounted} from "vue";
 import monitor from "@/assets/preview/first-block-nimbl-landing.png";
+import monitorWebp from "@/assets/preview/first-block-nimbl-landing.webp";
 import rightImg from "@/assets/preview/rightImg.png";
 import imgPlayLeft from "@/assets/preview/imgPlayLeft.png";
 import leftMiddleImg from "@/assets/preview/leftMiddleImg.png";
