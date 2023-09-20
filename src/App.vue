@@ -25,7 +25,6 @@ function onLeavePreviewPage(el: any, done: any) {
         {
             autoAlpha: 0.0,
             duration: 1,
-            position: "absolute",
         },
         "",
     );
@@ -38,7 +37,6 @@ function onLeavePreviewPage(el: any, done: any) {
             filter: "blur(20px)",
             opacity: 0,
             stagger: 0,
-            position: "absolute",
         },
         "+0.4",
     );
@@ -51,7 +49,6 @@ function onLeavePreviewPage(el: any, done: any) {
             filter: "blur(20px)",
             opacity: 0,
             stagger: 0,
-            position: "absolute",
         },
         "+0.4",
     );
@@ -62,7 +59,6 @@ function onLeavePreviewPage(el: any, done: any) {
             opacity: 0,
             ease: "expo.inOut",
             duration: 1,
-            position: "absolute",
         },
         "0",
     );
@@ -89,7 +85,7 @@ onMounted(() => {
         type="button"
         class="w-screen h-screen z-[100] fixed block"
         @click="handlePreviewClick"></button>
-    <main class="h-screen w-screen relative bg-[#0F0722]">
+    <main class="absolute inset-0  bg-[#0F0722]">
         
         <div class="absolute left-0 top-0 right-0 bottom-0">
             <router-view v-slot="{Component, route}">

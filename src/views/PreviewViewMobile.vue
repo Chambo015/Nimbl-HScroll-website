@@ -61,7 +61,7 @@ const coords = computed( () => {
 </script>
 
 <template>
-    <div class="fixed left-0 top-0 right-0 bottom-0  z-[99]">
+    <div class="absolute left-0 top-0 right-0 bottom-0  z-[99]">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
             <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
