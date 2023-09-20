@@ -38,30 +38,30 @@ const stopWatchAlpha = watchEffect(() => {
     }
 });
 
-const throttledAlpha = useThrottleFn(() => {
+/* const throttledAlpha = useThrottleFn(() => {
     if (alpha.value) return alpha.value;
 }, 500);
 
 const throttledBeta = useThrottleFn(() => {
     if (beta.value) return beta.value;
-}, 500);
+}, 500); */
 
-const coords = computed(async () => {
+const coords = computed( () => {
     if (isSupported.value && alpha.value && beta.value && initBeta && initAlpha) {
-        const alphaValue = await throttledAlpha();
-        const betaValue = await throttledBeta();
-        if (alphaValue && betaValue) {
-            const x = (alphaValue - initAlpha) / 30;
-            const y = (betaValue - initBeta) / 20;
+  /*       const alphaValue = await throttledAlpha();
+        const betaValue = await throttledBeta(); */
+    /*     if (alphaValue && betaValue) { */
+            const x = (alpha.value - initAlpha) / 30;
+            const y = (beta.value - initBeta) / 20;
             return {x: `${x}px`, y: `${y}px`};
-        }
+        /* } */
     } 
     return {x: "0px", y: "0px"};
 });
 </script>
 
 <template>
-    <div class="fixed left-0 top-0 w-screen h-screen z-[99]">
+    <div class="fixed left-0 top-0 right-0 bottom-0 w-screen h-screen z-[99]">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
             <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
