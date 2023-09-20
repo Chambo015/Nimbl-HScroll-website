@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import handImg from "@/assets/hand.png";
 import handLgImg from "@/assets/hand_lg.png";
-import handImgWebp from "@/assets/hand.webp";
+import handLgImgWebp from "@/assets/hand_lg.webp";
 import HeroButton from "@/components/HeroButton.vue";
 import IconFiveDots from '@/components/icons/IconFiveDots.vue';
 import gsap from "gsap";
@@ -66,7 +65,7 @@ onMounted(() => {
             </div>
             <div ref="mainImgEl" data="mainImgEl" class="shrink-0 max-sm:mt-5 relative max-sm:w-[180%] " >
                 <picture class="relative ">
-                    <!-- <source :srcset="handImgWebp" type="image/webp" /> -->
+                    <source :srcset="handLgImgWebp" type="image/webp" />
                     <img
                         loading="lazy"
                         :src="handLgImg"

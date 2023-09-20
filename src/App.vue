@@ -83,7 +83,7 @@ onMounted(() => {
     <button
         v-if="!ready"
         type="button"
-        class="w-screen h-screen z-[100] fixed block"
+        class="left-0 right-0 top-0 bottom-0 z-[100] absolute block"
         @click="handlePreviewClick"></button>
     <main class="absolute inset-0  bg-[#0F0722]">
         
