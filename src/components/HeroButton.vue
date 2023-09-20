@@ -1,6 +1,7 @@
 <template>
     <button
-        class="wrap w-[353px] h-[67px] max-sm:w-[266px] max-sm:h-[50px] relative"
+        @click="buttonClick"
+        class="wrap w-[353px] h-[67px] max-sm:w-[266px] max-sm:h-[50px] relative cursor-pointer"
         :class="[bgBtn]">
         <img
             v-if="!regular"
@@ -20,6 +21,12 @@ import imgBg from "@/assets/btn-texture.webp";
 import {computed} from "vue";
 
 const props = defineProps<{regular?: boolean}>();
+
+const emit = defineEmits(['click'])
+
+function buttonClick() {
+  emit('click')
+}
 
 const rb = computed(() => {
     return "20px";
