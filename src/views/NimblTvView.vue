@@ -7,7 +7,7 @@ import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
 import {computed, onMounted, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
-import { useMediaQuery, useWindowSize } from '@vueuse/core';
+import {useMediaQuery, useWindowSize} from "@vueuse/core";
 
 const props = defineProps({
     ready: Boolean,
@@ -15,7 +15,8 @@ const props = defineProps({
 
 const isXS = useMediaQuery("(max-width: 640px)");
 
-const sectionEl = ref()
+const sectionEl = ref();
+const sectionInnerEl = ref();
 const sliderEl = ref();
 const buttonsEl = ref();
 const titleEl = ref();
@@ -24,26 +25,34 @@ const lightEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "stakes", target: sectionEl});
 
 watchEffect(() => {
-    if(props.ready) {
+    if (props.ready) {
         gsap.to(lightEl.value, {
-        autoAlpha: 1,
-        delay: 1.5,
-        duration: 1,
-    });
+            autoAlpha: 1,
+            delay: 1.5,
+            duration: 1,
+        });
+
+        gsap.to(sectionInnerEl.value, {
+            scale: 1,
+            yPercent: 0,
+            top: 0,
+            duration: 1,
+            delay: 0.2
+        });
     }
 });
 
-const { height } = useWindowSize()
-const previewOnMobile = computed(() => {
-    if(height.value < 700) {
-        return 'top-1/2 -translate-y-[55%] scale-[1.8] '
-    } else  {
-        return 'top-1/2 -translate-y-[60%] scale-[2]'
-    }  
-}) 
+const {height} = useWindowSize();
+/* const previewOnMobile = computed(() => {
+    if (height.value < 700) {
+        return "top-1/2 -translate-y-[55%] scale-[1.8] ";
+    } else {
+        return "top-1/2 -translate-y-[60%] scale-[2]";
+    }
+}); */
 
 onMounted(() => {
-    if(isXS.value) return
+    if (isXS.value) return;
     const tl = gsap.timeline();
 
     tl.from(sliderEl.value, {
@@ -73,15 +82,36 @@ onMounted(() => {
         "0",
     );
 });
+
+onMounted(() => {
+    if (isXS.value) {
+        if (height.value < 700) {
+            gsap.set(sectionInnerEl.value, {
+                scale: 1.8,
+                yPercent: -55,
+                top: "50%",
+            });
+        } else {
+            gsap.set(sectionInnerEl.value, {
+                scale: 2,
+                yPercent: -60,
+                top: "50%",
+            });
+        }
+    } else {
+        gsap.set(sectionInnerEl.value, {
+            scale: 0.45,
+            yPercent: -50,
+            top: "50%",
+        });
+    }
+});
 </script>
 
 <template>
-    <section
-        ref="sectionEl"
-        @wheel="onWheel"
-        class="relative w-full "
-       >
-       <div class="wrap_section  w-full left-0 absolute"  :class=" ready ? 'scale-100 -translate-y-0 top-0' : isXS? previewOnMobile : 'scale-[0.48] max-2xl:scale-[0.4] top-1/2 -translate-y-1/2'">
+    <section ref="sectionEl" @wheel="onWheel" class="relative w-full">
+        <!-- :class=" ready ? 'scale-100 -translate-y-0 top-0' : isXS? previewOnMobile : 'scale-[0.48] max-2xl:scale-[0.4] top-1/2 -translate-y-1/2'" -->
+        <div ref="sectionInnerEl" class="w-full left-0 absolute">
             <picture ref="lightEl" data="lightEl" class="opacity-0">
                 <source :srcset="lightImgWebp" type="image/webp" />
                 <img
@@ -119,7 +149,7 @@ onMounted(() => {
                     >DOWNLOAD APP<template #icon><IconFiveDots /></template
                 ></HeroButton>
             </div>
-       </div>
+        </div>
     </section>
 </template>
 
@@ -145,8 +175,5 @@ onMounted(() => {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-.wrap_section {
-    transition: top 0.5s ease, transform 0.5s ease ;
 }
 </style>
