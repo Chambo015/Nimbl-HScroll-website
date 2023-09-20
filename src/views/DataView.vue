@@ -25,7 +25,7 @@
                 <div
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
                     <picture class="flex justify-center pointer-events-none select-none ">
-                        <!-- <source :srcset="imgBgWebp" type="image/webp" /> -->
+                        <source :srcset="personDataWebp" type="image/webp" />
                         <img :src="personData" alt="imgBg" class="w-[250px] h-[250px] max-sm:w-[160px] max-sm:h-[160px]" />
                     </picture>
                     <span
@@ -58,7 +58,7 @@
                 <div
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy  max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
                     <picture class="flex justify-center pointer-events-none select-none">
-                        <!-- <source :srcset="imgBgWebp" type="image/webp" /> -->
+                        <source :srcset="dataNimblWebp" type="image/webp" />
                         <img :src="dataNimbl" alt="imgBg" class="w-[289px] h-[181px] max-sm:w-[200px] max-sm:h-[120px]" />
                     </picture>
                     <span
@@ -97,7 +97,9 @@ import {onMounted, onUnmounted, computed, ref} from "vue";
 import imgBg from "@/assets/db-bg.png";
 import imgBgWebp from "@/assets/db-bg.webp";
 import personData from "@/assets/person-data.png";
+import personDataWebp from "@/assets/person-data.webp";
 import dataNimbl from "@/assets/data-nimbl.png";
+import dataNimblWebp from "@/assets/data-nimbl.webp";
 import IconChain from "@/components/DataView/IconChain.vue";
 import LocksCenter from "@/components/DataView/LocksCenter.vue";
 import gsap from "gsap";
