@@ -91,7 +91,7 @@ onMounted(() => {
         @click="handlePreviewClick"></button>
     <main class="h-screen w-screen relative bg-[#0F0722]">
         
-        <div class="h-full w-full absolute left-0 top-0 right-0 bottom-0">
+        <div class="absolute left-0 top-0 right-0 bottom-0">
             <router-view v-slot="{Component, route}">
                 <TransitionLeavePage :to-meta="route.meta">
                     <component :ready="ready" :is="Component" />

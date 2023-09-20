@@ -84,6 +84,7 @@ onMounted(() => {
 });
 
 onMounted(() => {
+    if(props.ready) return
     if (isXS.value) {
         if (height.value < 700) {
             gsap.set(sectionInnerEl.value, {

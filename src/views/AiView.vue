@@ -78,7 +78,7 @@ const sectionEl = ref();
 const leftVideoEl = ref();
 const rightVideoEl = ref();
 const titleEl = ref();
-const readyToShowVideo = ref(false);
+const readyToShowVideo = ref(true);
 
 const {onWheel} = useMouseWheel({toDownRoute: "handle", toUpRoute: "summarize", target: sectionEl});
 
