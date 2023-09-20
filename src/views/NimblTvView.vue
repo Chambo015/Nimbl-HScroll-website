@@ -81,7 +81,7 @@ onMounted(() => {
         @wheel="onWheel"
         class="relative w-full "
        >
-       <div class="transition-all duration-[1s] delay-100 w-full left-0 absolute"  :class=" ready ? 'scale-100 -translate-y-0 top-0' : isXS? previewOnMobile : 'scale-[0.48] max-2xl:scale-[0.4] top-1/2 -translate-y-1/2'">
+       <div class="wrap_section  w-full left-0 absolute"  :class=" ready ? 'scale-100 -translate-y-0 top-0' : isXS? previewOnMobile : 'scale-[0.48] max-2xl:scale-[0.4] top-1/2 -translate-y-1/2'">
             <picture ref="lightEl" data="lightEl" class="opacity-0">
                 <source :srcset="lightImgWebp" type="image/webp" />
                 <img
@@ -145,5 +145,8 @@ onMounted(() => {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.wrap_section {
+    transition: top 0.5s ease, transform 0.5s ease ;
 }
 </style>

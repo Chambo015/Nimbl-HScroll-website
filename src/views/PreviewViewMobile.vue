@@ -47,7 +47,7 @@ const throttledBeta = useThrottleFn(() => {
 }, 500); */
 
 const coords = computed( () => {
-    if (isSupported.value && alpha.value && beta.value && initBeta && initAlpha) {
+    if (isSupported.value && alpha.value && beta.value) {
   /*       const alphaValue = await throttledAlpha();
         const betaValue = await throttledBeta(); */
     /*     if (alphaValue && betaValue) { */
@@ -61,7 +61,7 @@ const coords = computed( () => {
 </script>
 
 <template>
-    <div class="fixed left-0 top-0 right-0 bottom-0 w-screen h-screen z-[99]">
+    <div class="fixed left-0 top-0 right-0 bottom-0  z-[99]">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
             <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
