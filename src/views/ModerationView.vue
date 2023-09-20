@@ -1,6 +1,6 @@
 <template>
    <section ref="sectionEl" @wheel="onWheel" class="py-[20px] h-full">
-      <div class="px-10 relative flex flex-col justify-start max-sm:flex-col-reverse max-sm:justify-end">
+      <div class="px-10 relative flex flex-col max-3xl:justify-start justify-center h-full max-sm:flex-col-reverse max-sm:justify-end">
        <div>
           <div ref="titleEl" data="titleEl">
             <h2 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-center mt-7 text-5xl max-2xl:text-4xl font-rfdewi font-black uppercase max-sm:text-2xl max-sm:mt-3">
@@ -28,7 +28,7 @@
             </div>
           </div>
        </div>
-       <div ref="radarEl" data="radarEl" class="mix-blend-lighten max-2xl:h-[350px] h-[500px] max-sm:mt-0 mt-10 max-sm:mb-5 max-2xl:mt-5 max-sm:h-[160px]"><TheScanner  /></div>
+       <div ref="radarEl" data="radarEl" class="mix-blend-lighten max-2xl:h-[350px] max-3xl:h-[500px] h-[600px] max-sm:mt-0 mt-10 max-sm:mb-5 max-2xl:mt-5 max-sm:h-[160px]"><TheScanner  /></div>
       </div>
     </section>
 </template>

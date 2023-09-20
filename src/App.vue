@@ -24,7 +24,7 @@ function onLeavePreviewPage(el: any, done: any) {
         clouds,
         {
             autoAlpha: 0.0,
-            duration: 1.5,
+            duration: 1,
             position: "absolute",
         },
         "",
@@ -91,7 +91,7 @@ onMounted(() => {
         @click="handlePreviewClick"></button>
     <main class="h-screen w-screen relative bg-[#0F0722]">
         
-        <div class="h-screen w-screen">
+        <div class="h-screen w-screen fixed left-0 top-0 right-0 bottom-0">
             <router-view v-slot="{Component, route}">
                 <TransitionLeavePage :to-meta="route.meta">
                     <component :ready="ready" :is="Component" />
