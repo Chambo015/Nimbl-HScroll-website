@@ -23,7 +23,7 @@ export default {
         TTOctos: ['TTOctosquares', 'Inter', '-apple-system', 'Helvetica Neue', 'sans-serif'],
     },
     backgroundImage: {
-      'btn-bg-liner': 'radial-gradient(119.98% 176.69% at 84.00% -4.95%, rgba(170, 214, 255, 0.81) 0%, rgba(170, 214, 255, 0.81) 0.01%, #0066FE 100%)',
+      'btn-bg-liner': 'linear-gradient(271deg, #0D0C11 2.43%, #46387A 97.57%)',
     }
     },
     container: {

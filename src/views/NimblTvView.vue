@@ -138,7 +138,7 @@ const alera =() => {
             <div
                 ref="buttonsEl"
                 data="buttonsEl"
-                class="max-sm:hidden absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-[linear-gradient(90deg,#2B253A_0%,#3E3A6E_100%)]">
+                class="max-sm:hidden absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px]  shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
                 <HeroButton 
                     >APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template
                 ></HeroButton>
