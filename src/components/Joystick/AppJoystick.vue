@@ -15,7 +15,7 @@ const toggleOpenMenu = () => {
 
 
 <template>
-    <div @mouseleave="isOpenMenu = false" class="absolute right-[150px] bottom-[160px] opacity-50 hover:opacity-100 transition-opacity z-50">
+    <div @mouseleave="isOpenMenu = false" class="absolute right-[150px] bottom-[160px] opacity-50 hover:opacity-100 transition-opacity z-20">
         <button @click="toggleOpenMenu" class="w-[145px] h-[81px] relative z-50">
             <CenterJoystick />
         </button>

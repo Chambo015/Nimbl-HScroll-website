@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import imgMobile from '@/assets/Screen_crypto.png'
 import imgMobileLg from '@/assets/Screen_crypto-lg.png'
-import imgMobileWebp from '@/assets/Screen_crypto.webp'
-import imgMobileSm from '@/assets/Screen_crypto-sm.png'
-import imgCard from '@/assets/business-card.png'
+import imgMobileLgWebp from '@/assets/Screen_crypto-lg.webp'
 import imgCardFull from '@/assets/business-card-full.png'
-import imgCardWebp from '@/assets/business-card.webp'
+import imgCardFullWebp from '@/assets/business-card-full.webp'
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import { onMounted, ref } from 'vue';
@@ -57,11 +54,11 @@ onMounted(() => {
               face-id.
             </p>
             <div class='mt-20 max-sm:mt-5 gap-20 flex max-sm:items-end '>
-              <picture><!-- <source :srcset="imgCardWebp" type="image/webp" /> --><img :src="imgCardFull" alt="imgCard" class='h-[212px] max-sm:h-[120px]' loading="lazy" /></picture>
+              <picture><source :srcset="imgCardFullWebp" type="image/webp" /> <img :src="imgCardFull" alt="imgCard" class='h-[212px] max-sm:h-[120px]' loading="lazy" /></picture>
             </div>
           </div>
           <div class="flex-shrink-0 max-sm:h-[300px]">
-           <picture><!-- <source :srcset="imgMobileWebp" type="image/webp" /> --><img ref="mainImgEl" data="mainImgEl" :src="imgMobileLg" alt="imgMobile" class='h-[832px] max-2xl:h-[550px] max-sm:h-auto object-contain object-bottom' loading="lazy" /></picture>
+           <picture><source :srcset="imgMobileLgWebp" type="image/webp" /><img ref="mainImgEl" data="mainImgEl" :src="imgMobileLg" alt="imgMobile" class='h-[832px] max-2xl:h-[550px] max-sm:h-auto object-contain object-bottom' loading="lazy" /></picture>
           </div>
         </div>
       </div>

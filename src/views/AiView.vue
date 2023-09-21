@@ -10,10 +10,13 @@
             <div class="flex gap-52 mt-24 max-2xl:mt-10 max-2xl:gap-20 max-sm:flex-col max-sm:gap-5 max-sm:mt-5">
                 <div ref="leftVideoEl" data="leftVideoEl" class="max-w-[650px] max-sm:w-full mix-blend-lighten">
                     <div class="w-[640px] h-[387px] relative max-sm:w-full max-sm:h-auto">
-                        <img
-                            :src="frame_video"
-                            alt="frame_video"
-                            class="w-full h-full mix-blend-lighten pointer-events-none" />
+                       <picture>
+                        <source :srcset="frame_videoWebp" type="image/webp" />
+                            <img
+                                :src="frame_video"
+                                alt="frame_video"
+                                class="w-full h-full mix-blend-lighten pointer-events-none" />
+                       </picture>
                         <video width="558" height="314" muted loop autoplay class="absolute top-9 left-9 rounded-xl max-sm:top-4 max-sm:left-0 max-sm:w-full max-sm:h-[82%]">
                             <source src="https://d2n3zca7e0phmo.cloudfront.net/aipravka.mp4" type="video/mp4" />
                         </video>
@@ -27,10 +30,13 @@
                 </div>
                 <div ref="rightVideoEl" data="rightVideoEl" class="max-w-[650px] max-sm:w-full  mix-blend-lighten">
                     <div class="w-[640px] h-[387px] relative max-sm:w-full max-sm:h-auto">
-                        <img
-                            :src="frame_video"
-                            alt="frame_video"
-                            class="w-full h-full mix-blend-lighten pointer-events-none" />
+                      <picture>
+                        <source :srcset="frame_videoWebp" type="image/webp" />
+                            <img
+                                :src="frame_video"
+                                alt="frame_video"
+                                class="w-full h-full mix-blend-lighten pointer-events-none" />
+                      </picture>
                         <Transition name="fade">
                             <VideoPlayer
                                 v-if="readyToShowVideo"
@@ -63,6 +69,7 @@
 
 <script setup lang="ts">
 import frame_video from "@/assets/ai_video_frame.png";
+import frame_videoWebp from "@/assets/ai_video_frame.webp";
 import imglaunguages from "@/assets/ai-launguages.png";
 import imglaunguagesWebp from "@/assets/ai-launguages.webp";
 import VideoPlayer from "@/components/AppVideoPlayer/VideoPlayer.vue";
@@ -78,12 +85,17 @@ const sectionEl = ref();
 const leftVideoEl = ref();
 const rightVideoEl = ref();
 const titleEl = ref();
-const readyToShowVideo = ref(true);
+const readyToShowVideo = ref(false);
 
 const {onWheel} = useMouseWheel({toDownRoute: "handle", toUpRoute: "summarize", target: sectionEl});
 
 onMounted(() => {
-    if(isXS.value) return
+    if(isXS.value) {
+        setTimeout(() => {
+            readyToShowVideo.value = true
+        }, 1000)
+        return
+    }
     const tl = gsap.timeline({
         onComplete: () => {
             readyToShowVideo.value = true;

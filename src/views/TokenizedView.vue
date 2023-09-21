@@ -2,6 +2,7 @@
 import monitorImgLarge from '@/assets/monitor-large.png';
 import monitorImgLargeWebp from '@/assets/monitor-large.webp';
 import monitorXs from '@/assets/monitor-xs.png';
+import monitorXsWebp from '@/assets/monitor-xs.webp';
 import IconAlphaCalls from '@/components/icons/IconAlphaCalls.vue';
 import IconAlphaContent from '@/components/icons/IconAlphaContent.vue';
 import IconChannelGrowth from '@/components/icons/IconChannelGrowth.vue';
@@ -66,7 +67,7 @@ onMounted(() => {
                     <IconAlphaContent class="max-sm:w-[23px] max-sm:h-[23px]" />
                     <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Alpha Content</p>
                   </div>
-                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 ">
+                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 max-sm:hidden">
                     <IconChannelGrowth class="max-sm:w-[23px] max-sm:h-[23px]" />
                     <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Channel Growth</p>
                   </div>
@@ -80,7 +81,7 @@ onMounted(() => {
                     <IconAlphaCalls class="max-sm:w-[23px] max-sm:h-[23px]" />
                     <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">Alpha Calls/Private content</p>
                   </div>
-                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 ">
+                  <div class="flex items-center gap-5 mt-7 max-sm:mt-4  max-sm:gap-1 max-sm:hidden">
                     <IconTheContent class="max-sm:w-[25px] max-sm:h-[25px]" />
                     <p class="text-3xl max-2xl:text-2xl leading-none text-white font-gilroy max-sm:text-sm">The Content</p>
                   </div>
@@ -90,7 +91,7 @@ onMounted(() => {
         </div>
         <div ref="monitorEl" data="monitorEl" class="flex items-end max-sm:justify-center max-sm:w-full ">
           <picture class="max-sm:hidden"><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain max-sm:h-[300px]' /></picture>
-          <picture class="max-sm:block hidden"><!-- <source :srcset="monitorImgLargeWebp" type="image/webp" /> --><img :src="monitorXs" alt="monitorImgLarge" class='w-full' /></picture>
+          <picture class="max-sm:block hidden"> <source :srcset="monitorXsWebp" type="image/webp" /> <img :src="monitorXs" alt="monitorImgLarge" class='w-full' /></picture>
         </div>
       </div>
     </section>

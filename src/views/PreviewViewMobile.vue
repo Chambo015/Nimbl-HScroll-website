@@ -120,7 +120,7 @@ const coords = computed( () => {
                 class="w-[132px] h-[128px] absolute -right-[6%] bottom-[4%] z-[2] right_cube" />
         </picture>
         <div
-            class="absolute smoke-clouds w-[150%] bottom-0 h-1/2 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.png')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity mix-blend-screen">
+            class="absolute smoke-clouds w-[150%] bottom-0 h-1/2 z-[3] bg-[url('@/assets/preview/mobile_smoke.webp')] bg-no-repeat bg-[length:150%_auto] bg-bottom opacity-60 transition-opacity mix-blend-screen">
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
