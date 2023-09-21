@@ -79,7 +79,7 @@
                 class="w-[293px] h-[283px] absolute right-[6%] bottom-[4%] z-[4] right_cube" />
       </picture>
         <div
-            class="absolute smoke-clouds w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.png')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity">
+            class="absolute smoke-clouds w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.webp')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity">
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img

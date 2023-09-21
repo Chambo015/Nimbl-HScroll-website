@@ -427,45 +427,53 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
     },
     token: (el, done) => {
         const tl = gsap.timeline({onComplete: done});
-        const imgEarthEl = el.querySelector('[data="imgEarthEl"]');
-        const starShipsEl = el.querySelector('[data="starShipsEl"]');
+        const contentEl = el.querySelector('[data="contentEl"]');
+        const light1El = el.querySelector('[data="light1El"]');
         const titleEl = el.querySelector('[data="titleEl"]');
-        const listEl = el.querySelector('[data="listEl"]');
+        const light2El = el.querySelector('[data="light2El"]');
+        const smokeEl = el.querySelector('[data="smokeEl"]');
 
-        tl.to(imgEarthEl, {
-            xPercent: 100,
+        tl.to(contentEl, {
             yPercent: 100,
             autoAlpha: 0.0,
-            duration: 1,
+            duration: 1.5,
             ease: "expo.inOut",
         });
+        
         tl.to(
-            starShipsEl,
+            titleEl.children,
             {
                 autoAlpha: 0.0,
-                duration: 1,
-                yPercent: -100,
-                xPercent: -250,
-                ease: "expo.inOut",
-            },
-            "0",
-        );
-        tl.to(
-            titleEl,
-            {
-                autoAlpha: 0.0,
-                duration: 1,
+                duration: 1.5,
                 yPercent: -150,
+                stagger: -0.3,
                 ease: "expo.inOut",
             },
             "0",
         );
         tl.to(
-            listEl,
+            light1El,
             {
-                xPercent: -100,
                 autoAlpha: 0.0,
-                duration: 1,
+                duration: 1.5,
+                ease: "expo.inOut",
+            },
+            "0",
+        );
+        tl.to(
+            light2El,
+            {
+                autoAlpha: 0.0,
+                duration: 1.5,
+                ease: "expo.inOut",
+            },
+            "0",
+        );
+        tl.to(
+            smokeEl,
+            {
+                autoAlpha: 0,
+                duration: 1.5,
                 ease: "expo.inOut",
             },
             "0",
@@ -494,77 +502,3 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
         );
     },
 };
-
-/* routes: [
-       
-        {
-          path: "/", // путь маршрута
-          name: "nimbltv", // имя маршрута
-          component: NimblTvView, // Каждый маршрут должен сопоставляться с компонентом.
-      },
-      {
-          path: "/stakes",
-          name: "stakes",
-          component: StakesView,
-      },
-      {
-          path: "/ai",
-          name: "ai",
-          component: AiView,
-      },
-      {
-          path: "/data",
-          name: "data",
-          component: DataView,
-      },
-      {
-          path: "/gamification",
-          name: "gamification",
-          component: GamificationView,
-      },
-      {
-          path: "/handle",
-          name: "handle",
-          component: HandleView,
-      },
-      {
-          path: "/moderation",
-          name: "moderation",
-          component: ModerationView,
-      },
-      {
-          path: "/roadmap",
-          name: "roadmap",
-          component: RoadmapView,
-      },
-      {
-          path: "/summarize",
-          name: "summarize",
-          component: SummarizeView,
-      },
-      {
-          path: "/swipe",
-          name: "swipe",
-          component: SwipeView,
-      },
-      {
-          path: "/teaser",
-          name: "teaser",
-          component: TeaserView,
-      },
-      {
-          path: "/tokenized",
-          name: "tokenized",
-          component: TokenizedView,
-      },
-      {
-          path: "/token",
-          name: "token",
-          component: TokenView,
-      },
-      {
-          path: "/transfers",
-          name: "transfers",
-          component: TransfersView,
-      },
-  ] */

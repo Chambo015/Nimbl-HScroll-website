@@ -20,7 +20,7 @@
                 Every instance is committed on-chain, with explanation and post links
               </p>
             </div>
-            <div class=" flex flex-col items-center gap-4 max-sm:gap-1">
+            <div class=" flex flex-col items-center gap-4 max-sm:gap-1 max-sm:hidden">
               <IconUserSearch class="max-2xl:w-[45px] max-2xl:h-[45px] max-sm:w-[40px] max-sm:h-[40px]" />
               <p class=" text-center text-white text-2xl max-2xl:text-lg font-normal font-gilroy max-sm:text-sm">
                 Moderation Guidelines developed by Nimbl Collective DAO
