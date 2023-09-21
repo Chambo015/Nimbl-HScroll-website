@@ -25,6 +25,7 @@ import smoke2 from "@/assets/preview/smoke2.png";
 import smoke2Webp from "@/assets/preview/smoke2.webp";
 import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
+import {IconPlay} from "@/components/icons";
 
 const {isSupported, alpha, beta, gamma} = useDeviceOrientation();
 
@@ -46,22 +47,22 @@ const throttledBeta = useThrottleFn(() => {
     if (beta.value) return beta.value;
 }, 500); */
 
-const coords = computed( () => {
+const coords = computed(() => {
     if (isSupported.value && alpha.value && beta.value) {
-  /*       const alphaValue = await throttledAlpha();
+        /*       const alphaValue = await throttledAlpha();
         const betaValue = await throttledBeta(); */
-    /*     if (alphaValue && betaValue) { */
-            const x = (alpha.value - initAlpha) / 30;
-            const y = (beta.value - initBeta) / 20;
-            return {x: `${x}px`, y: `${y}px`};
+        /*     if (alphaValue && betaValue) { */
+        const x = (alpha.value - initAlpha) / 30;
+        const y = (beta.value - initBeta) / 20;
+        return {x: `${x}px`, y: `${y}px`};
         /* } */
-    } 
+    }
     return {x: "0px", y: "0px"};
 });
 </script>
 
 <template>
-    <div class="absolute left-0 top-0 right-0 bottom-0  z-20">
+    <div class="absolute left-0 top-0 right-0 bottom-0 z-20">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
             <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
@@ -156,6 +157,13 @@ const coords = computed( () => {
                     alt="smoke-image7"
                     :src="centerSmoke"
             /></picture>
+        </div>
+        <div
+            class="flex w-[170px] h-[170px] absolute z-10 rounded-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E800FF] opacity-75"></span>
+            <div class="bg-[#E800FF] h-full w-full z-10 rounded-full">
+                <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            </div>
         </div>
     </div>
 </template>

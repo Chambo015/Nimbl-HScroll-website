@@ -1,6 +1,6 @@
 <template>
     <div  class="bg-transparent fixed left-0 top-0 w-screen h-screen z-20">
-        <div class="bg-black/30 fixed inset-0 backdrop-blur-2xl z-[555] transition-all"></div>
+        <div class="bg-black/30 fixed inset-0 backdrop-blur-2xl duration-[2s] z-50 transition-opacity" :class="{'opacity-0': imgUploaded}"></div>
         <div class="absolute left-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="absolute right-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="w-screen monitor_wrap h-screen left-0 top-0 absolute z-[1]">
@@ -110,6 +110,13 @@
             </picture>
             <picture> <source :srcset="centerSmokeWebp" type="image/webp" /><img class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none" alt="smoke-image7" :src="centerSmoke" /></picture>
         </div>
+        <div
+            class="flex w-[170px] h-[170px] absolute z-10 rounded-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E800FF] opacity-75"></span>
+            <div class="bg-[#E800FF] h-full w-full z-10 rounded-full">
+                <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -143,6 +150,7 @@ import smoke2 from "@/assets/preview/smoke2.png";
 import smoke2Webp from "@/assets/preview/smoke2.webp";
 import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
+import {IconPlay} from '@/components/icons'
 import gsap from 'gsap'
 
 const X = ref();
@@ -151,7 +159,6 @@ const Y = ref();
 const coords = computed(() => ({x: `${X.value * 40}px`, y: `${Y.value * 40}px`}));
 const coordsNear = computed(() => ({x: `${X.value * 150}px`, y: `${Y.value * 150}px`}));
 const coordsMiddle = computed(() => ({x: `${X.value * 85}px`, y: `${Y.value * 85}px`}));
-const coordsPeople = computed(() => ({x: `${X.value * 50}px`, y: `${Y.value * 0}px`}));
 
 const mouseEventHandle = (e: any) => {
     X.value = (e.clientX - window.innerWidth / 2) / window.innerWidth;
@@ -175,15 +182,19 @@ onMounted(() => {
     })
     control.value.pause()
 })
-onUnmounted(() => {
+/* onUnmounted(() => {
     gsap.to(container.value, {
         duration: 3,
         scale: 1.8,
         opacity: 0,
-        onComplete: () => {
-            
-        }
     })
+}) */
+
+const imgUploaded = ref(false)
+onMounted(() => {
+    setTimeout(() => {
+        imgUploaded.value = true
+    }, 1500)
 })
 </script>
 

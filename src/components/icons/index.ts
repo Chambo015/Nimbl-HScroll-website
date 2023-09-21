@@ -3,7 +3,6 @@ import IconMarketplace from './IconMarketplace.vue';
 import IconSettings from './IconSettings.vue';
 import IconLogo from './IconLogo.vue';
 import IconSearch from './IconSearch.vue';
-import IconChevron from './IconChevron.vue';
 import IconEye from './IconEye.vue';
 import IconVideoGallery from './IconVideoGallery.vue';
 import IconComments from './IconComments.vue';
