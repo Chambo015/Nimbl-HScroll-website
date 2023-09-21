@@ -19,7 +19,7 @@ const routerArr = ['nimbltv', 'stakes', 'tokenized', 'data', 'moderation', 'swip
 'transfers', 'gamification', 'summarize', 'ai', 'handle', 'token', 'roadmap']
 
 const router = createRouter({
-    history: createWebHashHistory(import.meta.env.BASE_URL) /* createWebHistory(), */, // Способ сохранения истории переходов по маршрутам
+    history: createWebHistory() /* createWebHistory(), */, // Способ сохранения истории переходов по маршрутам
     routes: [
         // Определяем маршруты
         /*   {
