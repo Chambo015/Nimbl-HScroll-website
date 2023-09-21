@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import tokenCoins from "@/assets/token-coins.png";
+import podium from "@/assets/podium.png";
+import tokenCard from "@/assets/token-card.png";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
@@ -17,7 +19,7 @@ const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "handle", ta
 
 onMounted(() => {
     if (isXS.value) return;
-    const tl = gsap.timeline();
+    /* const tl = gsap.timeline();
 
     tl.from(imgEarthEl.value, {
         xPercent: 100,
@@ -58,20 +60,34 @@ onMounted(() => {
             ease: "expo.inOut",
         },
         "0",
-    );
+    ); */
 });
 </script>
 
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="h-full flex flex-col justify-center max-3xl:pt-9 bg-black relative">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full flex flex-col  max-3xl:pt-9 bg-black relative">
         <div ref="titleEl" data="titleEl" class="text-center">
             <h2 class="main-title">NIMBL TOKEN<span class="main-text-layer">NIMBL TOKEN</span></h2>
-            <p class="text-center text-white font-gilroy text-3xl max-sm:text-base">
+            <p class="text-center text-white font-gilroy text-3xl max-sm:text-base -translate-y-5">
               $NIMBL is a utility token that acts as the platform currency
             </p>
         </div>
-        <div>
+        <div class="flex flex-col justify-center items-center relative after:absolute after:w-full after:h-[30%] after:bg-gradient-to-b after:to-black after:bottom-0 after:from-black/10 ">
+            <div>
+                <div></div>
+            </div>
             <img :src="tokenCoins" alt="tokenCoins" width="618" height="392">
+            <img :src="podium" alt="podium" width="820" height="170">
+            <div class="bg-btn-bg-liner border-[#7351C8] border-[2px] shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)] absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+                <div class="flex flex-col items-center -mt-14 w-[665px] pb-6">
+                    <img :src="tokenCard" alt="tokenCard" width="134" height="119" class="pointer-events-none select-none">
+                    <ul class="flex gap-1 font-gilroy text-3xl">
+                        <li>Stake</li>
+                        <li>$Nimbl</li>
+                        <li>to gain governance</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 </template>
