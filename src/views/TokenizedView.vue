@@ -90,7 +90,7 @@ onMounted(() => {
           </div>
         </div>
         <div ref="monitorEl" data="monitorEl" class="flex items-end max-sm:justify-center max-sm:w-full ">
-          <picture class="max-sm:hidden"><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" class='h-[85vh] object-bottom object-contain max-sm:h-[300px]' /></picture>
+          <picture class="max-sm:hidden"><source :srcset="monitorImgLargeWebp" type="image/webp" /><img :src="monitorImgLarge" alt="monitorImgLarge" width="907" height="798" class='h-[85vh] w-auto object-bottom object-contain max-sm:h-[300px]' /></picture>
           <picture class="max-sm:block hidden"> <source :srcset="monitorXsWebp" type="image/webp" /> <img :src="monitorXs" alt="monitorImgLarge" class='w-full' /></picture>
         </div>
       </div>
