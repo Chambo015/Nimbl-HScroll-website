@@ -103,7 +103,7 @@ onMounted(() => {
                 </TransitionLeavePage>
             </router-view>
         </div>
-        <AppJoystick @click-bottom="isModalOpen = !isModalOpen" v-if="!isXS" />
+        <AppJoystick @click-bottom="isModalOpen = !isModalOpen" />
         <NavigationApp />
 
         <template v-if="!isXS">
