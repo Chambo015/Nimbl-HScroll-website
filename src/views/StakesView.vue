@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import userImg1 from "@/assets/chart-user1.png";
+/* import userImg1 from "@/assets/chart-user1.png";
 import userImg2 from "@/assets/chart-user2.png";
 import userImg3 from "@/assets/chart-user3.png";
 import userImg1Webp from "@/assets/chart-user1.webp";
 import userImg2Webp from "@/assets/chart-user2.webp";
-import userImg3Webp from "@/assets/chart-user3.webp";
+import userImg3Webp from "@/assets/chart-user3.webp"; */
 import ChartBackground from "@/components/StakesView/ChartBackground.vue";
 import {onMounted, ref} from "vue";
 import gsap from "gsap";
@@ -19,6 +19,7 @@ const titleEl = ref();
 const dotsChartEl = ref();
 
 const {onWheel} = useMouseWheel({toDownRoute: "tokenized", toUpRoute: "nimbltv", target: sectionEl});
+
 onMounted(() => {
     if(isXS.value) return
     const tl = gsap.timeline();

@@ -28,7 +28,7 @@
                 No complex crypto ponzienomics, simply <span class="text-[#6529E0]">rewarding</span> our early creators
                 and users
             </p>
-            <img loading="lazy" :src="imgGroup" alt="imgGroup" class="w-[500px] max-2xl:w-[350px] mt-auto max-sm:w-[90%]" />
+            <picture class=" mt-auto  max-sm:w-[90%]"> <source :srcset="imgGroupWebp" type="image/webp" /><img loading="lazy" :src="imgGroup" alt="imgGroup" width="400" height="248" class="w-[500px] max-2xl:w-[350px] " /></picture>
             <img
                 loading="lazy"
                 :src="creater1"
@@ -120,30 +120,42 @@
                 alt="creator18"
                 class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[10%] top-[83%] z-20 max-sm:hidden" />
         </div>
-        <img
-            ref="imgCoinRightEl" data="imgCoinRightEl"
-            loading="lazy"
-            :src="imgCoin"
-            alt="imgCoin"
-            class="w-[136px] h-[136px] object-contain absolute right-[20px] top-[40%] z-20 max-sm:-right-[10px] max-sm:top-[520px] max-sm:w-[72px] max-sm:h-[72px]" />
-        <img
-            ref="imgGlassRightEl" data="imgGlassRightEl"
-            loading="lazy"
-            :src="imgGlass"
-            alt="imgGlass"
-            class="w-[129px] h-[129px] object-contain absolute right-[20px] bottom-[44px] z-20 max-sm:w-[72px] max-sm:h-[72px] max-sm:right-0 max-sm:-left-[20px] max-sm:top-[620px]" />
-        <img
-            ref="imgCoinLeftEl" data="imgCoinLeftEl"
-            loading="lazy"
-            :src="imgCoin"
-            alt="imgCoin"
-            class="w-[112px] h-[112px] object-contain absolute left-[30px] bottom-[40px] z-20 max-sm:hidden" />
-        <img
-            ref="imgGlassLeftEl" data="imgGlassLeftEl"
-            loading="lazy"
-            :src="imgCircle"
-            alt="imgCircle"
-            class="w-[75px] h-[75px] object-contain absolute left-[50px] top-[42%] z-20 max-sm:hidden" />
+        <picture>
+            <source :srcset="imgCoinWebp" type="image/webp" />
+            <img
+                ref="imgCoinRightEl" data="imgCoinRightEl"
+                loading="lazy"
+                :src="imgCoin"
+                alt="imgCoin"
+                class="w-[136px] h-[136px] object-contain absolute right-[20px] top-[40%] z-20 max-sm:-right-[10px] max-sm:top-[520px] max-sm:w-[72px] max-sm:h-[72px]" />
+        </picture>
+       <picture>
+        <source :srcset="imgGlassWebp" type="image/webp" />
+            <img
+                ref="imgGlassRightEl" data="imgGlassRightEl"
+                loading="lazy"
+                :src="imgGlass"
+                alt="imgGlass"
+                class="w-[129px] h-[129px] object-contain absolute right-[20px] bottom-[44px] z-20 max-sm:w-[72px] max-sm:h-[72px] max-sm:right-0 max-sm:-left-[20px] max-sm:top-[620px]" />
+       </picture>
+       <picture>
+        <source :srcset="imgCoinWebp" type="image/webp" />
+            <img
+                ref="imgCoinLeftEl" data="imgCoinLeftEl"
+                loading="lazy"
+                :src="imgCoin"
+                alt="imgCoin"
+                class="w-[112px] h-[112px] object-contain absolute left-[30px] bottom-[40px] z-20 max-sm:hidden" />
+       </picture>
+       <picture>
+        <source :srcset="imgCircleWebp" type="image/webp" />
+            <img
+                ref="imgGlassLeftEl" data="imgGlassLeftEl"
+                loading="lazy"
+                :src="imgCircle"
+                alt="imgCircle"
+                class="w-[75px] h-[75px] object-contain absolute left-[50px] top-[42%] z-20 max-sm:hidden" />
+       </picture>
     </section>
 </template>
 
@@ -151,6 +163,7 @@
 import levelXP from "@/assets/levelXP.png";
 import levelXPWebp from "@/assets/levelXP.webp";
 import imgGroup from "@/assets/GroupCreators.png";
+import imgGroupWebp from "@/assets/GroupCreators.webp";
 import {
     creater1,
     creater10,
@@ -172,8 +185,11 @@ import {
     creater9,
 } from "@/assets/creaters";
 import imgCoin from "@/assets/coin.png";
+import imgCoinWebp from "@/assets/coin.webp";
 import imgGlass from "@/assets/glass.png";
+import imgGlassWebp from "@/assets/glass.webp";
 import imgCircle from "@/assets/circle.png";
+import imgCircleWebp from "@/assets/circle.webp";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
@@ -189,7 +205,7 @@ const imgGlassRightEl = ref();
 const imgCoinLeftEl = ref();
 const imgGlassLeftEl = ref();
 
-const {onWheel} = useMouseWheel({toDownRoute: "summarize", toUpRoute: "transfers", target: sectionEl});
+const {onWheel} = useMouseWheel({toDownRoute: "ai", toUpRoute: "teaser", target: sectionEl});
 
 onMounted(() => {
     if(isXS.value) return

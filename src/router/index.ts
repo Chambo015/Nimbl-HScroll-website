@@ -5,18 +5,18 @@ import StakesView from "@/views/StakesView.vue";
 import AiView from "@/views/AiView.vue";
 import DataView from "@/views/DataView.vue";
 import GamificationView from "@/views/GamificationView.vue";
-import HandleView from "@/views/HandleView.vue";
+/* import HandleView from "@/views/HandleView.vue"; */
 import ModerationView from "@/views/ModerationView.vue";
 import RoadmapView from "@/views/RoadmapView.vue";
-import SummarizeView from "@/views/SummarizeView.vue";
+/* import SummarizeView from "@/views/SummarizeView.vue"; */
 import SwipeView from "@/views/SwipeView.vue";
 import TeaserView from "@/views/TeaserView.vue";
 import TokenizedView from "@/views/TokenizedView.vue";
 import TokenView from "@/views/TokenView.vue";
-import TransfersView from "@/views/TransfersView.vue";
+/* import TransfersView from "@/views/TransfersView.vue"; */
 
 const routerArr = ['nimbltv', 'stakes', 'tokenized', 'data', 'moderation', 'swipe', 'teaser', 
-'transfers', 'gamification', 'summarize', 'ai', 'handle', 'token', 'roadmap']
+/* 'transfers', */ 'gamification', /* 'summarize', */ 'ai', /* 'handle', */ 'token', 'roadmap']
 
 const router = createRouter({
     history: createWebHashHistory(import.meta.env.BASE_URL) /* createWebHistory(), */, // Способ сохранения истории переходов по маршрутам
@@ -52,11 +52,11 @@ const router = createRouter({
             name: "gamification",
             component: GamificationView,
         },
-        {
+        /* {
             path: "/handle",
             name: "handle",
             component: HandleView,
-        },
+        }, */
         {
             path: "/moderation",
             name: "moderation",
@@ -67,11 +67,11 @@ const router = createRouter({
             name: "roadmap",
             component: RoadmapView,
         },
-        {
+        /* {
             path: "/summarize",
             name: "summarize",
             component: SummarizeView,
-        },
+        }, */
         {
             path: "/swipe",
             name: "swipe",
@@ -92,11 +92,11 @@ const router = createRouter({
             name: "token",
             component: TokenView,
         },
-        {
+        /* {
             path: "/transfers",
             name: "transfers",
             component: TransfersView,
-        },
+        }, */
     ],
 });
 

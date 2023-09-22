@@ -8,8 +8,10 @@ import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
 import PreviewViewMobile from "./views/PreviewViewMobile.vue";
+import ModalContacts from "./components/ModalContacts.vue";
 
 const ready = ref(false);
+const isModalOpen = ref(false);
 const router = useRouter();
 const isXS = useMediaQuery("(max-width: 640px)");
 
@@ -74,12 +76,12 @@ onKeyStroke("Enter", (e) => {
     handlePreviewClick();
 });
 
-const changeZIndex = ref(false)
+const changeZIndex = ref(false);
 watchEffect(() => {
-    if(ready.value) {
-        setTimeout(() => changeZIndex.value = true , 1000)
+    if (ready.value) {
+        setTimeout(() => (changeZIndex.value = true), 1000);
     }
-})
+});
 
 onMounted(() => {
     router.replace({name: "nimbltv"});
@@ -92,16 +94,16 @@ onMounted(() => {
         type="button"
         class="left-0 right-0 top-0 bottom-0 z-30 absolute block"
         @click="handlePreviewClick"></button>
-    <main class="absolute inset-0 overflow-hidden  bg-[#0F0722]">
+    <main class="absolute inset-0 overflow-hidden bg-[#0F0722]">
         <!-- :class="{'z-30': changeZIndex}" -->
-        <div class="absolute left-0 top-0 right-0 bottom-0 overflow-hidden" >
+        <div class="absolute left-0 top-0 right-0 bottom-0 overflow-hidden">
             <router-view v-slot="{Component, route}">
                 <TransitionLeavePage :to-meta="route.meta">
                     <component :ready="ready" :is="Component" />
                 </TransitionLeavePage>
             </router-view>
         </div>
-        <AppJoystick v-if="!isXS" />
+        <AppJoystick @click-bottom="isModalOpen = !isModalOpen" v-if="!isXS" />
         <NavigationApp />
 
         <template v-if="!isXS">
@@ -110,10 +112,17 @@ onMounted(() => {
             </Transition>
         </template>
         <template v-if="isXS">
-            <Transition name="prev-mob"  mode="in-out">
+            <Transition name="prev-mob" mode="in-out">
                 <PreviewViewMobile v-if="!ready" />
             </Transition>
         </template>
+        <Transition
+            enter-active-class="transition-all"
+            leave-active-class="transition-all"
+            leave-to-class="opacity-0 translate-y-1/2"
+            enter-from-class="opacity-0 translate-y-1/2"
+            ><ModalContacts @click-close="isModalOpen = !isModalOpen" v-if="isModalOpen"
+        /></Transition>
     </main>
 </template>
 
@@ -123,12 +132,14 @@ main {
 }
 .prev-mob-enter-active,
 .prev-mob-leave-active {
-  transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+    transition:
+        opacity 1s ease 0.2s,
+        transform 1s ease 0.2s;
 }
 
 .prev-mob-enter-from,
 .prev-mob-leave-to {
-  opacity: 0;
-  transform: scale(1.5);
+    opacity: 0;
+    transform: scale(1.5);
 }
 </style>

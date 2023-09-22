@@ -46,7 +46,7 @@ const light1El = ref();
 const light2El = ref();
 const smokeEl = ref();
 
-const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "handle", target: sectionEl});
+const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "ai", target: sectionEl});
 
 onMounted(() => {
     if (isXS.value) return;
@@ -103,7 +103,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="h-full flex flex-col max-3xl:pt-9 relative">
+    <section ref="sectionEl" @wheel="onWheel" class="h-full flex flex-col max-3xl:pt-9 relative justify-center pb-[100px]">
         <div ref="titleEl" data="titleEl" class="text-center">
             <h2 class="main-title">NIMBL TOKEN<span class="main-text-layer">NIMBL TOKEN</span></h2>
             <p class="text-center text-white font-gilroy text-3xl max-sm:text-base max-2xl:text-xl max-sm:w-[80%] mx-auto">
@@ -255,7 +255,7 @@ onMounted(() => {
     </section>
 </template>
 
-<style scoped>
+<style scoped >
 .main-title {
     background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.3) 100%);
     background-clip: text;

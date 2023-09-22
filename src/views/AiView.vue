@@ -18,7 +18,7 @@
                                 class="w-full h-full mix-blend-lighten pointer-events-none" />
                        </picture>
                         <video width="558" height="314" muted loop autoplay class="absolute top-9 left-9 rounded-xl max-sm:top-4 max-sm:left-0 max-sm:w-full max-sm:h-[82%]">
-                            <source src="https://d2n3zca7e0phmo.cloudfront.net/aipravka.mp4" type="video/mp4" />
+                            <source src="/aipravka.mp4" type="video/mp4" />
                         </video>
                     </div>
                     <h3 class="text-[40px] max-2xl:text-3xl mt-10 max-2xl:mt-6 font-rfdewi font-bold uppercase max-sm:text-lg max-sm:mt-3">
@@ -87,7 +87,7 @@ const rightVideoEl = ref();
 const titleEl = ref();
 const readyToShowVideo = ref(false);
 
-const {onWheel} = useMouseWheel({toDownRoute: "handle", toUpRoute: "summarize", target: sectionEl});
+const {onWheel} = useMouseWheel({toDownRoute: "token", toUpRoute: "gamification", target: sectionEl});
 
 onMounted(() => {
     if(isXS.value) {

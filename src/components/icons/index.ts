@@ -1,31 +1,26 @@
-import IconContent from './IconContent.vue';
-import IconMarketplace from './IconMarketplace.vue';
-import IconSettings from './IconSettings.vue';
-import IconLogo from './IconLogo.vue';
-import IconSearch from './IconSearch.vue';
-import IconEye from './IconEye.vue';
-import IconVideoGallery from './IconVideoGallery.vue';
-import IconComments from './IconComments.vue';
-import IconFutures from './IconFutures.vue';
-import IconHeadDiamond from './IconHeadDiamond.vue';
-import IconConfetti from './IconConfetti.vue';
-import IconPlay from './IconPlay.vue';
-import IconPause from './IconPause.vue';
-import IconSpinner from './IconSpinner.vue';
-import IconAirPlay from './IconAirPlay.vue';
-import IconVolume from './IconVolume.vue';
-import IconSettingsSolid from './IconSettingsSolid.vue';
-import IconArrowTurnRight from './IconArrowTurnRight.vue';
-import IconArrowLeft from './IconArrowLeft.vue';
-import IconSubtitles from './IconSubtitles.vue';
-import IconVoice from './IconVoice.vue';
-import IconFacebook from './IconFacebook.vue';
-import IconGoogle from './IconGoogle.vue';
-import IconArrowSolid from './IconArrowSolid.vue';
-
+import IconContent from "./IconContent.vue";
+import IconSettings from "./IconSettings.vue";
+import IconLogo from "./IconLogo.vue";
+import IconSearch from "./IconSearch.vue";
+import IconEye from "./IconEye.vue";
+import IconVideoGallery from "./IconVideoGallery.vue";
+import IconFutures from "./IconFutures.vue";
+import IconPlay from "./IconPlay.vue";
+import IconPause from "./IconPause.vue";
+import IconAirPlay from "./IconAirPlay.vue";
+import IconVolume from "./IconVolume.vue";
+import IconSettingsSolid from "./IconSettingsSolid.vue";
+import IconArrowTurnRight from "./IconArrowTurnRight.vue";
+import IconArrowLeft from "./IconArrowLeft.vue";
+import IconSubtitles from "./IconSubtitles.vue";
+import IconVoice from "./IconVoice.vue";
+import IconFacebook from "./IconFacebook.vue";
+import IconGoogle from "./IconGoogle.vue";
+import IconCloseBtn from "./IconCloseBtn.vue";
+import IconChevronRight from "./IconChevronRight.vue";
 
 export {
-/*     IconCommunity,
+    /*     IconCommunity,
     IconContent,
     IconMarketplace,
     IconSettings,
@@ -44,13 +39,13 @@ export {
     IconLocationDot, */
     IconPlay,
     IconPause,
-/*     IconFullScreenOff,
+    /*     IconFullScreenOff,
     IconFullScreenOn,
     IconLogout,
     IconSpinner,
     IconAirPlay, */
     IconVolume,
-/*     IconChatGPT,
+    /*     IconChatGPT,
     IconSettingsSolid,
     IconArrowTurnRight,
     IconArrowLeft,
@@ -58,7 +53,9 @@ export {
     IconReload, */
     IconSubtitles,
     IconVoice,
-   /*  IconFacebook,
+    /*  IconFacebook,
     IconGoogle,
     IconArrowSolid, */
-}
+    IconCloseBtn,
+    IconChevronRight
+};

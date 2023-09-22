@@ -21,6 +21,7 @@ export default {
             },
             backgroundImage: {
                 "btn-bg-liner": "linear-gradient(271deg, #0D0C11 2.43%, #46387A 97.57%)",
+                "bg-play-liner": "linear-gradient(230deg, rgba(232, 0, 255, 1) 9.01%, rgba(7, 104, 214, 1) 85.51%)",
             },
         },
         container: {

@@ -1,13 +1,13 @@
 <template>
     <section ref="sectionEl" @wheel="onWheel" class="h-full">
-        <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
+        <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[130px]">
             <picture class="flex justify-center pointer-events-none select-none ">
                 <source :srcset="imgBgWebp" type="image/webp" />
                 <img ref="mainImgEl" data="mainImgEl" width="1919" height="658" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] max-sm:mt-0 object-contain mix-blend-lighten" />
             </picture>
         </div>
         <div ref="contentEl" data="contentEl">
-            <div class="text-center">
+            <div class="text-center relative">
                 <span
                     class="text-[#0061F0] text-center text-4xl max-2xl:text-3xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table mx-auto">
                     Powered by Lens Protocol
