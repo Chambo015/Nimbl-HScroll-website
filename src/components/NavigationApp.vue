@@ -9,11 +9,11 @@
                 <li><RouterLink :to="{name: 'moderation'}">MODERATION</RouterLink></li>
                 <li><RouterLink :to="{name: 'swipe'}">SWIPE</RouterLink></li>
                 <li><RouterLink :to="{name: 'teaser'}">TEASER</RouterLink></li>
-                <li><RouterLink :to="{name: 'transfers'}">TRANSFERS</RouterLink></li>
+              <!--   <li><RouterLink :to="{name: 'transfers'}">TRANSFERS</RouterLink></li> -->
                 <li><RouterLink :to="{name: 'gamification'}">GAMIFICATION</RouterLink></li>
-                <li><RouterLink :to="{name: 'summarize'}">SUMMARIZE</RouterLink></li>
+                <!-- <li><RouterLink :to="{name: 'summarize'}">SUMMARIZE</RouterLink></li> -->
                 <li><RouterLink :to="{name: 'ai'}">AI</RouterLink></li>
-                <li><RouterLink :to="{name: 'handle'}">HANDLE</RouterLink></li>
+               <!--  <li><RouterLink :to="{name: 'handle'}">HANDLE</RouterLink></li> -->
                 <li><RouterLink :to="{name: 'token'}">TOKEN</RouterLink></li>
                 <li><RouterLink :to="{name: 'roadmap'}">ROADMAP</RouterLink></li>
             </ul>

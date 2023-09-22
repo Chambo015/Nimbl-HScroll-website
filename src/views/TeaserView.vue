@@ -14,7 +14,7 @@ const sectionEl = ref();
 const mainImgEl = ref();
 const contentEl = ref();
 
-const {onWheel} = useMouseWheel({toDownRoute: "transfers", toUpRoute: "swipe", target: sectionEl});
+const {onWheel} = useMouseWheel({toDownRoute: "gamification", toUpRoute: "swipe", target: sectionEl});
 
 onMounted(() => {
     if(isXS.value) return
@@ -56,9 +56,9 @@ onMounted(() => {
                     Post a short-form teaser leading to a long-form video, get the outreach of bite-sized content into
                     your longer piece of content.
                 </p>
-                <div class="mt-14 max-sm:flex max-sm:justify-center max-sm:hidden
+                <div class="mt-14 opacity-10 max-sm:justify-center max-sm:hidden 
                 ">
-                    <HeroButton class="w-[500px] h-[95px]">
+                    <HeroButton class="w-[500px] h-[95px] cursor-wait" title="coming soon">
                         <p class="font-rfdewi text-2xl max-sm:text-sm font-bold">DOWNLOAD APP</p><template #icon><IconFiveDots class="w-[37px] h-[37px]" /></template>
                     </HeroButton>
                 </div>

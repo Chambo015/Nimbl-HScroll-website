@@ -8,7 +8,6 @@ import gsap from "gsap";
 import {computed, onMounted, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
 import {useMediaQuery, useSwipe, useWindowSize} from "@vueuse/core";
-import { useRouter } from 'vue-router';
 
 const props = defineProps({
     ready: Boolean,
@@ -24,7 +23,6 @@ const titleEl = ref();
 const lightEl = ref();
 
 const {onWheel} = useMouseWheel({toDownRoute: "stakes", target: sectionEl});
-
 
 watchEffect(() => {
     if (props.ready) {
@@ -102,15 +100,10 @@ onMounted(() => {
         });
     }
 });
-
-const alera =() => {
-    window.alert('era')
-}
 </script>
 
 <template>
     <section ref="sectionEl" @wheel="onWheel" class="relative w-full ">
-        <!-- :class=" ready ? 'scale-100 -translate-y-0 top-0' : isXS? previewOnMobile : 'scale-[0.48] max-2xl:scale-[0.4] top-1/2 -translate-y-1/2'" -->
         <div ref="sectionInnerEl" class="w-full left-0 absolute">
             <picture ref="lightEl" data="lightEl" class="opacity-0">
                 <source :srcset="lightImgWebp" type="image/webp" />
@@ -138,13 +131,13 @@ const alera =() => {
             <div
                 ref="buttonsEl"
                 data="buttonsEl"
-                class="max-sm:hidden absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px]  shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
+                class="max-sm:hidden opacity-0 absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px]  shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
                 <HeroButton 
                     >APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template
                 ></HeroButton>
                 <HeroButton @click="$router.push({name: 'ai'})"  regular>LAUNCH DESKTOP DEMO APP</HeroButton>
             </div>
-            <div class="w-[266px] h-[55px] mx-auto mt-5 hidden max-sm:block">
+            <div class="w-[266px] h-[55px] mx-auto mt-5 hidden max-sm:block opacity-0">
                 <HeroButton @click="$router.push({name: 'ai'})"
                     >DOWNLOAD APP<template #icon><IconFiveDots /></template
                 ></HeroButton>

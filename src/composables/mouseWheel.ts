@@ -17,9 +17,10 @@ export default function useMouseWheel({toDownRoute, toUpRoute, target}: {toDownR
     }
   })
   const onWheel = (el: any) => {
-    if(el.deltaY > 0 && toDownRoute) {
+    console.log('el', el);
+    if(el.deltaY > 10 && toDownRoute ) {
         router.push({name: toDownRoute})
-    } else if(el.deltaY < 0 && toUpRoute) {
+    } else if(el.deltaY < -10 && toUpRoute ) {
         router.push({name: toUpRoute})
     }
   }

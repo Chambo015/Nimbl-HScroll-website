@@ -160,8 +160,8 @@ const coords = computed(() => {
         </div>
         <div
             class="flex w-[170px] h-[170px] absolute z-10 rounded-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E800FF] opacity-75"></span>
-            <div class="bg-[#E800FF] h-full w-full z-10 rounded-full">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-bg-play-liner  opacity-75"></span>
+            <div class="bg-bg-play-liner h-full w-full z-10 rounded-full">
                 <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>
         </div>

@@ -1,13 +1,13 @@
 <template>
     <section ref="sectionEl" @wheel="onWheel" class="h-full">
-        <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[70px]">
+        <div  class="flex justify-center -mb-[350px] max-2xl:-mb-[300px] max-sm:-mb-[130px]">
             <picture class="flex justify-center pointer-events-none select-none ">
                 <source :srcset="imgBgWebp" type="image/webp" />
-                <img ref="mainImgEl" data="mainImgEl" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] max-sm:mt-0 object-contain mix-blend-lighten" />
+                <img ref="mainImgEl" data="mainImgEl" width="1919" height="658" :src="imgBg" alt="imgBg" class="w-[1920px] max-3xl:-mt-[100px]  max-sm:max-w-[150%] max-sm:mt-0 object-contain mix-blend-lighten" />
             </picture>
         </div>
         <div ref="contentEl" data="contentEl">
-            <div class="text-center">
+            <div class="text-center relative">
                 <span
                     class="text-[#0061F0] text-center text-4xl max-2xl:text-3xl font-medium font-gilroy py-1 px-2 max-sm:text-sm bg-[#001D48] border border-[#1017B9] max-sm:mx-auto max-sm:table mx-auto">
                     Powered by Lens Protocol
@@ -26,7 +26,7 @@
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
                     <picture class="flex justify-center pointer-events-none select-none ">
                         <source :srcset="personDataWebp" type="image/webp" />
-                        <img :src="personData" alt="imgBg" class="w-[250px] h-[250px] max-sm:w-[160px] max-sm:h-[160px]" />
+                        <img :src="personData" alt="imgBg" width="250" height="250" class="w-[250px] h-[250px] max-sm:w-[160px] max-sm:h-[160px]" />
                     </picture>
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
@@ -59,7 +59,7 @@
                     class="relative [&>span]:absolute [&>span]:bg-[#22202F] [&>span]:font-gilroy  max-2xl:[&>span]:text-2xl [&>span]:text-3xl [&>span]:rounded [&>span]:px-2 [&>span]:py-1 max-sm:[&>span]:text-base">
                     <picture class="flex justify-center pointer-events-none select-none">
                         <source :srcset="dataNimblWebp" type="image/webp" />
-                        <img :src="dataNimbl" alt="imgBg" class="w-[289px] h-[181px] max-sm:w-[200px] max-sm:h-[120px]" />
+                        <img :src="dataNimbl" alt="imgBg" width="312" height="203" class="w-[289px] h-[181px] max-sm:w-[200px] max-sm:h-[120px]" />
                     </picture>
                     <span
                         :style="{transform: `translate(${coords.x},${coords.y})`}"
