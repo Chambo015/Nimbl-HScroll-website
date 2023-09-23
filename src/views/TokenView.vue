@@ -219,6 +219,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image1"
                     :src="smoke1" />
@@ -226,6 +228,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image2"
                     :src="smoke2" />
@@ -233,6 +237,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image4"
                     :src="smoke2" />
@@ -240,6 +246,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke3Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image3"
                     :src="smoke3" />
@@ -247,6 +255,7 @@ onMounted(() => {
             <picture>
                 <source :srcset="centerSmokeWebp" type="image/webp" />
                 <img
+                width="950" height="444"
                     class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image7"
                     :src="centerSmoke"
@@ -265,7 +274,7 @@ onMounted(() => {
     @apply text-center font-rfdewi inline-block bg-clip-text text-white text-[88px] max-2xl:text-[50px] leading-none font-black uppercase -translate-x-2  max-sm:-translate-x-0 max-sm:text-3xl;
 }
 .main-text-layer {
-    background-image: url("../assets/image1895.png");
+    background-image: url("../assets/image1895.webp");
     background-size: contain;
     position: absolute;
     width: 100%;
