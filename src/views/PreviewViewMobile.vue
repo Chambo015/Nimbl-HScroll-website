@@ -125,6 +125,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image1"
                     :src="smoke1" />
@@ -132,6 +134,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image2"
                     :src="smoke2" />
@@ -139,6 +143,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image4"
                     :src="smoke2" />
@@ -146,6 +152,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke3Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image3"
                     :src="smoke3" />
@@ -153,6 +161,7 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="centerSmokeWebp" type="image/webp" />
                 <img
+                width="950" height="444"
                     class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image7"
                     :src="centerSmoke"

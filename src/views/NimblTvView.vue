@@ -156,7 +156,7 @@ onMounted(() => {
     @apply text-center font-rfdewi inline-block bg-clip-text text-white text-[145px] max-sm:text-[50px] leading-none font-black uppercase -translate-x-2 -translate-y-7 max-sm:-translate-x-0 max-sm:-translate-y-6;
 }
 .main-text-layer {
-    background-image: url("../assets/image1895.png");
+    background-image: url("../assets/image1895.webp");
     background-size: contain;
     position: absolute;
     width: 100%;
