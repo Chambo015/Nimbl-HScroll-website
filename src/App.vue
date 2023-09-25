@@ -28,7 +28,6 @@ function onLeavePreviewPage(el: any, done: any) {
             autoAlpha: 0.0,
             duration: 1,
         },
-        "",
     );
     tl.to(
         leftCubs,

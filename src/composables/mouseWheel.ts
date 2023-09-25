@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 
 
 export default function useMouseWheel({toDownRoute, toUpRoute, target}: {toDownRoute?: string, toUpRoute?: string, target?: Ref<HTMLElement>}) {
-  const { isSwiping, direction,  lengthY } = useSwipe(target)
+  const { isSwiping, direction } = useSwipe(target)
   const router = useRouter()
 
   watchEffect(() => {
@@ -17,7 +17,6 @@ export default function useMouseWheel({toDownRoute, toUpRoute, target}: {toDownR
     }
   })
   const onWheel = (el: any) => {
-    console.log('el', el);
     if(el.deltaY > 10 && toDownRoute ) {
         router.push({name: toDownRoute})
     } else if(el.deltaY < -10 && toUpRoute ) {
