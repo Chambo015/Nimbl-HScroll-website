@@ -224,8 +224,8 @@ onMounted(() => {
     }
 }
 .smoke-cloud1 {
-    -webkit-animation: wave 8s 0.1s infinite linear;
-    animation: wave 8s 0.1s infinite linear;
+    -webkit-animation: wave 7s 0.1s infinite linear;
+    animation: wave 7s 0.1s infinite linear;
     display: block;
     left: -20%;
     bottom: 0;
@@ -235,8 +235,8 @@ onMounted(() => {
     left: -14%;
     bottom: -6%;
     opacity: 0.3;
-    -webkit-animation: wave 9s 0.1s infinite linear;
-    animation: wave 9s 0.1s infinite linear;
+    -webkit-animation: wave 7s 0.1s infinite linear;
+    animation: wave 7s 0.1s infinite linear;
 }
 .smoke-cloud4 {
     right: -15%;

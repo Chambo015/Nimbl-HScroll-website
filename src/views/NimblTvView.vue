@@ -7,7 +7,7 @@ import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
 import {computed, onMounted, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
-import {useMediaQuery, useSwipe, useWindowSize} from "@vueuse/core";
+import {useMediaQuery, useWindowSize} from "@vueuse/core";
 
 const props = defineProps({
     ready: Boolean,
@@ -143,6 +143,8 @@ onMounted(() => {
                 ></HeroButton>
             </div>
         </div>
+        <div class="w-16 h-16 rounded-full bg-bg-planet-liner blur-[1px] absolute left-48 top-16 rotate-[140deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.16)]"></div>
+        <div class="w-6 h-6 rounded-full bg-bg-planet-liner blur-[1px] absolute left-48 top-16 rotate-[140deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.16)]"></div>
     </section>
 </template>
 
