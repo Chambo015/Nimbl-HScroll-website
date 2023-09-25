@@ -61,7 +61,7 @@ onMounted(() => {
                 class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center max-2xl:text-4xl">
                 Introducing Stakes
             </h2>
-            <p class="font-gilroy text-[28px] max-2xl:text-2xl leading-tight text-center mt-8 max-sm:text-base">
+            <p class="font-gilroy text-[28px] max-2xl:text-2xl leading-tight text-center mt-8 max-sm:text-base font-normal">
                 Join the next generation of social engagement with Stakes, a platform that intertwines community
                 interaction with the excitement of owning stakes in your favorite groups and influencers.
             </p>
