@@ -30,26 +30,41 @@ import {IconPlay} from "@/components/icons";
 const sectionEl = ref()
 const parallax = reactive(useParallax(sectionEl))
 const cardStyle = computed(() => ({
-  transition: '.3s ease-out all',
-  transform: `rotateX(${parallax.roll * 15}deg) rotateY(${
-    parallax.tilt * 15
-  }deg)`,
+  transition: '.3s ease-out transform',
+  transform: `rotateX(${parallax.roll * 20}deg) rotateY(${parallax.tilt * 20}deg)`,
+}))
+const layer0 = computed(() => ({
+    transition: '.3s ease-out transform',
+  transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
+}))
+const layer1 = computed(() => ({
+    transition: '.3s ease-out transform',
+  transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px)`,
+}))
+const layer2 = computed(() => ({
+    transition: '.3s ease-out transform',
+  transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px)`,
+}))
+const layerPeople = computed(() => ({
+    transition: '.3s ease-out transform',
+  transform: `translateX(${parallax.tilt * 20}px)`,
 }))
 </script>
 
 <template>
     <div ref="sectionEl"  class="absolute left-0 top-0 right-0 bottom-0 z-20">
-        <div :style="cardStyle" class="[transform-style:_preserve-3d] w-full h-full relative before:bg-black before:w-full before:h-full before:block before:absolute before:bottom-full after:bg-black after:w-full after:h-full after:block after:absolute after:top-full">
+        <div :style="cardStyle" class="[transform-style:_preserve-3d] will-change-transform w-full h-full relative before:bg-black before:w-full before:h-full before:block before:absolute before:bottom-full after:bg-black after:w-full after:h-full after:block after:absolute after:top-full">
             <div class="h-[200%] w-1/2 absolute left-full top-[-50%] bg-black"></div>
             <div class="h-[200%] w-1/2 absolute right-full top-[-50%] bg-black"></div>
             <picture
                 ><source :srcset="prevImgMobileWebp" type="image/webp" />
-                <img   :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
+                <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover select-none"
             /></picture>
         </div>
         <picture>
             <source :srcset="leftMiddleImgWebp" type="image/webp" />
-            <img
+            <img 
+            :style="layer1"
                 :src="leftMiddleImg"
                 alt="leftMiddleImg"
                 class="w-[90px] h-[87px] absolute -left-[2%] top-1/2 z-[2] left_cube" />
@@ -57,6 +72,7 @@ const cardStyle = computed(() => ({
         <picture>
             <source :srcset="peopleImgWebp" type="image/webp" />
             <img
+                :style="layerPeople"
                 width="247"
                 height="176"
                 :src="peopleImg"
@@ -66,6 +82,7 @@ const cardStyle = computed(() => ({
         <picture>
             <source :srcset="rightImgWebp" type="image/webp" />
             <img
+            :style="layer2"
                 :src="rightImg"
                 alt="rightImg"
                 class="w-[97px] h-[64px] absolute right-[2%] top-[1%] z-[2] right_cube opacity-50" />
@@ -73,6 +90,7 @@ const cardStyle = computed(() => ({
         <picture>
             <source :srcset="imgPlayLeftWebp" type="image/webp" />
             <img
+            :style="layer2"
                 :src="imgPlayLeft"
                 alt="imgPlayLeft"
                 class="w-[90px] h-[60px] absolute -left-[2%] top-[8%] z-[2] left_cube opacity-50" />
@@ -80,6 +98,7 @@ const cardStyle = computed(() => ({
         <picture>
             <source :srcset="rightMiddleImgWebp" type="image/webp" />
             <img
+            :style="layer1"
                 :src="rightMiddleImg"
                 alt="rightMiddleImg"
                 class="w-[70px] h-[75px] absolute -right-[3%] top-1/2 z-[2] right_cube" />
@@ -87,6 +106,7 @@ const cardStyle = computed(() => ({
         <picture>
             <source :srcset="nearLeftImgWebp" type="image/webp" />
             <img
+            :style="layer0"
                 ref="container"
                 :src="nearLeftImg"
                 alt="nearLeftImg"
@@ -94,7 +114,7 @@ const cardStyle = computed(() => ({
         </picture>
         <picture>
             <source :srcset="nearRightWebp" type="image/webp" />
-            <img
+            <img :style="layer0"
                 :src="nearRight"
                 alt="nearRight"
                 class="w-[132px] h-[128px] absolute -right-[6%] bottom-[4%] z-[2] right_cube" />

@@ -10,7 +10,7 @@ import gsap from "gsap";
 import {computed, onMounted, reactive, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
 import {useMediaQuery, useParallax, useWindowSize} from "@vueuse/core";
-import useMouseAnimation from '@/composables/useMouseAnimation';
+import useMouseAnimation from "@/composables/useMouseAnimation";
 
 const props = defineProps({
     ready: Boolean,
@@ -28,19 +28,18 @@ const planetsEl = ref();
 
 const {onWheel} = useMouseWheel({toDownRoute: "stakes", target: sectionEl});
 
-const {X, Y} = useMouseAnimation()
+const {X, Y} = useMouseAnimation();
 const coords20 = computed(() => ({x: `${X.value * 20}px`, y: `${Y.value * 20}px`}));
 const coords40 = computed(() => ({x: `${X.value * 40}px`, y: `${Y.value * 40}px`}));
 const coords60 = computed(() => ({x: `${X.value * 60}px`, y: `${Y.value * 60}px`}));
 const coords80 = computed(() => ({x: `${X.value * 80}px`, y: `${Y.value * 80}px`}));
 
-const parallax = reactive(useParallax(sectionEl))
+const parallax = reactive(useParallax(sectionEl));
 const cardStyle = computed(() => ({
-  transition: '.3s ease-out all',
-  transform: `translate(${-( parallax.tilt * 6)}%, ${parallax.roll * 2}%) rotateX(${parallax.roll * 15}deg) rotateY(${
-    parallax.tilt * 15
-  }deg)`,
-}))
+    "transform-style": "preserve-3d",
+    transition: ".3s ease-out all",
+    transform: `translate(${-(parallax.tilt * 5)}%, ${parallax.roll * 2}%) rotateX(${parallax.roll * 20}deg) rotateY(${parallax.tilt * 20}deg)`,
+}));
 
 watchEffect(() => {
     if (props.ready) {
@@ -139,7 +138,7 @@ onMounted(() => {
                     :src="lightImg"
                     alt="lightImg"
                     loading="lazy"
-                    class="absolute top-0 left-1/2 -translate-x-1/2 z-40 select-none pointer-events-none" />
+                    class="absolute top-[-1%] left-1/2 -translate-x-1/2 z-40 select-none pointer-events-none" />
             </picture>
             <div ref="titleEl" data="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[40px]">
                 <div class="inline-flex flex-col">
@@ -153,7 +152,7 @@ onMounted(() => {
                     </h1>
                 </div>
             </div>
-            <div ref="sliderEl" class="relative" >
+            <div ref="sliderEl" class="relative">
                 <HeroSliderApp data="slider_h_El" />
             </div>
             <div
@@ -172,24 +171,30 @@ onMounted(() => {
             </div>
         </div>
         <div ref="planetsEl" data="planetsEl" class="opacity-0">
-            <div :style="{transform: `translate(${coords20.x},${coords40.y}) rotate(140deg)`}"
+            <div
+                :style="{transform: `translate(${coords20.x},${coords40.y}) rotate(140deg)`}"
                 class="w-16 h-16 rounded-full bg-bg-planet-liner blur-[1px] absolute left-48 top-16 rotate-[140deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.16)] max-2xl:left-36 max-2xl:top-10 max-sm:w-7 max-sm:h-7 max-sm:-left-1"></div>
-            <div  :style="{transform: `translate(${coords80.x},${coords80.y})  rotate(140deg)`}"
+            <div
+                :style="{transform: `translate(${coords80.x},${coords80.y})  rotate(140deg)`}"
                 class="w-6 h-6 rounded-full bg-bg-planet-liner blur-[1px] absolute left-48 top-16 rotate-[140deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.16)] max-2xl:left-36 max-2xl:top-10 max-sm:left-5 max-sm:top-20"></div>
-            <div :style="{transform: `translate(${coords60.x},${coords60.y})  rotate(145deg)`}"
+            <div
+                :style="{transform: `translate(${coords60.x},${coords60.y})  rotate(145deg)`}"
                 class="w-8 h-8 rounded-full bg-bg-planet-liner blur-[2px] absolute left-36 top-40 rotate-[145deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.1)] max-2xl:left-16 max-2xl:top-36 max-sm:hidden"></div>
-            <picture >
+            <picture>
                 <source :srcset="right_lg_planetWebp" type="image/webp" />
-                <img :style="{transform: `translate(${coords20.x},${coords20.y})`}"
+                <img
+                    :style="{transform: `translate(${coords20.x},${coords20.y})`}"
                     :src="right_lg_planet"
                     alt="right_lg_planet"
                     width="298"
                     height="146"
                     class="absolute right-10 top-16 blur-[1px] max-2xl:right-5 max-2xl:w-[230px] max-sm:w-28 max-sm:top-20 max-sm:-right-5"
             /></picture>
-            <div :style="{transform: `translate(${coords60.x},${coords60.y})  rotate(-20deg)`}"
+            <div
+                :style="{transform: `translate(${coords60.x},${coords60.y})  rotate(-20deg)`}"
                 class="w-8 h-8 rounded-full bg-bg-planet-liner blur-[2px] absolute right-60 top-10 rotate-[-20deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.1)] max-2xl:right-44 max-2xl:top-7 max-sm:right-1"></div>
-            <div :style="{transform: `translate(${coords20.x},${coords20.y})  rotate(120deg)`}"
+            <div
+                :style="{transform: `translate(${coords20.x},${coords20.y})  rotate(120deg)`}"
                 class="w-24 h-24 rounded-full bg-[radial-gradient(71.22%_69.08%_at_68.95%_56.86%,#29353E_0%,#101417_80.6%,#AB78FE_92.89%,#FFF_100%)] blur-[2px] absolute left-20 bottom-10 rotate-[120deg] drop-shadow-[6px_-1px_26px_rgba(255,255,255,0.1)] max-2xl:left-14 max-2xl:w-16 max-2xl:h-16 max-sm:hidden"></div>
         </div>
     </section>
