@@ -7,16 +7,16 @@ import right_lg_planetWebp from "@/assets/right_lg_planet.webp";
 import HeroSliderApp from "@/components/HeroSliderApp.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
-import {computed, onMounted, ref, watchEffect} from "vue";
+import {computed, onMounted, reactive, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
-import {useMediaQuery, useWindowSize} from "@vueuse/core";
+import {useMediaQuery, useParallax, useWindowSize} from "@vueuse/core";
 import useMouseAnimation from '@/composables/useMouseAnimation';
 
 const props = defineProps({
     ready: Boolean,
 });
 
-const isXS = useMediaQuery("(max-width: 640px)");
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const sectionEl = ref();
 const sectionInnerEl = ref();
@@ -33,6 +33,14 @@ const coords20 = computed(() => ({x: `${X.value * 20}px`, y: `${Y.value * 20}px`
 const coords40 = computed(() => ({x: `${X.value * 40}px`, y: `${Y.value * 40}px`}));
 const coords60 = computed(() => ({x: `${X.value * 60}px`, y: `${Y.value * 60}px`}));
 const coords80 = computed(() => ({x: `${X.value * 80}px`, y: `${Y.value * 80}px`}));
+
+const parallax = reactive(useParallax(sectionEl))
+const cardStyle = computed(() => ({
+  transition: '.3s ease-out all',
+  transform: `translate(${-( parallax.tilt * 6)}%, ${parallax.roll * 2}%) rotateX(${parallax.roll * 15}deg) rotateY(${
+    parallax.tilt * 15
+  }deg)`,
+}))
 
 watchEffect(() => {
     if (props.ready) {
@@ -123,7 +131,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="relative w-full">
+    <section ref="sectionEl" :style="cardStyle" @wheel="onWheel" class="relative w-full">
         <div ref="sectionInnerEl" class="w-full left-0 absolute will-change-transform">
             <picture ref="lightEl" data="lightEl" class="opacity-0">
                 <source :srcset="lightImgWebp" type="image/webp" />
@@ -145,7 +153,7 @@ onMounted(() => {
                     </h1>
                 </div>
             </div>
-            <div ref="sliderEl" class="relative">
+            <div ref="sliderEl" class="relative" >
                 <HeroSliderApp data="slider_h_El" />
             </div>
             <div

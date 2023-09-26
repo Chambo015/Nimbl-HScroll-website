@@ -123,7 +123,7 @@ import useMouseWheel from "@/composables/mouseWheel";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import { useMediaQuery } from '@vueuse/core';
 
-const isXS = useMediaQuery("(max-width: 640px)");
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const refImg2 = ref<HTMLDivElement | null>(null);
 const refImg3 = ref<HTMLDivElement | null>(null);

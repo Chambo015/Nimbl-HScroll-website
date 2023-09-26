@@ -14,7 +14,7 @@ import gsap from 'gsap';
 import useMouseWheel from '@/composables/mouseWheel';
 import { useMediaQuery } from '@vueuse/core';
 
-const isXS = useMediaQuery("(max-width: 640px)");
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const sectionEl = ref()
 const monitorEl = ref()

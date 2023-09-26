@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {useDeviceOrientation, useThrottleFn} from "@vueuse/core";
-import {computed, watchEffect} from "vue";
+import {useDeviceOrientation, useParallax, useThrottleFn} from "@vueuse/core";
+import {computed, reactive, ref, watchEffect} from "vue";
 import prevImgMobile from "@/assets/preview/mobile-intro-transperent.png";
 import prevImgMobileWebp from "@/assets/preview/mobile-intro-transperent.webp";
 import rightImg from "@/assets/preview/rightImg.png";
@@ -27,46 +27,26 @@ import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
 import {IconPlay} from "@/components/icons";
 
-const {isSupported, alpha, beta, gamma} = useDeviceOrientation();
-
-let initAlpha: number, initBeta: number;
-
-const stopWatchAlpha = watchEffect(() => {
-    if (alpha.value && beta.value) {
-        initAlpha = alpha.value;
-        initBeta = beta.value;
-        stopWatchAlpha();
-    }
-});
-
-/* const throttledAlpha = useThrottleFn(() => {
-    if (alpha.value) return alpha.value;
-}, 500);
-
-const throttledBeta = useThrottleFn(() => {
-    if (beta.value) return beta.value;
-}, 500); */
-
-const coords = computed(() => {
-    if (isSupported.value && alpha.value && beta.value) {
-        /*       const alphaValue = await throttledAlpha();
-        const betaValue = await throttledBeta(); */
-        /*     if (alphaValue && betaValue) { */
-        const x = (alpha.value - initAlpha) / 30;
-        const y = (beta.value - initBeta) / 20;
-        return {x: `${x}px`, y: `${y}px`};
-        /* } */
-    }
-    return {x: "0px", y: "0px"};
-});
+const sectionEl = ref()
+const parallax = reactive(useParallax(sectionEl))
+const cardStyle = computed(() => ({
+  transition: '.3s ease-out all',
+  transform: `rotateX(${parallax.roll * 15}deg) rotateY(${
+    parallax.tilt * 15
+  }deg)`,
+}))
 </script>
 
 <template>
-    <div class="absolute left-0 top-0 right-0 bottom-0 z-20">
-        <picture
-            ><source :srcset="prevImgMobileWebp" type="image/webp" />
-            <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
-        /></picture>
+    <div ref="sectionEl"  class="absolute left-0 top-0 right-0 bottom-0 z-20">
+        <div :style="cardStyle" class="[transform-style:_preserve-3d] w-full h-full relative before:bg-black before:w-full before:h-full before:block before:absolute before:bottom-full after:bg-black after:w-full after:h-full after:block after:absolute after:top-full">
+            <div class="h-[200%] w-1/2 absolute left-full top-[-50%] bg-black"></div>
+            <div class="h-[200%] w-1/2 absolute right-full top-[-50%] bg-black"></div>
+            <picture
+                ><source :srcset="prevImgMobileWebp" type="image/webp" />
+                <img   :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
+            /></picture>
+        </div>
         <picture>
             <source :srcset="leftMiddleImgWebp" type="image/webp" />
             <img
@@ -95,7 +75,6 @@ const coords = computed(() => {
             <img
                 :src="imgPlayLeft"
                 alt="imgPlayLeft"
-                :style="{transform: `translate(${coords.x},${coords.y})`}"
                 class="w-[90px] h-[60px] absolute -left-[2%] top-[8%] z-[2] left_cube opacity-50" />
         </picture>
         <picture>

@@ -37,7 +37,7 @@ const computedList = computed(() => {
     return list[currentIdxList.value];
 });
 
-const isXS = useMediaQuery("(max-width: 640px)");
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const sectionEl = ref();
 const titleEl = ref();
@@ -187,6 +187,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image1"
                     :src="smoke1" />
@@ -194,6 +196,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image2"
                     :src="smoke2" />
@@ -201,6 +205,8 @@ onMounted(() => {
         <picture>
             <source :srcset="smoke2Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image4"
                     :src="smoke2" />
@@ -208,11 +214,13 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke3Webp" type="image/webp" />
                 <img
+                width="1600"
+                height="850"
                     class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image3"
                     :src="smoke3"  />
             </picture>
-            <picture> <source :srcset="centerSmokeWebp" type="image/webp" /><img class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none" alt="smoke-image7" :src="centerSmoke" /></picture>
+            <picture> <source :srcset="centerSmokeWebp" type="image/webp" /><img  width="950" height="444" class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none" alt="smoke-image7" :src="centerSmoke" /></picture>
         </div>
         <div
             class="absolute hidden max-sm:block smoke-clouds w-[150%] bottom-0 h-1/2 z-[3] bg-[url('@/assets/preview/mobile_smoke.webp')] bg-no-repeat bg-[length:140%_auto] bg-bottom opacity-60 transition-opacity mix-blend-screen">

@@ -7,9 +7,8 @@ import swipeLeftWebp from '@/assets/swipe-toFilter.webp';
 import swipeRightWebp from '@/assets/swipe-toSave.webp';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
-import type { CSSProperties } from 'vue';
 import { onMounted, ref, reactive, computed } from 'vue';
-import { useDeviceOrientation, useMediaQuery, useParallax } from '@vueuse/core';
+import {  useMediaQuery, useParallax } from '@vueuse/core';
 
 const isXS = useMediaQuery("(max-width: 640px)");
 
@@ -21,11 +20,16 @@ const {onWheel} = useMouseWheel({toDownRoute: "teaser", toUpRoute: "moderation",
 
 const parallax = reactive(useParallax(sectionEl))
 const layer0 = computed(() => ({
-  transform: `translateX(${parallax.tilt * 10}px) translateY(${
-    parallax.roll * 10
-  }px) scale(1.33)`,
+  transform: `translateX(${parallax.tilt * 20}px) translateY(${
+    parallax.roll * 20
+  }px)`,
 }))
-const orientation = reactive(useDeviceOrientation())
+const layer1 = computed(() => ({
+  transform: `translateX(${parallax.tilt * -20}px) translateY(${
+    parallax.roll * -20
+  }px)`,
+}))
+
 onMounted(() => {
   if(isXS.value) return
     const tl = gsap.timeline();
@@ -47,7 +51,6 @@ onMounted(() => {
         },
         "0",
     );
-    
 });
 </script>
 
@@ -64,11 +67,10 @@ onMounted(() => {
           </p>
         </div>
         <div ref="mainImgEl" data="mainImgEl" class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
-          <picture><source :srcset="mobileImgWebp" type="image/webp" /><img  :src="mobileImg" alt="mobileImg" class=" max-h-[744px] max-2xl:max-h-[100vh]  max-sm:w-[230px] max-sm:h-[380px] object-contain transition-all" /></picture>
-          <picture><source :srcset="swipeLeftWebp" type="image/webp" /><img  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
+          <picture><source :srcset="mobileImgWebp" type="image/webp" /><img :src="mobileImg" alt="mobileImg" class=" max-h-[744px] max-2xl:max-h-[100vh]  max-sm:w-[230px] max-sm:h-[380px] object-contain transition-all" /></picture>
+          <picture><source :srcset="swipeLeftWebp" type="image/webp" /><img :style="layer1"  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
           <picture><source :srcset="swipeRightWebp" type="image/webp" /><img :style="layer0" :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>
         </div>
-        <div>{{ orientation.isSupported }}</div>
       </div>
     </section>
 </template>
