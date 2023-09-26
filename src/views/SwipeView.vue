@@ -26,7 +26,7 @@ const layer0 = computed(() => ({
 }))
 const layer1 = computed(() => ({
   transform: `translateX(${parallax.tilt * -20}px) translateY(${
-    parallax.roll * -20
+    parallax.roll * 20
   }px)`,
 }))
 
