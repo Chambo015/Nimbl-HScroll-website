@@ -39,13 +39,13 @@
             </ul>
           </div>
         </div>
-         <picture>
+         <picture  ref="rocketImgEl"   data="rocketImgEl " class="max-sm:absolute  max-sm:top-[150px]  max-sm:-right-[100px]">
          <source :srcset="rocketWebp" type="image/webp" />
            <img
-           ref="rocketImgEl"   data="rocketImgEl"
+            :style="layer0"
             :src="rocket"
             alt="rocket"
-            class="mix-blend-screen w-[1000px] max-2xl:w-[687px] max-2xl:h-[237px] object-contain mx-auto max-sm:absolute max-sm:-rotate-90 max-sm:top-[150px]  max-sm:-right-[100px] max-sm:w-[350px] max-sm:block"
+            class="w-[1000px] max-2xl:w-[687px] max-2xl:h-[237px] object-contain mx-auto max-sm:-rotate-90  max-sm:w-[350px] max-sm:block"
           /> 
          </picture>
         <div ref="bottomListEl" data="bottomListEl" class="flex justify-between gap-8 max-sm:flex-col max-sm:w-full max-sm:mt-3 max-sm:gap-3 ">
@@ -95,8 +95,8 @@ import rocket from '@/assets/NIMBL-rocket.png';
 import rocketWebp from '@/assets/NIMBL-rocket.webp';
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
-import { onMounted, ref } from 'vue';
-import { useMediaQuery } from '@vueuse/core';
+import { onMounted, ref, reactive, computed } from 'vue';
+import { useMediaQuery, useParallax } from '@vueuse/core';
 
 const isXS = useMediaQuery("(max-width: 640px)");
 
@@ -107,8 +107,26 @@ const rocketImgEl = ref();
 
 const {onWheel} = useMouseWheel({ toUpRoute: "token", target: sectionEl});
 
+const parallax = reactive(useParallax(sectionEl));
+const layer0 = computed(() => ({
+  transition: ".3s ease-out all",
+  transform: `translateX(${parallax.tilt * 5}px) translateY(${parallax.roll * 100}px) rotate(-90deg)`,
+}))
+
 onMounted(() => {
-  if(isXS.value) return
+  if(isXS.value) {
+    gsap.from(
+      rocketImgEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 150,
+            filter: 'blur(2px)',
+            ease: "expo.inOut",
+        }
+    );
+    return
+  }
     const tl = gsap.timeline();
     
     tl.from(topListEl.value.children, {

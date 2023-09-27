@@ -27,44 +27,36 @@ import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
 import {IconPlay} from "@/components/icons";
 
-const sectionEl = ref()
-const parallax = reactive(useParallax(sectionEl))
-const cardStyle = computed(() => ({
-  transition: '.3s ease-out transform',
-  transform: `rotateX(${parallax.roll * 20}deg) rotateY(${parallax.tilt * 20}deg)`,
-}))
+const sectionEl = ref();
+const parallax = reactive(useParallax(sectionEl));
 const layer0 = computed(() => ({
-    transition: '.3s ease-out transform',
-  transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
-}))
+    transition: ".3s ease-out transform",
+    transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
+}));
 const layer1 = computed(() => ({
-    transition: '.3s ease-out transform',
-  transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px)`,
-}))
+    transition: ".3s ease-out transform",
+    transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px)`,
+}));
 const layer2 = computed(() => ({
-    transition: '.3s ease-out transform',
-  transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px)`,
-}))
+    transition: ".3s ease-out transform",
+    transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px)`,
+}));
 const layerPeople = computed(() => ({
-    transition: '.3s ease-out transform',
-  transform: `translateX(${parallax.tilt * 20}px)`,
-}))
+    transition: ".3s ease-out transform",
+    transform: `translateX(${parallax.tilt * 20}px)`,
+}));
 </script>
 
 <template>
-    <div ref="sectionEl"  class="absolute left-0 top-0 right-0 bottom-0 z-20">
-        <div :style="cardStyle" class="[transform-style:_preserve-3d] will-change-transform w-full h-full relative before:bg-black before:w-full before:h-full before:block before:absolute before:bottom-full after:bg-black after:w-full after:h-full after:block after:absolute after:top-full">
-            <div class="h-[200%] w-1/2 absolute left-full top-[-50%] bg-black"></div>
-            <div class="h-[200%] w-1/2 absolute right-full top-[-50%] bg-black"></div>
-            <picture
-                ><source :srcset="prevImgMobileWebp" type="image/webp" />
-                <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover select-none"
-            /></picture>
-        </div>
+    <div ref="sectionEl" class="absolute left-0 top-0 right-0 bottom-0 z-20">
+        <picture
+            ><source :srcset="prevImgMobileWebp" type="image/webp" />
+            <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover select-none"
+        /></picture>
         <picture>
             <source :srcset="leftMiddleImgWebp" type="image/webp" />
-            <img 
-            :style="layer1"
+            <img
+                :style="layer1"
                 :src="leftMiddleImg"
                 alt="leftMiddleImg"
                 class="w-[90px] h-[87px] absolute -left-[2%] top-1/2 z-[2] left_cube" />
@@ -82,7 +74,7 @@ const layerPeople = computed(() => ({
         <picture>
             <source :srcset="rightImgWebp" type="image/webp" />
             <img
-            :style="layer2"
+                :style="layer2"
                 :src="rightImg"
                 alt="rightImg"
                 class="w-[97px] h-[64px] absolute right-[2%] top-[1%] z-[2] right_cube opacity-50" />
@@ -90,7 +82,7 @@ const layerPeople = computed(() => ({
         <picture>
             <source :srcset="imgPlayLeftWebp" type="image/webp" />
             <img
-            :style="layer2"
+                :style="layer2"
                 :src="imgPlayLeft"
                 alt="imgPlayLeft"
                 class="w-[90px] h-[60px] absolute -left-[2%] top-[8%] z-[2] left_cube opacity-50" />
@@ -98,7 +90,7 @@ const layerPeople = computed(() => ({
         <picture>
             <source :srcset="rightMiddleImgWebp" type="image/webp" />
             <img
-            :style="layer1"
+                :style="layer1"
                 :src="rightMiddleImg"
                 alt="rightMiddleImg"
                 class="w-[70px] h-[75px] absolute -right-[3%] top-1/2 z-[2] right_cube" />
@@ -106,7 +98,7 @@ const layerPeople = computed(() => ({
         <picture>
             <source :srcset="nearLeftImgWebp" type="image/webp" />
             <img
-            :style="layer0"
+                :style="layer0"
                 ref="container"
                 :src="nearLeftImg"
                 alt="nearLeftImg"
@@ -114,7 +106,8 @@ const layerPeople = computed(() => ({
         </picture>
         <picture>
             <source :srcset="nearRightWebp" type="image/webp" />
-            <img :style="layer0"
+            <img
+                :style="layer0"
                 :src="nearRight"
                 alt="nearRight"
                 class="w-[132px] h-[128px] absolute -right-[6%] bottom-[4%] z-[2] right_cube" />
@@ -124,8 +117,8 @@ const layerPeople = computed(() => ({
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image1"
                     :src="smoke1" />
@@ -133,8 +126,8 @@ const layerPeople = computed(() => ({
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image2"
                     :src="smoke2" />
@@ -142,8 +135,8 @@ const layerPeople = computed(() => ({
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image4"
                     :src="smoke2" />
@@ -151,8 +144,8 @@ const layerPeople = computed(() => ({
             <picture>
                 <source :srcset="smoke3Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image3"
                     :src="smoke3" />
@@ -160,7 +153,8 @@ const layerPeople = computed(() => ({
             <picture>
                 <source :srcset="centerSmokeWebp" type="image/webp" />
                 <img
-                width="950" height="444"
+                    width="950"
+                    height="444"
                     class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image7"
                     :src="centerSmoke"
@@ -168,7 +162,8 @@ const layerPeople = computed(() => ({
         </div>
         <div
             class="flex w-[170px] h-[170px] absolute z-10 rounded-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-bg-play-liner  opacity-75"></span>
+            <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-bg-play-liner opacity-75"></span>
             <div class="bg-bg-play-liner h-full w-full z-10 rounded-full">
                 <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>

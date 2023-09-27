@@ -90,19 +90,19 @@ import screen4Webp from "@/assets/app-screens/screen-4-lg.webp";
 import screen5Webp from "@/assets/app-screens/screen-5-lg.webp";
 
 const styles = {
-    activeWrap: "max-sm:w-[225px] max-sm:h-[400px]",
-    unActiveWrap: "  max-sm:w-[172px] max-sm:h-[320px] ",
-    activeImg: "w-[100%] mx-auto  max-sm:w-[204px]",
+    activeWrap: "max-sm:w-[267px] max-sm:h-[470px]",
+    unActiveWrap: "  max-sm:w-[204px] max-sm:h-[380px] ",
+    activeImg: "w-[100%] mx-auto  max-sm:w-[254px]",
     unActiveImg: "w-[90%] mx-auto ",
 };
 
 const currentSlide = ref(0);
-const isLargerXS = useMediaQuery("(min-width: 640px)");
+const isLargerXS = useMediaQuery("(min-width: 700px)");
 
 const [container] = useKeenSlider<HTMLDivElement>(
     {
         slides: {
-            perView: isLargerXS.value ? 5 : 2,
+            perView: isLargerXS.value ? 5 : 1.6,
             spacing: 15,
             origin: "center",
         },

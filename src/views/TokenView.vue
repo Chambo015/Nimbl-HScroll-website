@@ -162,9 +162,8 @@ onMounted(() => {
                     >
                 </div>
             </div>
-            <picture> <source :srcset="tokenCoinsWebp" type="image/webp" /><img :src="tokenCoins" alt="tokenCoins" width="618" height="392" class="relative z-10 max-2xl:w-[500px] max-sm:w-[250px]" /></picture>
-            <picture> <source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="max-2xl:w-[680px] max-sm:w-[320px]" /></picture>
-            
+            <picture><source :srcset="tokenCoinsWebp" type="image/webp" /><img :src="tokenCoins" alt="tokenCoins" width="618" height="392" class="relative z-10 max-2xl:w-[500px] max-sm:w-[250px]" /></picture>
+            <picture><source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="max-2xl:w-[680px] max-sm:w-[320px]" /></picture> 
         </div>
         <picture>
             <source :srcset="lightImgWebp" type="image/webp" />

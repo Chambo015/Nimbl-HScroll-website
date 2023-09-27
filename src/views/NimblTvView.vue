@@ -4,6 +4,8 @@ import lightImg from "@/assets/light.png";
 import lightImgWebp from "@/assets/light.webp";
 import right_lg_planet from "@/assets/right_lg_planet.png";
 import right_lg_planetWebp from "@/assets/right_lg_planet.webp";
+import podium from "@/assets/podium.png";
+import podiumWebp from "@/assets/podium.webp";
 import HeroSliderApp from "@/components/HeroSliderApp.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
@@ -29,13 +31,6 @@ const planetsEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "stakes", target: sectionEl});
 
 const parallax = reactive(useParallax(sectionEl));
-const cardStyle = computed(() => {
-    if (props.ready || !isXS.value) return undefined
-    return ({
-        transition: ".3s ease-out all",
-        transform: `translate(${-(parallax.tilt * 5)}%, ${parallax.roll * 2}%) rotateX(${parallax.roll * 20}deg) rotateY(${parallax.tilt * 20}deg)`,
-    })
-});
 const layer0 = computed(() => ({
   transition: ".3s ease-out all",
   transform: `translateX(${parallax.tilt * 10}px) translateY(${parallax.roll * 10}px)`,
@@ -57,26 +52,24 @@ const layer4 = computed(() => ({
   transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px) rotate(-20deg)`,
 }))
 
-
 watchEffect(() => {
     if (props.ready) {
-        gsap.to(lightEl.value, {
-            autoAlpha: 1,
-            delay: 1.5,
-            duration: 1,
-        });
+        const tl = gsap.timeline();
 
-        gsap.to(sectionInnerEl.value, {
+        tl.to(sectionInnerEl.value, {
             scale: 1,
-            yPercent: 0,
-            top: 0,
+            yPercent: -60,
+            top: '50%',
             duration: 1,
             delay: 0.3,
         });
-        gsap.to(planetsEl.value, {
+        tl.to(lightEl.value, {
+            autoAlpha: 1,
+            duration: 1,
+        }, '+=0.5');
+        tl.to(planetsEl.value, {
             autoAlpha: 1,
             duration: 1.5,
-            delay: 1,
             ease: "expo.inOut",
         });
     }
@@ -122,13 +115,13 @@ onMounted(() => {
         if (height.value < 700) {
             // for Iphone SE
             gsap.set(sectionInnerEl.value, {
-                scale: 1.8,
+                scale: 1.5,
                 yPercent: -70,
                 top: "50%",
             });
         } else {
             gsap.set(sectionInnerEl.value, {
-                scale: 2,
+                scale: 1.8,
                 yPercent: -75,
                 top: "50%",
             });
@@ -143,7 +136,7 @@ onMounted(() => {
     }
 });
 
-function onClick() {
+/* function onClick() {
     // feature detect
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission()
@@ -156,13 +149,11 @@ function onClick() {
     } else {
       // handle regular non iOS 13+ devices
     }
-  }
+  } */
 </script>
 
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="relative w-full " :style="cardStyle">
-        <div ref="sectionInnerEl" class="w-full left-0 absolute will-change-transform">
-            <picture ref="lightEl" data="lightEl" class="opacity-0">
+    <section ref="sectionEl" @wheel="onWheel" class="relative w-full h-full max-sm:flex max-sm:items-center"><picture ref="lightEl" data="lightEl" class="opacity-0">
                 <source :srcset="lightImgWebp" type="image/webp" />
                 <img 
                     :src="lightImg"
@@ -170,6 +161,7 @@ function onClick() {
                     loading="lazy"
                     class="absolute top-[-1%] left-1/2 -translate-x-1/2 z-40 select-none pointer-events-none" />
             </picture>
+        <div ref="sectionInnerEl" class="w-full left-0 absolute will-change-transform ">
             <div ref="titleEl" data="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[40px]">
                 <div class="inline-flex flex-col">
                     <p
@@ -182,8 +174,9 @@ function onClick() {
                     </h1>
                 </div>
             </div>
-            <div ref="sliderEl" class="relative">
+            <div ref="sliderEl" class="relative after:absolute after:w-full after:h-[20%] after:bg-gradient-to-b after:to-[#0F0722] after:z-20 after:bottom-0 after:translate-y-full after:from-[#0f07221f]">
                 <HeroSliderApp data="slider_h_El" />
+                <picture><source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="max-2xl:w-[680px] max-sm:w-[320px] z-10 mx-auto absolute bottom-0 translate-y-full -translate-x-1/2 left-1/2" /></picture> 
             </div>
             <div
                 ref="buttonsEl"
@@ -213,7 +206,6 @@ function onClick() {
             <picture>
                 <source :srcset="right_lg_planetWebp" type="image/webp" />
                 <img
-                @click="onClick"
                     :style="layer0"
                     :src="right_lg_planet"
                     alt="right_lg_planet"
@@ -238,7 +230,7 @@ function onClick() {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
-    @apply text-center font-rfdewi inline-block bg-clip-text text-white text-[145px] max-sm:text-[50px] leading-none font-black uppercase -translate-x-2 -translate-y-7 max-sm:-translate-x-0 max-sm:-translate-y-6;
+    @apply text-center font-rfdewi inline-block bg-clip-text text-white text-[145px] max-sm:text-[55px] leading-none font-black uppercase -translate-x-2 -translate-y-7 max-sm:-translate-x-0 max-sm:-translate-y-6;
 }
 .main-text-layer {
     background-image: url("../assets/image1895.webp");

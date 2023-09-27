@@ -15,6 +15,8 @@ const isXS = useMediaQuery("(max-width: 640px)");
 const sectionEl = ref();
 const mainImgEl = ref();
 const contentEl = ref();
+const leftCardEl = ref();
+const rightCardEl = ref();
 
 const {onWheel} = useMouseWheel({toDownRoute: "teaser", toUpRoute: "moderation", target: sectionEl});
 
@@ -51,6 +53,28 @@ onMounted(() => {
         },
         "0",
     );
+    tl.from(
+      leftCardEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: 50,
+            rotate: 10,
+            ease: "expo.inOut",
+        },
+        "-=1"
+    );
+    tl.from(
+      rightCardEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -50,
+            rotate: -10,
+            ease: "expo.inOut",
+        },
+        "-=1"
+    );
 });
 </script>
 
@@ -68,8 +92,8 @@ onMounted(() => {
         </div>
         <div ref="mainImgEl" data="mainImgEl" class="relative [&>picture]:pointer-events-none [&>picture]:select-none">
           <picture><source :srcset="mobileImgWebp" type="image/webp" /><img :src="mobileImg" alt="mobileImg" class=" max-h-[744px] max-2xl:max-h-[100vh]  max-sm:w-[230px] max-sm:h-[380px] object-contain transition-all" /></picture>
-          <picture><source :srcset="swipeLeftWebp" type="image/webp" /><img :style="layer1"  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
-          <picture><source :srcset="swipeRightWebp" type="image/webp" /><img :style="layer0" :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>
+          <picture><source :srcset="swipeLeftWebp" type="image/webp" /><img ref="leftCardEl" data="leftCardEl" :style="layer1"  :src="swipeLeft" alt="swipeLeft" class="absolute top-[5%] -left-[40%]" /></picture>
+          <picture><source :srcset="swipeRightWebp" type="image/webp" /><img ref="rightCardEl" data="rightCardEl" :style="layer0" :src="swipeRight" alt="swipeLeft" class="absolute top-[5%] -right-[40%]" /></picture>
         </div>
       </div>
     </section>

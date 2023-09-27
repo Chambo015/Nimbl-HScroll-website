@@ -17,7 +17,7 @@ const contentEl = ref();
 const {onWheel} = useMouseWheel({toDownRoute: "gamification", toUpRoute: "swipe", target: sectionEl});
 
 onMounted(() => {
-    if(isXS.value) return
+    /* if(isXS.value) return */
     const tl = gsap.timeline();
 
     tl.from(mainImgEl.value, {
