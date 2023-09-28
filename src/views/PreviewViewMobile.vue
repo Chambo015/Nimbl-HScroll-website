@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {useDeviceOrientation, useParallax, useThrottleFn} from "@vueuse/core";
-import {computed, reactive, ref, watchEffect} from "vue";
+import {useParallax} from "@vueuse/core";
+import {computed, reactive, ref, onMounted} from "vue";
 import prevImgMobile from "@/assets/preview/mobile-intro-transperent.png";
 import prevImgMobileWebp from "@/assets/preview/mobile-intro-transperent.webp";
 import rightImg from "@/assets/preview/rightImg.png";
@@ -26,29 +26,47 @@ import smoke2Webp from "@/assets/preview/smoke2.webp";
 import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
 import {IconPlay} from "@/components/icons";
+import useStupidBrowser from "@/composables/useStupidBrowser";
 
 const sectionEl = ref();
 const parallax = reactive(useParallax(sectionEl));
-const layer0 = computed(() => ({
-    transition: ".3s ease-out transform",
-    transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
-}));
-const layer1 = computed(() => ({
-    transition: ".3s ease-out transform",
-    transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px)`,
-}));
-const layer2 = computed(() => ({
+const {isSafari} = useStupidBrowser();
+const layer0 = computed(() => {
+    if (isSafari.value) return undefined;
+    return {
+        transition: ".3s ease-out transform",
+        transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
+    };
+});
+const layer1 = computed(() => {
+    if (isSafari.value) return undefined;
+    return {
+        transition: ".3s ease-out transform",
+        transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px)`,
+    };
+});
+const layer2 = computed(() => isSafari.value ? undefined : ({
     transition: ".3s ease-out transform",
     transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px)`,
 }));
-const layerPeople = computed(() => ({
+const layerPeople = computed(() => isSafari.value ? undefined : ({
     transition: ".3s ease-out transform",
     transform: `translateX(${parallax.tilt * 20}px)`,
 }));
+
+const imgUploaded = ref(false);
+onMounted(() => {
+    setTimeout(() => {
+        imgUploaded.value = true;
+    }, 1500);
+});
 </script>
 
 <template>
-    <div ref="sectionEl" class="absolute left-0 top-0 right-0 bottom-0 z-20">
+    <div
+        ref="sectionEl"
+        class="absolute left-0 top-0 right-0 bottom-0 z-20 duration-1000"
+        :class="{'blur-2xl backdrop-blur-lg': !imgUploaded}">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
             <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover select-none"

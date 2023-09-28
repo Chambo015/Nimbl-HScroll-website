@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HeroButton from "@/components/HeroButton.vue";
 import lightImg from "@/assets/light.png";
 import lightImgWebp from "@/assets/light.webp";
 import right_lg_planet from "@/assets/right_lg_planet.png";
@@ -7,7 +6,6 @@ import right_lg_planetWebp from "@/assets/right_lg_planet.webp";
 import podium from "@/assets/podium.png";
 import podiumWebp from "@/assets/podium.webp";
 import HeroSliderApp from "@/components/HeroSliderApp.vue";
-import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import gsap from "gsap";
 import {computed, onMounted, reactive, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
@@ -66,12 +64,12 @@ watchEffect(() => {
         tl.to(lightEl.value, {
             autoAlpha: 1,
             duration: 1,
-        }, '+=0.5');
+        }, '+=0');
         tl.to(planetsEl.value, {
             autoAlpha: 1,
             duration: 1.5,
             ease: "expo.inOut",
-        });
+        }, '-=1');
     }
 });
 
@@ -174,11 +172,11 @@ onMounted(() => {
                     </h1>
                 </div>
             </div>
-            <div ref="sliderEl" class="relative after:absolute after:w-full after:h-[20%] after:bg-gradient-to-b after:to-[#0F0722] after:z-20 after:bottom-0 after:translate-y-full after:from-[#0f07221f]">
+            <div ref="sliderEl" class="relative ">
                 <HeroSliderApp data="slider_h_El" />
-                <picture><source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="max-2xl:w-[680px] max-sm:w-[320px] z-10 mx-auto absolute bottom-0 translate-y-full -translate-x-1/2 left-1/2" /></picture> 
+                <div class="hidden max-sm:block after:absolute after:w-full after:h-[20%] after:bg-gradient-to-b after:to-[#0F0722] after:z-20 after:bottom-0 after:translate-y-full after:from-[#0f07221f]"><picture><source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="w-full z-10 mx-auto absolute bottom-0 translate-y-[90%] -translate-x-1/2 left-1/2" /></picture> </div>
             </div>
-            <div
+           <!--  <div
                 ref="buttonsEl"
                 data="buttonsEl"
                 class="max-sm:hidden opacity-0 absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px] shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
@@ -191,7 +189,7 @@ onMounted(() => {
                 <HeroButton @click="$router.push({name: 'ai'})"
                     >DOWNLOAD APP<template #icon><IconFiveDots /></template
                 ></HeroButton>
-            </div>
+            </div> -->
         </div>
         <div ref="planetsEl" data="planetsEl" class="opacity-0">
             <div

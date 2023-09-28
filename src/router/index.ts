@@ -1,18 +1,18 @@
 import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 
 import NimblTvView from "@/views/NimblTvView.vue";
-import StakesView from "@/views/StakesView.vue";
-import AiView from "@/views/AiView.vue";
-import DataView from "@/views/DataView.vue";
-import GamificationView from "@/views/GamificationView.vue";
+// import StakesView from "@/views/StakesView.vue";
+// import AiView from "@/views/AiView.vue";
+// import DataView from "@/views/DataView.vue";
+// import GamificationView from "@/views/GamificationView.vue";
 /* import HandleView from "@/views/HandleView.vue"; */
-import ModerationView from "@/views/ModerationView.vue";
-import RoadmapView from "@/views/RoadmapView.vue";
+// import ModerationView from "@/views/ModerationView.vue";
+// import RoadmapView from "@/views/RoadmapView.vue";
 /* import SummarizeView from "@/views/SummarizeView.vue"; */
-import SwipeView from "@/views/SwipeView.vue";
-import TeaserView from "@/views/TeaserView.vue";
-import TokenizedView from "@/views/TokenizedView.vue";
-import TokenView from "@/views/TokenView.vue";
+// import SwipeView from "@/views/SwipeView.vue";
+// import TeaserView from "@/views/TeaserView.vue";
+// import TokenizedView from "@/views/TokenizedView.vue";
+// import TokenView from "@/views/TokenView.vue";
 /* import TransfersView from "@/views/TransfersView.vue"; */
 
 const routerArr = ['nimbltv', 'stakes', 'tokenized', 'data', 'moderation', 'swipe', 'teaser', 
@@ -35,22 +35,22 @@ const router = createRouter({
         {
             path: "/stakes",
             name: "stakes",
-            component: StakesView,
+            component: () => import('@/views/StakesView.vue'),
         },
         {
             path: "/ai",
             name: "ai",
-            component: AiView,
+            component: () => import('@/views/AiView.vue'),
         },
         {
             path: "/data",
             name: "data",
-            component: DataView,
+            component: () => import('@/views/DataView.vue'),
         },
         {
             path: "/gamification",
             name: "gamification",
-            component: GamificationView,
+            component: () => import('@/views/GamificationView.vue'),
         },
         /* {
             path: "/handle",
@@ -60,12 +60,12 @@ const router = createRouter({
         {
             path: "/moderation",
             name: "moderation",
-            component: ModerationView,
+            component: () => import('@/views/ModerationView.vue'),
         },
         {
             path: "/roadmap",
             name: "roadmap",
-            component: RoadmapView,
+            component: () => import('@/views/RoadmapView.vue'),
         },
         /* {
             path: "/summarize",
@@ -75,22 +75,22 @@ const router = createRouter({
         {
             path: "/swipe",
             name: "swipe",
-            component: SwipeView,
+            component: () => import('@/views/SwipeView.vue'),
         },
         {
             path: "/teaser",
             name: "teaser",
-            component: TeaserView,
+            component: () => import('@/views/TeaserView.vue'),
         },
         {
             path: "/tokenized",
             name: "tokenized",
-            component: TokenizedView,
+            component: () => import('@/views/TokenizedView.vue'),
         },
         {
             path: "/token",
             name: "token",
-            component: TokenView,
+            component: () => import('@/views/TokenView.vue'),
         },
         /* {
             path: "/transfers",

@@ -13,7 +13,8 @@ import ModalContacts from "./components/ModalContacts.vue";
 const ready = ref(false);
 const isModalOpen = ref(false);
 const router = useRouter();
-const isXS = useMediaQuery("(max-width: 640px)");
+const imgUploaded = ref(false)
+const isXS = useMediaQuery("(max-width: 700px)");
 
 function onLeavePreviewPage(el: any, done: any) {
     const clouds = el.querySelector(".smoke-clouds");
@@ -84,6 +85,9 @@ watchEffect(() => {
 
 onMounted(() => {
     router.replace({name: "nimbltv"});
+    setTimeout(() => {
+        imgUploaded.value = true
+    }, 1500)
 });
 </script>
 

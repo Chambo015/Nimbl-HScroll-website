@@ -33,7 +33,31 @@ const layer1 = computed(() => ({
 }))
 
 onMounted(() => {
-  if(isXS.value) return
+  if(isXS.value) {
+    const tl = gsap.timeline();
+    tl.from(
+      leftCardEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: 50,
+            rotate: 10,
+            ease: "expo.inOut",
+        }
+    );
+    tl.from(
+      rightCardEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            xPercent: -50,
+            rotate: -10,
+            ease: "expo.inOut",
+        },
+        "-=1.5"
+    );
+    return
+  }
     const tl = gsap.timeline();
 
     tl.from(mainImgEl.value, {
