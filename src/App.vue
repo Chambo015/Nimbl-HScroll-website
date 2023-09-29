@@ -9,7 +9,6 @@ import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
 import PreviewViewMobile from "./views/PreviewViewMobile.vue";
 import ModalContacts from "./components/ModalContacts.vue";
-import useCustomFullscreen from './composables/useCustomFullscreen';
 
 const ready = ref(false);
 const mainEl = ref()
@@ -17,8 +16,6 @@ const isModalOpen = ref(false);
 const router = useRouter();
 const imgUploaded = ref(false)
 const isXS = useMediaQuery("(max-width: 700px)");
-
-const {enterFullscreen} =  useCustomFullscreen(mainEl)
 
 function onLeavePreviewPage(el: any, done: any) {
     const clouds = el.querySelector(".smoke-clouds");
