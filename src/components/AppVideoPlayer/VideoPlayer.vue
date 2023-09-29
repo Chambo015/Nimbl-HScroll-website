@@ -10,7 +10,7 @@ import {
     IconVoice
 } from '@/components/icons';
 import type { AudioTrackType, SoundVolumeType } from '@/types';
-import { useCustomFullscreen } from '@/composables/useCustomFullscreen';
+import useCustomFullscreen from '@/composables/useCustomFullscreen';
 import type { UseMediaTextTrackSource } from '@vueuse/core';
 import poster from "@/assets/ai-launguages.webp";
 

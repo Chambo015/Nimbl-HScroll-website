@@ -54,7 +54,7 @@ onMounted(() => {
             rotate: -10,
             ease: "expo.inOut",
         },
-        "-=1.5"
+        "-=1"
     );
     return
   }
