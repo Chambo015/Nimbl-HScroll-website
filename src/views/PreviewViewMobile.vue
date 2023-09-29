@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {useDeviceOrientation, useThrottleFn} from "@vueuse/core";
-import {computed, watchEffect} from "vue";
+import {useParallax} from "@vueuse/core";
+import {computed, reactive, ref, onMounted} from "vue";
 import prevImgMobile from "@/assets/preview/mobile-intro-transperent.png";
 import prevImgMobileWebp from "@/assets/preview/mobile-intro-transperent.webp";
 import rightImg from "@/assets/preview/rightImg.png";
@@ -26,50 +26,55 @@ import smoke2Webp from "@/assets/preview/smoke2.webp";
 import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
 import {IconPlay} from "@/components/icons";
+import useStupidBrowser from "@/composables/useStupidBrowser";
 
-const {isSupported, alpha, beta, gamma} = useDeviceOrientation();
-
-let initAlpha: number, initBeta: number;
-
-const stopWatchAlpha = watchEffect(() => {
-    if (alpha.value && beta.value) {
-        initAlpha = alpha.value;
-        initBeta = beta.value;
-        stopWatchAlpha();
-    }
+const sectionEl = ref();
+const parallax = reactive(useParallax(sectionEl));
+const {isSafari} = useStupidBrowser();
+const layer0 = computed(() => {
+    if (isSafari.value) return undefined;
+    return {
+        transition: ".3s ease-out transform",
+        transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
+    };
 });
+const layer1 = computed(() => {
+    if (isSafari.value) return undefined;
+    return {
+        transition: ".3s ease-out transform",
+        transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px)`,
+    };
+});
+const layer2 = computed(() => isSafari.value ? undefined : ({
+    transition: ".3s ease-out transform",
+    transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px)`,
+}));
+const layerPeople = computed(() => isSafari.value ? undefined : ({
+    transition: ".3s ease-out transform",
+    transform: `translateX(${parallax.tilt * 20}px)`,
+}));
 
-/* const throttledAlpha = useThrottleFn(() => {
-    if (alpha.value) return alpha.value;
-}, 500);
-
-const throttledBeta = useThrottleFn(() => {
-    if (beta.value) return beta.value;
-}, 500); */
-
-const coords = computed(() => {
-    if (isSupported.value && alpha.value && beta.value) {
-        /*       const alphaValue = await throttledAlpha();
-        const betaValue = await throttledBeta(); */
-        /*     if (alphaValue && betaValue) { */
-        const x = (alpha.value - initAlpha) / 30;
-        const y = (beta.value - initBeta) / 20;
-        return {x: `${x}px`, y: `${y}px`};
-        /* } */
-    }
-    return {x: "0px", y: "0px"};
+const imgUploaded = ref(false);
+onMounted(() => {
+    setTimeout(() => {
+        imgUploaded.value = true;
+    }, 1500);
 });
 </script>
 
 <template>
-    <div class="absolute left-0 top-0 right-0 bottom-0 z-20">
+    <div
+        ref="sectionEl"
+        class="absolute left-0 top-0 right-0 bottom-0 z-20 duration-1000"
+        :class="{'blur-2xl backdrop-blur-lg': !imgUploaded}">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
-            <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover"
+            <img :src="prevImgMobile" alt="prevImgMobile" class="w-full h-full object-cover select-none"
         /></picture>
         <picture>
             <source :srcset="leftMiddleImgWebp" type="image/webp" />
             <img
+                :style="layer1"
                 :src="leftMiddleImg"
                 alt="leftMiddleImg"
                 class="w-[90px] h-[87px] absolute -left-[2%] top-1/2 z-[2] left_cube" />
@@ -77,6 +82,7 @@ const coords = computed(() => {
         <picture>
             <source :srcset="peopleImgWebp" type="image/webp" />
             <img
+                :style="layerPeople"
                 width="247"
                 height="176"
                 :src="peopleImg"
@@ -86,6 +92,7 @@ const coords = computed(() => {
         <picture>
             <source :srcset="rightImgWebp" type="image/webp" />
             <img
+                :style="layer2"
                 :src="rightImg"
                 alt="rightImg"
                 class="w-[97px] h-[64px] absolute right-[2%] top-[1%] z-[2] right_cube opacity-50" />
@@ -93,14 +100,15 @@ const coords = computed(() => {
         <picture>
             <source :srcset="imgPlayLeftWebp" type="image/webp" />
             <img
+                :style="layer2"
                 :src="imgPlayLeft"
                 alt="imgPlayLeft"
-                :style="{transform: `translate(${coords.x},${coords.y})`}"
                 class="w-[90px] h-[60px] absolute -left-[2%] top-[8%] z-[2] left_cube opacity-50" />
         </picture>
         <picture>
             <source :srcset="rightMiddleImgWebp" type="image/webp" />
             <img
+                :style="layer1"
                 :src="rightMiddleImg"
                 alt="rightMiddleImg"
                 class="w-[70px] h-[75px] absolute -right-[3%] top-1/2 z-[2] right_cube" />
@@ -108,6 +116,7 @@ const coords = computed(() => {
         <picture>
             <source :srcset="nearLeftImgWebp" type="image/webp" />
             <img
+                :style="layer0"
                 ref="container"
                 :src="nearLeftImg"
                 alt="nearLeftImg"
@@ -116,6 +125,7 @@ const coords = computed(() => {
         <picture>
             <source :srcset="nearRightWebp" type="image/webp" />
             <img
+                :style="layer0"
                 :src="nearRight"
                 alt="nearRight"
                 class="w-[132px] h-[128px] absolute -right-[6%] bottom-[4%] z-[2] right_cube" />
@@ -125,8 +135,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image1"
                     :src="smoke1" />
@@ -134,8 +144,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image2"
                     :src="smoke2" />
@@ -143,8 +153,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image4"
                     :src="smoke2" />
@@ -152,8 +162,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="smoke3Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image3"
                     :src="smoke3" />
@@ -161,7 +171,8 @@ const coords = computed(() => {
             <picture>
                 <source :srcset="centerSmokeWebp" type="image/webp" />
                 <img
-                width="950" height="444"
+                    width="950"
+                    height="444"
                     class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image7"
                     :src="centerSmoke"
@@ -169,7 +180,8 @@ const coords = computed(() => {
         </div>
         <div
             class="flex w-[170px] h-[170px] absolute z-10 rounded-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-bg-play-liner  opacity-75"></span>
+            <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-bg-play-liner opacity-75"></span>
             <div class="bg-bg-play-liner h-full w-full z-10 rounded-full">
                 <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             </div>

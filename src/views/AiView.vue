@@ -79,7 +79,7 @@ import {onMounted, ref} from "vue";
 import {video} from "@/video";
 import { useMediaQuery } from '@vueuse/core';
 
-const isXS = useMediaQuery("(max-width: 640px)");
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const sectionEl = ref();
 const leftVideoEl = ref();

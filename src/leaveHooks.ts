@@ -7,6 +7,7 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
         const buttonsEl = el.querySelector('[data="buttonsEl"]');
         const titleEl = el.querySelector('[data="titleEl"]');
         const lightEl = el.querySelector('[data="lightEl"]');
+        const planetsEl = el.querySelector('[data="planetsEl"]');
 
         tl.to(
             sliderEl,
@@ -46,6 +47,15 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
             },
             "0",
         );
+        tl.to(
+            planetsEl.children,
+            {
+                autoAlpha: 0.0,
+                duration: .8,
+                ease: "expo.inOut",
+            },
+            "0",
+        ); 
     },
     stakes: (el, done) => {
         const tl = gsap.timeline({onComplete: done});

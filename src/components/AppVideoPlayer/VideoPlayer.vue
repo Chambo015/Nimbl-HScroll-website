@@ -10,7 +10,7 @@ import {
     IconVoice
 } from '@/components/icons';
 import type { AudioTrackType, SoundVolumeType } from '@/types';
-import { useCustomFullscreen } from '@/composables/useCustomFullscreen';
+import useCustomFullscreen from '@/composables/useCustomFullscreen';
 import type { UseMediaTextTrackSource } from '@vueuse/core';
 import poster from "@/assets/ai-launguages.webp";
 
@@ -198,7 +198,7 @@ onMounted(() => {
               @mousemove="mousemoveHandler">
               <div class="relative h-full w-full overflow-hidden shadow">
                   <!-- crossorigin="anonymous" -->
-                  <video :autoplay="!lite" ref="videoEl" class="block w-full h-full bg-transparent" @click="playing = !playing" :poster="poster" />
+                  <video :autoplay="!lite" ref="videoEl" class="block w-full h-full bg-transparent object-cover" @click="playing = !playing" :poster="poster" />
                   <audio ref="audioEl"></audio>
                   <div
                       v-if="waiting"

@@ -58,7 +58,7 @@ onMounted(() => {
     <section ref="sectionEl" @wheel="onWheel" class="pt-44 max-sm:pt-7 max-sm:pb-7 flex flex-col justify-center max-sm:justify-start">
         <div ref="titleEl" data="titleEl" class="container">
             <h2
-                class="bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center max-2xl:text-4xl">
+                class=" bg-gradient-to-b from-white to-white/50 text-transparent bg-clip-text text-[50px] leading-none font-black uppercase font-rfdewi max-sm:text-2xl text-center max-2xl:text-4xl">
                 Introducing Stakes
             </h2>
             <p class="font-gilroy text-[28px] max-2xl:text-2xl leading-tight text-center mt-8 max-sm:text-base font-normal">

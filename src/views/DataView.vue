@@ -29,27 +29,27 @@
                         <img :src="personData" alt="imgBg" width="250" height="250" class="w-[250px] h-[250px] max-sm:w-[160px] max-sm:h-[160px]" />
                     </picture>
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-left-5 -top-5 transition-transform duration-75 max-sm:-left-3 max-sm:-top-3"
                         >Interests</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-right-10 top-0 transition-transform duration-[40ms] max-sm:-right-5 "
                         >Cookies</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-left-14 bottom-8 transition-transform duration-[50ms] max-sm:-left-7 max-sm:bottom-8"
                         >Data</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-left-1 -bottom-8 transition-transform duration-[60ms] max-sm:-left-0 max-sm:-bottom-5"
                         >Chats</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-right-10 bottom-0 transition-transform duration-[65ms]"
                         >History</span
                     >
@@ -62,27 +62,27 @@
                         <img :src="dataNimbl" alt="imgBg" width="312" height="203" class="w-[289px] h-[181px] max-sm:w-[200px] max-sm:h-[120px]" />
                     </picture>
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-left-5 -top-5 transition-transform duration-[35ms]"
                         >Content</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-right-5 -top-5 transition-transform duration-[45ms]"
                         >Posts</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-left-12 bottom-5 transition-transform duration-[55ms]"
                         >Likes</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-left-2 -bottom-10 transition-transform duration-[65ms]"
                         >Shares</span
                     >
                     <span
-                        :style="{transform: `translate(${coords.x},${coords.y})`}"
+                        :style="layer0"
                         class="-right-14 -bottom-5 transition-transform duration-[70ms]"
                         >Comments</span
                     >
@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, onUnmounted, computed, ref} from "vue";
+import {onMounted, onUnmounted, computed, ref, reactive} from "vue";
 import imgBg from "@/assets/db-bg.png";
 import imgBgWebp from "@/assets/db-bg.webp";
 import personData from "@/assets/person-data.png";
@@ -104,7 +104,7 @@ import IconChain from "@/components/DataView/IconChain.vue";
 import LocksCenter from "@/components/DataView/LocksCenter.vue";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
-import { useMediaQuery } from '@vueuse/core';
+import { useMediaQuery, useParallax } from '@vueuse/core';
 
 const isXS = useMediaQuery("(max-width: 640px)");
 
@@ -112,21 +112,11 @@ const sectionEl = ref();
 const mainImgEl = ref();
 const contentEl = ref();
 
-const X = ref();
-const Y = ref();
-
-const coords = computed(() => ({x: `${X.value * 35}px`, y: `${Y.value * 35}px`}));
-
-const mouseEventHandle = (e: any) => {
-    X.value = (e.clientX - window.innerWidth / 2) / window.innerWidth;
-    Y.value = (e.clientY - window.innerHeight / 2) / window.innerHeight;
-};
-onMounted(() => {
-    window.addEventListener("mousemove", mouseEventHandle);
-});
-onUnmounted(() => {
-    window.removeEventListener("mousemove", mouseEventHandle);
-});
+const parallax = reactive(useParallax(sectionEl));
+const layer0 = computed(() => ({
+  transition: ".3s ease-out all",
+  transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px)`,
+}))
 
 const {onWheel} = useMouseWheel({toDownRoute: "moderation", toUpRoute: "tokenized", target: sectionEl});
 

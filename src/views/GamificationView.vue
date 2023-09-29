@@ -28,133 +28,188 @@
                 No complex crypto ponzienomics, simply <span class="text-[#6529E0]">rewarding</span> our early creators
                 and users
             </p>
-            <picture class=" mt-auto  max-sm:w-[90%]"> <source :srcset="imgGroupWebp" type="image/webp" /><img loading="lazy" :src="imgGroup" alt="imgGroup" width="400" height="248" class="w-[500px] max-2xl:w-[350px] " /></picture>
-            <img
-                loading="lazy"
-                :src="creater1"
-                alt="creator1"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[20%] top-[10%] z-20" />
-            <img
-                loading="lazy"
-                :src="creater2"
-                alt="creator2"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[13%] top-[20%] z-20 max-sm:left-[5%] max-sm:top-[18%]" />
-            <img
-                loading="lazy"
-                :src="creater3"
-                alt="creator3"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[30%] top-[8%] z-20" />
-            <img
-                loading="lazy"
-                :src="creater4"
-                alt="creator4"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[10%] top-[38%] z-20 max-sm:left-[25%] max-sm:top-[15%]" />
-            <img
-                loading="lazy"
-                :src="creater5"
-                alt="creator5"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[17%] top-[40%] z-20 max-sm:left-[15%] max-sm:top-[16%]" />
-            <img
-                loading="lazy"
-                :src="creater6"
-                alt="creator6"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[22%] top-[50%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater7"
-                alt="creator7"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[10%] top-[60%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater8"
-                alt="creator8"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[16%] top-[65%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater9"
-                alt="creator9"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[25%] top-[72%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater10"
-                alt="creator10"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[25%] top-[72%] z-20 max-sm:right-[15%] max-sm:top-[15%]" />
-            <img
-                loading="lazy"
-                :src="creater11"
-                alt="creator11"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[15%] top-[60%] z-20 max-sm:right-[5%] max-sm:top-[18%]" />
-            <img
-                loading="lazy"
-                :src="creater12"
-                alt="creator12"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[22%] top-[56%] z-20 max-sm:right-[35%] max-sm:top-[16%]" />
-            <img
-                loading="lazy"
-                :src="creater13"
-                alt="creator13"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[8%] top-[50%] z-20 max-sm:right-[23%] max-sm:top-[18%]" />
-            <img
-                loading="lazy"
-                :src="creater14"
-                alt="creator14"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[25%] top-[10%] z-20" />
-            <img
-                loading="lazy"
-                :src="creater15"
-                alt="creator15"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[17%] top-[22%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater16"
-                alt="creator16"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[18%] top-[40%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater17"
-                alt="creator17"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[18%] top-[80%] z-20 max-sm:hidden" />
-            <img
-                loading="lazy"
-                :src="creater18"
-                alt="creator18"
-                class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[10%] top-[83%] z-20 max-sm:hidden" />
+            <picture class=" mt-auto  max-sm:w-[90%]"> <source :srcset="imgGroupWebp" type="image/webp" /><img loading="lazy" :src="imgGroup" alt="imgGroup" width="400" height="248" class="w-[500px] max-2xl:w-[450px] " /></picture>
+            <picture>
+                <source :srcset="creater1Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater1"
+                    alt="creator1"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[20%] top-[10%] z-20" />
+            </picture>
+            <picture>
+                <source :srcset="creater2Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater2"
+                    alt="creator2"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[13%] top-[20%] z-20 max-sm:left-[5%] max-sm:top-[18%]" />
+            </picture>
+            <picture>
+                <source :srcset="creater3Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater3"
+                    alt="creator3"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[30%] top-[8%] z-20" />
+            </picture>
+            <picture>
+                <source :srcset="creater4Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater4"
+                    alt="creator4"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[10%] top-[38%] z-20 max-sm:left-[25%] max-sm:top-[15%]" />
+            </picture>
+            <picture>
+                <source :srcset="creater5Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater5"
+                    alt="creator5"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[17%] top-[40%] z-20 max-sm:left-[15%] max-sm:top-[16%]" />
+            </picture>
+            <picture>
+                <source :srcset="creater6Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater6"
+                    alt="creator6"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[22%] top-[50%] z-20 max-sm:hidden" />
+            </picture>
+            <picture>
+                <source :srcset="creater7Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater7"
+                    alt="creator7"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[10%] top-[60%] z-20 max-sm:hidden" />
+            </picture>
+            <picture>
+                <source :srcset="creater8Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater8"
+                    alt="creator8"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[16%] top-[65%] z-20 max-sm:hidden" />
+            </picture>
+            <picture>
+                <source :srcset="creater9Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater9"
+                    alt="creator9"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute left-[25%] top-[72%] z-20 max-sm:hidden" />
+            </picture>
+            <picture>
+                <source :srcset="creater10Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater10"
+                    alt="creator10"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[25%] top-[72%] z-20 max-sm:right-[15%] max-sm:top-[15%]" />
+            </picture>
+            <picture>
+                <source :srcset="creater11Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater11"
+                    alt="creator11"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[15%] top-[60%] z-20 max-sm:right-[5%] max-sm:top-[18%]" />
+            </picture>
+            <picture>
+                <source :srcset="creater12Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater12"
+                    alt="creator12"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[22%] top-[56%] z-20 max-sm:right-[35%] max-sm:top-[16%]" />
+            </picture>
+            <picture>
+                <source :srcset="creater13Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater13"
+                    alt="creator13"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[8%] top-[50%] z-20 max-sm:right-[23%] max-sm:top-[18%]" />
+            </picture>
+           <picture>
+            <source :srcset="creater14Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater14"
+                    alt="creator14"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[25%] top-[10%] z-20" />
+           </picture>
+            <picture>
+                <source :srcset="creater15Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater15"
+                    alt="creator15"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[17%] top-[22%] z-20 max-sm:hidden" />
+            </picture>
+            <picture>
+                <source :srcset="creater16Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater16"
+                    alt="creator16"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[18%] top-[40%] z-20 max-sm:hidden" />
+            </picture>
+            <picture>
+                <source :srcset="creater17Webp" type="image/webp" />
+                <img :style="layer1"
+                    loading="lazy"
+                    :src="creater17"
+                    alt="creator17"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[18%] top-[80%] z-20 max-sm:hidden" />
+            </picture>
+           <picture>
+            <source :srcset="creater18Webp" type="image/webp" />
+                <img :style="layer0"
+                    loading="lazy"
+                    :src="creater18"
+                    alt="creator18"
+                    class="w-[80px] h-[80px] max-sm:w-[30px] max-sm:h-[30px] absolute right-[10%] top-[83%] z-20 max-sm:hidden" />
+           </picture>
         </div>
-        <picture>
+        <picture   ref="imgCoinRightEl" data="imgCoinRightEl" class=" absolute right-[20px] top-[40%] z-20 max-sm:-right-[10px] max-sm:top-[520px] ">
             <source :srcset="imgCoinWebp" type="image/webp" />
-            <img
-                ref="imgCoinRightEl" data="imgCoinRightEl"
+            <img :style="layer3"
+              
                 loading="lazy"
                 :src="imgCoin"
                 alt="imgCoin"
-                class="w-[136px] h-[136px] object-contain absolute right-[20px] top-[40%] z-20 max-sm:-right-[10px] max-sm:top-[520px] max-sm:w-[72px] max-sm:h-[72px]" />
+                class="w-[136px] h-[136px] object-contain  max-sm:w-[72px] max-sm:h-[72px]" />
         </picture>
-       <picture>
+       <picture ref="imgGlassRightEl" data="imgGlassRightEl" class="absolute right-[20px] bottom-[44px] z-20 max-sm:right-0 max-sm:-left-[20px] max-sm:top-[620px]">
         <source :srcset="imgGlassWebp" type="image/webp" />
             <img
-                ref="imgGlassRightEl" data="imgGlassRightEl"
+            :style="layer3"
                 loading="lazy"
                 :src="imgGlass"
                 alt="imgGlass"
-                class="w-[129px] h-[129px] object-contain absolute right-[20px] bottom-[44px] z-20 max-sm:w-[72px] max-sm:h-[72px] max-sm:right-0 max-sm:-left-[20px] max-sm:top-[620px]" />
+                class="w-[129px] h-[129px] object-contain  max-sm:w-[72px] max-sm:h-[72px] " />
        </picture>
-       <picture>
+       <picture ref="imgCoinLeftEl" data="imgCoinLeftEl" class="absolute left-[30px] bottom-[40px] z-20">
         <source :srcset="imgCoinWebp" type="image/webp" />
             <img
-                ref="imgCoinLeftEl" data="imgCoinLeftEl"
+            :style="layer2"
+                
                 loading="lazy"
                 :src="imgCoin"
                 alt="imgCoin"
-                class="w-[112px] h-[112px] object-contain absolute left-[30px] bottom-[40px] z-20 max-sm:hidden" />
+                class="w-[112px] h-[112px] object-contain  max-sm:hidden" />
        </picture>
-       <picture>
+       <picture ref="imgGlassLeftEl" data="imgGlassLeftEl" class="absolute left-[50px] top-[42%] z-20">
         <source :srcset="imgCircleWebp" type="image/webp" />
-            <img
-                ref="imgGlassLeftEl" data="imgGlassLeftEl"
+            <img :style="layer2"
+                
                 loading="lazy"
                 :src="imgCircle"
                 alt="imgCircle"
-                class="w-[75px] h-[75px] object-contain absolute left-[50px] top-[42%] z-20 max-sm:hidden" />
+                class="w-[75px] h-[75px] object-contain  max-sm:hidden" />
        </picture>
     </section>
 </template>
@@ -167,22 +222,40 @@ import imgGroupWebp from "@/assets/GroupCreators.webp";
 import {
     creater1,
     creater10,
+    creater10Webp,
     creater11,
+    creater11Webp,
     creater12,
+    creater12Webp,
     creater13,
+    creater13Webp,
     creater14,
+    creater14Webp,
     creater15,
+    creater15Webp,
     creater16,
+    creater16Webp,
     creater17,
+    creater17Webp,
     creater18,
+    creater18Webp,
+    creater1Webp,
     creater2,
+    creater2Webp,
     creater3,
+    creater3Webp,
     creater4,
+    creater4Webp,
     creater5,
+    creater5Webp,
     creater6,
+    creater6Webp,
     creater7,
+    creater7Webp,
     creater8,
+    creater8Webp,
     creater9,
+creater9Webp,
 } from "@/assets/creaters";
 import imgCoin from "@/assets/coin.png";
 import imgCoinWebp from "@/assets/coin.webp";
@@ -192,10 +265,10 @@ import imgCircle from "@/assets/circle.png";
 import imgCircleWebp from "@/assets/circle.webp";
 import gsap from "gsap";
 import useMouseWheel from "@/composables/mouseWheel";
-import {onMounted, ref} from "vue";
-import { useMediaQuery } from '@vueuse/core';
+import {onMounted, ref, reactive, computed} from "vue";
+import { useMediaQuery, useParallax } from '@vueuse/core';
 
-const isXS = useMediaQuery("(max-width: 640px)");
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const sectionEl = ref();
 const contentEl = ref();
@@ -206,6 +279,24 @@ const imgCoinLeftEl = ref();
 const imgGlassLeftEl = ref();
 
 const {onWheel} = useMouseWheel({toDownRoute: "ai", toUpRoute: "teaser", target: sectionEl});
+
+const parallax = reactive(useParallax(sectionEl));
+const layer0 = computed(() => ({
+  transition: ".3s ease-out all",
+  transform: `translateX(${parallax.tilt * 10}px) translateY(${parallax.roll * 10}px)`,
+}))
+const layer1 = computed(() => ({
+  transition: ".3s ease-out all",
+  transform: `translateX(${parallax.tilt * -10}px) translateY(${parallax.roll * -10}px)`,
+}))
+const layer2 = computed(() => ({
+  transition: ".3s ease-out all",
+  transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 40}px)`,
+}))
+const layer3 = computed(() => ({
+  transition: ".3s ease-out all",
+  transform: `translateX(${parallax.tilt * -20}px) translateY(${parallax.roll * -40}px)`,
+}))
 
 onMounted(() => {
     if(isXS.value) return

@@ -9,11 +9,16 @@ import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
 import PreviewViewMobile from "./views/PreviewViewMobile.vue";
 import ModalContacts from "./components/ModalContacts.vue";
+import useCustomFullscreen from './composables/useCustomFullscreen';
 
 const ready = ref(false);
+const mainEl = ref()
 const isModalOpen = ref(false);
 const router = useRouter();
-const isXS = useMediaQuery("(max-width: 640px)");
+const imgUploaded = ref(false)
+const isXS = useMediaQuery("(max-width: 700px)");
+
+const {enterFullscreen} =  useCustomFullscreen(mainEl)
 
 function onLeavePreviewPage(el: any, done: any) {
     const clouds = el.querySelector(".smoke-clouds");
@@ -28,7 +33,6 @@ function onLeavePreviewPage(el: any, done: any) {
             autoAlpha: 0.0,
             duration: 1,
         },
-        "",
     );
     tl.to(
         leftCubs,
@@ -68,6 +72,7 @@ function onLeavePreviewPage(el: any, done: any) {
 
 const handlePreviewClick = () => {
     ready.value = true;
+    document.body.requestFullscreen();
     router.replace({name: "nimbltv"});
 };
 
@@ -85,6 +90,9 @@ watchEffect(() => {
 
 onMounted(() => {
     router.replace({name: "nimbltv"});
+    setTimeout(() => {
+        imgUploaded.value = true
+    }, 1500)
 });
 </script>
 
@@ -93,8 +101,9 @@ onMounted(() => {
         v-if="!ready"
         type="button"
         class="left-0 right-0 top-0 bottom-0 z-30 absolute block"
-        @click="handlePreviewClick"></button>
-    <main class="absolute inset-0 overflow-hidden bg-[#0F0722]">
+        @click="handlePreviewClick"
+        ></button>
+    <main ref="mainEl" class="absolute inset-0 overflow-hidden bg-[#0F0722]">
         <!-- :class="{'z-30': changeZIndex}" -->
         <div class="absolute left-0 top-0 right-0 bottom-0 overflow-hidden">
             <router-view v-slot="{Component, route}">

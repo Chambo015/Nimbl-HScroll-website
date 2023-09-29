@@ -1,5 +1,5 @@
 <template>
-    <div  class="bg-transparent fixed left-0 top-0 w-screen h-screen z-20">
+    <div  class="bg-transparent fixed left-0 top-0 w-screen h-screen z-20 will-change-transform">
         <div class="bg-black/30 fixed inset-0 backdrop-blur-2xl duration-[2s] z-50 transition-opacity" :class="{'opacity-0': imgUploaded}"></div>
         <div class="absolute left-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="absolute right-0 inset-y-0 bg-black w-[30%]"></div>
@@ -76,7 +76,7 @@
                 :src="nearRight"
                 alt="nearRight"
                 :style="{transform: `translate(${coordsNear.x},${coordsNear.y})`}"
-                class="w-[293px] h-[283px] absolute right-[6%] bottom-[4%] z-[4] right_cube" />
+                class="w-[293px] h-[283px] absolute right-[6%] bottom-[4%] z-[4] right_cube will-change-transform" />
       </picture>
         <div
             class="absolute smoke-clouds w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.webp')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-60 transition-opacity">
@@ -129,7 +129,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref, onUnmounted} from "vue";
+import {computed, onMounted, ref} from "vue";
 import monitor from "@/assets/preview/first-block-nimbl-landing.png";
 import monitorWebp from "@/assets/preview/first-block-nimbl-landing.webp";
 import rightImg from "@/assets/preview/rightImg.png";
@@ -160,24 +160,13 @@ import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
 import {IconPlay} from '@/components/icons'
 import gsap from 'gsap'
+import useMouseAnimation from '@/composables/useMouseAnimation';
 
-const X = ref();
-const Y = ref();
+const {X, Y} = useMouseAnimation()
 
 const coords = computed(() => ({x: `${X.value * 40}px`, y: `${Y.value * 40}px`}));
 const coordsNear = computed(() => ({x: `${X.value * 150}px`, y: `${Y.value * 150}px`}));
 const coordsMiddle = computed(() => ({x: `${X.value * 85}px`, y: `${Y.value * 85}px`}));
-
-const mouseEventHandle = (e: any) => {
-    X.value = (e.clientX - window.innerWidth / 2) / window.innerWidth;
-    Y.value = (e.clientY - window.innerHeight /2) / window.innerHeight;
-}
-onMounted(() => {
-    window.addEventListener("mousemove", mouseEventHandle);
-});
-onUnmounted(() => {
-    window.removeEventListener("mousemove", mouseEventHandle)
-})
 
 // Animation container
 const container = ref()

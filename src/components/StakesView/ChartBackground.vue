@@ -161,27 +161,25 @@
             :href="userImg1Webp"
             width="100px"
             height="100px"
-            transform="translate(-50,-50)"
-            class="absolute -left-full -top-full ">
+            transform="translate(-50,-50)">
             <!--     <animateMotion dur="12s"  
       repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1" >
             <mpath xlink:href="#curve1" />
         </animateMotion> -->
         </image>
-        <image :href="userImg2Webp" width="100px" height="100px" transform="translate(-50,-50)">
-            <animateMotion dur="11s" repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1">
+        <image  id="user2" :href="userImg2Webp" width="100px" height="100px" transform="translate(-50,-50)">
+          <!--   <animateMotion dur="11s" repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1">
                 <mpath xlink:href="#curve2" />
-            </animateMotion>
+            </animateMotion> -->
         </image>
-        <image
+        <image  id="user3"
             :href="userImg3Webp"
             width="100px"
             height="100px"
-            transform="translate(-50,-50)"
-            class="absolute -left-full -top-full">
-            <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1">
+            transform="translate(-50,-50)">
+            <!-- <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1">
                 <mpath xlink:href="#curve3" />
-            </animateMotion>
+            </animateMotion> -->
         </image>
         <defs>
             <filter
@@ -517,6 +515,7 @@ import userImg1Webp from "@/assets/chart-user1.webp";
 import userImg2Webp from "@/assets/chart-user2.webp";
 import userImg3Webp from "@/assets/chart-user3.webp";
 import {gsap} from "gsap";
+import { SlowMo } from 'gsap/EasePack';
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import {onMounted} from "vue";
 
@@ -524,13 +523,35 @@ gsap.registerPlugin(MotionPathPlugin);
 
 onMounted(() => {
     gsap.to("#user1", {
-        duration: 12,
+        duration: 15,
         repeat: -1,
-        ease: "power1.inOut",
+        ease: SlowMo.ease.config(0.7, 0.3, false),
        "will-change": 'transform',
         motionPath: {
             path: "#curve1",
             align: "#curve1",
+            alignOrigin: [0.5, 0.5],
+        },
+    });
+    gsap.to("#user2", {
+        duration: 11,
+        repeat: -1,
+        ease: SlowMo.ease.config(0.7, 0.3, false),
+       "will-change": 'transform',
+        motionPath: {
+            path: "#curve2",
+            align: "#curve2",
+            alignOrigin: [0.5, 0.5],
+        },
+    });
+    gsap.to("#user3", {
+        duration: 12,
+        repeat: -1,
+        ease: SlowMo.ease.config(0.7, 0.5, false),
+       "will-change": 'transform',
+        motionPath: {
+            path: "#curve3",
+            align: "#curve3",
             alignOrigin: [0.5, 0.5],
         },
     });
