@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { leaveHooks} from '@/leaveHooks'
+import { leaveHooks } from '@/leaveHooks'
 import { useMediaQuery } from '@vueuse/core';
 import type { PropType} from 'vue'
 import  { computed} from 'vue'
@@ -24,11 +24,9 @@ const onLeaveHook = computed(() => {
 
 <style scoped>
 :global(.fade-enter-active) {
-    transition: all 0s ease-out;
     position: absolute !important;
 } 
 :global(.fade-leave-active ){
-    transition: all 0s ease-out;
     position: absolute !important;
 } 
 

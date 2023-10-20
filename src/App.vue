@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {watchEffect, onMounted, ref} from "vue";
+import { onMounted, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
-import gsap from "gsap";
+import {onLeavePreviewPage} from '@/leaveHooks'
 import {useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
@@ -17,56 +17,6 @@ const router = useRouter();
 const imgUploaded = ref(false)
 const isXS = useMediaQuery("(max-width: 700px)");
 
-function onLeavePreviewPage(el: any, done: any) {
-    const clouds = el.querySelector(".smoke-clouds");
-    const leftCubs = el.querySelectorAll("&>.left_cube");
-    const rightCubs = el.querySelectorAll("&>.right_cube");
-
-    const tl = gsap.timeline({onComplete: done});
-
-    tl.to(
-        clouds,
-        {
-            autoAlpha: 0.0,
-            duration: 1,
-        },
-    );
-    tl.to(
-        leftCubs,
-        {
-            duration: 0.6,
-            xPercent: -100,
-            scale: 1.5,
-            filter: "blur(20px)",
-            opacity: 0,
-            stagger: 0,
-        },
-        "+0.4",
-    );
-    tl.to(
-        rightCubs,
-        {
-            duration: 0.6,
-            xPercent: 100,
-            scale: 1.5,
-            filter: "blur(20px)",
-            opacity: 0,
-            stagger: 0,
-        },
-        "+0.4",
-    );
-    tl.to(
-        el,
-        {
-            scale: 2,
-            opacity: 0,
-            ease: "expo.inOut",
-            duration: 1,
-        },
-        "0",
-    );
-}
-
 const handlePreviewClick = () => {
     ready.value = true;
     document.body.requestFullscreen();
@@ -76,13 +26,6 @@ const handlePreviewClick = () => {
 onKeyStroke("Enter", (e) => {
     e.preventDefault();
     handlePreviewClick();
-});
-
-const changeZIndex = ref(false);
-watchEffect(() => {
-    if (ready.value) {
-        setTimeout(() => (changeZIndex.value = true), 1000);
-    }
 });
 
 onMounted(() => {
@@ -101,7 +44,6 @@ onMounted(() => {
         @click="handlePreviewClick"
         ></button>
     <main ref="mainEl" class="absolute inset-0 overflow-hidden bg-[#0F0722]">
-        <!-- :class="{'z-30': changeZIndex}" -->
         <div class="absolute left-0 top-0 right-0 bottom-0 overflow-hidden">
             <router-view v-slot="{Component, route}">
                 <TransitionLeavePage :to-meta="route.meta">
@@ -111,17 +53,19 @@ onMounted(() => {
         </div>
         <AppJoystick @click-bottom="isModalOpen = !isModalOpen" />
         <NavigationApp />
-
+        <!-- Preview for Desktop  -->
         <template v-if="!isXS">
             <Transition @leave="onLeavePreviewPage" :css="false" mode="in-out">
                 <PreviewView v-if="!ready" />
             </Transition>
         </template>
+        <!-- Preview for Mobile -->
         <template v-if="isXS">
             <Transition name="prev-mob" mode="in-out">
                 <PreviewViewMobile v-if="!ready" />
             </Transition>
         </template>
+        <!-- Modal Contact -->
         <Transition
             enter-active-class="transition-all"
             leave-active-class="transition-all"

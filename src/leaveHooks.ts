@@ -511,4 +511,55 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
             "0",
         );
     },
+    
 };
+
+export function onLeavePreviewPage(el: any, done: any) {
+    const clouds = el.querySelector(".smoke-clouds");
+    const leftCubs = el.querySelectorAll("&>.left_cube");
+    const rightCubs = el.querySelectorAll("&>.right_cube");
+
+    const tl = gsap.timeline({onComplete: done});
+
+    tl.to(
+        clouds,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+        },
+    );
+    tl.to(
+        leftCubs,
+        {
+            duration: 0.6,
+            xPercent: -100,
+            scale: 1.5,
+            filter: "blur(20px)",
+            opacity: 0,
+            stagger: 0,
+        },
+        "+0.4",
+    );
+    tl.to(
+        rightCubs,
+        {
+            duration: 0.6,
+            xPercent: 100,
+            scale: 1.5,
+            filter: "blur(20px)",
+            opacity: 0,
+            stagger: 0,
+        },
+        "+0.4",
+    );
+    tl.to(
+        el,
+        {
+            scale: 2,
+            opacity: 0,
+            ease: "expo.inOut",
+            duration: 1,
+        },
+        "0",
+    );
+}
