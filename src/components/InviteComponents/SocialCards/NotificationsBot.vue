@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_card relative font-rfdewi text-xl leading-tight max-w-[250px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all">
+  <div class="bg_card relative font-Rollbox font-bold text-xl leading-tight max-w-[250px] p-3  cursor-pointer rounded-md hover:rounded-none transition-all">
     <p class="uppercase relative z-10 text_arrow">Notifications Bot</p>
     <img :src="notifications" alt="notifications" width="78" height="77" class="absolute right-0 bottom-0 pointer-events-none">
   </div>

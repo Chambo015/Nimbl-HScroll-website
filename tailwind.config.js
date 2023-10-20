@@ -18,11 +18,17 @@ export default {
                 gilroy: ["Gilroy", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
                 univers: ["Univers", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
                 TTOctos: ["TTOctosquares", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
+                Rollbox: ["Rollbox", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
+            },
+            dropShadow: {
+                icon: "0px 0px 2px #ffffff",
             },
             backgroundImage: {
                 "btn-bg-liner": "linear-gradient(271deg, #0D0C11 2.43%, #46387A 97.57%)",
                 "bg-play-liner": "linear-gradient(230deg, rgba(232, 0, 255, 1) 9.01%, rgba(7, 104, 214, 1) 85.51%)",
                 "bg-planet-liner": "radial-gradient(90.3% 106.3% at 91.68% 87.6%, rgba(109, 147, 173, 0.87) 0%, #101417 80.6%, #AB78FE 92.89%, #FFF 100%)",
+                "gradient-header-secondary":
+                    "radial-gradient(443.81% 434.72% at 322.31% -217.78%, #6F359C 0%, #01060C 100%)",
             },
         },
         container: {

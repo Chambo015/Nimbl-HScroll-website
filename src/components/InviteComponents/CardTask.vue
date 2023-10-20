@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="bg_open flex-grow w-1/4 flex items-center justify-center">
-            <p class="font-tt-octosquares text-black text-2xl text-center">OPEN</p>
+            <p class="font-Rollbox font-bold text-black text-3xl text-center">OPEN</p>
         </div>
     </div>
 </template>

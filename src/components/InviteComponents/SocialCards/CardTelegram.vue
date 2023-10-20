@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_card relative font-rfdewi text-xl leading-tight max-w-[250px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all">
+  <div class="bg_card relative font-Rollbox text-xl leading-tight max-w-[250px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all">
     <p class="uppercase relative z-10 text_arrow">telegram</p>
     <IconTelegramBlue class="absolute right-3 bottom-2" />
   </div>

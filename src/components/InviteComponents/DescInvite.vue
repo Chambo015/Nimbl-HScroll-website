@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#1B1C20] flex gap-3 rounded-lg py-3 px-3">
+  <div class="bg-[#1B1C20] flex gap-3 rounded-lg py-3 px-3 justify-around">
     <div class="flex items-center gap-4">
       <p class="token-gradient-text font-rfdewi font-black text-[48px] leading-none uppercase">3X</p>
       <div class="font-tt-octosquares uppercase"><p class="text-[#BF51F7] text-base leading-none">multiplier</p><p class="leading-tight mt-1 text-sm">First 1.000 invites</p>

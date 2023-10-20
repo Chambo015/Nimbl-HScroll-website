@@ -20,7 +20,6 @@ const toggleOpenMenu = () => {
 };
 const closeMenu = () => {
     isOpenMenu.value = false;
-    showTwitterPost.value = false
 }
 
 </script>
@@ -28,7 +27,7 @@ const closeMenu = () => {
 <template>
     <div
         @mouseleave="closeMenu"
-        class="absolute right-[50px] max-sm:right-5 bottom-[160px] max-sm:bottom-[100px] opacity-50 hover:opacity-100 transition-opacity z-20">
+        class="absolute right-[50px] max-sm:right-5 bottom-[160px] max-sm:bottom-[100px] opacity-50 hover:opacity-100 transition-opacity z-20" :class="{'!opacity-100': showTwitterPost}">
         <button @click="toggleOpenMenu" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px] relative z-50">
             <CenterJoystick v-if="!isInvitePage" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px]" />
             <CenterJoystickTwitter

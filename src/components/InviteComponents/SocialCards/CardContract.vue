@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_card relative font-rfdewi text-xl leading-tight max-w-[250px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all">
+  <div class="bg_card relative font-Rollbox text-xl leading-tight max-w-[250px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all">
     <p class="uppercase relative z-10 text_arrow">Contract</p>
     <img :src="contract" alt="contract" width="118" height="72" class="absolute right-0 bottom-0 pointer-events-none mix-blend-lighten">
   </div>
