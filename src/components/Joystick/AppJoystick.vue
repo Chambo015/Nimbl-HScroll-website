@@ -7,11 +7,13 @@ import TopJoystick from './TopJoystick.vue';
 import CenterJoystickTwitter from './CenterJoystickTwitter.vue';
 import { useRoute } from 'vue-router';
 import TweetContainer from './TweetContainer.vue';
+import { onClickOutside } from '@vueuse/core'
 
 
 defineEmits(['clickBottom'])
 const route = useRoute()
 
+const target = ref(null)
 const isInvitePage = computed(() => route.name === 'invite')
 const isOpenMenu = ref(false)
 const showTwitterPost = ref(false)
@@ -21,11 +23,16 @@ const toggleOpenMenu = () => {
 const closeMenu = () => {
     isOpenMenu.value = false;
 }
+onClickOutside(target, () => {
+    isOpenMenu.value = false;
+    showTwitterPost.value = false;
+})
 
 </script>
 
 <template>
     <div
+        ref="target"
         @mouseleave="closeMenu"
         class="absolute right-[50px] max-sm:right-5 bottom-[160px] max-sm:bottom-[100px] opacity-50 hover:opacity-100 transition-opacity z-20" :class="{'!opacity-100': showTwitterPost}">
         <button @click="toggleOpenMenu" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px] relative z-50">
@@ -59,7 +66,7 @@ const closeMenu = () => {
             :class="[isOpenMenu ? ' translate-x-0  hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-x-1/2 hidden']">
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
-        <div v-if="showTwitterPost" class="absolute top-0 -translate-x-1/2 -translate-y-full"><TweetContainer /></div>
+        <div v-if="showTwitterPost" class="absolute top-0 -translate-x-2/3 -translate-y-full w-[500px]"><TweetContainer /></div>
     </div>
 </template>
 

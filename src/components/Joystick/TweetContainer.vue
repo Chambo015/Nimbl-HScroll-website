@@ -1,8 +1,8 @@
 <template>
     <div>
-        <Tweet tweet-id="1702230452373745826" theme="dark">
+        <Tweet tweet-id="1702230452373745826" theme="dark" :width="500">
             <template v-slot:loading>
-                <span>Loading...</span>
+                <div class="w-[500px] h-[590px] bg-[#15202b] flex items-center justify-center rounded-lg"><span>Loading...</span></div>
             </template>
         </Tweet>
     </div>

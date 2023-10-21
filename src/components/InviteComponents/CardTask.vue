@@ -1,6 +1,6 @@
 <template>
     <div
-        class="h-[110xp] flex shadow-none transition-all hover:-translate-y-1 duration-500 hover:shadow-blue-900 rounded-r-3xl hover:shadow-lg rounded-l-md cursor-pointer">
+        class="h-[110xp] flex rounded-r-3xl  rounded-l-md cursor-pointer">
         <div class="flex-grow w-1/4 flex-shrink-0 rounded-l-md overflow-hidden h-full">
             <img src="@/assets/ai-launguages.webp" alt="" class="object-cover w-full h-full" />
         </div>

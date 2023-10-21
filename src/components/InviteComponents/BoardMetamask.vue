@@ -2,15 +2,15 @@
     <div
         class="card_metamask min-h-[350px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
-        <div v-if="user" class="w-full h-full py-4 px-8">
+        <div v-if="user" class="w-full h-full py-4 px-8 ">
             <div class="flex relative z-30">
                 <Menu as="div" class="relative inline-block text-left">
                     <MenuButton
                         class="flex font-tt-octosquares font-medium items-center h-[60px] px-5 gap-5 bg-gradient-header-secondary"
                         ><IconWallet /> {{ userWallet }}</MenuButton
                     >
-                    <MenuItems class="absolute left-0 flex flex-col bg-gradient-header-secondary mt-2 p-2 w-full">
-                        <MenuItem v-slot="{active}">
+                    <MenuItems class="absolute left-0 flex flex-col bg-gradient-header-secondary mt-2 p-2 ">
+                        <MenuItem>
                             <a class="cursor-pointer"> Logout </a>
                         </MenuItem>
                     </MenuItems>
@@ -33,10 +33,37 @@
                     This is your custom referral link. Use it to invite others to sign up for Nimbl.
                 </p>
             </div>
-            <div class="flex relative z-20 items-center mt-5">
-                <div class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center">
-                    <input type="text" disabled  :value="inviteLink" class="bg-transparent text-white select-text w-[200px]" />
-                    <button @click="copy(inviteLink)" title="Copied" class="btn_copy relative"><img :src="copyImg" alt="copyImg" width="24" height="24"></button>
+            <div class="flex relative z-20 items-center mt-5 gap-5">
+                <div class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow">
+                    <input
+                        type="text"
+                        disabled
+                        :value="inviteLink"
+                        class="bg-transparent text-white select-text flex-grow" />
+                    <button
+                        @click="copy(inviteLink)"
+                        title="Copied"
+                        class="btn_copy relative w-[24px] h-[24px] flex-shrink-0">
+                        <img :src="copyImg" alt="copyImg" width="24" height="24" />
+                    </button>
+                </div>
+
+                <button class="btn_share flex-grow justify-center flex h-[42px] items-center px-4">
+                    <p class="uppercase font-Rollbox font-bold text-black text-lg !leading-none flex gap-4">
+                        Share Link <IconShareLink />
+                    </p>
+                </button>
+            </div>
+            <div
+                class="font-Rollbox text-white uppercase flex items-center justify-around h-[85px] mt-[40px] user_stats relative"
+                :style="{'--bg': `url(${user_stat_bg})`}">
+                <div class="flex flex-col items-center gap-2 relative z-20">
+                    <p>units</p>
+                    <p class="font-extrabold text-[40px] leading-none">604</p>
+                </div>
+                <div class="flex flex-col items-center gap-2 relative z-20">
+                    <p>invites</p>
+                    <p class="font-extrabold text-[40px] leading-none">200</p>
                 </div>
             </div>
         </div>
@@ -52,16 +79,17 @@ import BtnMetamaskConnect from "@/components/InviteComponents/BtnMetamaskConnect
 import IconWallet from "@/components/icons/IconWallet.vue";
 import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
+import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import copyImg from "@/assets/invite/copy.png";
 import useMetamask from "@/composables/useMetamask";
 import {useClipboard, useStorage} from "@vueuse/core";
 import {computed, onMounted, ref} from "vue";
-
+import IconShareLink from "../icons/IconShareLink.vue";
 
 const {handleAuth} = useMetamask();
 
 const user = ref<string | null>();
-const inviteLink = ref('https://nimbl.tv/id1335222222222222222222222')
+const inviteLink = ref("https://nimbl.tv/id1335222222222222222222222");
 
 const userWallet = computed(() => (user.value ? user.value.slice(0, 10) + "..." : null));
 const loginMetamask = async () => {
@@ -69,7 +97,7 @@ const loginMetamask = async () => {
     useStorage("metamask-user", res, sessionStorage);
     user.value = res;
 };
-const { copy, copied } = useClipboard()
+const {copy, copied} = useClipboard();
 onMounted(() => {
     const storageUser = useStorage("metamask-user", null, sessionStorage);
     user.value = storageUser.value;
@@ -92,12 +120,28 @@ onMounted(() => {
 }
 
 .btn_copy:active:after {
-    content:attr(title);
-    padding:5px;
-    border:1px solid #ccc;
-    top:5px;
+    content: attr(title);
+    padding: 5px;
+    border: 1px solid #ccc;
+    top: 5px;
     position: absolute;
-    left:105%;
+    left: 105%;
     background: black;
+}
+
+.btn_share {
+    background-image: linear-gradient(180deg, #b0731a -9.01%, #d0a530 22.91%, #f2d14e 63.49%);
+}
+
+.user_stats::before {
+    content: "";
+    background-image: var(--bg);
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0.6;
+    z-index: 1;
+    mix-blend-mode: screen;
 }
 </style>
