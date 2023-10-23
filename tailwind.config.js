@@ -14,7 +14,7 @@ export default {
         extend: {
             fontFamily: {
                 rfdewi: ["RFDewi", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
-                "tt-octosquares": ["TT Octosquares", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
+                "tt-octosquares": ["TTOctosquares", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
                 gilroy: ["Gilroy", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
                 univers: ["Univers", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],
                 TTOctos: ["TTOctosquares", "Inter", "-apple-system", "Helvetica Neue", "sans-serif"],

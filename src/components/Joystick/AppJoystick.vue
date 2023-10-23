@@ -66,7 +66,7 @@ onClickOutside(target, () => {
             :class="[isOpenMenu ? ' translate-x-0  hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-x-1/2 hidden']">
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
-        <div v-if="showTwitterPost" class="absolute top-0 -translate-x-2/3 -translate-y-full w-[500px]"><TweetContainer /></div>
+        <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full  z-[9999]"><TweetContainer /></div>
     </div>
 </template>
 

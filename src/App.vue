@@ -3,7 +3,7 @@ import { onMounted, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
 import {onLeavePreviewPage} from '@/leaveHooks'
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
@@ -14,6 +14,7 @@ const ready = ref(false);
 const mainEl = ref()
 const isModalOpen = ref(false);
 const router = useRouter();
+const route = useRoute();
 const imgUploaded = ref(false)
 const isXS = useMediaQuery("(max-width: 700px)");
 
@@ -28,12 +29,17 @@ onKeyStroke("Enter", (e) => {
     handlePreviewClick();
 });
 
-onMounted(() => {
+onMounted( async () => {
+    await router.isReady()
+   if(route.name === 'invite') {
+    ready.value = true;
+    return
+   }
     router.replace({name: "nimbltv"});
     setTimeout(() => {
         imgUploaded.value = true
     }, 1500)
-});
+})
 </script>
 
 <template>

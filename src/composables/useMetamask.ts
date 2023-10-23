@@ -50,6 +50,7 @@
                 }
             } else {
                 console.error("Ethereum wallet not detected");
+                throw new Error('Ethereum wallet not detected')
             }
         };
     
@@ -69,16 +70,17 @@
         
                 const {message} = await requestMessage(account, chain);
                 const signature = await signer.signMessage(message);
-                const {user} = await verifyMessage(message, signature);
+                const res = await verifyMessage(message, signature);
                 
-                if (user) {
-                    return user
+                if (res.user) {
+                    return res 
                 } else {
                     alert("authentication error");
                 }
-            } catch (error) {
+            } catch (e) {
                 alert("authentication error");
-                console.log("authentication error", error)
+                console.log("authentication error", e)
+                throw new Error((e as Error).message)
             }
            
         };

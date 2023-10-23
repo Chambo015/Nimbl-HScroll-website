@@ -1,6 +1,6 @@
 <template>
-  <div class="h-full w-full overflow-y-auto pr-5">
-    <div class="grid grid-cols-2 gap-8">
+  <div class="h-full w-full overflow-y-auto pr-5 max-md:px-3">
+    <div class="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-5">
       <CardTask />
       <CardTask />
       <CardTask />

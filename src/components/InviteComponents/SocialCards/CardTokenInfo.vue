@@ -1,17 +1,18 @@
 <template>
-  <div class="bg_card relative font-Rollbox text-xl max-md:text-sm leading-tight max-w-[250px] min-h-[75px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all">
-    <p class="uppercase relative z-10 text_arrow">telegram <br class="hidden max-md:inline" /></p>
-    <IconTelegramBlue class="absolute right-3 bottom-2 max-md:w-[33px] max-md:h-[33px]" />
+  <div class="bg_card relative font-Rollbox text-xl max-md:text-sm isolate leading-tight min-h-[75px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all flex-grow">
+    <p class="uppercase relative z-10 text_arrow">Token info <br class="hidden max-md:inline" /></p>
+    <img :src="tokenInfo" alt="contract" width="95" height="64" class="absolute right-0 bottom-0 pointer-events-none max-md:w-[90px]">
+    <div class="absolute inset-x-0 inset-y-0 bg-black/90 z-50"><p class="uppercase z-10 absolute text-center top-1/2 -translate-y-1/2 w-full">COMING SOON...</p></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import IconTelegramBlue from '@/components/icons/IconTelegramBlue.vue';
+import tokenInfo from '@/assets/invite/tokenInfo.webp'
 </script>
 
 <style scoped>
 .bg_card {
-  border: 1px solid #7351C8;
+  /* border: 1px solid #7351C8; */
   background: linear-gradient(271deg, #0D0C11 2.43%, #46387A 97.57%);
 }
 .text_arrow::after {

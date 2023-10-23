@@ -1,24 +1,24 @@
 <template>
-  <div class="bg-[#1B1C20] flex gap-3 rounded-lg py-3 px-3 justify-around">
-    <div class="flex items-center gap-4">
+  <div class="bg-[#1B1C20] max-md:bg-transparent flex max-md:flex-col gap-3  rounded-lg py-3 px-3 max-md:px-0 justify-around">
+    <div class="flex items-center gap-4 max-md:bg-[#333333] max-md:justify-center max-md:py-2">
       <p class="token-gradient-text font-rfdewi font-black text-[48px] leading-none uppercase">3X</p>
       <div class="font-tt-octosquares uppercase"><p class="text-[#BF51F7] text-base leading-none">multiplier</p><p class="leading-tight mt-1 text-sm">First 1.000 invites</p>
       </div>
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 max-md:bg-[#333333] max-md:justify-center max-md:py-2">
       <p class="token-gradient-text font-rfdewi font-black text-[48px] leading-none uppercase">2X</p>
       <div class="font-tt-octosquares uppercase"><p class="text-[#BF51F7] text-base leading-none">multiplier</p><p class="leading-tight mt-1 text-sm">First 2.000 invites</p>
       </div>
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 max-md:bg-[#333333] max-md:justify-center max-md:py-2">
       <p class="token-gradient-text font-rfdewi font-black text-[48px] leading-none uppercase">1.5X</p>
       <div class="font-tt-octosquares uppercase"><p class="text-[#BF51F7] text-base leading-none">multiplier</p><p class="leading-tight mt-1 text-sm">First 10.000 invites</p>
       </div>
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 max-md:bg-[#333333] max-md:justify-center max-md:py-2">
       <p class="token-gradient-text font-rfdewi font-black text-[48px] leading-none uppercase">1.2X</p>
       <div class="font-tt-octosquares uppercase"><p class="text-[#BF51F7] text-base leading-none">multiplier</p><p class="leading-tight mt-1 text-sm">First 20.000 invites</p>
       </div>
