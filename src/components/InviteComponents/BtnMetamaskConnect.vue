@@ -5,7 +5,7 @@
         <iconMetamask />
       </div>
       <div class="px-5 bg_text flex items-center">
-        <p class="font-tt-octosquares uppercase font-medium text-2xl leading-none">connect metamask</p>
+        <p class="font-tt-octosquares uppercase font-medium text-2xl leading-none max-md:text-lg">connect metamask</p>
       </div>
     </div>
   </button>

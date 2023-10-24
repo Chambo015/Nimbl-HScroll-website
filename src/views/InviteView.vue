@@ -20,7 +20,7 @@
             </div>
         </div>
     </main>
-    <main v-else class="w-full flex flex-col h-full border-b overflow-x-hidden">
+    <main v-else class="w-full flex flex-col h-full overflow-x-hidden">
         <div class="font-Rollbox font-bold flex justify-between border-b border-[rgba(51,51,51,0.50)]">
             <button
                 class="px-2 py-2 text-center flex-grow flex-shrink-0 border-b-2 border-transparent rounded-md"
@@ -43,13 +43,13 @@
         </div>
         <div v-if="activeMobileTab === 'invite'" class="mt-2 overflow-y-auto">
             <BoardMetamask />
-            <div class="grid grid-cols-2 mt-4 px-5 gap-3">
+            <div class="grid grid-cols-2 mt-5 px-5 gap-3">
                 <BackToNimbl />
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
             </div>
-            <div>
+            <div class="mt-5">
                 <DescInvite />
             </div>
         </div>

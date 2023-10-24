@@ -5,14 +5,14 @@
             <img src="@/assets/ai-launguages.webp" alt="" class="object-cover w-full h-full" />
         </div>
         <div class="flex-grow-[2] flex-shrink relative flex p-3 gap-2 items-start justify-center flex-col bg_card_body" :style="{'--bg': `url(${noise})`}">
-            <p class="font-tt-octosquares font-medium text-white text-xl leading-tight max-md:text-sm">Follow Nimbl on Twitter</p>
+            <p class="font-tt-octosquares font-medium text-white text-xl leading-tight max-md:text-sm max-2xl:text-lg">Follow Nimbl on Twitter</p>
             <div class="flex gap-2 items-center">
                 <img :src="logo" alt="nimbl" class="w-[14px] h-[14px] mt-1" />
-                <p class="text-xl leading-none text-white font-tt-octosquares max-md:text-xs ">10 pts</p>
+                <p class="text-xl leading-none text-white font-tt-octosquares max-md:text-xs max-2xl:text-base">10 pts</p>
             </div>
         </div>
-        <div class="bg_open flex-grow w-1/4 flex items-center justify-center max-md:w-[12%]">
-            <p class="font-Rollbox font-bold text-black text-3xl text-center max-md:rotate-90 max-md:text-base">OPEN</p>
+        <div class="bg_open flex-grow w-1/4 flex items-center justify-center max-md:w-[12%] max-2xl:w-[20%]">
+            <p class="font-Rollbox font-bold text-black text-3xl text-center max-md:rotate-90 max-md:text-base max-2xl:text-lg">OPEN</p>
         </div>
     </div>
 </template>
