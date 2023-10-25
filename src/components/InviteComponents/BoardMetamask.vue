@@ -114,8 +114,9 @@ const {handleAuth} = useMetamask();
 const defaultUser = {
     wallet: null,
     uuid: null,
+    token: null,
 };
-const user = useStorage<{wallet: string | null; uuid: string | null}>("metamask-user", defaultUser, sessionStorage);
+const user = useStorage<{wallet: string | null; uuid: string | null, token: string | null}>("metamask-user", defaultUser, sessionStorage);
 const errorMetamask = ref();
 
 const inviteLink = computed(() => (user.value.uuid ? window.location.href + "?u=" + user.value.uuid : null));
@@ -127,6 +128,7 @@ const loginMetamask = async () => {
         if (!res) return;
         user.value.wallet = res.user;
         user.value.uuid = res.uuid;
+        user.value.token = res.key;
     } catch (e) {
         errorMetamask.value = (e as Error).message;
     }

@@ -72,6 +72,7 @@
                 const {message} = await requestMessage(account, chain);
                 const signature = await signer.signMessage(message);
                 const res = await verifyMessage(message, signature);
+                console.log("res", res)
                 
                 if (res.user) {
                     return res 

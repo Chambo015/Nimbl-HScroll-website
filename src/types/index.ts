@@ -95,3 +95,15 @@ export interface  AudioTrackType  {
     label: string,
     flag: string
 }
+
+export interface IBoardTask {
+    id: number;
+    order: number;
+    created: string;
+    updated: string;
+    is_active: boolean;
+    is_deleted: boolean;
+    is_completed?: boolean;
+    name: string;
+    reward: number;
+}
