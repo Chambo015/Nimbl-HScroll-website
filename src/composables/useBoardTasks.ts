@@ -18,7 +18,6 @@ const useBoardTasks = () => {
 
 
     const fetchAllTasks = async () => {
-        console.log('fetch all tasks', user.value.token)
 		const response = await fetch('https://api.nimbl.tv/en/api/hunter/tasks/', {
             method: 'GET',
             headers: {
@@ -59,7 +58,6 @@ const useBoardTasks = () => {
 
     const fetchTasks = async () => {
         const allTasks = await fetchAllTasks()
-        console.log('all tasks')
         if(!user.value.token) return allTasks;
         const userCompletedTaskIds = await fetchUserCompletedTasks(user.value.token);
         const tasks = allTasks.map(task => {
@@ -69,7 +67,6 @@ const useBoardTasks = () => {
                 is_completed: isCompleted
             }
         })
-        console.log('user tasks', tasks)
         return tasks
     }
 
