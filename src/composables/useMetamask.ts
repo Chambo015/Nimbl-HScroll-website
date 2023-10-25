@@ -46,6 +46,7 @@
     
                     return {signer, chain: chainId, account: accounts[0]};
                 } catch (error) {
+                    throw new Error((error as Error).message)
                     console.error("User denied account access", error);
                 }
             } else {
@@ -79,7 +80,6 @@
                 }
             } catch (e) {
                 alert("authentication error");
-                console.log("authentication error", e)
                 throw new Error((e as Error).message)
             }
            

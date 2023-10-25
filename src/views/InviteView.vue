@@ -1,5 +1,5 @@
 <template>
-    <main v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 pb-[35px] gap-5">
+    <main ref=contentEl v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 pb-[35px] gap-5">
         <div class="w-1/3 flex-shrink-0 flex flex-col space-y-5 pb-5">
             <BoardMetamask />
             <BoardUsersRating />
@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import {breakpointsTailwind, useBreakpoints} from "@vueuse/core";
+import {breakpointsTailwind, useBreakpoints, useMediaQuery} from "@vueuse/core";
 import BoardMetamask from "@/components/InviteComponents/BoardMetamask.vue";
 import BoardUsersRating from "@/components/InviteComponents/BoardUsersRating.vue";
 import CardTelegram from "@/components/InviteComponents/SocialCards/CardTelegram.vue";
@@ -71,14 +71,29 @@ import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
 import DescInvite from "@/components/InviteComponents/DescInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
+import gsap from 'gsap';
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const mdAndSmaller = breakpoints.smallerOrEqual("md");
 const activeMobileTab = ref<"invite" | "tasks" | "ranking">("invite");
+const isXS = useMediaQuery("(max-width: 700px)");
+const contentEl = ref()
+
+onMounted(() => {
+    if (isXS.value) return;
+    const tl = gsap.timeline();
+
+    tl.from(contentEl.value, {
+        autoAlpha: 0.0,
+        duration: 1.5,
+        ease: "expo.inOut",
+    });
+    
+});
 </script>
 
 <style scoped></style>

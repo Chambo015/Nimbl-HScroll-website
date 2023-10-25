@@ -11,14 +11,18 @@
                     >
                     <MenuItems class="absolute left-0 flex flex-col bg-gradient-header-secondary mt-2 p-2">
                         <MenuItem>
-                            <button class="cursor-pointer" @click="logOutMetamask"> Logout </button>
+                            <button class="cursor-pointer" @click="logOutMetamask">Logout</button>
                         </MenuItem>
                     </MenuItems>
                 </Menu>
-                <div 
+                <div
                     class="max-md:hidden max-2xl:w-full max-2xl:mb-3 block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] w-[350px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px]">
-                    <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base ">Weekly Leaderboard</p>
-                    <p class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">#159 of 21.788</p>
+                    <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
+                        Weekly Leaderboard
+                    </p>
+                    <p class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
+                        #159 of 21.788
+                    </p>
                     <img
                         :src="rocket_img"
                         width="133"
@@ -27,10 +31,20 @@
                         class="absolute right-0 top-0 -translate-y-[25px] translate-x-1/4 transition-all duration-1000 group-hover:drop-shadow-icon max-2xl:w-[100px] max-2xl:-translate-y-4" />
                 </div>
             </div>
-            <div class="hidden max-md:flex gap-2 justify-between bg-gradient-header-secondary relative  -translate-x-5 w-screen mt-3 px-5 py-2">
-                <div><span class="font-TTOctos text-xs text-white">Units</span>: <span class="font-Rollbox text-white font-bold">604</span></div>
-                <div><span class="font-TTOctos text-xs text-white">Rank</span>: <span class="font-Rollbox text-white font-bold">105</span></div>
-                <div><span class="font-TTOctos text-xs text-white">Invites:</span>: <span class="font-Rollbox text-white font-bold">20</span></div>
+            <div
+                class="hidden max-md:flex gap-2 justify-between bg-gradient-header-secondary relative -translate-x-5 w-screen mt-3 px-5 py-2">
+                <div>
+                    <span class="font-TTOctos text-xs text-white">Units</span>:
+                    <span class="font-Rollbox text-white font-bold">604</span>
+                </div>
+                <div>
+                    <span class="font-TTOctos text-xs text-white">Rank</span>:
+                    <span class="font-Rollbox text-white font-bold">105</span>
+                </div>
+                <div>
+                    <span class="font-TTOctos text-xs text-white">Invites:</span>:
+                    <span class="font-Rollbox text-white font-bold">20</span>
+                </div>
             </div>
             <div class="relative z-10 font-Rollbox mt-5">
                 <p class="font-bold text-xl !leading-tight max-2xl:text-lg">INVITE LINK</p>
@@ -39,19 +53,25 @@
                 </p>
             </div>
             <div class="flex max-md:flex-col relative z-20 items-center mt-5 gap-5 max-md:gap-2">
-                <div class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
+                <div
+                    class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
                     <input
                         type="text"
                         disabled
                         :value="inviteLink"
                         class="bg-transparent text-white select-text flex-grow max-w-full" />
-                    <button @click="inviteLink && copy(inviteLink)" class="btn_copy relative w-[24px] h-[24px] flex-shrink-0">
+                    <button
+                        @click="inviteLink && copy(inviteLink)"
+                        class="btn_copy relative w-[24px] h-[24px] flex-shrink-0">
                         <img :src="copyImg" alt="copyImg" width="24" height="24" />
                     </button>
                 </div>
 
-                <button class="btn_share flex-grow justify-center flex h-[42px] items-center px-4 max-md:w-full">
-                    <p class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none flex gap-4 max-2xl:items-center">
+                <button
+                    @click="startShare"
+                    class="btn_share flex-grow justify-center flex h-[42px] items-center px-4 max-md:w-full">
+                    <p
+                        class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none flex gap-4 max-2xl:items-center">
                         Share Link <IconShareLink />
                     </p>
                 </button>
@@ -69,9 +89,9 @@
                 </div>
             </div>
         </div>
-        <div v-else class="w-full h-full relative flex items-center justify-center">
-            <p v-if="errorMetamask" class="font-Rollbox font-bold text-red-500">{{ errorMetamask }}</p>
-            <BtnMetamaskConnect v-else @click="loginMetamask" />
+        <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
+            <p v-if="errorMetamask" class="font-Rollbox font-bold text-red-500 px-4">{{ errorMetamask }}</p>
+            <BtnMetamaskConnect @click="loginMetamask" />
         </div>
     </div>
 </template>
@@ -85,7 +105,7 @@ import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import copyImg from "@/assets/invite/copy.png";
 import useMetamask from "@/composables/useMetamask";
-import {useClipboard, useStorage} from "@vueuse/core";
+import {useClipboard, useShare, useStorage} from "@vueuse/core";
 import {computed, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
 
@@ -94,28 +114,38 @@ const {handleAuth} = useMetamask();
 const defaultUser = {
     wallet: null,
     uuid: null,
-}
+};
 const user = useStorage<{wallet: string | null; uuid: string | null}>("metamask-user", defaultUser, sessionStorage);
-const errorMetamask = ref()
+const errorMetamask = ref();
 
-const inviteLink = computed(() => (user.value.uuid ? window.location.href + '?u=' + user.value.uuid : null));
+const inviteLink = computed(() => (user.value.uuid ? window.location.href + "?u=" + user.value.uuid : null));
 const userWallet = computed(() => (user.value.wallet ? user.value.wallet.slice(0, 10) + "..." : null));
 const loginMetamask = async () => {
     try {
+        errorMetamask.value = false;
         const res = await handleAuth();
-    if (!res) return;
-    user.value.wallet = res.user;
-    user.value.uuid = res.uuid;
+        if (!res) return;
+        user.value.wallet = res.user;
+        user.value.uuid = res.uuid;
     } catch (e) {
-        console.log('error inside');
-        errorMetamask.value = (e as Error).message
+        errorMetamask.value = (e as Error).message;
     }
-    
 };
 const logOutMetamask = () => {
-    user.value = defaultUser
-}
+    user.value = defaultUser;
+};
 const {copy} = useClipboard();
+
+const {share, isSupported} = useShare();
+function startShare() {
+    if (isSupported.value && inviteLink.value) {
+        share({
+            title: "Nimbl.tv",
+            text: "Nimbl.Tv is a flagship Social-Fi project of the internet",
+            url: inviteLink.value,
+        });
+    }
+}
 </script>
 
 <style scoped>
