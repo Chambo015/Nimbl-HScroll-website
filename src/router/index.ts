@@ -1,4 +1,4 @@
-import {createRouter, /* createWebHashHistory */ createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory,} from "vue-router";
 
 import NimblTvView from "@/views/NimblTvView.vue";
 
@@ -20,7 +20,7 @@ const routerPaths = [
 ];
 
 const router = createRouter({
-    history: createWebHistory() /* createWebHistory(), */, // Способ сохранения истории переходов по маршрутам
+    history: createWebHashHistory() /* createWebHistory(), */, // Способ сохранения истории переходов по маршрутам
     routes: [
         // Определяем маршруты
         {
