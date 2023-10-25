@@ -5,7 +5,7 @@
             <BoardUsersRating />
         </div>
         <div class="flex flex-grow flex-col pb-5 gap-5">
-            <div class="flex h-[100px] gap-4 flex-shrink-0 w-full pr-5">
+            <div class="flex h-[100px] gap-4 flex-shrink-0 w-full pr-5 max-xl:flex-wrap max-xl:h-auto">
                 <BackToNimbl />
                 <CardTelegram />
                 <CardXTwitter />
