@@ -26,7 +26,11 @@
 
 <script setup lang="ts">
 import CardTask from './CardTask.vue';
+import useBoardTasks from '../../composables/useBoardTasks'
 
+const { fetchTasks } = useBoardTasks();
+
+fetchTasks();
 
 </script>
 
