@@ -1,7 +1,6 @@
-
-
-import { IBoardTask } from "@/types";
+import { IBoardTask, ICompletedTask } from "@/types";
 import { useStorage } from "@vueuse/core";
+import { ref } from 'vue';
 
 declare global {
     var ethereum: any;
@@ -16,13 +15,14 @@ const user = useStorage<{wallet: string | null; uuid: string | null, token: stri
 
 const useBoardTasks = () => {
 
+    const loading = ref(false)
 
     const fetchAllTasks = async () => {
-		const response = await fetch('https://api.nimbl.tv/en/api/hunter/tasks/', {
+
+        const response = await fetch('https://api.nimbl.tv/en/api/hunter/tasks/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Token ${user.value.token}`
             },
         });
 
@@ -51,27 +51,37 @@ const useBoardTasks = () => {
             throw new Error(error);
         }
 
-        const data = await response.json() as {action_type: number}[];
+        const data = await response.json() as ICompletedTask[];
 
         return data;
     }
 
     const fetchTasks = async () => {
+        loading.value = true
+
         const allTasks = await fetchAllTasks()
-        if(!user.value.token) return allTasks;
+
+        if(!user.value.token) {
+            loading.value = false
+            return allTasks;
+        } 
+
         const userCompletedTaskIds = await fetchUserCompletedTasks(user.value.token);
-        const tasks = allTasks.map(task => {
-            const isCompleted = userCompletedTaskIds.includes({ action_type: task.id });
-            return {
-                ...task,
-                is_completed: isCompleted
-            }
+
+        userCompletedTaskIds.forEach(completedTask => {
+            const idDoneTask =  allTasks.findIndex(task => task.id === completedTask.action_type)
+            if(idDoneTask < 0) return
+            allTasks[idDoneTask].is_completed = true  
         })
-        return tasks
+
+        loading.value = false
+
+        return allTasks
     }
 
     return {
         fetchTasks,
+        loading
     };
 };
 

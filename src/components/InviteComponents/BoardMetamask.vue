@@ -2,21 +2,13 @@
     <div
         class="card_metamask min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
-        <div v-if="user.wallet" class="w-full h-full py-4 px-8 max-md:px-5">
-            <div class="flex max-2xl:flex-col-reverse relative z-20">
-                <Menu as="div" class="relative inline-block text-left z-10">
-                    <MenuButton
-                        class="flex font-tt-octosquares font-medium items-center h-[60px] max-2xl:h-[40px] px-5 gap-5 bg-gradient-header-secondary"
-                        ><IconWallet /> {{ userWallet }}</MenuButton
-                    >
-                    <MenuItems class="absolute left-0 flex flex-col bg-gradient-header-secondary mt-2 p-2">
-                        <MenuItem>
-                            <button class="cursor-pointer" @click="logOutMetamask">Logout</button>
-                        </MenuItem>
-                    </MenuItems>
-                </Menu>
+        <div v-if="user.wallet" class="w-full h-full py-4 px-8 max-md:px-5 flex flex-col">
+            <div class="flex max-xl:flex-col-reverse relative z-20 gap-3 ">
+                <div class="relative overflow-hidden z-10 flex font-tt-octosquares font-medium items-center h-[60px] max-2xl:h-auto max-xl:h-[40px] px-5 gap-5 bg-gradient-header-secondary">
+                    <IconWallet class="flex-shrink-0 cursor-pointer" @click="logOutMetamask" /> <p class="flex-grow truncate">{{ user.wallet }}</p>
+                </div>
                 <div
-                    class="max-md:hidden max-2xl:w-full max-2xl:mb-3 block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] w-[350px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px]">
+                    class="max-md:hidden flex-shrink-0 max-xl:w-full max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] w-[350px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
                     </p>
@@ -76,16 +68,17 @@
                     </p>
                 </button>
             </div>
+            <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
             <div
-                class="max-md:hidden block font-Rollbox text-white uppercase flex items-center justify-around h-[85px] mt-[40px] user_stats relative"
+                class="max-md:hidden font-Rollbox text-white uppercase max-2xl:text-sm flex items-center justify-around h-[85px] mt-[40px] max-2xl:mt-5 user_stats relative"
                 :style="{'--bg': `url(${user_stat_bg})`}">
                 <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>units</p>
-                    <p class="font-extrabold text-[40px] leading-none">604</p>
+                    <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">604</p>
                 </div>
                 <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>invites</p>
-                    <p class="font-extrabold text-[40px] leading-none">200</p>
+                    <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">200</p>
                 </div>
             </div>
         </div>
@@ -97,7 +90,6 @@
 </template>
 
 <script setup lang="ts">
-import {Menu, MenuButton, MenuItems, MenuItem} from "@headlessui/vue";
 import BtnMetamaskConnect from "@/components/InviteComponents/BtnMetamaskConnect.vue";
 import IconWallet from "@/components/icons/IconWallet.vue";
 import noise from "@/assets/bg_invite_noise.webp";
@@ -120,7 +112,6 @@ const user = useStorage<{wallet: string | null; uuid: string | null, token: stri
 const errorMetamask = ref();
 
 const inviteLink = computed(() => (user.value.uuid ? window.location.href + "?u=" + user.value.uuid : null));
-const userWallet = computed(() => (user.value.wallet ? user.value.wallet.slice(0, 10) + "..." : null));
 const loginMetamask = async () => {
     try {
         errorMetamask.value = false;

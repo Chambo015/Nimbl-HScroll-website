@@ -12,7 +12,7 @@
                 <CardContract />
                 <CardTokenInfo />
             </div>
-            <div class="w-full overflow-hidden">
+            <div class="w-full overflow-hidden flex-grow">
                 <BoardTasks />
             </div>
             <div class="mt-auto pr-5">

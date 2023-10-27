@@ -1,40 +1,21 @@
-import axios from 'axios';
-
-export interface ITweets {
-  "url": string,
-  "author_name": string,
-  "author_url": string,
-  "html": string,
-  "width": number,
-  "height": number | null,
-  "type": string,
-  "cache_age": string,
-  "provider_name": string,
-  "provider_url": string,
-  "version": string
-}
+import {ITweets} from "@/types";
+import axios from "axios";
 
 const useTwitterPosts = () => {
-    const handleApiPost = async (endpoint: string, body: any) => {
-        const result = await axios.post<ITweets>(endpoint, body, {
+    const handleApiPost = async (endpoint: string) => {
+        const result = await axios.get<{count: number; results: ITweets[]}>(endpoint, {
             headers: {
                 "Content-Type": "application/json",
             },
-  
         });
-        return result.data;
+        return result.data.results;
     };
 
-    const body = {
-      url: "https://twitter.com/nimbltv/status/1702230452373745826",
+    const fetchTweetPosts = async (): Promise<ITweets[]> => {
+        return await handleApiPost("https://api.nimbl.tv/ru/api/main/tweets/");
     };
 
-    const getPost = async (): Promise<ITweets> => {
-      return await handleApiPost('https://api.nimbl.tv/ru/api/main/tweets/', body)
-     }
-
-     return {getPost}
-    
+    return {fetchTweetPosts};
 };
 
 export default useTwitterPosts;
