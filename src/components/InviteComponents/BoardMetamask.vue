@@ -2,10 +2,12 @@
     <div
         class="card_metamask min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
-        <div v-if="user.wallet" class="w-full h-full py-4 px-8 max-md:px-5 flex flex-col">
-            <div class="flex max-xl:flex-col-reverse relative z-20 gap-3 ">
-                <div class="relative overflow-hidden z-10 flex font-tt-octosquares font-medium items-center h-[60px] max-2xl:h-auto max-xl:h-[40px] px-5 gap-5 bg-gradient-header-secondary">
-                    <IconWallet class="flex-shrink-0 cursor-pointer" @click="logOutMetamask" /> <p class="flex-grow truncate">{{ user.wallet }}</p>
+        <div v-if="user.wallet" class="w-full h-full py-4 px-4 flex flex-col">
+            <div class="flex max-xl:flex-col-reverse relative z-20 gap-3">
+                <div
+                    class="relative overflow-hidden z-10 flex font-tt-octosquares font-medium items-center h-[60px] max-2xl:h-auto max-xl:h-[40px] px-5 gap-5 bg-gradient-header-secondary">
+                    <IconWallet class="flex-shrink-0 cursor-pointer" @click="logOutMetamask" />
+                    <p class="flex-grow truncate">{{ user.wallet }}</p>
                 </div>
                 <div
                     class="max-md:hidden flex-shrink-0 max-xl:w-full max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] w-[350px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
@@ -40,7 +42,7 @@
             </div>
             <div class="relative z-10 font-Rollbox mt-5">
                 <p class="font-bold text-xl !leading-tight max-2xl:text-lg">INVITE LINK</p>
-                <p class="font-TTOctos text-lg mt-4 !leading-tight max-2xl:text-base">
+                <p class="font-TTOctos text-lg mt-4 !leading-tight max-2xl:text-base max-2xl:mt-2">
                     This is your custom referral link. Use it to invite others to sign up for Nimbl.
                 </p>
             </div>
@@ -60,7 +62,7 @@
                 </div>
 
                 <button
-                    @click="startShare"
+                    @click="isModalShareOpen = true"
                     class="btn_share flex-grow justify-center flex h-[42px] items-center px-4 max-md:w-full">
                     <p
                         class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none flex gap-4 max-2xl:items-center">
@@ -69,6 +71,20 @@
                 </button>
             </div>
             <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
+            <div class="flex gap-4 relative z-20 mt-2">
+                <button
+                    class="flex-grow flex bg-black p-1 justify-center items-center gap-3 cursor-pointer"
+                    :class="{'!bg-active-connect': false}">
+                    <IconTwitter />
+                    connect twitter/x
+                </button>
+                <button v-if="user.telegram_id"
+                    class="flex-grow flex bg-active-connect p-1 justify-center items-center gap-3 cursor-pointer">
+                    <IconTelegram/>
+                    {{ user.telegram_username || 'telegram connected' }}
+                </button>
+                <VueTelegramLogin v-if="!user.telegram_id" mode="callback" telegram-login="NimblTelegramBot" @callback="onTelegramAuth" />
+            </div>
             <div
                 class="max-md:hidden font-Rollbox text-white uppercase max-2xl:text-sm flex items-center justify-around h-[85px] mt-[40px] max-2xl:mt-5 user_stats relative"
                 :style="{'--bg': `url(${user_stat_bg})`}">
@@ -86,6 +102,14 @@
             <p v-if="errorMetamask" class="font-Rollbox font-bold text-red-500 px-4">{{ errorMetamask }}</p>
             <BtnMetamaskConnect @click="loginMetamask" />
         </div>
+        <!-- Modal Contact -->
+        <Transition
+            enter-active-class="transition-all"
+            leave-active-class="transition-all"
+            leave-to-class="opacity-0 translate-y-1/2"
+            enter-from-class="opacity-0 translate-y-1/2"
+            ><ModalContacts share-mode @click-close="() => isModalShareOpen = !isModalShareOpen" v-if="isModalShareOpen && inviteLink" :invite-link="inviteLink"
+        /></Transition>
     </div>
 </template>
 
@@ -97,21 +121,28 @@ import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import copyImg from "@/assets/invite/copy.png";
 import useMetamask from "@/composables/useMetamask";
-import {useClipboard, useShare, useStorage} from "@vueuse/core";
+import {useClipboard, useStorage} from "@vueuse/core";
 import {computed, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
+import IconTwitter from "../icons/IconTwitter.vue";
+import IconTelegram from "../icons/IconTelegram.vue";
+import VueTelegramLogin from "./VueTelegramLogin.vue";
+import { IUserStorage, IUserTg, defaultUser } from '@/types';
+import { useHunterTelegram } from '@/composables/useHunterTelegram';
+import ModalContacts from '../ModalContacts.vue';
 
-const {handleAuth} = useMetamask();
-
-const defaultUser = {
-    wallet: null,
-    uuid: null,
-    token: null,
-};
-const user = useStorage<{wallet: string | null; uuid: string | null, token: string | null}>("metamask-user", defaultUser, sessionStorage);
 const errorMetamask = ref();
+const isModalShareOpen = ref(false);
 
-const inviteLink = computed(() => (user.value.uuid ? window.location.href + "?u=" + user.value.uuid : null));
+const { handleAuth } = useMetamask();
+const { postTelegramId } = useHunterTelegram()
+const { copy } = useClipboard();
+const user = useStorage<IUserStorage>(
+    "metamask-user",
+    defaultUser,
+    sessionStorage,
+);
+
 const loginMetamask = async () => {
     try {
         errorMetamask.value = false;
@@ -120,16 +151,26 @@ const loginMetamask = async () => {
         user.value.wallet = res.user;
         user.value.uuid = res.uuid;
         user.value.token = res.key;
+        user.value.telegram_id = res.telegram_id;
+        user.value.telegram_username = res.telegram_username;
     } catch (e) {
         errorMetamask.value = (e as Error).message;
     }
 };
+
 const logOutMetamask = () => {
     user.value = defaultUser;
 };
-const {copy} = useClipboard();
 
-const {share, isSupported} = useShare();
+const inviteLink = computed(() => (user.value.uuid ? window.location.href + "?u=" + user.value.uuid : null));
+
+async function onTelegramAuth (user: IUserTg) {
+    const data = await postTelegramId(user.id, user.username)
+    console.log(user);
+}
+
+/* 
+const { share, isSupported } = useShare();
 function startShare() {
     if (isSupported.value && inviteLink.value) {
         share({
@@ -138,7 +179,7 @@ function startShare() {
             url: inviteLink.value,
         });
     }
-}
+} */
 </script>
 
 <style scoped>

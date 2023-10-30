@@ -1,7 +1,7 @@
 <template>
     <div
         class="card min-h-[90px] flex relative rounded-r-3xl  rounded-l-md cursor-pointer" :class="{'pointer-events-none [&>*]:opacity-50': isCompleted}">
-        <div class="w-1/4 flex-shrink-0 rounded-l-md overflow-hidden h-full relative bg-cover" :style="{backgroundImage: `url(${imgUrl})`}">
+        <div class="w-1/4 flex-shrink-0 rounded-l-md overflow-hidden h-full relative bg-cover bg-center" :style="{backgroundImage: `url(${imgUrl || '/nimbl-nimbl.png'})`}">
             <!-- <img :src="imgUrl" alt="image task" class="object-cover w-full h-full absolute inset-x-0 inset-y-0" /> -->
         </div>
         <div class="flex-grow-[2] flex-shrink relative flex p-3 gap-2 items-start justify-center flex-col bg_card_body" :style="{'--bg': `url(${noise})`}">
@@ -11,10 +11,10 @@
                 <p class="text-xl leading-none text-white font-tt-octosquares max-md:text-xs max-2xl:text-base">{{reward}} units</p>
             </div>
         </div>
-        <div v-if="!isCompleted" class="bg_open  w-1/4 flex-shrink-0 flex items-center justify-center max-md:w-[12%] max-2xl:w-[20%]">
-            <p class="font-Rollbox font-bold text-black text-3xl text-center max-md:rotate-90 max-md:text-base max-2xl:text-lg px-1">OPEN</p>
-        </div>
-        <div v-else class="absolute right-0 z-2 !opacity-100">
+      <!--   <div v-if="!isCompleted" class="bg_open  w-1/4 flex-shrink-0 flex items-center justify-center max-md:w-[12%] max-2xl:w-[23%]">
+            <p class="font-Rollbox font-bold text-black text-2xl text-center max-md:rotate-90 max-md:text-base max-2xl:text-lg px-1">ACTIVE</p>
+        </div> -->
+        <div v-if="isCompleted" class="absolute right-0 z-2 !opacity-100">
             <Vue3Lottie animation-link="lottie/done.json" :height="100" :width="100" :loop="false" />
         </div>
     </div>
@@ -27,6 +27,7 @@ import noise from "@/assets/invite/noise_card_task.webp";
 defineProps({
     imgUrl: {
         type: String,
+        required: false,
         default: '/nimbl-nimbl.png'
     },
     reward: {

@@ -29,6 +29,8 @@ export interface AudioTrackType {
 
 export interface IBoardTask {
     id: number;
+    task_done: boolean;
+    task_image: string | null
     order: number;
     created: string;
     updated: string;
@@ -37,6 +39,7 @@ export interface IBoardTask {
     is_completed?: boolean;
     name: string;
     reward: number;
+    hunter_task: number
 }
 
 export interface ICompletedTask {
@@ -54,6 +57,8 @@ export interface IUser {
     user: string; // wallet
     uuid: string;
     key: string;
+    "telegram_id": string | null,
+    "telegram_username": string | null
 }
 
 export interface ITweets {
@@ -65,4 +70,29 @@ export interface ITweets {
     is_deleted: boolean;
     twitter_username: string;
     tweet_url: string;
+}
+
+export interface IUserTg {
+    first_name: string;
+    hash: string;
+    id: number;
+    auth_date: number;
+    username: string;
+    photo_url: string
+}
+
+export const defaultUser: IUserStorage = {
+    wallet: null,
+    uuid: null,
+    token: null,
+    telegram_id: null,
+    telegram_username: null
+};
+
+export interface IUserStorage {
+    wallet: null | string,
+    uuid: null | string,
+    token: null | string,
+    telegram_id: null | string | number,
+    telegram_username: null | string
 }

@@ -1,17 +1,12 @@
-import { IBoardTask, ICompletedTask } from "@/types";
+import { IBoardTask, ICompletedTask, IUserStorage, defaultUser } from "@/types";
 import { useStorage } from "@vueuse/core";
 import { ref } from 'vue';
 
 declare global {
     var ethereum: any;
 }
-const defaultUser = {
-    wallet: null,
-    uuid: null,
-    token: null,
-}
 
-const user = useStorage<{wallet: string | null; uuid: string | null, token: string | null}>("metamask-user", defaultUser, sessionStorage);
+const user = useStorage<IUserStorage>("metamask-user", defaultUser, sessionStorage);
 
 const useBoardTasks = () => {
 

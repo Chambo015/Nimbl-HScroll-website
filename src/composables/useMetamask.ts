@@ -1,7 +1,5 @@
-
-
-    import {ethers} from "ethers";
-    import axios from "axios";
+import {ethers} from "ethers";
+import axios from "axios";
 import { IUser } from '@/types';
 
     declare global {
