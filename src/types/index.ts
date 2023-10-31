@@ -56,6 +56,26 @@ export interface IUser {
     key: string;
 }
 
+export interface IUserTwitter {
+    id: number;
+    last_login?: string;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    date_joined?: string;
+    avatar?: string;
+    file?: string | null;
+    account_type?: number;
+    username: string;
+    activated_date?: string | null;
+    channel_id: number;
+}
+
+export interface ISessionTwitter {
+    user: IUserTwitter | null;
+    token: string | null;
+}
+
 export interface ITweets {
     id: number;
     order: number;

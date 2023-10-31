@@ -97,6 +97,11 @@ const router = createRouter({
             path: "/invite",
             name: "invite",
             component: () => import("@/views/InviteView.vue"),
+        },
+        {
+            path: "/invite/:twitterId",
+            name: "invite",
+            component: () => import("@/views/InviteView.vue"),
         }
     ],
 });

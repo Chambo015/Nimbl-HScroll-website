@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import {breakpointsTailwind, useBreakpoints, useMediaQuery} from "@vueuse/core";
+import {breakpointsTailwind, useBreakpoints, useMediaQuery, useStorage} from "@vueuse/core";
 import BoardMetamask from "@/components/InviteComponents/BoardMetamask.vue";
 import BoardUsersRating from "@/components/InviteComponents/BoardUsersRating.vue";
 import CardTelegram from "@/components/InviteComponents/SocialCards/CardTelegram.vue";
@@ -71,10 +71,14 @@ import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
 import DescInvite from "@/components/InviteComponents/DescInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref } from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
 import gsap from 'gsap';
+import twitterAuthClient from "@/composables/twitterAuthClient";
+import { useRoute } from "vue-router";
+import {  ISessionTwitter } from "@/types";
+import { DEFAULT_USER_STORAGE, STORAGE_USER_KEY } from "@/constants";
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
@@ -82,6 +86,20 @@ const mdAndSmaller = breakpoints.smallerOrEqual("md");
 const activeMobileTab = ref<"invite" | "tasks" | "ranking">("invite");
 const isXS = useMediaQuery("(max-width: 700px)");
 const contentEl = ref()
+
+const route = useRoute()
+
+onMounted(async () => {
+    const twitterId = route.params.twitterId;
+    console.log('tw', twitterId)
+    if (typeof twitterId === "string") {
+        const twitterUser = await twitterAuthClient.fetchTwitterUserById(twitterId);
+        
+        userStorage.value = {
+            ...twitterUser
+        }
+    }
+})
 
 onMounted(() => {
     if (isXS.value) return;
@@ -92,8 +110,20 @@ onMounted(() => {
         duration: 1.5,
         ease: "expo.inOut",
     });
-    
 });
+
+const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
+
+
+// router.beforeEach(async (to, from) => {
+//     const twitterId = to.params.twitterId;
+//     console.log('tw', twitterId)
+//     if (typeof twitterId === "string") {
+//         const twitterUser = await twitterAuthClient.fetchTwitterUserById(twitterId);
+//         console.log('tw', twitterUser)
+//     }
+// })
+
 </script>
 
 <style scoped></style>
