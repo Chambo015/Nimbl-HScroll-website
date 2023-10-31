@@ -170,7 +170,7 @@ async function onTelegramAuth(user: IUserTg) {
 
 onMounted(async () => {
     try {
-        const twitterId = route.params.t;
+        const twitterId = route.query.t;
         console.log("tw", twitterId);
         if (typeof twitterId === "string" && twitterId) {
 
