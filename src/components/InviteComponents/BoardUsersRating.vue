@@ -39,6 +39,11 @@
 </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useLeaderboard from '@/composables/useLeaderboard';
+
+const { fetchLeaderboard } = useLeaderboard()
+fetchLeaderboard();
+</script>
 
 <style scoped></style>

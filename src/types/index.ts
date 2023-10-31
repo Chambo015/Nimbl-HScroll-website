@@ -106,6 +106,15 @@ export interface IUserTg {
     photo_url: string;
 }
 
+export interface ILeaderboardUser {
+    id: number;
+    avatar: string;
+    account_type: number;
+    username: string;
+    units: number;
+    invite_count: number;
+}
+
 /* export interface IUserStorage {
     wallet: null | string,
     uuid: null | string,
