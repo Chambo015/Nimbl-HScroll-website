@@ -1,7 +1,7 @@
 <template>
     <div
         class="card min-h-[90px] flex relative rounded-r-3xl  rounded-l-md cursor-pointer" :class="{'pointer-events-none [&>*]:opacity-50': isCompleted}">
-        <div class="w-1/4 flex-shrink-0 rounded-l-md overflow-hidden h-full relative bg-cover bg-center" :style="{backgroundImage: `url(${imgUrl || '/nimbl-nimbl.png'})`}">
+        <div class="w-1/4 flex-shrink-0 rounded-l-md overflow-hidden h-full relative bg-cover bg-center" :style="{backgroundImage: `url(${imgUrl || defaultImgUrl})`}">
             <!-- <img :src="imgUrl" alt="image task" class="object-cover w-full h-full absolute inset-x-0 inset-y-0" /> -->
         </div>
         <div class="flex-grow-[2] flex-shrink relative flex p-3 gap-2 items-start justify-center flex-col bg_card_body" :style="{'--bg': `url(${noise})`}">
@@ -15,7 +15,7 @@
             <p class="font-Rollbox font-bold text-black text-2xl text-center max-md:rotate-90 max-md:text-base max-2xl:text-lg px-1">ACTIVE</p>
         </div> -->
         <div v-if="isCompleted" class="absolute right-0 z-2 !opacity-100">
-            <Vue3Lottie animation-link="lottie/done.json" :height="100" :width="100" :loop="false" />
+            <Vue3Lottie :animation-link="doneLottieUrl" :height="100" :width="100" :loop="false" />
         </div>
     </div>
 </template>
@@ -24,6 +24,10 @@
 import { Vue3Lottie } from 'vue3-lottie'
 import logo from "@/assets/invite/logo_white.png";
 import noise from "@/assets/invite/noise_card_task.webp";
+
+const defaultImgUrl = new URL('./nimbl-nimbl.png', import.meta.url).href
+const doneLottieUrl = new URL('/lottie/done.json', import.meta.url).href
+
 defineProps({
     imgUrl: {
         type: String,

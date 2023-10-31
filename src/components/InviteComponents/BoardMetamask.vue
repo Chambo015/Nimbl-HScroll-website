@@ -47,7 +47,7 @@
                 </p>
             </div>
             <div class="flex max-md:flex-col relative z-20 items-center mt-5 gap-5 max-md:gap-2">
-                <div
+                <div v-if="inviteLink"
                     class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
                     <input
                         type="text"
@@ -79,13 +79,13 @@
                     connect twitter/x
                 </button>
                 <button
-                    v-if="userStorage.telegram_id"
+                    v-if="userStorage.user.telegram_id"
                     class="flex-grow flex bg-active-connect p-1 justify-center items-center gap-3 cursor-pointer">
                     <IconTelegram />
-                    {{ userStorage.telegram_username || "telegram connected" }}
+                    {{ userStorage.user.telegram_username || "telegram connected" }}
                 </button>
                 <VueTelegramLogin
-                    v-if="!userStorage.telegram_id"
+                    v-if="!userStorage.user.telegram_id"
                     mode="callback"
                     telegram-login="NimblTelegramBot"
                     @callback="onTelegramAuth" />
@@ -161,7 +161,10 @@ const logOutMetamask = () => {
     userStorage.value = DEFAULT_USER_STORAGE;
 };
 
-const inviteLink = computed(() => (userStorage.value.uuid ? window.location.href + "?u=" + userStorage.value.uuid : null));
+const inviteLink = computed(() => {
+    const uuid = userStorage.value.user?.invite_uuid;
+    return uuid ? window.location.href + "?u=" + uuid : null
+});
 
 async function onTelegramAuth(user: IUserTg) {
     await postTelegramId(user.id, user.username);

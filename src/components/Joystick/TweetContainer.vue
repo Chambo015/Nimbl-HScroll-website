@@ -3,7 +3,7 @@
         <template v-for="tweet of tweetPosts" :key="tweet.id">
             <Tweet :tweet-url="tweet.tweet_url"  theme="dark" :width="widthWidget">
                 <template v-slot:loading>
-                    <div class="w-[500px] h-[590px] max-md:w-[calc(100vw-40px)] max-md:h-[400px] max-2xl:w-[350px] bg-[#15202b] flex items-center justify-center rounded-lg"> <Vue3Lottie animation-link="/lottie/loading.json" :height="200" :width="200" /></div>
+                    <div class="w-[500px] h-[590px] max-md:w-[calc(100vw-40px)] max-md:h-[400px] max-2xl:w-[350px] bg-[#15202b] flex items-center justify-center rounded-lg"> <Vue3Lottie :animation-link="loadingLottieUrl" :height="200" :width="200" /></div>
                 </template>
             </Tweet>
         </template>
@@ -18,6 +18,7 @@ import { computed, onMounted, ref } from 'vue';
 import useTwitterPosts from '@/composables/useTwitterPosts';
 import { ITweets } from '@/types';
 
+const loadingLottieUrl = new URL('/lottie/loading.json', import.meta.url).href
 const tweetPosts = ref<ITweets[]>([])
 const {fetchTweetPosts} = useTwitterPosts()
 const { width } = useWindowSize()
