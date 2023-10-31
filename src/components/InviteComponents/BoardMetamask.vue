@@ -149,8 +149,11 @@ const {fetchTwitterUserById} = useTwitterAuth();
 const {postTelegramId} = useHunterTelegram();
 const {copy} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
+const uuidStorage = useStorage<string>("uuid", "");
 
 const loginTwitter = async () => {
+    const uuid = route.query.u;
+    uuidStorage.value = uuid as string;
     window.open('https://api.nimbl.tv/accounts/twitter/login/', '_self')
 };
 
@@ -167,7 +170,7 @@ async function onTelegramAuth(user: IUserTg) {
 
 onMounted(async () => {
     try {
-        const twitterId = route.params.twitterId;
+        const twitterId = route.params.t;
         console.log("tw", twitterId);
         if (typeof twitterId === "string" && twitterId) {
 
