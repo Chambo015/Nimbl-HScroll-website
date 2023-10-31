@@ -75,10 +75,10 @@ import {onMounted, ref } from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
 import gsap from 'gsap';
-import twitterAuthClient from "@/composables/twitterAuthClient";
 import { useRoute } from "vue-router";
 import {  ISessionTwitter } from "@/types";
 import { DEFAULT_USER_STORAGE, STORAGE_USER_KEY } from "@/constants";
+import useTwitterAuth from "@/composables/useTwitterAuth";
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
@@ -91,11 +91,13 @@ const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_S
 
 const route = useRoute()
 
+const { fetchTwitterUserById } = useTwitterAuth();
+
 onMounted(async () => {
     const twitterId = route.params.twitterId;
     console.log('tw', twitterId)
     if (typeof twitterId === "string") {
-        const twitterUser = await twitterAuthClient.fetchTwitterUserById(twitterId);
+        const twitterUser = await fetchTwitterUserById(twitterId);
         
         userStorage.value = {
             ...twitterUser
@@ -117,3 +119,4 @@ onMounted(() => {
 </script>
 
 <style scoped></style>
+@/composables/useTwitterAuth
