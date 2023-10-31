@@ -32,7 +32,6 @@ defineProps({
     imgUrl: {
         type: String,
         required: false,
-        default: '/nimbl-nimbl.png'
     },
     reward: {
         type: Number,
