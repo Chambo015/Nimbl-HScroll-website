@@ -175,7 +175,7 @@ const logOutMetamask = () => {
 
 const inviteLink = computed(() => {
     const uuid = userStorage.value.user?.invite_uuid;
-    return uuid ? window.location.origin + import.meta.env.BASE_URL + "invite" + "?u=" + uuid : null;
+    return uuid ? 'https://chambo015.github.io/Nimbl-HScroll-website/#/invite' + "?u=" + uuid : null;
 });
 
 async function onTelegramAuth(user: IUserTg) {
