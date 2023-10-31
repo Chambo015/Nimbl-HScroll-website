@@ -30,7 +30,7 @@ export interface AudioTrackType {
 export interface IBoardTask {
     id: number;
     task_done: boolean;
-    task_image: string | null
+    task_image: string | null;
     order: number;
     created: string;
     updated: string;
@@ -39,7 +39,7 @@ export interface IBoardTask {
     is_completed?: boolean;
     name: string;
     reward: number;
-    hunter_task: number
+    hunter_task: number;
 }
 
 export interface ICompletedTask {
@@ -57,29 +57,33 @@ export interface IUser {
     user: string; // wallet
     uuid: string;
     key: string;
-    "telegram_id": string | null,
-    "telegram_username": string | null
+    telegram_id: string | null;
+    telegram_username: string | null;
 }
 
 export interface IUserTwitter {
     id: number;
-    last_login?: string;
-    first_name?: string;
-    last_name?: string;
-    email?: string;
-    date_joined?: string;
-    avatar?: string;
-    file?: string | null;
-    account_type?: number;
+    last_login: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    date_joined: string;
+    avatar: string;
+    file?: null;
+    account_type: number;
+    activated_date: string;
     username: string;
-    activated_date?: string | null;
     channel_id: number;
+    units: number;
+    invite_uuid: string;
+    telegram_id: string | null;
+    telegram_username: string | null;
+    wallet_address?: null;
 }
 
 export interface ISessionTwitter {
     user: IUserTwitter | null;
     token: string | null;
-    uuid: null | string,
 }
 
 export interface ITweets {
@@ -99,7 +103,7 @@ export interface IUserTg {
     id: number;
     auth_date: number;
     username: string;
-    photo_url: string
+    photo_url: string;
 }
 
 /* export interface IUserStorage {

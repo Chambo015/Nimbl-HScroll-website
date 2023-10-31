@@ -2,7 +2,7 @@
   <button v-bind="$attrs" class="shadow-xl rounded-sm overflow-hidden">
     <div class="flex h-[75px]">
       <div class="w-[75px] h-[75px] bg-[#1F1127]/40 relative">
-        <Vue3Lottie animation-link="/lottie/twitter.json" :height="120" :width="120" :loop="true" class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2" />
+        <Vue3Lottie :animation-link="twitterLottieUrl" :height="120" :width="120" :loop="true" class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2" />
       </div>
       <div class="px-5 bg_text flex items-center">
         <p class="font-tt-octosquares uppercase font-medium text-2xl leading-none max-md:text-lg">connect twitter/X</p>
@@ -13,6 +13,8 @@
 
 <script setup lang="ts">
 import { Vue3Lottie } from 'vue3-lottie'
+
+const twitterLottieUrl = new URL('/lottie/twitter.json', import.meta.url).href
 </script>
 
 <style scoped>
