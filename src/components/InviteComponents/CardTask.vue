@@ -25,7 +25,7 @@ import { Vue3Lottie } from 'vue3-lottie'
 import logo from "@/assets/invite/logo_white.png";
 import noise from "@/assets/invite/noise_card_task.webp";
 
-const defaultImgUrl = new URL('./nimbl-nimbl.png', import.meta.url).href
+const defaultImgUrl = new URL('/nimbl-nimbl.png', import.meta.url).href
 const doneLottieUrl = new URL('/lottie/done.json', import.meta.url).href
 
 defineProps({

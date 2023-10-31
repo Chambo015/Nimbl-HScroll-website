@@ -75,29 +75,30 @@
             <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
             <div class="flex gap-4 relative z-20 mt-2">
                 <div
+                    v-if="!userStorage.user.wallet_address"
                     class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
                     <input
                         type="text"
                         v-model="walletMetamask"
                         placeholder="Connect Metamask"
-                        class="bg-transparent text-white select-text flex-grow max-w-full border-none outline-none" />
-                    <button
-                        @click="sendMetamask"
-                        class="relative w-[24px] h-[24px] flex-shrink-0">
+                        class="bg-transparent text-white select-text max-2xl:w-[130px] max-w-full border-none outline-none" />
+                    <button @click="sendMetamask" class="relative w-[24px] h-[24px] flex-shrink-0">
                         <IconSend class="w-[24px] h-[24px]" />
                     </button>
                 </div>
-                <button
-                    v-if="userStorage.user.telegram_id"
-                    class="flex-grow flex flex-shrink-0 bg-active-connect p-1 justify-center items-center gap-3 cursor-pointer">
-                    <IconTelegram />
-                    {{ userStorage.user.telegram_username || "telegram connected" }}
-                </button>
-                <VueTelegramLogin
-                    v-if="!userStorage.user.telegram_id"
-                    mode="callback"
-                    telegram-login="NimblTelegramBot"
-                    @callback="onTelegramAuth" />
+                <div class="flex-grow-[2] flex-shrink-0">
+                    <button
+                        v-if="userStorage.user.telegram_id"
+                        class="flex bg-active-connect p-1 justify-center items-center gap-3 cursor-pointer">
+                        <IconTelegram />
+                        {{ userStorage.user.telegram_username || "telegram connected" }}
+                    </button>
+                    <VueTelegramLogin
+                        v-if="!userStorage.user.telegram_id"
+                        mode="callback"
+                        telegram-login="NimblTelegramBot"
+                        @callback="onTelegramAuth" />
+                </div>
             </div>
             <div
                 class="max-md:hidden font-Rollbox text-white uppercase max-2xl:text-sm flex items-center justify-around h-[85px] mt-[40px] max-2xl:mt-5 user_stats relative"
@@ -150,7 +151,7 @@ import ModalContacts from "../ModalContacts.vue";
 import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
 import {useRoute} from "vue-router";
 import useTwitterAuth from "@/composables/useTwitterAuth";
-import axios from 'axios';
+import axios from "axios";
 
 const errorLogin = ref();
 const isModalShareOpen = ref(false);
@@ -160,7 +161,7 @@ const {postTelegramId} = useHunterTelegram();
 const {copy} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const uuidStorage = useStorage<string>("uuid", "");
-const walletMetamask = ref('')
+const walletMetamask = ref("");
 
 const loginTwitter = async () => {
     const uuid = route.query.u;
@@ -183,11 +184,20 @@ async function onTelegramAuth(user: IUserTg) {
 }
 
 const sendMetamask = () => {
-    if(!walletMetamask.value) return
-    axios.post('https://api.nimbl.tv/en/api/metamask/connect/', {
-        "wallet_address": walletMetamask.value
-    })
-}
+    if (!walletMetamask.value || !userStorage.value.token) return;
+    axios.post(
+        "https://api.nimbl.tv/en/api/metamask/connect/",
+        {
+            wallet_address: walletMetamask.value,
+        },
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${userStorage.value.token}`,
+            },
+        },
+    );
+};
 
 onMounted(async () => {
     console.log("csa", import.meta.env.BASE_URL);
