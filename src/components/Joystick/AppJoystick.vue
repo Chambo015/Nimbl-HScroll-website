@@ -7,7 +7,7 @@ import TopJoystick from './TopJoystick.vue';
 import CenterJoystickTwitter from './CenterJoystickTwitter.vue';
 import { useRoute } from 'vue-router';
 import TweetContainer from './TweetContainer.vue';
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useElementBounding  } from '@vueuse/core'
 
 
 defineEmits(['clickBottom'])
@@ -27,7 +27,7 @@ onClickOutside(target, () => {
     isOpenMenu.value = false;
     showTwitterPost.value = false;
 })
-
+const { top } = useElementBounding(target)
 </script>
 
 <template>
@@ -66,7 +66,7 @@ onClickOutside(target, () => {
             :class="[isOpenMenu ? ' translate-x-0  hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-x-1/2 hidden']">
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
-        <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full  z-[9999]"><TweetContainer /></div>
+        <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full  z-[9999] overflow-hidden" :style="{height: (top - 50) + 'px'}"><TweetContainer /></div>
     </div>
 </template>
 

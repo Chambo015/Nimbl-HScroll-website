@@ -1,7 +1,6 @@
-
-
-    import {ethers} from "ethers";
-    import axios from "axios";
+import {ethers} from "ethers";
+import axios from "axios";
+import { IUser } from '@/types';
 
     declare global {
         var ethereum: any;
@@ -74,7 +73,7 @@
                 const res = await verifyMessage(message, signature);
                 
                 if (res.user) {
-                    return res 
+                    return res as IUser
                 } else {
                     alert("authentication error");
                 }

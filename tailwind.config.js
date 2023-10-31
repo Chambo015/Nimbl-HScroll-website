@@ -29,6 +29,7 @@ export default {
                 "bg-planet-liner": "radial-gradient(90.3% 106.3% at 91.68% 87.6%, rgba(109, 147, 173, 0.87) 0%, #101417 80.6%, #AB78FE 92.89%, #FFF 100%)",
                 "gradient-header-secondary":
                     "radial-gradient(443.81% 434.72% at 322.31% -217.78%, #6F359C 0%, #01060C 100%)",
+                    "active-connect": "linear-gradient(180deg, #7BE22A 0%, #2A6000 100%)"
             },
         },
         container: {

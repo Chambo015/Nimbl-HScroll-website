@@ -1,21 +1,3 @@
-import type { Component } from 'vue';
-
-export type TabCategoryType = 'Top' | 'Trending' | 'Rising' | 'WatchList';
-export type TabHomeCategoryType = 'Mints' | 'Secondary Market';
-
-export type RangeType = '1d' | '1w' | '1m' | '3m';
-
-export type ChartRangeType = 'ALL' | 'ONE_YEAR' | 'ONE_MONTH' | 'ONE_WEEK' | 'ONE_DAY';
-
-export interface ChannelI {
-    id: number;
-    name: string;
-    subscribers: string;
-    price: number;
-    total: number;
-    avatar: string;
-}
-
 export interface VideoI {
     id: number;
     title: string;
@@ -24,74 +6,106 @@ export interface VideoI {
     avatar: string;
     poster: string;
     /* Свойства для видео аудио и субтитров */
-    videoSrc?: string,
-    audioSrc? : AudioTrackType[],
+    videoSrc?: string;
+    audioSrc?: AudioTrackType[];
     subtitles?: {
-        src: string,
-        kind: 'subtitles',
-        label: string,
-        srcLang: LanguagesType,
-    }[]
+        src: string;
+        kind: "subtitles";
+        label: string;
+        srcLang: LanguagesType;
+    }[];
 }
 
-export interface IAnnouncement {
+export type SoundVolumeType = "medium" | "low" | "high" | "off";
+
+export type LanguagesType = "en" | "fr" | "es" | "zh" | "it" | "kk" | "de";
+
+export interface AudioTrackType {
+    language: LanguagesType;
+    src: string;
+    label: string;
+    flag: string;
+}
+
+export interface IBoardTask {
     id: number;
-    author: {
-        name: string;
-        avatar: string;
-    };
-    text: string;
-    attachImg?: string;
-    likeCount: number;
-    createdDate: number; // 2h ago
+    task_done: boolean;
+    task_image: string | null
+    order: number;
+    created: string;
+    updated: string;
+    is_active: boolean;
+    is_deleted: boolean;
+    is_completed?: boolean;
+    name: string;
+    reward: number;
+    hunter_task: number
 }
 
-export interface ILoginForm {
-    password: {
-        value: string;
-        typeInput: string;
-        placeholder: string;
-        label: string;
-        validateError: string | null;
-    };
-    confirmPassword: {
-        value: string;
-        typeInput: string;
-        placeholder: string;
-        label: string;
-        validateError: string | null;
-    };
-    email: {
-        value: string;
-        typeInput: string;
-        placeholder: string;
-        label: string;
-        validateError: string | null;
-    };
+export interface ICompletedTask {
+    action_type: number;
+    created: string;
+    id: number;
+    is_active: boolean;
+    is_deleted: boolean;
+    order: number;
+    updated: string;
+    user: number;
 }
 
 export interface IUser {
-    email: string;
-    token: string;
-    id: string;
+    user: string; // wallet
+    uuid: string;
+    key: string;
+    "telegram_id": string | null,
+    "telegram_username": string | null
 }
 
-export type SoundVolumeType = 'medium' | 'low' | 'high' | 'off';
-
-export type TypeMessageGPT = {
+export interface IUserTwitter {
     id: number;
-    text: string[];
-    isChatGPT: boolean;
-    showStatus: boolean;
-    delayToResponse?: number;
-    attachComponent?: Component
-};
-
-export type LanguagesType = 'en' | 'fr' | 'es' | 'zh' | 'it' | 'kk' | 'de'
-
-export interface  AudioTrackType  {
-    language: LanguagesType,
-    src: string,
-    label: string,
-    flag: string
+    last_login?: string;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    date_joined?: string;
+    avatar?: string;
+    file?: string | null;
+    account_type?: number;
+    username: string;
+    activated_date?: string | null;
+    channel_id: number;
 }
+
+export interface ISessionTwitter {
+    user: IUserTwitter | null;
+    token: string | null;
+    uuid: null | string,
+}
+
+export interface ITweets {
+    id: number;
+    order: number;
+    created: string;
+    updated: string;
+    is_active: boolean;
+    is_deleted: boolean;
+    twitter_username: string;
+    tweet_url: string;
+}
+
+export interface IUserTg {
+    first_name: string;
+    hash: string;
+    id: number;
+    auth_date: number;
+    username: string;
+    photo_url: string
+}
+
+/* export interface IUserStorage {
+    wallet: null | string,
+    uuid: null | string,
+    token: null | string,
+    telegram_id: null | string | number,
+    telegram_username: null | string
+} */

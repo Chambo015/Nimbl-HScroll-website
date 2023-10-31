@@ -5,14 +5,14 @@
             <BoardUsersRating />
         </div>
         <div class="flex flex-grow flex-col pb-5 gap-5">
-            <div class="flex h-[100px] gap-4 flex-shrink-0 w-full pr-5">
+            <div class="flex h-[100px] gap-4 flex-shrink-0 w-full pr-5 max-xl:flex-wrap max-xl:h-auto">
                 <BackToNimbl />
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
                 <CardTokenInfo />
             </div>
-            <div class="w-full overflow-hidden">
+            <div class="w-full overflow-hidden flex-grow">
                 <BoardTasks />
             </div>
             <div class="mt-auto pr-5">
@@ -71,11 +71,10 @@ import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
 import DescInvite from "@/components/InviteComponents/DescInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref } from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
 import gsap from 'gsap';
-
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const mdAndSmaller = breakpoints.smallerOrEqual("md");
@@ -92,8 +91,8 @@ onMounted(() => {
         duration: 1.5,
         ease: "expo.inOut",
     });
-    
 });
+
 </script>
 
 <style scoped></style>

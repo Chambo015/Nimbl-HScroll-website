@@ -93,8 +93,9 @@ const router = createRouter({
             name: "transfers",
             component: TransfersView,
         }, */
+       
         {
-            path: "/invite",
+            path: "/invite/:twitterId?",
             name: "invite",
             component: () => import("@/views/InviteView.vue"),
         }
