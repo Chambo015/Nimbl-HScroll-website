@@ -79,6 +79,7 @@ export interface IUserTwitter {
 export interface ISessionTwitter {
     user: IUserTwitter | null;
     token: string | null;
+    uuid: null | string,
 }
 
 export interface ITweets {
@@ -101,10 +102,10 @@ export interface IUserTg {
     photo_url: string
 }
 
-export interface IUserStorage {
+/* export interface IUserStorage {
     wallet: null | string,
     uuid: null | string,
     token: null | string,
     telegram_id: null | string | number,
     telegram_username: null | string
-}
+} */

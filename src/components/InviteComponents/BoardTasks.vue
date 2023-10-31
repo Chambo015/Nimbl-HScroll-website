@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full overflow-y-auto pr-5 max-md:px-3">
-    <div v-if="loading" class="h-full w-full flex items-center justify-center"><Vue3Lottie animation-link="lottie/main_loader.json" :height="200" :width="200" :loop="true" /></div>
+    <div v-if="loading" class="h-full w-full flex items-center justify-center"><Vue3Lottie animation-link="/lottie/main_loader.json" :height="200" :width="200" :loop="true" /></div>
     <div v-else class="grid grid-cols-2 gap-8 max-xl:grid-cols-1 max-md:gap-5">
       <CardTask v-for="task of tasks" :key="task.id" :img-url="task.task_image || undefined" :name="task.name" :reward="task.reward" :is-completed="task.task_done" />
     </div>
@@ -12,11 +12,11 @@ import CardTask from './CardTask.vue';
 import { Vue3Lottie } from 'vue3-lottie'
 import useBoardTasks from '../../composables/useBoardTasks'
 import { onMounted, ref, watch } from 'vue';
-import { IBoardTask, IUserStorage, defaultUser } from '@/types';
+import { IBoardTask, ISessionTwitter } from '@/types';
 import { useStorage } from '@vueuse/core/index.mjs';
+import { DEFAULT_USER_STORAGE, STORAGE_USER_KEY } from '@/constants';
 
-const user = useStorage<IUserStorage>("metamask-user", defaultUser, sessionStorage);
-
+const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const tasks = ref<IBoardTask[] | []>([]);
 
 const { fetchTasks, loading } = useBoardTasks();
@@ -26,7 +26,7 @@ onMounted(async() => {
  tasks.value = resTasks
 })
 
-watch(user, async () => {
+watch(userStorage, async () => {
   const resTasks =  await fetchTasks();
   tasks.value = resTasks
 })

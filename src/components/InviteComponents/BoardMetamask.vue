@@ -2,12 +2,12 @@
     <div
         class="card_metamask min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
-        <div v-if="user.wallet" class="w-full h-full py-4 px-4 flex flex-col">
+        <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
             <div class="flex max-xl:flex-col-reverse relative z-20 gap-3">
                 <div
                     class="relative overflow-hidden z-10 flex font-tt-octosquares font-medium items-center h-[60px] max-2xl:h-auto max-xl:h-[40px] px-5 gap-5 bg-gradient-header-secondary">
                     <IconWallet class="flex-shrink-0 cursor-pointer" @click="logOutMetamask" />
-                    <p class="flex-grow truncate">{{ user.wallet }}</p>
+                    <p class="flex-grow truncate">{{ userStorage.user?.username }}</p>
                 </div>
                 <div
                     class="max-md:hidden flex-shrink-0 max-xl:w-full max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] w-[350px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
@@ -78,12 +78,17 @@
                     <IconTwitter />
                     connect twitter/x
                 </button>
-                <button v-if="user.telegram_id"
+                <button
+                    v-if="userStorage.telegram_id"
                     class="flex-grow flex bg-active-connect p-1 justify-center items-center gap-3 cursor-pointer">
-                    <IconTelegram/>
-                    {{ user.telegram_username || 'telegram connected' }}
+                    <IconTelegram />
+                    {{ userStorage.telegram_username || "telegram connected" }}
                 </button>
-                <VueTelegramLogin v-if="!user.telegram_id" mode="callback" telegram-login="NimblTelegramBot" @callback="onTelegramAuth" />
+                <VueTelegramLogin
+                    v-if="!userStorage.telegram_id"
+                    mode="callback"
+                    telegram-login="NimblTelegramBot"
+                    @callback="onTelegramAuth" />
             </div>
             <div
                 class="max-md:hidden font-Rollbox text-white uppercase max-2xl:text-sm flex items-center justify-around h-[85px] mt-[40px] max-2xl:mt-5 user_stats relative"
@@ -100,7 +105,7 @@
         </div>
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
             <p v-if="errorLogin" class="font-Rollbox font-bold text-red-500 px-4">{{ errorLogin }}</p>
-            <BtnMetamaskConnect @click="loginMetamask" />
+            <BtnTwitterConnect @click="loginTwitter" />
         </div>
         <!-- Modal Contact -->
         <Transition
@@ -108,67 +113,74 @@
             leave-active-class="transition-all"
             leave-to-class="opacity-0 translate-y-1/2"
             enter-from-class="opacity-0 translate-y-1/2"
-            ><ModalContacts share-mode @click-close="() => isModalShareOpen = !isModalShareOpen" v-if="isModalShareOpen && inviteLink" :invite-link="inviteLink"
+            ><ModalContacts
+                share-mode
+                @click-close="() => (isModalShareOpen = !isModalShareOpen)"
+                v-if="isModalShareOpen && inviteLink"
+                :invite-link="inviteLink"
         /></Transition>
     </div>
 </template>
 
 <script setup lang="ts">
-import BtnMetamaskConnect from "@/components/InviteComponents/BtnMetamaskConnect.vue";
+import BtnTwitterConnect from "@/components/InviteComponents/BtnTwitterConnect.vue";
 import IconWallet from "@/components/icons/IconWallet.vue";
 import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import copyImg from "@/assets/invite/copy.png";
-import useMetamask from "@/composables/useMetamask";
 import {useClipboard, useStorage} from "@vueuse/core";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
 import IconTwitter from "../icons/IconTwitter.vue";
 import IconTelegram from "../icons/IconTelegram.vue";
 import VueTelegramLogin from "./VueTelegramLogin.vue";
-import { IUserStorage, IUserTg, defaultUser } from '@/types';
-import { useHunterTelegram } from '@/composables/useHunterTelegram';
-import ModalContacts from '../ModalContacts.vue';
+import {ISessionTwitter, IUserTg} from "@/types";
+import {useHunterTelegram} from "@/composables/useHunterTelegram";
+import ModalContacts from "../ModalContacts.vue";
+import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
+import {useRoute} from "vue-router";
+import useTwitterAuth from "@/composables/useTwitterAuth";
 
 const errorLogin = ref();
 const isModalShareOpen = ref(false);
+const route = useRoute();
+const {fetchTwitterUserById} = useTwitterAuth();
+const {postTelegramId} = useHunterTelegram();
+const {copy} = useClipboard();
+const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 
-const { handleAuth } = useMetamask();
-const { postTelegramId } = useHunterTelegram()
-const { copy } = useClipboard();
-const user = useStorage<IUserStorage>(
-    "metamask-user",
-    defaultUser,
-    sessionStorage,
-);
-
-const loginMetamask = async () => {
-    try {
-        errorLogin.value = false;
-        const res = await handleAuth();
-        if (!res) return;
-        user.value.wallet = res.user;
-        user.value.uuid = res.uuid;
-        user.value.token = res.key;
-        user.value.telegram_id = res.telegram_id;
-        user.value.telegram_username = res.telegram_username;
-    } catch (e) {
-        errorLogin.value = (e as Error).message;
-    }
+const loginTwitter = async () => {
+    window.open('https://api.nimbl.tv/accounts/twitter/login/', '_self')
 };
 
 const logOutMetamask = () => {
-    user.value = defaultUser;
+    userStorage.value = DEFAULT_USER_STORAGE;
 };
 
-const inviteLink = computed(() => (user.value.uuid ? window.location.href + "?u=" + user.value.uuid : null));
+const inviteLink = computed(() => (userStorage.value.uuid ? window.location.href + "?u=" + userStorage.value.uuid : null));
 
-async function onTelegramAuth (user: IUserTg) {
-    const data = await postTelegramId(user.id, user.username)
+async function onTelegramAuth(user: IUserTg) {
+    await postTelegramId(user.id, user.username);
     console.log(user);
 }
 
+onMounted(async () => {
+    try {
+        const twitterId = route.params.twitterId;
+        console.log("tw", twitterId);
+        if (typeof twitterId === "string" && twitterId) {
+
+            const twitterUser = await fetchTwitterUserById(twitterId);
+
+            userStorage.value = {
+                ...twitterUser,
+            };
+        }
+    } catch (e) {
+        errorLogin.value = (e as Error).message;
+    }
+})
 </script>
 
 <style scoped>

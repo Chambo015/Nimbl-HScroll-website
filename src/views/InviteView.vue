@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import {breakpointsTailwind, useBreakpoints, useMediaQuery, useStorage} from "@vueuse/core";
+import {breakpointsTailwind, useBreakpoints, useMediaQuery} from "@vueuse/core";
 import BoardMetamask from "@/components/InviteComponents/BoardMetamask.vue";
 import BoardUsersRating from "@/components/InviteComponents/BoardUsersRating.vue";
 import CardTelegram from "@/components/InviteComponents/SocialCards/CardTelegram.vue";
@@ -75,35 +75,12 @@ import {onMounted, ref } from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
 import gsap from 'gsap';
-import { useRoute } from "vue-router";
-import {  ISessionTwitter } from "@/types";
-import { DEFAULT_USER_STORAGE, STORAGE_USER_KEY } from "@/constants";
-import useTwitterAuth from "@/composables/useTwitterAuth";
-
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const mdAndSmaller = breakpoints.smallerOrEqual("md");
 const activeMobileTab = ref<"invite" | "tasks" | "ranking">("invite");
 const isXS = useMediaQuery("(max-width: 700px)");
 const contentEl = ref()
-
-const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
-
-const route = useRoute()
-
-const { fetchTwitterUserById } = useTwitterAuth();
-
-onMounted(async () => {
-    const twitterId = route.params.twitterId;
-    console.log('tw', twitterId)
-    if (typeof twitterId === "string") {
-        const twitterUser = await fetchTwitterUserById(twitterId);
-        
-        userStorage.value = {
-            ...twitterUser
-        }
-    }
-})
 
 onMounted(() => {
     if (isXS.value) return;
@@ -119,4 +96,3 @@ onMounted(() => {
 </script>
 
 <style scoped></style>
-@/composables/useTwitterAuth
