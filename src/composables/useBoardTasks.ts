@@ -1,4 +1,4 @@
-import { IBoardTask, ICompletedTask, IUserStorage, defaultUser } from "@/types";
+import { IBoardTask, IUserStorage, defaultUser } from "@/types";
 import { useStorage } from "@vueuse/core";
 import { ref } from 'vue';
 
@@ -33,7 +33,7 @@ const useBoardTasks = () => {
 
     const fetchUserCompletedTasks = async (sessionToken: string) => {
 
-		const response = await fetch('https://api.nimbl.tv/en/api/hunter/done/tasks/', {
+		const response = await fetch('https://api.nimbl.tv/en/api/hunter/tasks/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const useBoardTasks = () => {
             throw new Error(error);
         }
 
-        const data = await response.json() as ICompletedTask[];
+        const data = await response.json() as IBoardTask[];
 
         return data;
     }
@@ -54,23 +54,17 @@ const useBoardTasks = () => {
     const fetchTasks = async () => {
         loading.value = true
 
-        const allTasks = await fetchAllTasks()
+        let allTasks
 
         if(!user.value.token) {
+            allTasks = await fetchAllTasks()
             loading.value = false
-            return allTasks;
-        } 
-
-        const userCompletedTaskIds = await fetchUserCompletedTasks(user.value.token);
-
-        userCompletedTaskIds.forEach(completedTask => {
-            const idDoneTask =  allTasks.findIndex(task => task.id === completedTask.action_type)
-            if(idDoneTask < 0) return
-            allTasks[idDoneTask].is_completed = true  
-        })
+        } else {
+            allTasks = await fetchUserCompletedTasks(user.value.token)
+            loading.value = false
+        }
 
         loading.value = false
-
         return allTasks
     }
 

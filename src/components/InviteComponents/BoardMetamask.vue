@@ -99,7 +99,7 @@
             </div>
         </div>
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
-            <p v-if="errorMetamask" class="font-Rollbox font-bold text-red-500 px-4">{{ errorMetamask }}</p>
+            <p v-if="errorLogin" class="font-Rollbox font-bold text-red-500 px-4">{{ errorLogin }}</p>
             <BtnMetamaskConnect @click="loginMetamask" />
         </div>
         <!-- Modal Contact -->
@@ -131,7 +131,7 @@ import { IUserStorage, IUserTg, defaultUser } from '@/types';
 import { useHunterTelegram } from '@/composables/useHunterTelegram';
 import ModalContacts from '../ModalContacts.vue';
 
-const errorMetamask = ref();
+const errorLogin = ref();
 const isModalShareOpen = ref(false);
 
 const { handleAuth } = useMetamask();
@@ -145,7 +145,7 @@ const user = useStorage<IUserStorage>(
 
 const loginMetamask = async () => {
     try {
-        errorMetamask.value = false;
+        errorLogin.value = false;
         const res = await handleAuth();
         if (!res) return;
         user.value.wallet = res.user;
@@ -154,7 +154,7 @@ const loginMetamask = async () => {
         user.value.telegram_id = res.telegram_id;
         user.value.telegram_username = res.telegram_username;
     } catch (e) {
-        errorMetamask.value = (e as Error).message;
+        errorLogin.value = (e as Error).message;
     }
 };
 
@@ -169,17 +169,6 @@ async function onTelegramAuth (user: IUserTg) {
     console.log(user);
 }
 
-/* 
-const { share, isSupported } = useShare();
-function startShare() {
-    if (isSupported.value && inviteLink.value) {
-        share({
-            title: "Nimbl.tv",
-            text: "Nimbl.Tv is a flagship Social-Fi project of the internet",
-            url: inviteLink.value,
-        });
-    }
-} */
 </script>
 
 <style scoped>
