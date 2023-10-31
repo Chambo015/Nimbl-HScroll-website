@@ -101,14 +101,6 @@ export interface IUserTg {
     photo_url: string
 }
 
-export const defaultUser: IUserStorage = {
-    wallet: null,
-    uuid: null,
-    token: null,
-    telegram_id: null,
-    telegram_username: null
-};
-
 export interface IUserStorage {
     wallet: null | string,
     uuid: null | string,

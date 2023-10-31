@@ -1,4 +1,5 @@
-import { IBoardTask, IUserStorage, defaultUser } from "@/types";
+import { DEFAULT_USER_STORAGE, STORAGE_USER_KEY } from '@/constants';
+import { IBoardTask, ISessionTwitter } from "@/types";
 import { useStorage } from "@vueuse/core";
 import { ref } from 'vue';
 
@@ -6,7 +7,7 @@ declare global {
     var ethereum: any;
 }
 
-const user = useStorage<IUserStorage>("metamask-user", defaultUser, sessionStorage);
+const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 
 const useBoardTasks = () => {
 
@@ -56,11 +57,11 @@ const useBoardTasks = () => {
 
         let allTasks
 
-        if(!user.value.token) {
+        if(!userStorage.value.token) {
             allTasks = await fetchAllTasks()
             loading.value = false
         } else {
-            allTasks = await fetchUserCompletedTasks(user.value.token)
+            allTasks = await fetchUserCompletedTasks(userStorage.value.token)
             loading.value = false
         }
 

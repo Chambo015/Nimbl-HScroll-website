@@ -87,6 +87,8 @@ const activeMobileTab = ref<"invite" | "tasks" | "ranking">("invite");
 const isXS = useMediaQuery("(max-width: 700px)");
 const contentEl = ref()
 
+const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
+
 const route = useRoute()
 
 onMounted(async () => {
@@ -111,18 +113,6 @@ onMounted(() => {
         ease: "expo.inOut",
     });
 });
-
-const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
-
-
-// router.beforeEach(async (to, from) => {
-//     const twitterId = to.params.twitterId;
-//     console.log('tw', twitterId)
-//     if (typeof twitterId === "string") {
-//         const twitterUser = await twitterAuthClient.fetchTwitterUserById(twitterId);
-//         console.log('tw', twitterUser)
-//     }
-// })
 
 </script>
 
