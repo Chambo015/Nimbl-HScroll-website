@@ -53,15 +53,15 @@
                                         @keyup.enter="saveMetamaskWallet"
                                         v-model="walletValue"
                                         :disabled="loadingWallet"
-                                        class="block pl-2.5 pr-6 pb-1.5 pt-3 w-full text-sm text-gray-900 bg-transparent rounded-lg appearance-none dark:text-white focus:outline-none focus:ring-0 peer placeholder:opacity-0 focus:placeholder:opacity-100"
+                                        class="block pl-2.5 pr-6 pb-1.5 pt-3 w-full text-sm  bg-transparent rounded-lg appearance-none text-white focus:outline-none focus:ring-0 peer placeholder:opacity-0 focus:placeholder:opacity-100"
                                         placeholder="0x123..." />
                                     <label
                                         for="small_outlined"
                                         class="absolute text-sm cursor-pointer duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 left-1"
                                         :class="[
                                             errorWallet
-                                                ? 'peer-focus:text-red-600 text-red-600 peer-focus:dark:text-red-500'
-                                                : 'peer-focus:text-blue-600 peer-focus:dark:text-blue-500 text-yellow-50',
+                                                ? 'peer-focus:text-red-600 text-red-600'
+                                                : 'peer-focus:text-blue-600 text-yellow-50',
                                         ]"
                                         >{{ errorWallet || "connect Metamask" }}</label
                                     >
