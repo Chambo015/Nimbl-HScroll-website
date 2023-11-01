@@ -111,28 +111,33 @@ import {computed, onMounted, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
 import {ISessionTwitter} from "@/types";
 import ModalContacts from "../ModalContacts.vue";
-import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
-import {useRoute} from "vue-router";
+import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY, STORAGE_UUID_KEY} from "@/constants";
+import {useRoute, useRouter} from "vue-router";
 import useTwitterAuth from "@/composables/useTwitterAuth";
 import ProfileMenu from './ProfileMenu.vue';
 
 const errorLogin = ref();
 const isModalShareOpen = ref(false);
 const route = useRoute();
+const router = useRouter();
 const {fetchTwitterUserById} = useTwitterAuth();
 const {copy} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
-const uuidStorage = useStorage<string>("uuid", "");
+const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
 
-const loginTwitter = async () => {
+function saveUuidStorage () {
     const uuid = route.query.u;
     uuidStorage.value = uuid as string;
+}
+
+const loginTwitter = async () => {
+    saveUuidStorage()
     window.open("https://api.nimbl.tv/accounts/twitter/login/", "_self");
 };
 
 const inviteLink = computed(() => {
     const uuid = userStorage.value.user?.invite_uuid;
-    return uuid ? window.location.origin + "/invite" + "?u=" + uuid : null;
+    return uuid ? "https://chambo015.github.io/Nimbl-HScroll-website/#/invite" + "?u=" + uuid : null;
 });
 
 onMounted(async () => {
@@ -149,6 +154,7 @@ onMounted(async () => {
     } catch (e) {
         errorLogin.value = (e as Error).message;
     }
+    router.replace('/') // for remove query params
 });
 </script>
 
