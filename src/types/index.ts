@@ -83,6 +83,7 @@ export interface IUserTwitter {
 
 export interface ISessionTwitter {
     user: IUserTwitter | null;
+    total_invites: number | null;
     token: string | null;
 }
 
@@ -115,10 +116,17 @@ export interface ILeaderboardUser {
     invite_count: number;
 }
 
-/* export interface IUserStorage {
-    wallet: null | string,
-    uuid: null | string,
-    token: null | string,
-    telegram_id: null | string | number,
-    telegram_username: null | string
-} */
+/* 
+
+{"token": 124121241242,
+"user": {
+    "id": 1212,
+    "username": "string",
+    "channel_id": 1212,
+    "units": 111,
+    "invite_uuid": "212",
+    "telegram_id": "string",
+    "telegram_username": "tring",
+    "wallet_address": null
+}}
+*/

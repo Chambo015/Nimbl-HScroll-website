@@ -49,14 +49,16 @@ const useTwitterAuth = () => {
       });
       const data = await response.json() as {
         user: IUserTwitter
-        key: string
+        key: string,
+        total_invites: number
       };
       
       loading.value = false;
 
       return {
         user: data.user,
-        token: data.key
+        token: data.key,
+        total_invites: data.total_invites
       } as ISessionTwitter;
     }
 

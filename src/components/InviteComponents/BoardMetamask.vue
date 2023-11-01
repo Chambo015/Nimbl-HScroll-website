@@ -2,16 +2,11 @@
     <div
         class="card_metamask min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
-        <!--  -->
         <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
             <div class="flex max-xl:flex-col-reverse relative z-20 gap-3">
+                <ProfileMenu />
                 <div
-                    class="relative overflow-hidden z-10 flex font-tt-octosquares font-medium items-center h-[60px] max-2xl:h-auto max-xl:h-[40px] px-5 gap-5 bg-gradient-header-secondary">
-                    <IconWallet class="flex-shrink-0 cursor-pointer" @click="logOutMetamask" />
-                    <p class="flex-grow truncate">{{ userStorage.user?.username }}</p>
-                </div>
-                <div
-                    class="max-md:hidden flex-shrink-0 max-xl:w-full max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] w-[350px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
+                    class="max-md:hidden flex-grow rounded-md flex-shrink-0 max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
                     </p>
@@ -47,10 +42,10 @@
                     This is your custom referral link. Use it to invite others to sign up for Nimbl.
                 </p>
             </div>
-            <div class="flex max-md:flex-col relative z-20 items-center mt-5 gap-5 max-md:gap-2">
+            <div class="flex max-md:flex-col relative z-10 items-center mt-5 gap-5 max-md:gap-2">
                 <div
                     v-if="inviteLink"
-                    class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
+                    class="bg-gradient-header-secondary rounded-md  py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
                     <input
                         type="text"
                         disabled
@@ -65,51 +60,24 @@
 
                 <button
                     @click="isModalShareOpen = true"
-                    class="btn_share flex-grow justify-center flex h-[42px] items-center px-4 max-md:w-full">
+                    class="btn_share flex-grow justify-center rounded-md  flex h-[42px] items-center px-4 max-md:w-full">
                     <p
-                        class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none flex gap-4 max-2xl:items-center">
-                        Share Link <IconShareLink />
-                    </p>
+                        class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none translate-y-[2px] max-2xl:items-center">
+                        Share Link 
+                    </p><IconShareLink class="ml-3" />
                 </button>
             </div>
             <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
-            <div class="flex gap-4 relative z-20 mt-2">
-                <div
-                    v-if="!userStorage.user.wallet_address"
-                    class="bg-gradient-header-secondary py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
-                    <input
-                        type="text"
-                        v-model="walletMetamask"
-                        placeholder="Connect Metamask"
-                        class="bg-transparent text-white select-text max-2xl:w-[130px] max-w-full border-none outline-none" />
-                    <button @click="sendMetamask" class="relative w-[24px] h-[24px] flex-shrink-0">
-                        <IconSend class="w-[24px] h-[24px]" />
-                    </button>
-                </div>
-                <div class="flex-grow-[2] flex-shrink-0">
-                    <button
-                        v-if="userStorage.user.telegram_id"
-                        class="flex bg-active-connect p-1 justify-center items-center gap-3 cursor-pointer">
-                        <IconTelegram />
-                        {{ userStorage.user.telegram_username || "telegram connected" }}
-                    </button>
-                    <VueTelegramLogin
-                        v-if="!userStorage.user.telegram_id"
-                        mode="callback"
-                        telegram-login="NimblTelegramBot"
-                        @callback="onTelegramAuth" />
-                </div>
-            </div>
             <div
                 class="max-md:hidden font-Rollbox text-white uppercase max-2xl:text-sm flex items-center justify-around h-[85px] mt-[40px] max-2xl:mt-5 user_stats relative"
                 :style="{'--bg': `url(${user_stat_bg})`}">
                 <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>units</p>
-                    <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">604</p>
+                    <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">{{ userStorage.user.units || 0 }}</p>
                 </div>
                 <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>invites</p>
-                    <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">200</p>
+                    <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">{{ userStorage.total_invites || 0 }}</p>
                 </div>
             </div>
         </div>
@@ -134,7 +102,6 @@
 
 <script setup lang="ts">
 import BtnTwitterConnect from "@/components/InviteComponents/BtnTwitterConnect.vue";
-import IconWallet from "@/components/icons/IconWallet.vue";
 import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
@@ -142,26 +109,20 @@ import copyImg from "@/assets/invite/copy.png";
 import {useClipboard, useStorage} from "@vueuse/core";
 import {computed, onMounted, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
-import IconSend from "../icons/IconSend.vue";
-import IconTelegram from "../icons/IconTelegram.vue";
-import VueTelegramLogin from "./VueTelegramLogin.vue";
-import {ISessionTwitter, IUserTg} from "@/types";
-import {useHunterTelegram} from "@/composables/useHunterTelegram";
+import {ISessionTwitter} from "@/types";
 import ModalContacts from "../ModalContacts.vue";
 import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
 import {useRoute} from "vue-router";
 import useTwitterAuth from "@/composables/useTwitterAuth";
-import axios from "axios";
+import ProfileMenu from './ProfileMenu.vue';
 
 const errorLogin = ref();
 const isModalShareOpen = ref(false);
 const route = useRoute();
 const {fetchTwitterUserById} = useTwitterAuth();
-const {postTelegramId} = useHunterTelegram();
 const {copy} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const uuidStorage = useStorage<string>("uuid", "");
-const walletMetamask = ref("");
 
 const loginTwitter = async () => {
     const uuid = route.query.u;
@@ -169,38 +130,12 @@ const loginTwitter = async () => {
     window.open("https://api.nimbl.tv/accounts/twitter/login/", "_self");
 };
 
-const logOutMetamask = () => {
-    userStorage.value = DEFAULT_USER_STORAGE;
-};
-
 const inviteLink = computed(() => {
     const uuid = userStorage.value.user?.invite_uuid;
     return uuid ? window.location.origin + "/invite" + "?u=" + uuid : null;
 });
 
-async function onTelegramAuth(user: IUserTg) {
-    await postTelegramId(user.id, user.username);
-    console.log(user);
-}
-
-const sendMetamask = () => {
-    if (!walletMetamask.value || !userStorage.value.token) return;
-    axios.post(
-        "https://api.nimbl.tv/en/api/metamask/connect/",
-        {
-            wallet_address: walletMetamask.value,
-        },
-        {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${userStorage.value.token}`,
-            },
-        },
-    );
-};
-
 onMounted(async () => {
-    console.log("csa", import.meta.env.BASE_URL);
     try {
         const twitterId = route.query.t;
         console.log("tw", twitterId);
