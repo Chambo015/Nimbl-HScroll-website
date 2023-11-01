@@ -1,8 +1,9 @@
+import { STORAGE_UUID_KEY } from '@/constants';
 import { ISessionTwitter, IUserTwitter } from '@/types';
 import { useStorage } from '@vueuse/core';
 import { ref } from 'vue';
 
-const uuidStorage = useStorage<string>("uuid", "");
+const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
 
 const useTwitterAuth = () => {
     const loading = ref(false);
@@ -49,14 +50,16 @@ const useTwitterAuth = () => {
       });
       const data = await response.json() as {
         user: IUserTwitter
-        key: string
+        key: string,
+        total_invites: number
       };
       
       loading.value = false;
 
       return {
         user: data.user,
-        token: data.key
+        token: data.key,
+        total_invites: data.total_invites
       } as ISessionTwitter;
     }
 

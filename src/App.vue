@@ -25,6 +25,7 @@ const handlePreviewClick = () => {
 };
 
 onKeyStroke("Enter", (e) => {
+    if(ready.value) return
     e.preventDefault();
     handlePreviewClick();
 });
