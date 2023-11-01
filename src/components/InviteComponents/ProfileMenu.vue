@@ -3,10 +3,10 @@
         <Popover v-slot="{open}" class="relative inline-block text-left isolate h-full">
             <PopoverButton
                 :disabled="!userStorage.user && !userStorage.token"
-                class="inline-flex h-full bg-gradient-header-secondary w-full justify-center items-center leading-none rounded-md px-4 py-2 text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 font-Rollbox font-bold text-base">
-                <IconAccountCircle class="mr-2 h-5 w-5 text-violet-200 hover:text-violet-100" />
-                {{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}
-                <IconChevronDown class="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100" :class="{'rotate-180': open}" aria-hidden="true" />
+                class="inline-flex max-w-[200px] h-full bg-gradient-header-secondary w-full justify-center items-center leading-none rounded-md px-4 py-2 text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 font-Rollbox font-bold text-base">
+                <IconAccountCircle class="mr-2 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" />
+                <span class="truncate">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
+                <IconChevronDown class="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
             </PopoverButton>
 
             <transition
@@ -35,6 +35,7 @@
                                 <VueTelegramLogin
                                     v-if="true"
                                     mode="callback"
+                                    size="small"
                                     telegram-login="NimblTelegramBot"
                                     @callback="onTelegramConnect" />
                             </button>

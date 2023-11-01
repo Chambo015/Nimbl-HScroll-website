@@ -30,16 +30,16 @@ const textInvite =
 
 const linkTwitter = () => {
     let link  = 'https://twitter.com/nimbltv'; 
-    if(props.shareMode) {
-         link = 'https://twitter.com/intent/tweet?text=' + textInvite  + '&url=' + props.inviteLink +'&hashtags=nimbl';
+    if(props.shareMode && props.inviteLink) {
+         link = 'https://twitter.com/intent/tweet?text=' + textInvite  + '&url=' + encodeURIComponent(props.inviteLink) +'&hashtags=nimbl';
     }
     window.open(link, '_blank');
     emit('clickClose')
 }
 const linkTelegram = () => {
     let link  = 'https://t.me/nimbltv'; 
-    if(props.shareMode) {
-         link = 'https://t.me/share/url?url=' + props.inviteLink + '&text=' + textInvite;
+    if(props.shareMode && props.inviteLink) {
+         link = 'https://t.me/share/url?url=' + encodeURIComponent(props.inviteLink)  + '&text=' + textInvite;
     }
     window.open(link, '_blank');
     emit('clickClose')

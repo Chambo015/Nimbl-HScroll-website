@@ -3,7 +3,7 @@
         class="card_metamask min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
         <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
-            <div class="flex max-xl:flex-col-reverse relative z-20 gap-3">
+            <div class="flex max-xl:flex-col-reverse relative z-30 gap-3">
                 <ProfileMenu />
                 <div
                     class="max-md:hidden flex-grow rounded-md flex-shrink-0 max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
