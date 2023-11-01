@@ -150,11 +150,13 @@ onMounted(async () => {
             userStorage.value = {
                 ...twitterUser,
             };
+            
+            router.replace({'query':undefined}) // for remove query params
         }
     } catch (e) {
         errorLogin.value = (e as Error).message;
     }
-    router.replace('/') // for remove query params
+    
 });
 </script>
 
