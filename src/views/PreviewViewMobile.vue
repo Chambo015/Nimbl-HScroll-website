@@ -25,7 +25,8 @@ import smoke2 from "@/assets/preview/smoke2.png";
 import smoke2Webp from "@/assets/preview/smoke2.webp";
 import smoke3 from "@/assets/preview/smoke3.png";
 import smoke3Webp from "@/assets/preview/smoke3.webp";
-import {IconPlay} from "@/components/icons";
+import logoCircle from "@/assets/preview/logo-circle.webp";
+// import {IconPlay} from "@/components/icons";
 import useStupidBrowser from "@/composables/useStupidBrowser";
 
 const sectionEl = ref();
@@ -182,8 +183,9 @@ onMounted(() => {
             class="flex w-[170px] h-[170px] absolute z-10 rounded-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
             <span
                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-bg-play-liner opacity-75"></span>
-            <div class="bg-bg-play-liner h-full w-full z-10 rounded-full">
-                <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <div class=" h-full w-full z-10 rounded-full">
+                <!-- <IconPlay class="w-[50%] h-[50%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" /> -->
+                <img :src="logoCircle" alt="" class="w-[100%] h-[100%] z-20 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover" aria-hidden="true">
             </div>
         </div>
     </div>

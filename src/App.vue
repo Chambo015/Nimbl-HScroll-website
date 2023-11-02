@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
-import {onLeavePreviewPage} from '@/leaveHooks'
+import {onLeavePreviewPage} from "@/leaveHooks";
 import {useRoute, useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
@@ -11,11 +11,11 @@ import PreviewViewMobile from "./views/PreviewViewMobile.vue";
 import ModalContacts from "./components/ModalContacts.vue";
 
 const ready = ref(false);
-const mainEl = ref()
+const mainEl = ref();
 const isModalOpen = ref(false);
 const router = useRouter();
 const route = useRoute();
-const imgUploaded = ref(false)
+const imgUploaded = ref(false);
 const isXS = useMediaQuery("(max-width: 700px)");
 
 const handlePreviewClick = () => {
@@ -25,22 +25,22 @@ const handlePreviewClick = () => {
 };
 
 onKeyStroke("Enter", (e) => {
-    if(ready.value) return
+    if (ready.value) return;
     e.preventDefault();
     handlePreviewClick();
 });
 
-onMounted( async () => {
-    await router.isReady()
-   if(route.name === 'invite') {
-    ready.value = true;
-    return
-   }
+onMounted(async () => {
+    await router.isReady();
+    if (route.name !== "nimbltv") {
+        ready.value = true;
+        return;
+    }
     router.replace({name: "nimbltv"});
     setTimeout(() => {
-        imgUploaded.value = true
-    }, 1500)
-})
+        imgUploaded.value = true;
+    }, 1500);
+});
 </script>
 
 <template>
@@ -48,8 +48,7 @@ onMounted( async () => {
         v-if="!ready"
         type="button"
         class="left-0 right-0 top-0 bottom-0 z-30 absolute block"
-        @click="handlePreviewClick"
-        ></button>
+        @click="handlePreviewClick"></button>
     <main ref="mainEl" class="absolute inset-0 overflow-hidden bg-[#0F0722]">
         <div class="absolute left-0 top-0 right-0 bottom-0 overflow-hidden">
             <router-view v-slot="{Component, route}">

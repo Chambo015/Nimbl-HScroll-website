@@ -52,9 +52,10 @@ const { top } = useElementBounding(target)
         </button>
         <!-- Top -->
         <button
+            disabled
             v-if="!isInvitePage"
             @click="$router.push({name: 'invite'})"
-            class="absolute bottom-full left-0 w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px] transition-all"
+            class="absolute bottom-full left-0 w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px] transition-all disabled:opacity-40"
             :class="[isOpenMenu ? ' translate-y-0 hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-y-1/2 hidden']">
             <TopJoystick class="w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>

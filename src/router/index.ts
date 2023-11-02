@@ -94,11 +94,11 @@ const router = createRouter({
             component: TransfersView,
         }, */
        
-        {
+        /* {
             path: "/invite/:twitterId?",
             name: "invite",
             component: () => import("@/views/InviteView.vue"),
-        }
+        } */
     ],
 });
 
