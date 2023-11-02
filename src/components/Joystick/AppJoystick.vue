@@ -34,7 +34,7 @@ const { top } = useElementBounding(target)
     <div
         ref="target"
         @mouseleave="closeMenu"
-        class="absolute right-[50px] max-sm:right-5 bottom-[160px] max-sm:bottom-[100px] opacity-50 hover:opacity-100 transition-opacity z-20" :class="{'!opacity-100': showTwitterPost}">
+        class="absolute right-[50px] max-sm:right-5 bottom-[160px] max-sm:bottom-[100px] opacity-50 hover:opacity-100 transition-opacity z-50" :class="{'!opacity-100': showTwitterPost}">
         <button @click="toggleOpenMenu" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px] relative z-50">
             <CenterJoystick v-if="!isInvitePage" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px]" />
             <CenterJoystickTwitter
@@ -52,7 +52,6 @@ const { top } = useElementBounding(target)
         </button>
         <!-- Top -->
         <button
-            disabled
             v-if="!isInvitePage"
             @click="$router.push({name: 'invite'})"
             class="absolute bottom-full left-0 w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px] transition-all disabled:opacity-40"
@@ -67,7 +66,7 @@ const { top } = useElementBounding(target)
             :class="[isOpenMenu ? ' translate-x-0  hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-x-1/2 hidden']">
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
-        <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full  z-[9999] overflow-hidden" :style="{height: (top - 50) + 'px'}"><TweetContainer /></div>
+        <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full z-[9999] overflow-hidden" :style="{height: (top - 50) + 'px'}"><TweetContainer /></div>
     </div>
 </template>
 

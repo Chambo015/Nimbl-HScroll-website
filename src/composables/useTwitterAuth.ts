@@ -12,7 +12,7 @@ const useTwitterAuth = () => {
       window.location.href = "https://api.nimbl.tv/accounts/twitter/login/"
     }
 
-    const connectMetamaskUuid = async (uuid: string, token: string) => {
+    const sendMetamaskUuid = async (uuid: string, token: string) => {
       const response = await fetch(`https://api.nimbl.tv/en/api/metamask/invite/`, {
         method: "POST",
         headers: {
@@ -38,7 +38,7 @@ const useTwitterAuth = () => {
     const fetchTwitterUserById = async (id: string) => {
       loading.value = true;
       if(uuidStorage.value.length > 0) {
-        connectMetamaskUuid(uuidStorage.value, id);
+        sendMetamaskUuid(uuidStorage.value, id);
       }
 
       const response = await fetch(`https://api.nimbl.tv/en/api/user/info/`, {

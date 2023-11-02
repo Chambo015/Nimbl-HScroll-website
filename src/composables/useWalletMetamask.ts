@@ -7,7 +7,7 @@ interface IErrorRes {
     status_code: number;
 }
 
-export const useWalletMetamask = ({wallet}: {wallet: Ref<string>}) => {
+export const useWalletMetamask = ({wallet}: {wallet: Ref<string | null | undefined>}) => {
     const loading = ref(false);
     const error = ref<string | null | undefined>(null);
 
@@ -30,6 +30,7 @@ export const useWalletMetamask = ({wallet}: {wallet: Ref<string>}) => {
             if (response.status === 200) {
                 loading.value = false;
                 error.value = null;
+                return toValue(wallet)
             } else {
                 loading.value = false;
                 error.value = "Error";

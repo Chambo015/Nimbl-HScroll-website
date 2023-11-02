@@ -1,5 +1,5 @@
 <template>
-  <div @click="$router.push({name: 'nimbltv'})" class="bg_card relative font-Rollbox max-md:text-sm font-bold text-xl max-2xl:text-lg leading-tight max-w-[250px] p-3 min-h-[100px] max-md:min-h-[75px]  cursor-pointer rounded-md hover:rounded-none transition-all">
+  <div @click="$router.push({name: 'nimbltv'})" class="bg_card relative ring-1 ring-blue-500/50 font-Rollbox max-md:text-sm font-bold text-xl max-2xl:text-lg leading-tight max-w-[250px] p-3 min-h-[100px] max-md:min-h-[75px]  cursor-pointer rounded-md hover:rounded-none transition-all">
     <p class="uppercase relative z-10 text_arrow">NIMBL.TV <br class="hidden max-md:inline" /></p>
     <img :src="nimbl" alt="notifications" width="59" height="59" class="absolute right-2 bottom-0 pointer-events-none max-md:w-[43px] max-md:h-[43px]">
   </div>
@@ -11,7 +11,6 @@ import nimbl from '@/assets/invite/nimbl.webp'
 
 <style scoped>
 .bg_card {
-  border: 1px solid #7351C8;
   background: linear-gradient(271deg, #0D0C11 2.43%, #46387A 97.57%);
 }
 .text_arrow::after {
