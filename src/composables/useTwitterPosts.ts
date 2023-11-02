@@ -28,14 +28,13 @@ const useTwitterPosts = () => {
     })
 
     const fetchTweetPostsByPageNumber = async (pageNumber: number): Promise<ITweets[]> => {
-        return await handleApiPost(`https://api.nimbl.tv/ru/api/main/tweets/?page=${pageNumber}`);
+        return await handleApiPost(`https://api.nimbl.tv/ru/api/main/tweets/?offset=${(pageNumber - 1) * 10}?limit=10`);
     };
 
-    // const fetchTweetPosts = async (): Promise<ITweets[]> => {
-    //     return await handleApiPost(`https://api.nimbl.tv/ru/api/main/tweets/`);
-    // };
-
     const fetchNextPosts = async () => {
+        if(loading == true) {
+            return ;
+        }
         if(loading == false) {
             pageNumber.value += 1
         }
