@@ -2,7 +2,7 @@
     <div
         @mouseenter="isHover = true"
         @mouseleave="isHover = false"
-        class="card inside__shadow  overflow-hidden border-white/50 border min-h-[90px] flex relative rounded-r-3xl rounded-l-md cursor-pointer"
+        class="card inside__shadow  overflow-hidden border min-h-[90px] flex relative rounded-r-3xl rounded-l-md cursor-pointer"
         :class="[isCompleted ? 'pointer-events-none [&>*]:opacity-50 border-[#f5b418]' : 'border-white/30']">
         <div
             class="w-1/4 flex-shrink-0 rounded-l-md overflow-hidden h-full relative bg-cover bg-center"

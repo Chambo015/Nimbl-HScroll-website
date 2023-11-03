@@ -124,7 +124,7 @@ import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import {useClipboard, useStorage} from "@vueuse/core";
-import {computed, nextTick, onMounted, reactive, ref} from "vue";
+import {computed, nextTick, onMounted, ref, toRef} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
 import {ISessionTwitter} from "@/types";
 import ModalContacts from "../ModalContacts.vue";
@@ -144,12 +144,9 @@ const {fetchTwitterUserById, fetchWeeklyLeaderboard} = useTwitterAuth();
 const {copy, copied} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
-const userStats = reactive({
-    units: userStorage.value.user?.units,
-    invites: userStorage.value.total_invites,
-});
-const {tweened: unitsWithAnim} = useAnimationDigits(userStats.units);
-const {tweened: invitesWithAnim} = useAnimationDigits(userStats.invites);
+
+const {tweened: unitsWithAnim} = useAnimationDigits(toRef(userStorage.value.user?.units));
+const {tweened: invitesWithAnim} = useAnimationDigits(toRef(userStorage.value.total_invites));
 
 function saveUuidStorage() {
     const uuid = route.query.u;

@@ -66,7 +66,7 @@ onMounted(() => {
 <template>
     <div
         ref="sectionEl"
-        class="absolute left-0 top-0 right-0 bottom-0 z-20 duration-1000"
+        class="absolute left-0 top-0 right-0 bottom-0 z-50 duration-1000"
         :class="{'blur-2xl backdrop-blur-lg': !imgUploaded}">
         <picture
             ><source :srcset="prevImgMobileWebp" type="image/webp" />
