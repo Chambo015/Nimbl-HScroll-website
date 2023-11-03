@@ -1,6 +1,6 @@
 <template>
     <div class="relative self-start z-20">
-        <Popover v-slot="{open}" class="relative inline-block text-left isolate h-full">
+        <Popover  v-slot="{open}"  class="relative inline-block text-left isolate h-full">
             <PopoverButton
                 :disabled="!userStorage.user && !userStorage.token"
                 class="inline-flex z-10 max-w-[200px] h-full bg-gradient-header-secondary w-full justify-center items-center leading-none rounded-md px-4 py-3 text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 font-Rollbox font-bold text-base">
@@ -9,17 +9,17 @@
                 <IconChevronDown class="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
             </PopoverButton>
 
-            <transition
+            <transition 
                 enter-active-class="transition duration-200 ease-out"
                 enter-from-class="translate-y-1 opacity-0"
                 enter-to-class="translate-y-0 opacity-100"
                 leave-active-class="transition duration-150 ease-in"
                 leave-from-class="translate-y-0 opacity-100"
                 leave-to-class="translate-y-1 opacity-0">
-                <PopoverPanel
+                <PopoverPanel :unmount="true" 
                     v-slot="{close}"
                     class="absolute left-0 mt-2 min-w-[260px] max-w-screen max-md:w-[90vw] origin-top-right divide-y divide-white/30 rounded-md backdrop-blur backdrop-filter shadow-lg ring-1 ring-black/5 bg-black/40 focus-visible:outline-none focus-visible:ring z-[999] font-TTOctos">
-                    <div class="px-1 py-1">
+                    <div class="px-1 py-1" >
                         <div>
                             <button
                                 class="group flex w-full items-center rounded-md px-3 py-3 hover:bg-gradient-header-secondary text-violet-400 !leading-tight">
@@ -41,7 +41,7 @@
                             </button>
                         </div>
                         <div>
-                            <button
+                            <button @vue:unmounted="wantChangeWallet = false" 
                                 class="group relative flex w-full items-center rounded-md px-3 py-3 text-white hover:bg-gradient-header-secondary">
                                 <label for="small_outlined"
                                     ><IconMetamask class="mr-0 h-5 w-5 text-violet-400" aria-hidden="true"
@@ -125,8 +125,10 @@ import IconTwitter from "../icons/IconTwitter.vue";
 import IconEditPen from "../icons/IconEditPen.vue";
 import IconAccountCircle from "../icons/IconAccountCircle.vue";
 import VueTelegramLogin from "./VueTelegramLogin.vue";
+import { useRouter } from 'vue-router';
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
+const router = useRouter()
 const walletValue = ref(userStorage.value.user?.wallet_address);
 const wantChangeWallet = ref(false)
 const {postTelegramId} = useHunterTelegram();
@@ -139,6 +141,7 @@ const logOut = (close: () => void) => {
 
 async function onTelegramConnect(user: IUserTg) {
     await postTelegramId(user.id, user.username);
+    router.replace('');
     console.log(user);
 }
 
@@ -149,8 +152,8 @@ const saveMetamaskWallet = async () => {
     if(newWallet && !errorWallet.value && !loadingWallet.value && userStorage.value.user ) {
      userStorage.value.user.wallet_address = newWallet;
      walletValue.value = userStorage.value.user.wallet_address
+     wantChangeWallet.value = false
     }
-    wantChangeWallet.value = false
 };
 </script>
 <style scoped>
