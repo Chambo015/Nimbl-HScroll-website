@@ -13,15 +13,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-white/20 hover:bg-gradient-header-secondary group [&:hover>td]:text-blue-500" v-for="(leader, idx ) of leaders" :key="leader.id">
+              <tr class="border-b border-white/20  group [&>td]:z-20 [&>td]:relative [&:hover>td]:text-blue-500 animation__hover" v-for="(leader, idx ) of leaders" :key="leader.id">
                 <td class="whitespace-nowrap px-5 py-4 max-md:px-3 max-md:py-2 font-medium text-center font-TTOctos">{{ idx + 1 }}</td>
                 <td class="whitespace-normal px-6 py-4 max-md:px-3 max-md:py-2 max-w-[100px] truncate font-Rollbox text-base !leading-tight font-bold max-md:text-sm">{{ leader.username }}</td>
                 <td class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">{{ leader.units }}</td>
                 <td class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">{{ leader.invite_count }}</td>
               </tr>
-             
             </tbody>
-      
+            <!-- <div class="group [transform:translateZ(0)] px-6 py-3 rounded-lg bg-gray-200 overflow-hidden relative before:absolute before:bg-sky-600 before:bottom-0 before:left-0 before:h-full before:w-full before:origin-[100%_100%] before:scale-x-0 hover:before:origin-[0_0] hover:before:scale-x-100 before:transition before:ease-in-out before:duration-500"><span class="relative z-0 text-black group-hover:text-gray-200 transition ease-in-out duration-500">Hover over me</span></div> -->
         </table>
       </div>
     </div>
@@ -55,4 +54,9 @@ fetchLeaderboard();
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #60e2ff 0%, #8c98ff 50%, #cc61ff 100%);
-}</style>
+}
+.animation__hover {
+  @apply [transform:translateZ(0)] overflow-hidden relative after:z-0 after:absolute after:bg-gradient-header-secondary after:bottom-0 after:left-0 after:h-full after:w-full after:origin-[100%_100%] after:scale-x-0 hover:after:origin-[0_0] hover:after:scale-x-100 after:transition after:ease-in-out after:duration-500
+}
+
+</style>

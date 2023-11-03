@@ -91,6 +91,7 @@ export interface ISessionTwitter {
     user: IUserTwitter | null;
     total_invites: number | null;
     token: string | null;
+    weekly_leaderboard: null | IWeeklyLeaderBoard 
 }
 
 export interface ITweets {
@@ -120,6 +121,11 @@ export interface ILeaderboardUser {
     username: string;
     units: number;
     invite_count: number;
+}
+
+export interface IWeeklyLeaderBoard  {
+    user_position: number;
+    all_users_count: number;
 }
 
 /* 

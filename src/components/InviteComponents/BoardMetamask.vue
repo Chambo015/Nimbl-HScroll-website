@@ -11,7 +11,7 @@
                         Weekly Leaderboard
                     </p>
                     <p class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
-                        #159 of 21.788
+                        #{{ userStorage.weekly_leaderboard?.user_position }} of {{ userStorage.weekly_leaderboard?.all_users_count }}
                     </p>
                     <img
                         :src="rocket_img"
@@ -44,18 +44,25 @@
             </div>
             <div class="flex max-md:flex-col relative z-10 items-center mt-5 gap-5 max-md:gap-2">
                 <div
+                    @click="inviteLink && copy(inviteLink)"
                     v-if="inviteLink"
-                    class="bg-gradient-header-secondary rounded-md py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full">
+                    class="bg-gradient-header-secondary cursor-pointer isolate relative rounded-md py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full"
+                    :class="{'ring-1 ring-[#f5b418]': copied}">
                     <input
                         type="text"
                         disabled
                         :value="inviteLink"
-                        class="bg-transparent text-white select-text flex-grow max-w-full" />
+                        class="bg-transparent text-white select-text flex-grow max-w-full cursor-pointer pointer-events-none" />
                     <button
                         @click="inviteLink && copy(inviteLink)"
                         class="btn_copy relative w-[24px] h-[24px] flex-shrink-0">
-                        <img :src="copyImg" alt="copyImg" width="24" height="24" />
+                        <IconContentCopy class="text-2xl" :class="{'text-[#f5b418]': copied}" />
                     </button>
+                    <span
+                        :class="[copied ? 'opacity-100 -translate-y-full' : 'translate-y-0']"
+                        class="absolute z-[-1] left-1/2 -translate-x-1/2 top-0 transition-all bg-[#f5b418] opacity-0 text-black font-TTOctos px-1 text-xs font-bold"
+                        >COPIED</span
+                    >
                 </div>
 
                 <button
@@ -70,18 +77,18 @@
             </div>
             <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
             <div
-                class="max-md:hidden font-Rollbox text-white uppercase max-2xl:text-sm flex items-center justify-around h-[85px] mt-[40px] max-2xl:mt-5 user_stats relative"
+                class="max-md:hidden font-Rollbox text-white py-3 uppercase max-2xl:text-sm flex items-center justify-around mt-5 user_stats relative"
                 :style="{'--bg': `url(${user_stat_bg})`}">
                 <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>units</p>
                     <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">
-                        {{ userStorage.user.units || 0 }}
+                        {{ unitsWithAnim.number.toFixed(0) || userStorage.user.units || 0 }}
                     </p>
                 </div>
                 <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>invites</p>
                     <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">
-                        {{ userStorage.total_invites || 0 }}
+                        {{ invitesWithAnim.number.toFixed(0) || userStorage.total_invites || 0 }}
                     </p>
                 </div>
             </div>
@@ -89,6 +96,12 @@
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
             <p v-if="errorLogin" class="font-Rollbox font-bold text-red-500 px-4">{{ errorLogin }}</p>
             <BtnTwitterConnect @click="loginTwitter" />
+            <p class="text-center mx-7 mt-5 -mb-9 text-sm !leading-tight">
+                By signing up, you agree to Nimbl's
+                <a :href="privacyPolicyURL" target="_blank" class="text-blue-600"
+                    >Terms of Service and Privacy Policy.</a
+                >
+            </p>
         </div>
         <!-- Modal Contact -->
         <Transition
@@ -110,9 +123,8 @@ import BtnTwitterConnect from "@/components/InviteComponents/BtnTwitterConnect.v
 import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
-import copyImg from "@/assets/invite/copy.png";
 import {useClipboard, useStorage} from "@vueuse/core";
-import {computed, nextTick, onMounted, ref} from "vue";
+import {computed, nextTick, onMounted, reactive, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
 import {ISessionTwitter} from "@/types";
 import ModalContacts from "../ModalContacts.vue";
@@ -120,15 +132,24 @@ import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY, STORAGE_UUID_KEY} from "@/consta
 import {useRoute, useRouter} from "vue-router";
 import useTwitterAuth from "@/composables/useTwitterAuth";
 import ProfileMenu from "./ProfileMenu.vue";
+import IconContentCopy from "../icons/IconContentCopy.vue";
+import {useAnimationDigits} from "@/composables/useAnimationDigits";
 
+const privacyPolicyURL = new URL("/privacy-policy.pdf", import.meta.url).href;
 const errorLogin = ref();
 const isModalShareOpen = ref(false);
 const route = useRoute();
 const router = useRouter();
-const {fetchTwitterUserById} = useTwitterAuth();
-const {copy} = useClipboard();
+const {fetchTwitterUserById, fetchWeeklyLeaderboard} = useTwitterAuth();
+const {copy, copied} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
+const userStats = reactive({
+    units: userStorage.value.user?.units,
+    invites: userStorage.value.total_invites,
+});
+const {tweened: unitsWithAnim} = useAnimationDigits(userStats.units);
+const {tweened: invitesWithAnim} = useAnimationDigits(userStats.invites);
 
 function saveUuidStorage() {
     const uuid = route.query.u;
@@ -148,24 +169,29 @@ const inviteLink = computed(() => {
 const refetchUserInfo = async (token: string) => {
     const twitterUser = await fetchTwitterUserById(token);
 
+    if (!twitterUser) return;
+
     userStorage.value = {
         ...twitterUser,
     };
+
+    const dataWeeklyLeaderboard = await fetchWeeklyLeaderboard({token});
+    if(!dataWeeklyLeaderboard) return
+    userStorage.value.weekly_leaderboard = {
+        ...dataWeeklyLeaderboard
+    }
 };
 
 onMounted(async () => {
     try {
-        if(userStorage.value.token) {
-          await  refetchUserInfo(userStorage.value.token)
+        if (userStorage.value.token) {
+            await refetchUserInfo(userStorage.value.token);
         }
         const twitterId = route.query.t;
         console.log("tw", twitterId);
         if (typeof twitterId === "string" && twitterId) {
-            const twitterUser = await fetchTwitterUserById(twitterId);
+            await refetchUserInfo(twitterId);
 
-            userStorage.value = {
-                ...twitterUser,
-            };
             await nextTick();
             router.replace({query: undefined}); // for remove query params
         }
