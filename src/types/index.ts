@@ -27,6 +27,11 @@ export interface AudioTrackType {
     flag: string;
 }
 
+export interface ITweetsCount {
+    done_tweets: number;
+    limit_tweets: number;
+}
+
 export interface IBoardTask {
     id: number;
     task_done: boolean;
@@ -40,6 +45,7 @@ export interface IBoardTask {
     name: string;
     reward: number;
     hunter_task: number;
+    tweets_count: ITweetsCount | null;
 }
 
 export interface ICompletedTask {
@@ -78,13 +84,14 @@ export interface IUserTwitter {
     invite_uuid: string;
     telegram_id: string | null;
     telegram_username: string | null;
-    wallet_address?: null;
+    wallet_address?: string | null;
 }
 
 export interface ISessionTwitter {
     user: IUserTwitter | null;
     total_invites: number | null;
     token: string | null;
+    weekly_leaderboard: null | IWeeklyLeaderBoard 
 }
 
 export interface ITweets {
@@ -114,6 +121,11 @@ export interface ILeaderboardUser {
     username: string;
     units: number;
     invite_count: number;
+}
+
+export interface IWeeklyLeaderBoard  {
+    user_position: number;
+    all_users_count: number;
 }
 
 /* 

@@ -93,7 +93,6 @@ const router = createRouter({
             name: "transfers",
             component: TransfersView,
         }, */
-       
         {
             path: "/invite/:twitterId?",
             name: "invite",

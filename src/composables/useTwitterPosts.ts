@@ -12,7 +12,7 @@ const useTwitterPosts = () => {
     };
 
     const fetchTweetPosts = async (): Promise<ITweets[]> => {
-        return await handleApiPost("https://api.nimbl.tv/ru/api/main/tweets/");
+        return await handleApiPost("https://api.nimbl.tv/ru/api/main/tweets?search=nimbltv");
     };
 
     return {fetchTweetPosts};
