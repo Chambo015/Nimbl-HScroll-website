@@ -145,8 +145,8 @@ const {copy, copied} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
 
-const {tweened: unitsWithAnim} = useAnimationDigits(toRef(userStorage.value.user?.units));
-const {tweened: invitesWithAnim} = useAnimationDigits(toRef(userStorage.value.total_invites));
+const {tweened: unitsWithAnim} = useAnimationDigits(() => userStorage.value.user?.units);
+const {tweened: invitesWithAnim} = useAnimationDigits(() => userStorage.value.total_invites);
 
 function saveUuidStorage() {
     const uuid = route.query.u;

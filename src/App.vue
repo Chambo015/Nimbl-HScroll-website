@@ -47,7 +47,7 @@ onMounted(async () => {
     <button
         v-if="!ready"
         type="button"
-        class="left-0 right-0 top-0 bottom-0 z-30 absolute block"
+        class="left-0 right-0 top-0 bottom-0 z-[9999] absolute block"
         @click="handlePreviewClick"></button>
     <main ref="mainEl" class="absolute inset-0 overflow-hidden bg-[#0F0722]">
         <div class="absolute left-0 top-0 right-0 bottom-0 overflow-hidden">
@@ -57,7 +57,7 @@ onMounted(async () => {
                 </TransitionLeavePage>
             </router-view>
         </div>
-        <AppJoystick @click-bottom="isModalOpen = !isModalOpen" />
+        <AppJoystick v-if="ready" @click-bottom="isModalOpen = !isModalOpen" />
         <NavigationApp />
         <!-- Preview for Desktop  -->
         <template v-if="!isXS">

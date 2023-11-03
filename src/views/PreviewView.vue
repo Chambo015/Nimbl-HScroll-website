@@ -1,5 +1,5 @@
 <template>
-    <div  class="bg-transparent fixed left-0 top-0 w-screen h-screen z-50 will-change-transform">
+    <div  class="bg-transparent fixed left-0 top-0 w-screen h-screen z-40 will-change-transform">
         <div class="bg-black/30 fixed inset-0 backdrop-blur-2xl duration-[2s] z-50 transition-opacity" :class="{'opacity-0': imgUploaded}"></div>
         <div class="absolute left-0 inset-y-0 bg-black w-[30%]"></div>
         <div class="absolute right-0 inset-y-0 bg-black w-[30%]"></div>
