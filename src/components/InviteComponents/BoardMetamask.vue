@@ -124,7 +124,7 @@ import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import {useClipboard, useStorage} from "@vueuse/core";
-import {computed, nextTick, onMounted, ref, toRef} from "vue";
+import {computed, nextTick, onMounted, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
 import {ISessionTwitter} from "@/types";
 import ModalContacts from "../ModalContacts.vue";

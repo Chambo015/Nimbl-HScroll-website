@@ -11,15 +11,13 @@ export const useAnimationDigits = (number:  () => number | undefined | null) => 
       gsap.to(tweened, {duration: 1, delay: 1, number: Number(toValue(number)) || 0});
     }
 
-    onMounted(() => {
+   /*  onMounted(() => {
       animationExecute()
-    });
+    }); */
 
     watchEffect(() => {
       animationExecute()
     })
 
-    return  {
-      tweened
-    }
+    return  { tweened };
 };
