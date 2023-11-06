@@ -7,7 +7,7 @@ const useTwitterPosts = () => {
     const tweetPosts = ref<ITweets[]>([]);
     const hasMore = ref<boolean>(true);
     const loading = ref<boolean>(false);
-    const LIMIT = 3;
+    const LIMIT = 10;
 
     onMounted(async () => {
         fetchNextPosts();

@@ -164,10 +164,6 @@ export default defineComponent({
       renderTweet();
     });
 
-    watch(props, () => {
-      renderTweet();
-    });
-
     function renderTweet(): void {
       if (!(window["twttr"] && window["twttr"].ready)) {
         addScript("https://platform.twitter.com/widgets.js", renderTweet);
