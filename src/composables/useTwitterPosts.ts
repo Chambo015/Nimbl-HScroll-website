@@ -1,52 +1,45 @@
 import {ITweets} from "@/types";
 import axios from "axios";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 
 const useTwitterPosts = () => {
-    const pageNumber = ref<number>(1);
+    const pageNumber = ref<number>(0);
     const tweetPosts = ref<ITweets[]>([]);
+    const hasMore = ref<boolean>(true);
     let loading = false;
+    const LIMIT = 3;
 
-    const handleApiPost = async (endpoint: string) => {
-        loading = false;
-        const result = await axios.get<{count: number; results: ITweets[]}>(endpoint, {
+    onMounted(async () => {
+        fetchNextPosts();
+    });
+
+    const fetchTweetPosts = async (pageNumber: number): Promise<void> => {
+        const limit = LIMIT;
+        const offset = (pageNumber - 1) * limit;
+        const endpoint = `https://api.nimbl.tv/ru/api/main/tweets/?offset=${offset}&limit=${limit}`;
+        const response = await axios.get<{count: number; next: string; results: ITweets[]}>(endpoint, {
             headers: {
                 "Content-Type": "application/json",
             },
         });
-        loading = true;
-        return result.data.results as ITweets[];
-    };
-
-    const fetchTweetPosts = async (): Promise<ITweets[]> => {
-        return await handleApiPost("https://api.nimbl.tv/ru/api/main/tweets?search=nimbltv");
-    }
-
-    onMounted(async () => {
-        tweetPosts.value = await fetchTweetPostsByPageNumber(pageNumber.value);
-    });
-
-    watch(pageNumber, async () => {
-        const data = await fetchTweetPostsByPageNumber(pageNumber.value);
-        tweetPosts.value = [...tweetPosts.value, ...data]
-    })
-
-    const fetchTweetPostsByPageNumber = async (pageNumber: number): Promise<ITweets[]> => {
-        return await handleApiPost(`https://api.nimbl.tv/ru/api/main/tweets/?offset=${(pageNumber - 1) * 10}?limit=10`);
+        hasMore.value = response.data.next !== null;
+        tweetPosts.value = [...tweetPosts.value, ...response.data.results]
     };
 
     const fetchNextPosts = async () => {
-        if(loading == true) {
-            return ;
-        }
         if(loading == false) {
+            loading = true;
             pageNumber.value += 1
+            await fetchTweetPosts(pageNumber.value);
+            
+            setTimeout(() => {
+                loading = false;
+            }, 300);
         }
     }
 
     return {
         tweetPosts,
-        fetchTweetPosts,
         fetchNextPosts,
     };
 };
