@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[500px] h-full max-2xl:w-[350px] max-md:w-[calc(100vw-40px)] overflow-y-scroll overflow-x-hidden rounded-2xl">
+    <div ref="el" class="w-[500px] h-full max-2xl:w-[350px] max-md:w-[calc(100vw-40px)] overflow-y-scroll overflow-x-hidden rounded-2xl">
         <template v-for="tweet of tweetPosts" :key="tweet.id">
             <Tweet :tweet-url="tweet.tweet_url"  theme="dark" :width="widthWidget">
                 <template v-slot:loading>
@@ -13,18 +13,17 @@
 <script setup lang="ts">
 import  Tweet from "vue-tweet";
 import { Vue3Lottie } from 'vue3-lottie'
-import {breakpointsTailwind, useBreakpoints, useWindowSize } from "@vueuse/core";
-import { computed, onMounted, ref } from 'vue';
+import {breakpointsTailwind, useBreakpoints, useInfiniteScroll, useWindowSize } from "@vueuse/core";
+import { computed, ref } from 'vue';
 import useTwitterPosts from '@/composables/useTwitterPosts';
-import { ITweets } from '@/types';
 import loadingCircle from '@/assets/lottie/loading-circle.json'
 
-const tweetPosts = ref<ITweets[]>([])
-const {fetchTweetPosts} = useTwitterPosts()
+const {fetchNextPosts, tweetPosts} = useTwitterPosts()
 const { width } = useWindowSize()
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const mdAndSmaller = breakpoints.smallerOrEqual("md");
 const TwoXlAndSmaller = breakpoints.smallerOrEqual("2xl");
+const el = ref<HTMLElement | null>(null)
 
 const widthWidget = computed(() => {
     if(mdAndSmaller.value) {
@@ -35,10 +34,11 @@ const widthWidget = computed(() => {
     return 500
 })
 
-onMounted(async() => {
-    const res = await fetchTweetPosts()
-    tweetPosts.value = res
-})
+useInfiniteScroll(
+    el,
+    fetchNextPosts,
+    { distance: 20 }
+);
 </script>
 
 <style scoped>
