@@ -1,12 +1,12 @@
 import {ITweets} from "@/types";
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, nextTick } from "vue";
 
 const useTwitterPosts = () => {
     const pageNumber = ref<number>(0);
     const tweetPosts = ref<ITweets[]>([]);
     const hasMore = ref<boolean>(true);
-    let loading = false;
+    const loading = ref<boolean>(false);
     const LIMIT = 3;
 
     onMounted(async () => {
@@ -27,14 +27,23 @@ const useTwitterPosts = () => {
     };
 
     const fetchNextPosts = async () => {
-        if(loading == false) {
-            loading = true;
+        if(loading.value == false && hasMore.value == true) {
+            console.log("fetchNextPosts", loading.value)
+            console.log("loading", true)
+            loading.value = true;
             pageNumber.value += 1
             await fetchTweetPosts(pageNumber.value);
+            nextTick(() => {
+                if (window.twttr && window.twttr.widgets) {
+                  window.twttr.widgets.load();
+                }
+            });
+              
             
             setTimeout(() => {
-                loading = false;
-            }, 300);
+                console.log("loading", false)
+                loading.value = false;
+            }, 1000);
         }
     }
 
