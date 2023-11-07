@@ -86,6 +86,12 @@
                     </p>
                 </div>
                 <div class="flex flex-col items-center gap-2 relative z-20">
+                    <p>weekly units</p>
+                    <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">
+                        {{ weeklyUnits.number.toFixed(0) || userStorage.user.units || 0 }}
+                    </p>
+                </div>
+                <div class="flex flex-col items-center gap-2 relative z-20">
                     <p>invites</p>
                     <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">
                         {{ invitesWithAnim.number.toFixed(0) || userStorage.total_invites || 0 }}
@@ -147,6 +153,7 @@ const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
 
 const {tweened: unitsWithAnim} = useAnimationDigits(() => userStorage.value.user?.units);
 const {tweened: invitesWithAnim} = useAnimationDigits(() => userStorage.value.total_invites);
+const {tweened: weeklyUnits} = useAnimationDigits(() => userStorage.value.temporary_units);
 
 function saveUuidStorage() {
     const uuid = route.query.u;
@@ -163,7 +170,7 @@ const inviteLink = computed(() => {
     return uuid ? "https://chambo015.github.io/Nimbl-HScroll-website/#/invite" + "?u=" + uuid : null;
 });
 
-const refetchUserInfo = async (token: string) => {
+const fetchUserInfo = async (token: string) => {
     const twitterUser = await fetchTwitterUserById(token);
 
     if (!twitterUser) return;
@@ -182,15 +189,15 @@ const refetchUserInfo = async (token: string) => {
 onMounted(async () => {
     try {
         if (userStorage.value.token) {
-            await refetchUserInfo(userStorage.value.token);
+            await fetchUserInfo(userStorage.value.token);
         }
         const twitterId = route.query.t;
         console.log("tw", twitterId);
         if (typeof twitterId === "string" && twitterId) {
-            await refetchUserInfo(twitterId);
+            await fetchUserInfo(twitterId);
 
             await nextTick();
-            router.replace({query: undefined}); // for remove query params
+            router.replace({query: undefined}); // reload page for remove query params
         }
     } catch (e) {
         errorLogin.value = (e as Error).message;
