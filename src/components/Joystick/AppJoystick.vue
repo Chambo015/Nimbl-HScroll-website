@@ -8,6 +8,7 @@ import CenterJoystickTwitter from './CenterJoystickTwitter.vue';
 import { useRoute } from 'vue-router';
 import TweetContainer from './TweetContainer.vue';
 import { onClickOutside, useElementBounding  } from '@vueuse/core'
+import TweetComponent from '@/components/TweetComponent.vue'
 
 
 defineEmits(['clickBottom'])
@@ -17,6 +18,7 @@ const target = ref(null)
 const isInvitePage = computed(() => route.name === 'invite')
 const isOpenMenu = ref(false)
 const showTwitterPost = ref(false)
+const tweetUrl = "https://twitter.com/Redrum274/status/1721120937536270391";
 const toggleOpenMenu = () => {
     isOpenMenu.value = !isOpenMenu.value
 };
@@ -67,6 +69,9 @@ const { top } = useElementBounding(target)
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
         <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full z-[9999] overflow-hidden" :style="{height: (top - 50) + 'px'}"><TweetContainer /></div>
+        <div v-show="false">
+            <TweetComponent :tweet-url="tweetUrl" v-if="tweetUrl" />
+        </div>
     </div>
 </template>
 
