@@ -1,6 +1,6 @@
 <template>
     <div
-        class="card_metamask flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg shadow-lg relative card_before"
+        class="card_metamask ring-1 ring-[#2a0a42] flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
         <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
             <div class="flex max-xl:flex-col-reverse relative z-30 gap-3 isolate">

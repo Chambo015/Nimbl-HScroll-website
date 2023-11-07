@@ -1,4 +1,4 @@
-import { reactive, onMounted,  toValue, watchEffect} from "vue";
+import { reactive,  toValue, watchEffect} from "vue";
 import gsap from "gsap";
 
 export const useAnimationDigits = (number:  () => number | undefined | null) => {
