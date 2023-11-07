@@ -22,14 +22,16 @@ const useTwitterPosts = () => {
                 "Content-Type": "application/json",
             },
         });
+        const newTweetPosts = response.data.results.map(tweet => ({
+            ...tweet,
+            tweet_id: tweet.tweet_url.split("/").pop(),
+        }))
         hasMore.value = response.data.next !== null;
-        tweetPosts.value = [...tweetPosts.value, ...response.data.results]
+        tweetPosts.value = [...tweetPosts.value, ...newTweetPosts]
     };
 
     const fetchNextPosts = async () => {
         if(loading.value == false && hasMore.value == true) {
-            console.log("fetchNextPosts", loading.value)
-            console.log("loading", true)
             loading.value = true;
             pageNumber.value += 1
             await fetchTweetPosts(pageNumber.value);
@@ -41,7 +43,6 @@ const useTwitterPosts = () => {
               
             
             setTimeout(() => {
-                console.log("loading", false)
                 loading.value = false;
             }, 1000);
         }
