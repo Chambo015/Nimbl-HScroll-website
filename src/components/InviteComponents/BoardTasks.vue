@@ -28,7 +28,7 @@ onMounted(async() => {
  tasks.value = resTasks
 })
 
-watch(userStorage, async () => {
+watch(() => userStorage.value.token, async () => {
   const resTasks =  await fetchTasks();
   tasks.value = resTasks
 })

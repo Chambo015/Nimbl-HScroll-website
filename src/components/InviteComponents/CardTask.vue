@@ -153,18 +153,7 @@ defineProps({
     mix-blend-mode: hard-light;
 }
 
-/* .bg_open {
-    --r: 15px;
-    clip-path: polygon(
-        0% 0%,
-        calc(100% - var(--r)) 0%,
-        100% var(--r),
-        100% calc(100% - var(--r)),
-        calc(100% - var(--r)) 100%,
-        0% 100%
-    );
-    background-image: linear-gradient(180deg, #b0731a -9.01%, #d0a530 22.91%, #f2d14e 63.49%);
-} */
+
 
 .inside__shadow {
     @apply before:absolute before:z-30 before:w-full before:h-full hover:before:shadow-[0px_0px_100px_-20px_inset] 

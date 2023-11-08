@@ -11,7 +11,7 @@
                         Weekly Leaderboard
                     </p>
                     <p class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
-                        #{{ userStorage.weekly_leaderboard?.user_position }} of {{ userStorage.weekly_leaderboard?.all_users_count }}
+                        #{{ userStorage.weekly_leaderboard?.user_position }} of {{ userStorage.weekly_leaderboard?.total_users }}
                     </p>
                     <img
                         :src="rocket_img"
@@ -76,28 +76,7 @@
                 </button>
             </div>
             <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
-            <div
-                class="max-md:hidden font-Rollbox text-white py-3 uppercase max-2xl:text-sm flex items-center justify-around mt-5 user_stats relative"
-                :style="{'--bg': `url(${user_stat_bg})`}">
-                <div class="flex flex-col items-center gap-2 relative z-20">
-                    <p>units</p>
-                    <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">
-                        {{ unitsWithAnim.number.toFixed(0) || userStorage.user.units || 0 }}
-                    </p>
-                </div>
-                <div class="flex flex-col items-center gap-2 relative z-20">
-                    <p>weekly units</p>
-                    <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">
-                        {{ weeklyUnits.number.toFixed(0) || userStorage.user.units || 0 }}
-                    </p>
-                </div>
-                <div class="flex flex-col items-center gap-2 relative z-20">
-                    <p>invites</p>
-                    <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">
-                        {{ invitesWithAnim.number.toFixed(0) || userStorage.total_invites || 0 }}
-                    </p>
-                </div>
-            </div>
+            <BoardUnits />
         </div>
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
             <p v-if="errorLogin" class="font-Rollbox font-bold text-red-500 px-4">{{ errorLogin }}</p>
@@ -128,7 +107,6 @@
 import BtnTwitterConnect from "@/components/InviteComponents/BtnTwitterConnect.vue";
 import noise from "@/assets/bg_invite_noise.webp";
 import rocket_img from "@/assets/rocket_img.png";
-import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import {useClipboard, useStorage} from "@vueuse/core";
 import {computed, nextTick, onMounted, ref} from "vue";
 import IconShareLink from "../icons/IconShareLink.vue";
@@ -139,7 +117,7 @@ import {useRoute, useRouter} from "vue-router";
 import useTwitterAuth from "@/composables/useTwitterAuth";
 import ProfileMenu from "./ProfileMenu.vue";
 import IconContentCopy from "../icons/IconContentCopy.vue";
-import {useAnimationDigits} from "@/composables/useAnimationDigits";
+import BoardUnits from './BoardUnits.vue';
 
 const privacyPolicyURL = new URL("/privacy-policy.pdf", import.meta.url).href;
 const errorLogin = ref();
@@ -150,10 +128,6 @@ const {fetchTwitterUserById, fetchWeeklyLeaderboard} = useTwitterAuth();
 const {copy, copied} = useClipboard();
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const uuidStorage = useStorage<string>(STORAGE_UUID_KEY, "");
-
-const {tweened: unitsWithAnim} = useAnimationDigits(() => userStorage.value.user?.units);
-const {tweened: invitesWithAnim} = useAnimationDigits(() => userStorage.value.total_invites);
-const {tweened: weeklyUnits} = useAnimationDigits(() => userStorage.value.temporary_units);
 
 function saveUuidStorage() {
     const uuid = route.query.u;
@@ -234,15 +208,5 @@ onMounted(async () => {
     background-image: linear-gradient(180deg, #b0731a -9.01%, #d0a530 22.91%, #f2d14e 63.49%);
 }
 
-.user_stats::before {
-    content: "";
-    background-image: var(--bg);
-    background-size: 100% 100%;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    opacity: 0.6;
-    z-index: 1;
-    mix-blend-mode: screen;
-}
+
 </style>

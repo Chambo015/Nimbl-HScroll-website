@@ -129,7 +129,7 @@ export interface ILeaderboardUser {
 
 export interface IWeeklyLeaderBoard  {
     user_position: number;
-    all_users_count: number;
+    total_users: number;
 }
 
 export type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER]
