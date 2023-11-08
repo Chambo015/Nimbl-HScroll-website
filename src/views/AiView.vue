@@ -87,7 +87,7 @@ const rightVideoEl = ref();
 const titleEl = ref();
 const readyToShowVideo = ref(false);
 
-const {onWheel} = useMouseWheel({toDownRoute: "token", toUpRoute: "gamification", target: sectionEl});
+const {onWheel} = useMouseWheel({toDownRoute: "tokenomics", toUpRoute: "gamification", target: sectionEl});
 
 onMounted(() => {
     if(isXS.value) {

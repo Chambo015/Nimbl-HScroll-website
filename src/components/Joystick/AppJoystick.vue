@@ -53,7 +53,7 @@ const { top } = useElementBounding(target)
             <BottomJoystick class="w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
         <!-- Top -->
-        <button
+        <button disabled
             v-if="!isInvitePage"
             @click="$router.push({name: 'invite'})"
             class="absolute bottom-full left-0 w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px] transition-all disabled:opacity-40"

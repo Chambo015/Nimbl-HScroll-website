@@ -14,6 +14,7 @@ const routerPaths = [
     "gamification",
     /* 'summarize', */ 
     "ai",
+    "tokenomics",
     /* 'handle', */ 
     "token",
     "roadmap",
@@ -94,10 +95,15 @@ const router = createRouter({
             component: TransfersView,
         }, */
         {
+            path: "/tokenomics",
+            name: "tokenomics",
+            component: () => import("@/views/TokenomicsView.vue")
+        },
+    /*     {
             path: "/invite/:twitterId?",
             name: "invite",
             component: () => import("@/views/InviteView.vue"),
-        }
+        } */
     ],
 });
 

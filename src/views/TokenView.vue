@@ -46,7 +46,7 @@ const light1El = ref();
 const light2El = ref();
 const smokeEl = ref();
 
-const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "ai", target: sectionEl});
+const {onWheel} = useMouseWheel({toDownRoute: "roadmap", toUpRoute: "tokenomics", target: sectionEl});
 
 onMounted(() => {
     if (isXS.value) return;

@@ -511,6 +511,18 @@ export const leaveHooks: {[k: string]: (el: any, done: any) => void} = {
             "0",
         );
     },
+    tokenomics: (el, done) => {
+        const tl = gsap.timeline({onComplete: done});
+        const containerEl = el.querySelector('[data="containerEl"]');
+
+        tl.to(containerEl.children, {
+            yPercent: -50,
+            autoAlpha: 0.0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "expo.inOut",
+        });
+    },
     
 };
 
