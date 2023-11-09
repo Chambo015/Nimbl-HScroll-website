@@ -3,7 +3,7 @@
         ref="sectionEl"
         @wheel="onWheel"
         class="h-full flex items-center pt-5 pb-10 max-md:pt-0 max-sm:py-1 max-sm:items-center">
-        <div ref="containerEl" data="containerEl" class="relative w-full h-full p-5 max-md:p-2 grid grid-cols-7 auto-rows-[minmax(0px,_1fr)] gap-5 max-md:gap-3 max-md:grid-cols-2">
+        <div ref="containerEl" data="containerEl" class="relative w-full h-full p-5 max-md:p-2 grid grid-cols-8 auto-rows-[minmax(0px,_1fr)] gap-5 max-md:gap-3 max-md:grid-cols-2">
             <div class="item__ceil col-span-2 max-md:col-span-1">
                 <div class="w-full h-[70%] absolute left-0 top-0 right-0 bg-center max-md:bg-center bg-repeat-x" :style="{backgroundImage: `url(${imgCex})`}"></div>
                 <div class="flex items-center justify-between absolute bottom-5 left-5 right-5 max-md:left-2 max-md:right-2 max-md:bottom-2">
@@ -11,11 +11,11 @@
                     <span class="item__percent">6%</span>
                 </div>
             </div>
-            <div class="item__ceil col-span-2 max-md:col-span-1">
-                <div class="w-full h-[70%] absolute left-0 top-0 right-0 bg-no-repeat bg-top bg-cover mix-blend-lighten " :style="{backgroundImage: `url(${imgDex})`}"></div>
+            <div class="item__ceil col-span-3 max-md:col-span-1">
+                <div class="w-full h-[80%] absolute left-0 top-0 right-0 bg-no-repeat bg-bottom bg-cover mix-blend-lighten " :style="{backgroundImage: `url(${imgDex})`}"></div>
                 <div class="flex items-center justify-between absolute bottom-5 left-5 right-5 max-md:left-2 max-md:right-2 max-md:bottom-2">
                     <span class="item__title">DEX liquidity</span>
-                    <span class="item__percent">6%</span>
+                    <span class="item__percent">11%</span>
                 </div>
             </div>
             <div class="item__ceil col-span-3 max-md:col-span-2">
@@ -23,24 +23,25 @@
                 <div class="w-[90%] h-full absolute top-4 right-0 bg-no-repeat bg-center bg-contain" :style="{backgroundImage: `url(${imgGraph})`}"></div>
                 <div class="flex flex-col-reverse justify-between absolute bottom-5 left-10 max-md:left-5 max-md:bottom-3">
                     <span class="item__title">Private Sale</span>
-                    <span class="item__percent">18%</span>
+                    <span class="item__percent">10%</span>
                 </div>
             </div>
             <!--  -->
             <div class="item__ceil col-span-3  max-md:col-span-2">
-                <div class="w-1/2 h-full absolute bottom-0 top-0 right-0 bg-no-repeat bg-center bg-contain mix-blend-lighten" :style="{backgroundImage: `url(${imgMarketing})`}"></div>
+                <div class="w-1/2 h-full absolute bottom-0 top-0 right-0 bg-no-repeat bg-bottom bg-contain mix-blend-lighten" :style="{backgroundImage: `url(${imgMarketing})`}"></div>
                 <div class="flex items-center gap-5 justify-between absolute top-1/2 left-10 -translate-y-1/2 max-md:left-5">
                     <span class="item__title">Marketing</span>
-                    <span class="item__percent ">13%</span>
+                    <span class="item__percent ">16%</span>
                 </div>
             </div>
             <div class="item__ceil col-span-1 up-radial-gradient max-md:hidden">
-                <div class="w-[74px] h-[74px] absolute left-1/2 bg-no-repeat bg-center bg-contain -translate-x-1/2 bottom-1/2" :style="{backgroundImage: `url(${imgPercent})`}"></div>
-                <div class="flex items-center absolute bottom-10 max-2xl:bottom-5 left-1/2 -translate-x-1/2">
-                    <span class="item__percent !text-[40px] max-2xl:!text-[30px]">RATIO</span>
+                <div class="w-full h-full absolute left-0 top-0  bg-no-repeat bg-left-top  mix-blend-lighten" :style="{backgroundImage: `url(${imgAdvisory})`}"></div>
+                <div class="flex items-center flex-col-reverse justify-between absolute bottom-10 left-5 right-5 max-md:left-2 max-md:right-2 max-md:bottom-2">
+                    <span class="item__title">Advisory</span>
+                    <span class="item__percent">4%</span>
                 </div>
             </div>
-            <div class="item__ceil col-span-3 max-md:col-span-2">
+            <div class="item__ceil col-span-4 max-md:col-span-2">
                 <div class="w-[70%] rounded-l-xl absolute bottom-5 top-5 max-md:top-2 max-md:bottom-2 right-0 bg-no-repeat bg-top bg-cover shadow-[0px_0px_57px_0px_rgba(225,_139,_255,_0.60)_inset]" :style="{backgroundImage: `url(${imgTeam})`}"></div>
                 <div class="flex flex-col-reverse justify-between absolute top-1/2 -translate-y-1/2 left-10 max-md:left-5">
                     <span class="item__title">Team</span>
@@ -48,10 +49,17 @@
                 </div>
             </div>
             <!--  -->
-            <div class="item__ceil col-span-3 max-md:col-span-2">
-                <div class="aspect-[0.64] h-full absolute bottom-0 left-[15%] max-md:left-[10%] bg-no-repeat bg-bottom bg-contain " :style="{backgroundImage: `url(${imgPhone})`}"></div>
-                <div class="flex flex-col-reverse max-md:flex-row max-md:items-center max-md:gap-5 max-md:left-[45%] justify-between absolute top-1/2 -translate-y-1/2 left-1/2">
+            <div class="item__ceil col-span-2 max-md:col-span-1">
+                <div class="aspect-[0.57] h-full max-md:top-5 max-md:left-5 absolute bottom-0 left-0 bg-no-repeat bg-bottom bg-contain " :style="{backgroundImage: `url(${imgPhone})`}"></div>
+                <div class="flex flex-col-reverse max-md:items-end max-md:flex-col max-md:right-3 justify-between absolute top-1/2 max-md:top-3 max-md:translate-y-0 -translate-y-1/2 right-5">
                     <span class="item__title">Development</span>
+                    <span class="item__percent">7%</span>
+                </div>
+            </div>
+            <div class="item__ceil col-span-2 max-md:col-span-1">
+                <div class="aspect-[0.7] h-full absolute bottom-0 max-md:bottom-3 left-0 bg-no-repeat bg-left bg-contain " :style="{backgroundImage: `url(${imgCoins})`}"></div>
+                <div class="flex flex-col-reverse max-md:items-end max-md:right-3 justify-between max-md:bottom-3 max-md:top-[initial] absolute top-1/2 -translate-y-1/2 right-5 max-md:-translate-y-0">
+                    <span class="item__title">Public Round</span>
                     <span class="item__percent">8%</span>
                 </div>
             </div>
@@ -59,7 +67,7 @@
                 <div class="w-1/2 h-full absolute bottom-0 top-0 right-0 bg-no-repeat bg-center mix-blend-lighten max-md:bg-cover" :style="{backgroundImage: `url(${imgTreasury})`}"></div>
                 <div class="flex items-center gap-10 justify-between absolute top-1/2 left-10 -translate-y-1/2 max-md:left-5 max-md:gap-5">
                     <span class="item__title">Treasury</span>
-                    <span class="item__percent ">25%</span>
+                    <span class="item__percent ">21%</span>
                 </div>
             </div>
         </div>
@@ -81,6 +89,8 @@ import imgPercent from '@/assets/tokenomics/percent.webp'
 import imgTeam from '@/assets/tokenomics/team.webp'
 import imgPhone from '@/assets/tokenomics/phone.webp'
 import imgTreasury from '@/assets/tokenomics/treasury.webp'
+import imgCoins from '@/assets/tokenomics/coins.webp'
+import imgAdvisory from '@/assets/tokenomics/advisory.webp'
 
 const isXS = useMediaQuery("(max-width: 700px)");
 
