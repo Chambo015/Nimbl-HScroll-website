@@ -25,18 +25,20 @@
                     :src="light"
                     aria-hidden="true" />
             </p>
-            <div v-if="currentMultiplier === MULTIPLIER['1.2X']">
-                <p class="multi__text">multiplier</p>
-                <p class="multi__timer">7 days left</p>
-            </div>
-            <div class="button__wrap">
-              <button class="button__claim">
-                  <p
-                      class="button__text">
-                      CLAIM
-                  </p>
-              </button>
-            </div>
+            <template v-if="currentMultiplier === MULTIPLIER['1.2X']">
+                <div>
+                    <p class="multi__text">multiplier</p>
+                    <p class="multi__timer">7 days left</p>
+                </div>
+                <div class="button__wrap">
+                  <button @click="multiWeeklyUnits(1.2)" class="button__claim">
+                      <p
+                          class="button__text">
+                          CLAIM
+                      </p>
+                  </button>
+                </div>
+            </template>
         </div>
 
         <div class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.5X']}">
@@ -48,10 +50,20 @@
                     :src="light"
                     aria-hidden="true" />
             </p>
-            <div v-if="currentMultiplier === MULTIPLIER['1.5X']">
-                <p class="multi__text">multiplier</p>
-                <p class="multi__timer">7 days left</p>
-            </div>
+            <template v-if="currentMultiplier === MULTIPLIER['1.5X']">
+                <div>
+                    <p class="multi__text">multiplier</p>
+                    <p class="multi__timer">7 days left</p>
+                </div>
+                <div class="button__wrap">
+                  <button @click="multiWeeklyUnits(1.5)" class="button__claim">
+                      <p
+                          class="button__text">
+                          CLAIM
+                      </p>
+                  </button>
+                </div>
+            </template>
         </div>
 
         <div class="item__block" :class="{'opacity-50 blur-[3px]': currentMultiplier !== MULTIPLIER['2X']}">
@@ -63,10 +75,20 @@
                     :src="light"
                     aria-hidden="true" />
             </p>
-            <div v-if="currentMultiplier === MULTIPLIER['2X']">
-                <p class="multi__text">multiplier</p>
-                <p class="multi__timer">7 days left</p>
-            </div>
+            <template v-if="currentMultiplier === MULTIPLIER['2X']">
+                <div>
+                    <p class="multi__text">multiplier</p>
+                    <p class="multi__timer">7 days left</p>
+                </div>
+                <div class="button__wrap">
+                  <button @click="multiWeeklyUnits(2)" class="button__claim">
+                      <p
+                          class="button__text">
+                          CLAIM
+                      </p>
+                  </button>
+                </div>
+            </template>
         </div>
 
         <div class="item__block" :class="{'opacity-50 blur-sm': currentMultiplier !== MULTIPLIER['3X']}">
@@ -78,10 +100,20 @@
                     :src="light"
                     aria-hidden="true" />
             </p>
-            <div v-if="currentMultiplier === MULTIPLIER['3X']">
-                <p class="multi__text">multiplier</p>
-                <p class="multi__timer">7 days left</p>
-            </div>
+            <template v-if="currentMultiplier === MULTIPLIER['3X']">
+                <div>
+                    <p class="multi__text">multiplier</p>
+                    <p class="multi__timer">7 days left</p>
+                </div>
+                <div class="button__wrap">
+                  <button @click="multiWeeklyUnits(3)" class="button__claim">
+                      <p
+                          class="button__text">
+                          CLAIM
+                      </p>
+                  </button>
+                </div>
+            </template>
         </div>
 
         <div
@@ -141,6 +173,11 @@ const currentMultiplier = computed<TypeMultiplier>(() => {
     if (!multiplier) return MULTIPLIER["1X"];
     return multiplier;
 });
+
+const multiWeeklyUnits = (multi: number) => {
+    if(!userStorage.value.temporary_units) return
+    userStorage.value.temporary_units = userStorage.value.temporary_units * multi
+}
 </script>
 
 <style scoped>
