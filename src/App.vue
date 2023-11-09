@@ -1,23 +1,14 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
-// import PreviewView from "./views/PreviewView.vue";
+import PreviewView from "./views/PreviewView.vue";
 import {onLeavePreviewPage} from "@/leaveHooks";
 import {useRoute, useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
-// import PreviewViewMobile from "./views/PreviewViewMobile.vue";
+import PreviewViewMobile from "./views/PreviewViewMobile.vue";
 import ModalContacts from "./components/ModalContacts.vue";
-
-import { defineAsyncComponent } from 'vue'
-
-const PreviewViewMobile = defineAsyncComponent(() =>
-  import("./views/PreviewViewMobile.vue")
-)
-const PreviewView = defineAsyncComponent(() =>
-  import("./views/PreviewView.vue")
-)
 
 const ready = ref(false);
 const mainEl = ref();

@@ -15,7 +15,7 @@ defineEmits(['clickBottom'])
 const route = useRoute()
 
 const target = ref(null)
-const isInvitePage = computed(() => route.name === 'invite')
+const isInvitePage = computed(() => /* route.name === 'invite' */ false)
 const isOpenMenu = ref(false)
 const showTwitterPost = ref(false)
 const tweetUrl = "https://twitter.com/Redrum274/status/1721120937536270391";
@@ -40,9 +40,9 @@ const { top } = useElementBounding(target)
         <button @click="toggleOpenMenu" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px] relative z-50">
             <CenterJoystick v-if="!isInvitePage" class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px]" />
             <CenterJoystickTwitter
+                v-else
                 @click="showTwitterPost = !showTwitterPost"
-                class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px]"
-                v-else />
+                class="w-[145px] h-[81px] max-sm:w-[82px] max-sm:h-[46px]" />
         </button>
         <!-- Bottom -->
         <button
@@ -53,7 +53,7 @@ const { top } = useElementBounding(target)
             <BottomJoystick class="w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
         <!-- Top -->
-        <button disabled
+        <button 
             v-if="!isInvitePage"
             @click="$router.push({name: 'invite'})"
             class="absolute bottom-full left-0 w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px] transition-all disabled:opacity-40"
