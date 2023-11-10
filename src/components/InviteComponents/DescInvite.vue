@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 max-md:bg-transparent flex max-md:flex-col gap-1 rounded-lg py-3 px-4 max-md:px-0 justify-around flex-wrap">
+        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 px-4 max-md:px-0 justify-around flex-wrap">
         <div class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1X
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="item__block" :class="{'opacity-50': currentMultiplier !== MULTIPLIER['1.2X']}">
+        <div class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.2X']}">
             <p class="digit__title">
                 1.2X
                 <img
@@ -30,13 +30,10 @@
                     <p class="multi__text">multiplier</p>
                     <p class="multi__timer">7 days left</p>
                 </div>
-                <div class="button__wrap">
-                  <button @click="multiWeeklyUnits(1.2)" class="button__claim">
-                      <p
-                          class="button__text">
-                          CLAIM
-                      </p>
-                  </button>
+                <div class="button__wrap" :class="{disabled: !canClaim}">
+                    <button :disabled="!canClaim" @click="multiWeeklyUnits(1.2)" class="button__claim">
+                        <p class="button__text">CLAIM</p>
+                    </button>
                 </div>
             </template>
         </div>
@@ -55,13 +52,10 @@
                     <p class="multi__text">multiplier</p>
                     <p class="multi__timer">7 days left</p>
                 </div>
-                <div class="button__wrap">
-                  <button @click="multiWeeklyUnits(1.5)" class="button__claim">
-                      <p
-                          class="button__text">
-                          CLAIM
-                      </p>
-                  </button>
+                <div class="button__wrap" :class="{disabled: !canClaim}">
+                    <button :disabled="!canClaim" @click="multiWeeklyUnits(1.2)" class="button__claim">
+                        <p class="button__text">CLAIM</p>
+                    </button>
                 </div>
             </template>
         </div>
@@ -81,12 +75,9 @@
                     <p class="multi__timer">7 days left</p>
                 </div>
                 <div class="button__wrap">
-                  <button @click="multiWeeklyUnits(2)" class="button__claim">
-                      <p
-                          class="button__text">
-                          CLAIM
-                      </p>
-                  </button>
+                    <button @click="multiWeeklyUnits(2)" class="button__claim">
+                        <p class="button__text">CLAIM</p>
+                    </button>
                 </div>
             </template>
         </div>
@@ -106,12 +97,9 @@
                     <p class="multi__timer">7 days left</p>
                 </div>
                 <div class="button__wrap">
-                  <button @click="multiWeeklyUnits(3)" class="button__claim">
-                      <p
-                          class="button__text">
-                          CLAIM
-                      </p>
-                  </button>
+                    <button @click="multiWeeklyUnits(3)" class="button__claim">
+                        <p class="button__text">CLAIM</p>
+                    </button>
                 </div>
             </template>
         </div>
@@ -155,17 +143,19 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, ref, inject} from "vue";
 import {DEFAULT_USER_STORAGE, MULTIPLIER, STORAGE_USER_KEY} from "@/constants";
-import {ISessionTwitter} from "@/types";
+import {ISessionTwitter, keyClaim} from "@/types";
 import {useStorage} from "@vueuse/core";
 import IconInfoOctagon from "@/components/icons/IconInfoOctagon.vue";
 import light from "@/assets/light-multiplier.webp";
+import axios from "axios";
 
 type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER];
 
 const isHoverPopover = ref(false);
 const isFocusPopover = ref(false);
+const triggerAnim = inject(keyClaim);
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const currentMultiplier = computed<TypeMultiplier>(() => {
@@ -174,10 +164,35 @@ const currentMultiplier = computed<TypeMultiplier>(() => {
     return multiplier;
 });
 
-const multiWeeklyUnits = (multi: number) => {
-    if(!userStorage.value.temporary_units) return
-    userStorage.value.temporary_units = userStorage.value.temporary_units * multi
-}
+const multiWeeklyUnits = async (multi: number) => {
+    if (!canClaim.value) return;
+    if (!userStorage.value.temporary_units) return;
+    const resStatus = await postMultiplyUnits()
+    if(!resStatus) return;
+    userStorage.value.temporary_units = userStorage.value.temporary_units * multi;
+    if (triggerAnim) triggerAnim.showMultiUnitsAnim.value = true;
+};
+
+const canClaim = computed(() => !userStorage.value.multiplier_claimed);
+
+const postMultiplyUnits = async () => {
+    try {
+        const res = await axios.post("https://api.nimbl.tv/ru/api/hunter/units/multiply/", null, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${userStorage.value.token}`,
+            },
+        });
+        if (res.status === 200) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error("error multiply", error);
+        return false;
+    }
+};
 </script>
 
 <style scoped>
@@ -185,7 +200,7 @@ const multiWeeklyUnits = (multi: number) => {
     @apply hover:shadow-[-1px_1px_10px_1px] hover:shadow-blue-600 !shadow-blue-600 duration-500  transition-shadow delay-200 hover:delay-0;
 }
 .item__block {
-    @apply flex items-center gap-4 max-md:bg-[#333333] max-md:justify-center max-md:py-2 group-hover:opacity-100 transition-opacity;
+    @apply flex items-center gap-4 max-md:bg-[#333333]/50 max-md:justify-center max-md:py-2 group-hover:opacity-100 transition-opacity;
 }
 .digit__title {
     @apply select-none token-gradient-text font-rfdewi font-black text-[48px] max-2xl:text-[38px] max-md:text-[48px] leading-none uppercase relative;
@@ -200,20 +215,37 @@ const multiWeeklyUnits = (multi: number) => {
 }
 
 .button__wrap {
-  @apply drop-shadow-none transition-all hover:drop-shadow-[-2px_1px_7px_#d0a530] duration-300
+    @apply drop-shadow-none transition-all hover:drop-shadow-[-2px_1px_7px_#d0a530] duration-300;
+}
+
+.button__wrap.disabled {
+    @apply hover:!drop-shadow-none;
 }
 .button__claim {
     --r: 10px;
-    clip-path: polygon(0% var(--r), var(--r) 0%, calc(100% - var(--r)) 0%, 100% var(--r), 100% calc(100% - var(--r)), calc(100% - var(--r)) 100%, var(--r) 100%, 0% calc(100% - var(--r)));
+    clip-path: polygon(
+        0% var(--r),
+        var(--r) 0%,
+        calc(100% - var(--r)) 0%,
+        100% var(--r),
+        100% calc(100% - var(--r)),
+        calc(100% - var(--r)) 100%,
+        var(--r) 100%,
+        0% calc(100% - var(--r))
+    );
     background-image: linear-gradient(180deg, #b0731a -9.01%, #d0a530 22.91%, #f2d14e 63.49%);
     @apply opacity-80  flex-shrink-0 flex items-center justify-center px-3 py-2 cursor-pointer active:scale-90 transition-transform will-change-transform;
 }
+
+.button__claim:disabled {
+    @apply !opacity-40 active:scale-100;
+}
 .button__text {
-    @apply font-TTOctos font-bold text-black text-2xl text-center max-md:text-base max-2xl:text-lg px-1
+    @apply font-TTOctos font-bold text-black text-2xl text-center max-md:text-base max-2xl:text-lg px-1;
 }
 
 .divider {
-    @apply flex-grow bg-[#C0F] blur-[1px] h-[1px] self-center rounded-md min-w-[40px] mx-1
+    @apply flex-grow bg-[#C0F] blur-[1px] h-[1px] self-center rounded-md min-w-[40px] mx-1;
 }
 
 .popover {
@@ -226,9 +258,9 @@ const multiWeeklyUnits = (multi: number) => {
     @apply text-xl text-[#BF51F7]  hover:opacity-100 focus:opacity-100;
 }
 .popover__panel {
-    @apply absolute left-0 bottom-full pb-5;
+    @apply absolute left-0 bottom-full pb-5 z-50;
 }
 .popover__body {
-    @apply bg-gradient-header-secondary min-w-[500px] max-h-[300px] overflow-auto p-4 rounded-md shadow-md ring ring-blue-500/50;
+    @apply bg-gradient-header-secondary min-w-[500px] max-h-[300px] overflow-auto p-4 rounded-md shadow-md ring ring-blue-500/50 max-md:w-[98vw] max-md:min-w-[auto];
 }
 </style>

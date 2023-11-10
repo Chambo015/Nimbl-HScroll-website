@@ -3,10 +3,10 @@
         class="card_metamask ring-1 ring-[#2a0a42] flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg relative card_before"
         :style="{'--bg': `url(${noise})`}">
         <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
-            <div class="flex max-xl:flex-col-reverse relative z-30 gap-3 isolate">
+            <div class="flex max-xl:flex-col relative z-30 gap-3 isolate">
                 <ProfileMenu />
                 <div
-                    class="max-md:hidden flex-grow rounded-md flex-shrink-0 max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
+                    class="flex-grow rounded-md flex-shrink-0 max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] max-md:w-full cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
                     </p>
@@ -19,21 +19,6 @@
                         height="133"
                         alt="rocket_img"
                         class="absolute right-0 top-0 -translate-y-[25px] translate-x-1/4 transition-all duration-1000 group-hover:drop-shadow-icon max-2xl:w-[100px] max-2xl:-translate-y-4" />
-                </div>
-            </div>
-            <div
-                class="hidden max-md:flex gap-2 justify-between bg-gradient-header-secondary relative -translate-x-5 w-screen mt-3 px-5 py-2">
-                <div>
-                    <span class="font-TTOctos text-xs text-white">Units</span>:
-                    <span class="font-Rollbox text-white font-bold">604</span>
-                </div>
-                <div>
-                    <span class="font-TTOctos text-xs text-white">Rank</span>:
-                    <span class="font-Rollbox text-white font-bold">105</span>
-                </div>
-                <div>
-                    <span class="font-TTOctos text-xs text-white">Invites:</span>:
-                    <span class="font-Rollbox text-white font-bold">20</span>
                 </div>
             </div>
             <div class="relative z-10 font-Rollbox mt-5">

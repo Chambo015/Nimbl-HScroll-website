@@ -1,34 +1,34 @@
 <template>
     <div
-        class="max-md:hidden font-Rollbox text-white py-3 uppercase max-2xl:text-sm flex items-center justify-around mt-5 user_stats relative"
+        class="font-Rollbox text-white py-3 uppercase max-2xl:text-sm flex items-center justify-around mt-5 user_stats relative"
         :style="{'--bg': `url(${user_stat_bg})`}">
         <div class="flex flex-col items-center gap-2 relative z-20">
-            <p>units</p>
-            <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px]">
+            <p class="max-md:text-xs">units</p>
+            <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px] max-md:text-2xl">
                 {{ unitsWithAnim.number.toFixed(0) || userStorage.user?.units || 0 }}
             </p>
         </div>
         <div class="flex flex-col items-center gap-2 relative z-20 isolate">
-            <p>weekly units</p>
-            <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px] relative">
+            <p class="max-md:text-xs">weekly units</p>
+            <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px] relative max-md:text-2xl">
                 {{ weeklyUnits.number.toFixed(0) || userStorage.user?.units || 0 }}
             </p>
             <Transition
                 enter-active-class="transition duration-200 ease-out"
                 enter-from-class="translate-y-4 opacity-0"
                 enter-to-class="translate-y-0 opacity-100"
-                leave-active-class="transition duration-150 delay-1000 ease-in"
+                leave-active-class="transition duration-150 delay-500 ease-in"
                 leave-from-class="translate-y-0 opacity-100"
                 leave-to-class="translate-y-4 opacity-0"
                 ><span
-                    v-if="showMultiplier"
+                    v-if="showMultiplier && triggerAnim?.showMultiUnitsAnim.value"
                     class="absolute left-1/2 -translate-x-1/2 bottom-0 z-20 translate-y-2 multi__text"
                     >1.2X</span
                 >
             </Transition>
 
             <Transition>
-                <ul className="round-list">
+                <ul v-if="showTransfer" className="round-list">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -37,8 +37,8 @@
             </Transition>
         </div>
         <div class="flex flex-col items-center gap-2 relative z-20">
-            <p>invites</p>
-            <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px]">
+            <p class="max-md:text-xs">invites</p>
+            <p class="font-extrabold text-[40px] leading-none max-2xl:text-[32px] max-md:text-2xl">
                 {{ invitesWithAnim.number.toFixed(0) || userStorage.total_invites || 0 }}
             </p>
         </div>
@@ -46,17 +46,19 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, inject, nextTick} from "vue";
 import {useStorage} from "@vueuse/core";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import {useAnimationDigits} from "@/composables/useAnimationDigits";
 import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
-import {ISessionTwitter} from "@/types";
+import {ISessionTwitter, keyClaim} from "@/types";
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const showMultiplier = ref(false);
+const showTransfer = ref(false)
+const triggerAnim = inject(keyClaim)
 
-const {tweened: unitsWithAnim} = useAnimationDigits(() => userStorage.value.user?.units);
+const {tweened: unitsWithAnim} = useAnimationDigits(() => userStorage.value.user?.units, onDoneTotalUAnim, onStartTotalUAnim);
 const {tweened: invitesWithAnim} = useAnimationDigits(() => userStorage.value.total_invites);
 const {tweened: weeklyUnits} = useAnimationDigits(
     () => userStorage.value.temporary_units,
@@ -64,13 +66,36 @@ const {tweened: weeklyUnits} = useAnimationDigits(
     onStartWeeklyAnim,
 );
 
-function onDoneWeeklyAnim() {
+async function onDoneWeeklyAnim() {
     showMultiplier.value = false;
+    if(triggerAnim) {
+        if(triggerAnim.showMultiUnitsAnim.value) {
+           await  transferUnits()
+        }
+        triggerAnim.showMultiUnitsAnim.value = false
+    } 
 }
 function onStartWeeklyAnim() {
     if (!userStorage.value.temporary_units) return;
     if (userStorage.value.temporary_units < 300) return;
     showMultiplier.value = true;
+}
+function onDoneTotalUAnim() {
+    showTransfer.value = false
+}
+function onStartTotalUAnim() {
+    
+}
+async function transferUnits() {
+    await nextTick()
+    if (!userStorage.value.temporary_units) return;
+    if (!userStorage.value.token) return;
+    if (!userStorage.value.user) return;
+    showTransfer.value = true
+    const unitsTransfer = userStorage.value.temporary_units
+    userStorage.value.temporary_units = 0
+    userStorage.value.user.units = userStorage.value.user?.units + unitsTransfer
+
 }
 </script>
 
@@ -93,7 +118,7 @@ function onStartWeeklyAnim() {
 
 
 ul.round-list {
-    --speed-anim: 2;
+    --speed-anim: 1;
     --delay-anim: calc(var(--speed-anim) * 125);
     list-style: none;
     display: flex;

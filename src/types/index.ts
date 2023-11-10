@@ -1,4 +1,6 @@
 import {MULTIPLIER} from '@/constants/index'
+import type { InjectionKey } from 'vue';
+import { Ref } from 'vue';
 
 export interface VideoI {
     id: number;
@@ -86,7 +88,8 @@ export interface IResUserInfo {
     total_invites: number | null;
     key: string | null;
     multiplier: TypeMultiplier | null;
-    temporary_units: number | null
+    temporary_units: number | null;
+    multiplier_claimed: boolean
 }
 
 export interface ISessionTwitter {
@@ -96,6 +99,7 @@ export interface ISessionTwitter {
     weekly_leaderboard: null | IWeeklyLeaderBoard
     temporary_units: null | number;
     multiplier: TypeMultiplier | null;
+    multiplier_claimed: boolean
 }
 
 export interface ITweets {
@@ -133,3 +137,8 @@ export interface IWeeklyLeaderBoard  {
 }
 
 export type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER]
+
+export const keyClaim = Symbol() as InjectionKey<{
+    showMultiUnitsAnim: Ref<boolean>,
+    showTransferUnitsAnim: Ref<boolean>
+}>

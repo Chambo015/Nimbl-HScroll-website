@@ -3,7 +3,7 @@
         <Popover  v-slot="{open}"  class="relative inline-block text-left isolate h-full">
             <PopoverButton
                 :disabled="!userStorage.user && !userStorage.token"
-                class="inline-flex z-10 max-w-[200px] h-full bg-gradient-header-secondary w-full justify-center items-center leading-none rounded-md px-4 py-3 text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 font-Rollbox font-bold text-base">
+                class="inline-flex z-10 max-w-[200px] max-md:max-w-full h-full bg-gradient-header-secondary w-full justify-center items-center leading-none rounded-md px-4 py-3 text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 font-Rollbox font-bold text-base">
                 <IconAccountCircle class="mr-2 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" />
                 <span class="truncate">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
                 <IconChevronDown class="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
@@ -116,7 +116,7 @@ import {useWalletMetamask} from "@/composables/useWalletMetamask";
 
 import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import IconChevronDown from "@/components/icons/IconChevronDown.vue";
-import IconMetamask from "../icons/IconMetamask.vue";
+import IconMetamask from "@/components/icons/iconMetamask.vue";
 import IconDone from "../icons/IconDone.vue";
 import IconTelegram from "../icons/IconTelegram.vue";
 import IconLogOut from "../icons/IconLogOut.vue";

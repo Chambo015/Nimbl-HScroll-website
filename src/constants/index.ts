@@ -8,7 +8,8 @@ export const DEFAULT_USER_STORAGE: ISessionTwitter = {
   total_invites: null,
   weekly_leaderboard: null,
   multiplier: null,
-  temporary_units: null
+  temporary_units: null,
+  multiplier_claimed: true
 } as const;
 
 export const MULTIPLIER = {
