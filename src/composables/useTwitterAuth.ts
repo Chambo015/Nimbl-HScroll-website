@@ -1,5 +1,5 @@
 import {STORAGE_UUID_KEY} from "@/constants";
-import {ISessionTwitter, IUserTwitter, IWeeklyLeaderBoard} from "@/types";
+import {IResUserInfo, ISessionTwitter, IWeeklyLeaderBoard} from "@/types";
 import {useStorage} from "@vueuse/core";
 import axios from "axios";
 import {ref} from "vue";
@@ -15,7 +15,7 @@ const useTwitterAuth = () => {
         window.location.href = "https://api.nimbl.tv/accounts/twitter/login/";
     };
 
-    const sendMetamaskUuid = async (uuid: string, token: string) => {
+    const sendMetamaskUuid = async ({uuid, token}: {uuid: string, token: string}) => {
         const response = await fetch(`https://api.nimbl.tv/en/api/metamask/invite/`, {
             method: "POST",
             headers: {
@@ -59,7 +59,7 @@ const useTwitterAuth = () => {
     const fetchTwitterUserById = async (id: string) => {
         loading.value = true;
         if (uuidStorage.value.length > 0) {
-            sendMetamaskUuid(uuidStorage.value, id);
+            sendMetamaskUuid({uuid: uuidStorage.value, token: id});
         }
 
         const response = await fetch(`https://api.nimbl.tv/en/api/user/info/`, {
@@ -75,11 +75,7 @@ const useTwitterAuth = () => {
           return null // Error
         }
 
-        const data = (await response.json()) as {
-            user: IUserTwitter;
-            key: string;
-            total_invites: number;
-        };
+        const data = (await response.json()) as IResUserInfo;
 
         loading.value = false;
 
@@ -87,6 +83,9 @@ const useTwitterAuth = () => {
             user: data.user,
             token: data.key,
             total_invites: data.total_invites,
+            multiplier: data.multiplier,
+            temporary_units: data.temporary_units,
+            multiplier_claimed: data.multiplier_claimed
         } as ISessionTwitter;
     };
 

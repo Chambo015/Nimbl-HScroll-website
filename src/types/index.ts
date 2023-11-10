@@ -1,3 +1,7 @@
+import {MULTIPLIER} from '@/constants/index'
+import type { InjectionKey } from 'vue';
+import { Ref } from 'vue';
+
 export interface VideoI {
     id: number;
     title: string;
@@ -59,14 +63,6 @@ export interface ICompletedTask {
     user: number;
 }
 
-export interface IUser {
-    user: string; // wallet
-    uuid: string;
-    key: string;
-    telegram_id: string | null;
-    telegram_username: string | null;
-}
-
 export interface IUserTwitter {
     id: number;
     last_login: string;
@@ -87,11 +83,23 @@ export interface IUserTwitter {
     wallet_address?: string | null;
 }
 
+export interface IResUserInfo {
+    user: IUserTwitter | null;
+    total_invites: number | null;
+    key: string | null;
+    multiplier: TypeMultiplier | null;
+    temporary_units: number | null;
+    multiplier_claimed: boolean
+}
+
 export interface ISessionTwitter {
     user: IUserTwitter | null;
     total_invites: number | null;
     token: string | null;
-    weekly_leaderboard: null | IWeeklyLeaderBoard 
+    weekly_leaderboard: null | IWeeklyLeaderBoard
+    temporary_units: null | number;
+    multiplier: TypeMultiplier | null;
+    multiplier_claimed: boolean
 }
 
 export interface ITweets {
@@ -125,20 +133,12 @@ export interface ILeaderboardUser {
 
 export interface IWeeklyLeaderBoard  {
     user_position: number;
-    all_users_count: number;
+    total_users: number;
 }
 
-/* 
+export type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER]
 
-{"token": 124121241242,
-"user": {
-    "id": 1212,
-    "username": "string",
-    "channel_id": 1212,
-    "units": 111,
-    "invite_uuid": "212",
-    "telegram_id": "string",
-    "telegram_username": "tring",
-    "wallet_address": null
-}}
-*/
+export const keyClaim = Symbol() as InjectionKey<{
+    showMultiUnitsAnim: Ref<boolean>,
+    showTransferUnitsAnim: Ref<boolean>
+}>

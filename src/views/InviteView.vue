@@ -43,14 +43,15 @@
         </div>
         <div v-if="activeMobileTab === 'invite'" class="mt-2 overflow-y-auto">
             <BoardMetamask />
-            <div class="grid grid-cols-2 mt-5 px-5 gap-3">
+            
+            <div class="mt-5">
+                <DescInvite />
+            </div>
+            <div class="grid grid-cols-2 mt-5 px-5 gap-3 mb-5">
                 <BackToNimbl />
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
-            </div>
-            <div class="mt-5">
-                <DescInvite />
             </div>
         </div>
         <div v-if="activeMobileTab === 'tasks'" class="mt-2 overflow-y-auto">
@@ -71,10 +72,11 @@ import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
 import DescInvite from "@/components/InviteComponents/DescInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
-import {onMounted, ref } from "vue";
+import {onMounted, ref , provide} from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
 import gsap from 'gsap';
+import { keyClaim } from '@/types';
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const mdAndSmaller = breakpoints.smallerOrEqual("md");
@@ -93,6 +95,12 @@ onMounted(() => {
     });
 });
 
+const showMultiUnitsAnim = ref(false)
+const showTransferUnitsAnim = ref(false)
+provide(keyClaim, {
+    showMultiUnitsAnim,
+    showTransferUnitsAnim
+})
 </script>
 
 <style scoped>
