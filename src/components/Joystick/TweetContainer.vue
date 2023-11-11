@@ -1,7 +1,7 @@
 <template>
     <div ref="el" class="w-[500px] h-full max-2xl:w-[350px] max-md:w-[calc(100vw-40px)] overflow-y-scroll overflow-x-hidden rounded-2xl">
         <template v-for="tweet of tweetPosts" :key="tweet.id">
-            <TweetComponent :tweet-id="tweet.id.toString()"  theme="dark" :width="widthWidget">
+            <TweetComponent :tweet-url="tweet.tweet_url.toString()" theme="dark" :width="widthWidget">
                 <template v-slot:loading>
                     <div class="w-[500px] h-[590px] max-md:w-[calc(100vw-40px)] max-md:h-[400px] max-2xl:w-[350px] bg-[#15202b] flex items-center justify-center rounded-lg"> <Vue3Lottie :animation-data="loadingCircle" :height="200" :width="200" /></div>
                 </template>
