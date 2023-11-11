@@ -127,13 +127,7 @@
                 <div v-if="isHoverPopover || isFocusPopover" class="popover__panel">
                     <div class="popover__body">
                         <p class="w-full font-TTOctos !leading-tight">
-                            London is Red Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                            Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                            printer took a galley of type and scrambled it to make a type specimen book. It has survived
-                            not only five centuries, but also the leap into electronic typesetting, remaining
-                            essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                            containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                            Aldus PageMaker including versions of Lorem Ipsum.
+                            In Nimbl's invite module, users earn units each week. To increase these units, they can achieve a weekly multiplier. The multipliers grow each week if they reach 300 units: it starts at 1.2x in week one, then 1.5x in week two, 2x in week three, and 2.5x in week four. If users don't hit 300 units in any week, their next week's multiplier drops back to 1.2x. Each user can earn only one multiplier per week.
                         </p>
                     </div>
                 </div>
