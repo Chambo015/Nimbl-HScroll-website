@@ -15,7 +15,7 @@ defineEmits(['clickBottom'])
 const route = useRoute()
 
 const target = ref(null)
-const isInvitePage = computed(() => /* route.name === 'invite' */ false)
+const isInvitePage = computed(() => route.name === 'invite')
 const isOpenMenu = ref(false)
 const showTwitterPost = ref(false)
 const tweetUrl = "https://twitter.com/Redrum274/status/1721120937536270391";

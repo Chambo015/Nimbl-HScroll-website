@@ -126,7 +126,7 @@ const loginTwitter = async () => {
 
 const inviteLink = computed(() => {
     const uuid = userStorage.value.user?.invite_uuid;
-    return uuid ? "https://chambo015.github.io/Nimbl-HScroll-website/#/invite" + "?u=" + uuid : null;
+    return uuid ? "https://nimbl.tv/invite" + "?u=" + uuid : null;
 });
 
 const fetchUserInfo = async (token: string) => {

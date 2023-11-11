@@ -99,16 +99,16 @@ const router = createRouter({
             name: "tokenomics",
             component: () => import("@/views/TokenomicsView.vue")
         },
-    /*     {
+        {
             path: "/invite/:twitterId?",
             name: "invite",
             component: () => import("@/views/InviteView.vue"),
-        } */
-        {
+        }
+       /*  {
             path: "/invite",
             name: "invite",
             component: () => import("@/views/InviteSoonView.vue"),
-        }
+        } */
     ],
 });
 
