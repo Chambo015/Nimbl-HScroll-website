@@ -1,6 +1,6 @@
 <template>
     <div @click="linkTwitter"
-        class="bg_card relative font-Rollbox text-xl max-md:text-sm leading-tight max-2xl:text-lg max-w-[250px] min-h-[100px] max-md:min-h-[75px] p-3 font-bold cursor-pointer rounded-md animation__hover-card">
+        class="bg_card relative max-md:rounded-none font-Rollbox text-xl max-md:text-sm leading-tight max-2xl:text-lg max-w-[250px] min-h-[100px] max-md:min-h-[75px] p-3 font-bold cursor-pointer rounded-md animation__hover-card">
         <p class="uppercase relative z-10 text_arrow">x/twitter <br class="hidden max-md:inline" /></p>
         <IconTwitterBlue class="absolute right-3 bottom-2 max-md:w-[33px] max-md:h-[33px]" />
     </div>

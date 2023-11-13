@@ -1,7 +1,8 @@
 <template>
     <div
-        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none">
-        <div class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
+        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 max-md:py-0 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none">
+        
+        <!-- <div v-if="currentMultiplier === MULTIPLIER['1X']" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1X
                 <img
@@ -14,9 +15,9 @@
                 <p class="multi__text">multiplier</p>
                 <p class="multi__timer">7 days left</p>
             </div>
-        </div>
+        </div> -->
 
-        <div class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.2X']}">
+        <div v-if="currentMultiplier === MULTIPLIER['1.2X']  || !isXS" class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.2X']}">
             <p class="digit__title">
                 1.2X
                 <img
@@ -38,7 +39,7 @@
             </template>
         </div>
 
-        <div class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.5X']}">
+        <div  v-if="currentMultiplier === MULTIPLIER['1.5X'] || !isXS"  class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.5X']}">
             <p class="digit__title">
                 1.5X
                 <img
@@ -60,7 +61,7 @@
             </template>
         </div>
 
-        <div class="item__block" :class="{'opacity-50 blur-[3px]': currentMultiplier !== MULTIPLIER['2X']}">
+        <div v-if="currentMultiplier === MULTIPLIER['2X'] || !isXS" class="item__block" :class="{'opacity-50 blur-[3px]': currentMultiplier !== MULTIPLIER['2X']}">
             <p class="digit__title">
                 2X
                 <img
@@ -75,14 +76,14 @@
                     <p class="multi__timer">7 days left</p>
                 </div>
                 <div class="button__wrap">
-                    <button @click="multiWeeklyUnits(2)" class="button__claim">
+                    <button :disabled="!canClaim" @click="multiWeeklyUnits(2)" class="button__claim">
                         <p class="button__text">CLAIM</p>
                     </button>
                 </div>
             </template>
         </div>
 
-        <div class="item__block" :class="{'opacity-50 blur-sm': currentMultiplier !== MULTIPLIER['3X']}">
+        <div v-if="currentMultiplier === MULTIPLIER['3X'] || !isXS" class="item__block" :class="{'opacity-50 blur-sm': currentMultiplier !== MULTIPLIER['3X']}">
             <p class="digit__title">
                 3X
                 <img
@@ -97,7 +98,7 @@
                     <p class="multi__timer">7 days left</p>
                 </div>
                 <div class="button__wrap">
-                    <button @click="multiWeeklyUnits(3)" class="button__claim">
+                    <button :disabled="!canClaim" @click="multiWeeklyUnits(3)" class="button__claim">
                         <p class="button__text">CLAIM</p>
                     </button>
                 </div>
@@ -140,7 +141,7 @@
 import {computed, ref, inject} from "vue";
 import {DEFAULT_USER_STORAGE, MULTIPLIER, STORAGE_USER_KEY} from "@/constants";
 import {ISessionTwitter, keyClaim} from "@/types";
-import {useStorage} from "@vueuse/core";
+import {useMediaQuery, useStorage} from "@vueuse/core";
 import IconInfoOctagon from "@/components/icons/IconInfoOctagon.vue";
 import light from "@/assets/light-multiplier.webp";
 import axios from "axios";
@@ -150,6 +151,7 @@ type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER];
 const isHoverPopover = ref(false);
 const isFocusPopover = ref(false);
 const triggerAnim = inject(keyClaim);
+const isXS = useMediaQuery("(max-width: 700px)");
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const currentMultiplier = computed<TypeMultiplier>(() => {
@@ -167,7 +169,10 @@ const multiWeeklyUnits = async (multi: number) => {
     if (triggerAnim) triggerAnim.showMultiUnitsAnim.value = true;
 };
 
-const canClaim = computed(() => !userStorage.value.multiplier_claimed);
+const canClaim = computed(() =>{
+    if(!userStorage.value.temporary_units) return
+    return !userStorage.value.multiplier_claimed && userStorage.value.temporary_units >= 300
+});
 
 const postMultiplyUnits = async () => {
     try {

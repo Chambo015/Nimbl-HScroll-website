@@ -58,17 +58,6 @@ export interface IBoardTask {
     tweets_metrics: ITweetsMetricsCount | null;
 }
 
-export interface ICompletedTask {
-    action_type: number;
-    created: string;
-    id: number;
-    is_active: boolean;
-    is_deleted: boolean;
-    order: number;
-    updated: string;
-    user: number;
-}
-
 export interface IUserTwitter {
     id: number;
     last_login: string;
@@ -96,6 +85,7 @@ export interface IResUserInfo {
     multiplier: TypeMultiplier | null;
     temporary_units: number | null;
     multiplier_claimed: boolean;
+    twitter_avatar_url: null | string
 }
 
 export interface ISessionTwitter {
@@ -106,6 +96,7 @@ export interface ISessionTwitter {
     temporary_units: null | number;
     multiplier: TypeMultiplier | null;
     multiplier_claimed: boolean;
+    twitter_avatar_url: null | string
 }
 
 export interface ITweets {

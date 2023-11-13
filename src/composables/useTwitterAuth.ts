@@ -85,7 +85,8 @@ const useTwitterAuth = () => {
             total_invites: data.total_invites,
             multiplier: data.multiplier,
             temporary_units: data.temporary_units,
-            multiplier_claimed: data.multiplier_claimed
+            multiplier_claimed: data.multiplier_claimed,
+            twitter_avatar_url: data.twitter_avatar_url
         } as ISessionTwitter;
     };
 

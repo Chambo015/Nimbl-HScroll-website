@@ -14,6 +14,13 @@ module.exports = {
   parserOptions: {
       ecmaVersion: 'latest', // указать версию ECMAScript.
   },
+  settings: {
+    "import/resolver": {
+        typescript: {
+            "project": 'tsconfig.json'
+        }
+    }
+  },
   rules: {
       //  настраивать правила
   },

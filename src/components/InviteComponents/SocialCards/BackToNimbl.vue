@@ -1,5 +1,5 @@
 <template>
-  <div @click="$router.push({name: 'nimbltv'})" class="bg_card group relative ring-1 ring-blue-500/50 font-Rollbox max-md:text-sm font-bold text-xl max-2xl:text-lg leading-tight max-w-[250px] p-3 min-h-[100px] max-md:min-h-[75px]  cursor-pointer rounded-md animation__hover-card">
+  <div @click="$router.push({name: 'nimbltv'})" class="bg_card group relative ring-1 ring-blue-500/50 font-Rollbox max-md:text-sm font-bold text-xl max-2xl:text-lg leading-tight max-w-[250px] max-md:rounded-none p-3 min-h-[100px] max-md:min-h-[75px]  cursor-pointer rounded-md animation__hover-card">
     <p class="uppercase relative z-10 text_arrow ">NIMBL.TV <br class="hidden max-md:inline" /></p>
     <img :src="nimbl" alt="notifications" width="59" height="59" class="absolute right-2 bottom-0 pointer-events-none max-md:w-[43px] max-md:h-[43px]">
   </div>

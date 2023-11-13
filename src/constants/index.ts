@@ -9,7 +9,8 @@ export const DEFAULT_USER_STORAGE: ISessionTwitter = {
   weekly_leaderboard: null,
   multiplier: null,
   temporary_units: null,
-  multiplier_claimed: true
+  multiplier_claimed: true,
+  twitter_avatar_url: null
 } as const;
 
 export const MULTIPLIER = {

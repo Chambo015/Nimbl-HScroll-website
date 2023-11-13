@@ -16,7 +16,7 @@
                 <BoardTasks />
             </div>
             <div class="mt-auto pr-5">
-                <DescInvite />
+                <MultiplierInvite />
             </div>
         </div>
     </main>
@@ -44,15 +44,19 @@
         <div v-if="activeMobileTab === 'invite'" class="mt-2 overflow-y-auto">
             <BoardMetamask />
             <div class="mt-5">
-                <DescInvite />
+                <MultiplierInvite />
             </div>
-            <div class="grid grid-cols-2 mt-5 px-5 gap-3 mb-5">
+            <div class="grid grid-cols-2 mb-5">
                 <BackToNimbl />
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
             </div>
             <div>
+                <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-5 mt-10">Tasks</h2>
+                <BoardTasks />
+            </div>
+            <div id="top10Users" class="mb-10">
                 <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3">Top 10 users</h2>
                 <BoardUsersRating :first="10" />
                 <button
@@ -60,10 +64,6 @@
                     class="font-TTOctos text-sm text-white/50 float-right inline mt-1 underline px-2">
                     View more
                 </button>
-            </div>
-            <div>
-                <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3 mt-5">Tasks</h2>
-                <BoardTasks />
             </div>
         </div>
         <div v-if="activeMobileTab === 'tasks'" class="mt-2 overflow-y-auto">
@@ -82,7 +82,7 @@ import BoardUsersRating from "@/components/InviteComponents/BoardUsersRating.vue
 import CardTelegram from "@/components/InviteComponents/SocialCards/CardTelegram.vue";
 import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter.vue";
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
-import DescInvite from "@/components/InviteComponents/DescInvite.vue";
+import MultiplierInvite from "@/components/InviteComponents/MultiplierInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
 import {onMounted, ref, provide} from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";

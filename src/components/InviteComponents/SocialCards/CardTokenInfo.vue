@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_card max-xl:hidden relative font-Rollbox text-xl max-md:text-sm max-2xl:text-lg isolate leading-tight min-h-[100px] max-md:min-h-[75px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all flex-grow">
+  <div class="bg_card max-xl:hidden max-md:rounded-none relative font-Rollbox text-xl max-md:text-sm max-2xl:text-lg isolate leading-tight min-h-[100px] max-md:min-h-[75px] p-3 font-bold cursor-pointer rounded-md hover:rounded-none transition-all flex-grow">
     <p class="uppercase relative z-10 text_arrow">Token info <br class="hidden max-md:inline" /></p>
     <img :src="tokenInfo" alt="contract" width="95" height="64" class="absolute right-0 bottom-0 pointer-events-none max-md:w-[90px]">
     <div class="absolute inset-x-0 inset-y-0 bg-black/90 z-50"><p class="uppercase z-10 absolute text-center top-1/2 -translate-y-1/2 w-full max-2xl:text-base">COMING SOON...</p></div>

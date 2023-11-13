@@ -1,5 +1,5 @@
 <template>
-  <div @click="linkTelegram" class="bg_card relative font-Rollbox text-xl max-2xl:text-lg max-md:text-sm leading-tight max-w-[250px] min-h-[100px] max-md:min-h-[75px] p-3 font-bold cursor-pointer rounded-md animation__hover-card">
+  <div @click="linkTelegram" class="bg_card max-md:rounded-none relative font-Rollbox text-xl max-2xl:text-lg max-md:text-sm leading-tight max-w-[250px] min-h-[100px] max-md:min-h-[75px] p-3 font-bold cursor-pointer rounded-md animation__hover-card">
     <p class="uppercase relative z-10 text_arrow">telegram <br class="hidden max-md:inline" /></p>
     <IconTelegramBlue class="absolute right-3 bottom-2 max-md:w-[33px] max-md:h-[33px]" />
   </div>

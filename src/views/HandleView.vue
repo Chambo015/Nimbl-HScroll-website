@@ -1,7 +1,7 @@
 <template>
     <section ref="sectionEl" @wheel="onWheel" class="relative flex items-center justify-center h-full">
         <div ref="webEl" data="webEl" class="relative max-2xl:-translate-y-[5%]">
-            <HandleWeb class='max-sm:w-[750px] max-sm:h-[365px]' />
+          <!--   <HandleWeb class='max-sm:w-[750px] max-sm:h-[365px]' /> -->
             <picture>
                 <source :srcset="radarIconWebp" type="image/webp" />
                 <img
@@ -118,7 +118,7 @@ import user2Prime from "@/assets/user2-prime.png";
 import user1Prime from "@/assets/user1-prime.png";
 import gsap from "gsap";
 import HeroButton from "@/components/HeroButton.vue";
-import HandleWeb from "@/components/HandleWeb.vue";
+// import HandleWeb from "@/components/HandleWeb.vue";
 import useMouseWheel from "@/composables/mouseWheel";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import { useMediaQuery } from '@vueuse/core';

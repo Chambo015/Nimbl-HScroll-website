@@ -1,12 +1,16 @@
 <template>
-    <div class="relative self-start z-20">
-        <Popover  v-slot="{open}"  class="relative inline-block text-left isolate h-full">
+    <div class="relative self-start z-20 max-md:w-full">
+        <Popover  v-slot="{open}"  class="relative inline-block text-left isolate h-full max-md:w-full">
             <PopoverButton
                 :disabled="!userStorage.user && !userStorage.token"
-                class="inline-flex z-10 max-w-[200px] max-md:max-w-full h-full bg-gradient-header-secondary w-full justify-center items-center leading-none rounded-md px-4 py-3 text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 font-Rollbox font-bold text-base">
-                <IconAccountCircle class="mr-2 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" />
-                <span class="truncate">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
-                <IconChevronDown class="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
+                class="inline-flex z-10 max-w-[200px] max-md:max-w-full h-full bg-gradient-header-secondary max-md:bg-none w-full items-center leading-none rounded-md px-4 max-md:py-0 py-3 max-md:px-0 text-white focus:outline-none font-Rollbox font-bold text-base">
+                <UserAvatar :url="userStorage.twitter_avatar_url || undefined" />
+                <span class="truncate ml-2">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
+                <IconChevronDown class="ml-2 mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
+               <!--  <div class="bg-gradient-header-secondary md:hidden grow-[2] self-start ml-auto py-2 px-2 chevron_mask overflow-hidden">
+                    <p class="text-white font-Rollbox text-xs !leading-none">TOTAL UNITS</p>
+                    <p class="mt-2 text-[#c7972a]">{{ userStorage.user?.units }}</p>
+                </div> -->
             </PopoverButton>
 
             <transition 
@@ -123,9 +127,9 @@ import IconLogOut from "../icons/IconLogOut.vue";
 import IconLoading from "../icons/IconLoading.vue";
 import IconTwitter from "../icons/IconTwitter.vue";
 import IconEditPen from "../icons/IconEditPen.vue";
-import IconAccountCircle from "../icons/IconAccountCircle.vue";
 import VueTelegramLogin from "./VueTelegramLogin.vue";
 import { useRouter } from 'vue-router';
+import UserAvatar from './UserAvatar.vue';
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
 const router = useRouter()
@@ -162,5 +166,8 @@ const saveMetamaskWallet = async () => {
 }
 .metamask__action-btn {
     @apply text-white absolute right-0 top-1/2 -translate-y-1/2 bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1
+}
+.chevron_mask {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 70% 100%, 30% 100%, 0% 75%);
 }
 </style>

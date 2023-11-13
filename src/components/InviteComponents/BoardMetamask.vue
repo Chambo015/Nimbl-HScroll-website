@@ -1,11 +1,11 @@
 <template>
     <div
-        class="card_metamask ring-1 ring-[#2a0a42] flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg relative card_before"
+        class="card_metamask ring-1 ring-[#2a0a42] max-md:ring-0 flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg relative"
         :style="{'--bg': `url(${noise})`}">
         <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
             <div class="flex max-xl:flex-col relative z-30 gap-3 isolate">
                 <ProfileMenu />
-                <div
+                <a href="#top10Users"
                     class="flex-grow rounded-md flex-shrink-0 max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] max-md:w-full cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
@@ -19,8 +19,9 @@
                         height="133"
                         alt="rocket_img"
                         class="absolute right-0 top-0 -translate-y-[25px] translate-x-1/4 transition-all duration-1000 group-hover:drop-shadow-icon max-2xl:w-[100px] max-2xl:-translate-y-4" />
-                </div>
+                </a>
             </div>
+            <BoardUnits />
             <div class="relative z-10 font-Rollbox mt-5">
                 <p class="font-bold text-xl !leading-tight max-2xl:text-lg">INVITE LINK</p>
                 <p class="font-TTOctos text-lg mt-4 !leading-tight max-2xl:text-base max-2xl:mt-2">
@@ -60,8 +61,7 @@
                     <IconShareLink class="ml-3" />
                 </button>
             </div>
-            <p class="font-TTOctos ml-2">Receive 10 units per invite</p>
-            <BoardUnits />
+            <p class="font-TTOctos ml-2 max-md:text-sm">Receive 10 units per invite</p>
         </div>
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
             <p v-if="errorLogin" class="font-Rollbox font-bold text-red-500 px-4">{{ errorLogin }}</p>
@@ -165,7 +165,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.card_before::before {
+.card_metamask::before {
     content: "";
     background-image: var(--bg);
     background-size: cover;
@@ -174,9 +174,13 @@ onMounted(async () => {
     position: absolute;
     opacity: 0.6;
     mix-blend-mode: multiply;
+    
+    @apply max-md:!bg-none
 }
+
 .card_metamask {
     background-image: linear-gradient(180deg, #5c2786 5.1%, #2f0053 100%);
+    @apply max-md:!bg-none
 }
 
 .btn_copy:active:after {
