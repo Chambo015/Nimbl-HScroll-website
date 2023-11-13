@@ -37,7 +37,7 @@ export interface ITweetsCount {
 }
 export interface ITweetsMetricsCount {
     done_tweets: number;
-    limit_tweets: number;
+    all_tweets: number;
 }
 
 export interface IBoardTask {

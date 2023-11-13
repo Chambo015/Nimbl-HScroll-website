@@ -1,7 +1,7 @@
 <template>
     <div class="main__wrap" :class="[isCompleted ? 'bg-[#f5b3183d] is-completed' : 'bg-[#2a0a42]']">
         <div
-            class="main__inner "
+            class="main__inner"
             @mouseenter="isHover = true"
             @mouseleave="isHover = false"
             :class="[isCompleted ? 'pointer-events-none [&>div]:opacity-50' : 'inside__shadow']">
@@ -15,8 +15,12 @@
                     class="flex gap-2 items-center bg-black/20 pt-[2px] pb-1 pl-1 pr-2 rounded-tr-md rounded-br-md rounded-tl-[15px] rounded-bl-[15px]">
                     <img :src="logo" alt="nimbl" class="w-[16px] h-[16px] translate-y-[1px]" />
                     <p class="text-xl !leading-none font-TTOctos max-md:text-xs max-2xl:text-base text-white">
-                        {{ reward }} units<span v-if="tweetsCount" class="ml-2">{{
+                        {{ reward }} units
+                        <span v-if="tweetsCount" class="ml-1">{{
                             "per " + tweetsCount.done_tweets + "/" + tweetsCount.limit_tweets
+                        }}</span>
+                        <span v-if="tweetsMetrics" class="ml-1">{{
+                            "per " + tweetsMetrics.done_tweets + "/" + tweetsMetrics.all_tweets
                         }}</span>
                     </p>
                 </div>
@@ -38,7 +42,7 @@
 
 <script setup lang="ts">
 import {PropType, ref} from "vue";
-import {ITweetsCount} from "@/types";
+import {ITweetsCount, ITweetsMetricsCount} from "@/types";
 import {Vue3Lottie} from "vue3-lottie";
 import logo from "@/assets/invite/logo_white.png";
 import noise from "@/assets/invite/noise_card_task.webp";
@@ -62,6 +66,10 @@ defineProps({
     },
     tweetsCount: {
         type: Object as PropType<ITweetsCount>,
+        required: false,
+    },
+    tweetsMetrics: {
+        type: Object as PropType<ITweetsMetricsCount>,
         required: false,
     },
     isCompleted: Boolean,
@@ -152,8 +160,6 @@ defineProps({
     opacity: 0.9;
     mix-blend-mode: hard-light;
 }
-
-
 
 .inside__shadow {
     @apply before:absolute before:z-30 before:w-full before:h-full hover:before:shadow-[0px_0px_100px_-20px_inset] 

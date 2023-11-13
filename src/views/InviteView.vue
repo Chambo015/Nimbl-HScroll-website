@@ -1,5 +1,5 @@
 <template>
-    <main ref=contentEl v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 pb-[35px] gap-5">
+    <main ref="contentEl" v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 pb-[35px] gap-5">
         <div class="w-1/3 flex-shrink-0 flex flex-col space-y-5 pb-5">
             <BoardMetamask />
             <BoardUsersRating />
@@ -55,17 +55,22 @@
             <div>
                 <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3">Top 10 users</h2>
                 <BoardUsersRating :first="10" />
+                <button
+                    @click="activeMobileTab = 'ranking'"
+                    class="font-TTOctos text-sm text-white/50 float-right inline mt-1 underline px-2">
+                    View more
+                </button>
             </div>
             <div>
-                <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3 mt-3">Tasks</h2>
+                <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3 mt-5">Tasks</h2>
                 <BoardTasks />
             </div>
         </div>
         <div v-if="activeMobileTab === 'tasks'" class="mt-2 overflow-y-auto">
-          <BoardTasks />
+            <BoardTasks />
         </div>
         <div v-if="activeMobileTab === 'ranking'" class="mt-2 overflow-y-auto">
-          <BoardUsersRating />
+            <BoardUsersRating />
         </div>
     </main>
 </template>
@@ -79,17 +84,17 @@ import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
 import DescInvite from "@/components/InviteComponents/DescInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
-import {onMounted, ref , provide} from "vue";
+import {onMounted, ref, provide} from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
-import CardTokenInfo from '@/components/InviteComponents/SocialCards/CardTokenInfo.vue';
-import gsap from 'gsap';
-import { keyClaim } from '@/types';
+import CardTokenInfo from "@/components/InviteComponents/SocialCards/CardTokenInfo.vue";
+import gsap from "gsap";
+import {keyClaim} from "@/types";
 const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const mdAndSmaller = breakpoints.smallerOrEqual("md");
 const activeMobileTab = ref<"invite" | "tasks" | "ranking">("invite");
 const isXS = useMediaQuery("(max-width: 700px)");
-const contentEl = ref()
+const contentEl = ref();
 
 onMounted(() => {
     if (isXS.value) return;
@@ -102,13 +107,12 @@ onMounted(() => {
     });
 });
 
-const showMultiUnitsAnim = ref(false)
-const showTransferUnitsAnim = ref(false)
+const showMultiUnitsAnim = ref(false);
+const showTransferUnitsAnim = ref(false);
 provide(keyClaim, {
     showMultiUnitsAnim,
-    showTransferUnitsAnim
-})
+    showTransferUnitsAnim,
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

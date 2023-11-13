@@ -127,7 +127,7 @@
                 <div v-if="isHoverPopover || isFocusPopover" class="popover__panel">
                     <div class="popover__body">
                         <p class="w-full font-TTOctos !leading-tight">
-                            In Nimbl's invite module, users earn units each week. To increase these units, they can achieve a weekly multiplier. The multipliers grow each week if they reach 300 units: it starts at 1.2x in week one, then 1.5x in week two, 2x in week three, and 2.5x in week four. If users don't hit 300 units in any week, their next week's multiplier drops back to 1.2x. Each user can earn only one multiplier per week.
+                            In Nimbl's invite module, users earn units each week. To increase these units, they can achieve a weekly multiplier. The multipliers grow each week if they reach <strong>300</strong> units: it starts at <strong>1.2x</strong> in week one, then <strong>1.5x</strong> in week two, <strong>2x</strong> in week three, and <strong>3x</strong> in week four. If users don't hit 300 units in any week, their next week's multiplier drops back to previous. Each user can earn only one multiplier per week.
                         </p>
                     </div>
                 </div>
