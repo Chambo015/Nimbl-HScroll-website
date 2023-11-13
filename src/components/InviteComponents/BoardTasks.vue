@@ -2,7 +2,7 @@
   <div class="h-full w-full overflow-y-auto pr-5 max-md:px-3 ">
     <div v-if="loading" class="h-full w-full flex items-center justify-center"><Vue3Lottie :animation-data="loadingMain" :height="200" :width="200" :loop="true" /></div>
     <div v-else class="grid grid-cols-2 max-xl:grid-cols-1 gap-5">
-      <CardTask v-for="task of tasks" :key="task.id" :img-url="task.task_image || undefined" :name="task.name" :reward="task.reward" :is-completed="task.task_done" :tweets-count="task.tweets_count || undefined" />
+      <CardTask v-for="task of tasks" :key="task.id" :img-url="task.task_image || undefined" :name="task.name" :reward="task.reward" :is-completed="task.task_done" :tweets-count="task.tweets_count || undefined" @click="task.embedded_url && toLink(task.embedded_url)" />
     </div>
   </div>
 </template>
@@ -27,6 +27,10 @@ onMounted(async() => {
  const resTasks =  await fetchTasks();
  tasks.value = resTasks
 })
+
+const toLink = (link: string) => {
+  window.open(link, "_blank");
+}
 
 watch(() => userStorage.value.token, async () => {
   const resTasks =  await fetchTasks();

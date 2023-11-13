@@ -20,7 +20,6 @@
                 <td class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">{{ leader.invite_count }}</td>
               </tr>
             </tbody>
-            <!-- <div class="group [transform:translateZ(0)] px-6 py-3 rounded-lg bg-gray-200 overflow-hidden relative before:absolute before:bg-sky-600 before:bottom-0 before:left-0 before:h-full before:w-full before:origin-[100%_100%] before:scale-x-0 hover:before:origin-[0_0] hover:before:scale-x-100 before:transition before:ease-in-out before:duration-500"><span class="relative z-0 text-black group-hover:text-gray-200 transition ease-in-out duration-500">Hover over me</span></div> -->
         </table>
       </div>
     </div>
@@ -33,12 +32,16 @@ import useLeaderboard from '@/composables/useLeaderboard';
 import { ILeaderboardUser } from '@/types';
 import { onMounted, ref } from 'vue';
 
+const props = defineProps({
+  first: Number
+})
+
 const leaders = ref<ILeaderboardUser[] | []>([])
 
 const { fetchLeaderboard } = useLeaderboard()
 
 onMounted( async () => {
-  leaders.value =  await fetchLeaderboard()
+  leaders.value =  props.first ? await fetchLeaderboard({limit: props.first, page: 1}) : await fetchLeaderboard()
 })
 fetchLeaderboard();
 </script>

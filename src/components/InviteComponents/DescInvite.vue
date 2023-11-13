@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 px-4 max-md:px-0 justify-around flex-wrap">
+        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none">
         <div class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1X

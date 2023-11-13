@@ -1,6 +1,6 @@
-import {MULTIPLIER} from '@/constants/index'
-import type { InjectionKey } from 'vue';
-import { Ref } from 'vue';
+import {MULTIPLIER} from "@/constants/index";
+import type {InjectionKey} from "vue";
+import {Ref} from "vue";
 
 export interface VideoI {
     id: number;
@@ -35,9 +35,14 @@ export interface ITweetsCount {
     done_tweets: number;
     limit_tweets: number;
 }
+export interface ITweetsMetricsCount {
+    done_tweets: number;
+    limit_tweets: number;
+}
 
 export interface IBoardTask {
     id: number;
+    embedded_url: null | string;
     task_done: boolean;
     task_image: string | null;
     order: number;
@@ -50,6 +55,7 @@ export interface IBoardTask {
     reward: number;
     hunter_task: number;
     tweets_count: ITweetsCount | null;
+    tweets_metrics: ITweetsMetricsCount | null;
 }
 
 export interface ICompletedTask {
@@ -89,17 +95,17 @@ export interface IResUserInfo {
     key: string | null;
     multiplier: TypeMultiplier | null;
     temporary_units: number | null;
-    multiplier_claimed: boolean
+    multiplier_claimed: boolean;
 }
 
 export interface ISessionTwitter {
     user: IUserTwitter | null;
     total_invites: number | null;
     token: string | null;
-    weekly_leaderboard: null | IWeeklyLeaderBoard
+    weekly_leaderboard: null | IWeeklyLeaderBoard;
     temporary_units: null | number;
     multiplier: TypeMultiplier | null;
-    multiplier_claimed: boolean
+    multiplier_claimed: boolean;
 }
 
 export interface ITweets {
@@ -131,14 +137,14 @@ export interface ILeaderboardUser {
     invite_count: number;
 }
 
-export interface IWeeklyLeaderBoard  {
+export interface IWeeklyLeaderBoard {
     user_position: number;
     total_users: number;
 }
 
-export type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER]
+export type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER];
 
 export const keyClaim = Symbol() as InjectionKey<{
-    showMultiUnitsAnim: Ref<boolean>,
-    showTransferUnitsAnim: Ref<boolean>
-}>
+    showMultiUnitsAnim: Ref<boolean>;
+    showTransferUnitsAnim: Ref<boolean>;
+}>;

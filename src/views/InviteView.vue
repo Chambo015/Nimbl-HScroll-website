@@ -43,7 +43,6 @@
         </div>
         <div v-if="activeMobileTab === 'invite'" class="mt-2 overflow-y-auto">
             <BoardMetamask />
-            
             <div class="mt-5">
                 <DescInvite />
             </div>
@@ -52,6 +51,14 @@
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
+            </div>
+            <div>
+                <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3">Top 10 users</h2>
+                <BoardUsersRating :first="10" />
+            </div>
+            <div>
+                <h2 class="px-4 text-xl font-Rollbox font-bold text-white uppercase mb-3 mt-3">Tasks</h2>
+                <BoardTasks />
             </div>
         </div>
         <div v-if="activeMobileTab === 'tasks'" class="mt-2 overflow-y-auto">
