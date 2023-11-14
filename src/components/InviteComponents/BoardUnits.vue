@@ -2,7 +2,7 @@
     <div
         class="font-Rollbox text-white py-3 uppercase max-2xl:text-sm flex items-center justify-around mt-5 user_stats relative"
         :style="{'--bg': `url(${user_stat_bg})`}">
-        <div class="flex flex-col items-center gap-2 relative z-20">
+        <div class="flex flex-col items-center gap-2 relative z-20 max-md:hidden">
             <p class="max-md:text-xs">units</p>
             <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px] max-md:text-2xl">
                 {{ unitsWithAnim.number.toFixed(0) || userStorage.user?.units || 0 }}
@@ -23,12 +23,12 @@
                 ><span
                     v-if="showMultiplier && triggerAnim?.showMultiUnitsAnim.value"
                     class="absolute left-1/2 -translate-x-1/2 bottom-0 z-20 translate-y-2 multi__text"
-                    >1.2X</span
+                    >{{ multiText }}</span
                 >
             </Transition>
 
             <Transition>
-                <ul v-if="showTransfer" className="round-list">
+                <ul v-if="showTransfer" className="round-list max-md:hidden">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -46,11 +46,11 @@
 </template>
 
 <script setup lang="ts">
-import {ref, inject, nextTick} from "vue";
+import {ref, inject, nextTick, computed} from "vue";
 import {useStorage} from "@vueuse/core";
 import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import {useAnimationDigits} from "@/composables/useAnimationDigits";
-import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
+import {DEFAULT_USER_STORAGE, MULTIPLIER, STORAGE_USER_KEY} from "@/constants";
 import {ISessionTwitter, keyClaim} from "@/types";
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
@@ -65,6 +65,15 @@ const {tweened: weeklyUnits} = useAnimationDigits(
     onDoneWeeklyAnim,
     onStartWeeklyAnim,
 );
+
+const multiText = computed(() => {
+    let currentM
+    Object.entries(MULTIPLIER).forEach(([k, v]) => {
+         if(v !== userStorage.value.multiplier) return  
+         currentM = k
+    })
+    return currentM
+})
 
 async function onDoneWeeklyAnim() {
     showMultiplier.value = false;

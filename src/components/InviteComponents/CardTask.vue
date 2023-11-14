@@ -41,15 +41,12 @@
 </template>
 
 <script setup lang="ts">
+import {Vue3Lottie} from "vue3-lottie";
 import {PropType, ref} from "vue";
 import {ITweetsCount, ITweetsMetricsCount} from "@/types";
-import {Vue3Lottie} from "vue3-lottie";
 import logo from "@/assets/invite/logo_white.png";
 import noise from "@/assets/invite/noise_card_task.webp";
 import doneTaskLottie from "@/assets/lottie/done-task.json";
-
-const defaultImgUrl = new URL("/nimbl-nimbl.png", import.meta.url).href;
-const isHover = ref(false);
 
 defineProps({
     imgUrl: {
@@ -72,8 +69,12 @@ defineProps({
         type: Object as PropType<ITweetsMetricsCount>,
         required: false,
     },
-    isCompleted: Boolean,
+    isCompleted: Boolean
 });
+
+const defaultImgUrl = new URL("/nimbl-nimbl.png", import.meta.url).href;
+const isHover = ref(false);
+
 </script>
 
 <style scoped>

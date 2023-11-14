@@ -13,7 +13,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-white/20  group [&>td]:z-20 [&>td]:relative [&:hover>td]:text-blue-500 animation__hover" v-for="(leader, idx ) of leaders" :key="leader.id">
+              <tr class="border-b last:border-b-0 border-white/20 group [&>td]:z-20 [&>td]:relative [&:hover>td]:text-blue-500 animation__hover" 
+                v-for="(leader, idx ) of leaders" :key="leader.id">
                 <td class="whitespace-nowrap px-5 py-4 max-md:px-3 max-md:py-2 font-medium text-center font-TTOctos">{{ idx + 1 }}</td>
                 <td class="whitespace-normal px-6 py-4 max-md:px-3 max-md:py-2 max-w-[100px] truncate font-Rollbox text-base !leading-tight font-bold max-md:text-sm">{{ leader.username }}</td>
                 <td class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">{{ leader.units }}</td>
@@ -28,9 +29,9 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import useLeaderboard from '@/composables/useLeaderboard';
 import { ILeaderboardUser } from '@/types';
-import { onMounted, ref } from 'vue';
 
 const props = defineProps({
   first: Number

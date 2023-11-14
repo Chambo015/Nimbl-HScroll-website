@@ -7,10 +7,10 @@
                 <UserAvatar :url="userStorage.twitter_avatar_url || undefined" />
                 <span class="truncate ml-2">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
                 <IconChevronDown class="ml-2 mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
-               <!--  <div class="bg-gradient-header-secondary md:hidden grow-[2] self-start ml-auto py-2 px-2 chevron_mask overflow-hidden">
+                <div class="bg-gradient-header-secondary md:hidden grow-[2] self-start ml-auto py-2 px-2 chevron_mask overflow-hidden">
                     <p class="text-white font-Rollbox text-xs !leading-none">TOTAL UNITS</p>
                     <p class="mt-2 text-[#c7972a]">{{ userStorage.user?.units }}</p>
-                </div> -->
+                </div>
             </PopoverButton>
 
             <transition 
@@ -112,13 +112,13 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
+import {useStorage} from "@vueuse/core";
+import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import {DEFAULT_USER_STORAGE, STORAGE_USER_KEY} from "@/constants";
 import {ISessionTwitter, IUserTg} from "@/types";
-import {useStorage} from "@vueuse/core";
 import {useHunterTelegram} from "@/composables/useHunterTelegram";
 import {useWalletMetamask} from "@/composables/useWalletMetamask";
 
-import {Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import IconChevronDown from "@/components/icons/IconChevronDown.vue";
 import IconMetamask from "@/components/icons/iconMetamask.vue";
 import IconDone from "../icons/IconDone.vue";

@@ -50,7 +50,6 @@ export interface IBoardTask {
     updated: string;
     is_active: boolean;
     is_deleted: boolean;
-    is_completed?: boolean;
     name: string;
     reward: number;
     hunter_task: number;
