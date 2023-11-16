@@ -2,7 +2,7 @@
   <div class="h-full w-full overflow-y-auto pr-5 max-md:px-3 ">
     <div v-if="loading" class="h-full w-full flex items-center justify-center"><Vue3Lottie :animation-data="loadingMain" :height="200" :width="200" :loop="true" /></div>
     <div v-else class="grid grid-cols-2 max-xl:grid-cols-1 gap-5 max-md:mb-5">
-      <CardTask v-for="task of tasks" :key="task.id" :img-url="task.task_image || undefined" :name="task.name" :reward="task.reward" :is-completed="task.task_done" :tweets-count="task.tweets_count || undefined"  :tweets-metrics="task.tweets_metrics || undefined" @click="onClickTask({link: task.embedded_url, name: task.name, completed: task.task_done})" :class="[task.embedded_url ? 'cursor-pointer': '']" />
+      <CardTask v-for="task of tasks" :key="task.id" :img-url="task.task_image || undefined" :name="task.name" :reward="task.reward" :is-completed="task.task_done" :tweets-count="task.tweets_count || undefined"  :tweets-metrics="task.tweets_metrics || undefined" @click="onClickTask({link: task.embedded_url, name: task.name, completed: task.task_done})" :class="[task.embedded_url || task.name.includes('AMA') ? 'cursor-pointer': '']" />
     </div>
     <ModalAMASession v-if="showModalAMA" @click-close="showModalAMA = false" :session-token="userStorage.token" />
   </div>

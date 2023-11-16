@@ -33,7 +33,7 @@ const useTwitterPosts = () => {
             loading.value = true;
             pageNumber.value += 1
             await fetchTweetPosts(pageNumber.value);
-            nextTick(() => {
+            await nextTick(() => {
                 if (window.twttr && window.twttr.widgets) {
                   window.twttr.widgets.load();
                 }

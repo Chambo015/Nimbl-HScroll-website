@@ -29,7 +29,7 @@
             <template v-if="currentMultiplier === MULTIPLIER['1.2X']">
                 <div>
                     <p class="multi__text">multiplier</p>
-                    <p class="multi__timer">7 days left</p>
+                    <p class="multi__timer">{{ computedDate }}</p>
                 </div>
                 <div class="button__wrap" :class="{disabled: !canClaim}">
                     <button :disabled="!canClaim" @click="multiWeeklyUnits(1.2)" class="button__claim">
@@ -51,7 +51,7 @@
             <template v-if="currentMultiplier === MULTIPLIER['1.5X']">
                 <div>
                     <p class="multi__text">multiplier</p>
-                    <p class="multi__timer">7 days left</p>
+                    <p class="multi__timer">{{ computedDate }}</p>
                 </div>
                 <div class="button__wrap" :class="{disabled: !canClaim}">
                     <button :disabled="!canClaim" @click="multiWeeklyUnits(1.2)" class="button__claim">
@@ -73,7 +73,7 @@
             <template v-if="currentMultiplier === MULTIPLIER['2X']">
                 <div>
                     <p class="multi__text">multiplier</p>
-                    <p class="multi__timer">7 days left</p>
+                    <p class="multi__timer">{{ computedDate }}</p>
                 </div>
                 <div class="button__wrap">
                     <button :disabled="!canClaim" @click="multiWeeklyUnits(2)" class="button__claim">
@@ -95,7 +95,7 @@
             <template v-if="currentMultiplier === MULTIPLIER['3X']">
                 <div>
                     <p class="multi__text">multiplier</p>
-                    <p class="multi__timer">7 days left</p>
+                    <p class="multi__timer">{{ computedDate }}</p>
                 </div>
                 <div class="button__wrap">
                     <button :disabled="!canClaim" @click="multiWeeklyUnits(3)" class="button__claim">
@@ -145,8 +145,22 @@ import {useMediaQuery, useStorage} from "@vueuse/core";
 import IconInfoOctagon from "@/components/icons/IconInfoOctagon.vue";
 import light from "@/assets/light-multiplier.webp";
 import axios from "axios";
+import { formatDistanceToNow } from 'date-fns';
 
 type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER];
+
+const deadLine = {
+    [MULTIPLIER['1X']]: new Date('2023-11-18T23:48+06:00'),
+    [MULTIPLIER['1.2X']]: new Date('2023-11-18T23:48+06:00'),
+    [MULTIPLIER['1.5X']]: new Date('2023-11-25T23:48+06:00'),
+    [MULTIPLIER['2X']]: new Date('2023-12-02T23:48+06:00'),
+    [MULTIPLIER['3X']]: new Date('2023-12-09T23:48+06:00'),
+}
+
+const computedDate = computed(() => {
+    const targetDate = deadLine[currentMultiplier.value]
+    return `${formatDistanceToNow(targetDate)} left`
+} )
 
 const isHoverPopover = ref(false);
 const isFocusPopover = ref(false);
@@ -218,7 +232,10 @@ const postMultiplyUnits = async () => {
 }
 
 .button__wrap.disabled {
-    @apply hover:!drop-shadow-none;
+    @apply hover:!drop-shadow-none ;
+}
+.button__wrap.disabled .button__claim {
+    @apply bg-[#827F74] bg-none cursor-default
 }
 .button__claim {
     --r: 10px;
