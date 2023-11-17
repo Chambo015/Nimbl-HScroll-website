@@ -3,7 +3,7 @@
         <Popover  v-slot="{open}"  class="relative inline-block text-left isolate h-full max-md:w-full">
             <PopoverButton
                 :disabled="!userStorage.user && !userStorage.token"
-                class="inline-flex z-10 max-w-[200px] max-md:max-w-full h-full bg-gradient-header-secondary max-md:bg-none w-full items-center leading-none rounded-md px-4 max-md:py-0 py-3 max-md:px-0 text-white focus:outline-none font-Rollbox font-bold text-base">
+                class="inline-flex z-10 max-w-[200px] max-md:max-w-full h-full bg-gradient-header-secondary max-md:bg-none w-full items-center leading-none rounded-md px-4 max-md:py-0 py-2 max-md:px-0 text-white focus:outline-none font-Rollbox font-bold text-base">
                 <UserAvatar :url="userStorage.twitter_avatar_url || undefined" />
                 <span class="truncate ml-2">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
                 <IconChevronDown class="ml-2 mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
