@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref, PropType} from "vue";
+import axios, { AxiosError } from "axios";
 import gsap from "gsap";
 import HeroButton from "@/components/HeroButton.vue";
-import {IconCloseBtn, IconChevronRight} from "@/components/icons";
-import axios, { AxiosError } from "axios";
+import {IconCloseBtn} from "@/components/icons";
 
 const props = defineProps({
     sessionToken: String as PropType<string | null>,
@@ -92,10 +92,7 @@ onMounted(() => {
                     </div>
                     <HeroButton @click="onSubmit" regular class="max-sm:!w-full group w-auto">
                         <span class="!text-2xl">SUBMIT</span>
-                        <div
-                            class="absolute right-[10%] inline top-1/2 -translate-y-1/2 group-hover:translate-x-1/2 transition-transform">
-                            <IconChevronRight /></div
-                    ></HeroButton>
+                    </HeroButton>
                 </div>
             </div>
         </div>
