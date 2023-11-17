@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
 import {onLeavePreviewPage} from "@/leaveHooks";
@@ -7,21 +7,22 @@ import {useRoute, useRouter} from "vue-router";
 import TransitionLeavePage from "./components/TransitionLeavePage.vue";
 import AppJoystick from "./components/Joystick/AppJoystick.vue";
 import {useMediaQuery, onKeyStroke} from "@vueuse/core";
-import PreviewViewMobile from "./views/PreviewViewMobile.vue";
+// import PreviewViewMobile from "./views/PreviewViewMobile.vue";
 import ModalContacts from "./components/ModalContacts.vue";
 
 const ready = ref(false);
 const mainEl = ref();
 const isModalOpen = ref(false);
+const imgUploaded = ref(false);
+
+
 const router = useRouter();
 const route = useRoute();
-const imgUploaded = ref(false);
 const isXS = useMediaQuery("(max-width: 700px)");
 
 const handlePreviewClick = () => {
     ready.value = true;
     document.body.requestFullscreen();
-    router.replace({name: "nimbltv"});
 };
 
 onKeyStroke("Enter", (e) => {
@@ -30,7 +31,8 @@ onKeyStroke("Enter", (e) => {
     handlePreviewClick();
 });
 
-onMounted(async () => {
+onBeforeMount(async () => {
+    isXS.value && handlePreviewClick()
     await router.isReady();
     if (route.name !== "nimbltv") {
         ready.value = true;
@@ -40,7 +42,7 @@ onMounted(async () => {
     setTimeout(() => {
         imgUploaded.value = true;
     }, 1500);
-});
+})
 </script>
 
 <template>
@@ -66,11 +68,11 @@ onMounted(async () => {
             </Transition>
         </template>
         <!-- Preview for Mobile -->
-        <template v-if="isXS">
+       <!--  <template v-if="isXS">
             <Transition name="prev-mob" mode="in-out">
                 <PreviewViewMobile v-if="!ready" />
             </Transition>
-        </template>
+        </template> -->
         <!-- Modal Contact -->
         <Transition
             enter-active-class="transition-all"
