@@ -1,6 +1,6 @@
 <template>
     <main ref="contentEl" v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 pb-[35px] gap-5">
-        <div class="w-1/3 flex-shrink-0 flex flex-col space-y-5 pb-5">
+        <div class="w-1/3 max-xl:w-[40%] max-lg:w-1/2 flex-shrink-0 flex flex-col space-y-5 pb-5">
             <BoardMetamask />
             <BoardUsersRating />
         </div>

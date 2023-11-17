@@ -31,7 +31,7 @@ li {
     @apply text-center 
 }
 li a {
-    @apply opacity-40 font-rfdewi text-white text-sm font-black gradient-nav-active 
+    @apply opacity-40 font-rfdewi text-white text-sm font-black gradient-nav-active max-lg:text-xs
 }
 li .router-link-active {
     @apply opacity-100
