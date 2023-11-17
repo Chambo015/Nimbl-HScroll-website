@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="item__ceil col-span-4 max-md:col-span-2">
-                <div class="w-1/2 h-full absolute bottom-0 top-0 right-0 bg-no-repeat bg-center mix-blend-lighten max-md:bg-cover" :style="{backgroundImage: `url(${imgTreasury})`}"></div>
+                <div class="w-1/2 h-full absolute bottom-0 top-0 right-0 bg-no-repeat bg-center mix-blend-lighten bg-cover" :style="{backgroundImage: `url(${imgTreasury})`}"></div>
                 <div class="flex items-center gap-10 justify-between absolute top-1/2 left-10 -translate-y-1/2 max-md:left-5 max-md:gap-5">
                     <span class="item__title">Treasury</span>
                     <span class="item__percent ">21%</span>
@@ -76,16 +76,15 @@
 
 <script setup lang="ts">
 import gsap from "gsap";
-import useMouseWheel from "@/composables/mouseWheel";
 import {onMounted, ref} from "vue";
 import {useMediaQuery} from "@vueuse/core";
+import useMouseWheel from "@/composables/mouseWheel";
 
 import imgCex from '@/assets/tokenomics/cex.webp'
 import imgDex from '@/assets/tokenomics/dex.webp'
 import imgChart from '@/assets/tokenomics/chart.webp'
 import imgGraph from '@/assets/tokenomics/graph.webp'
 import imgMarketing from '@/assets/tokenomics/marketing.webp'
-import imgPercent from '@/assets/tokenomics/percent.webp'
 import imgTeam from '@/assets/tokenomics/team.webp'
 import imgPhone from '@/assets/tokenomics/phone.webp'
 import imgTreasury from '@/assets/tokenomics/treasury.webp'
