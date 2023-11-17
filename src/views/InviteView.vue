@@ -69,7 +69,7 @@
         <div v-if="activeMobileTab === 'tasks'" class="mt-2 overflow-y-auto">
             <BoardTasks />
         </div>
-        <div v-if="activeMobileTab === 'ranking'" class="mt-2 overflow-y-auto">
+        <div v-if="activeMobileTab === 'ranking'" class="overflow-y-auto">
             <BoardUsersRating />
         </div>
     </main>

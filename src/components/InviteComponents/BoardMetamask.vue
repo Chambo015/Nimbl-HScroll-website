@@ -10,7 +10,7 @@
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
                     </p>
-                    <p class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
+                    <p v-once class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
                         #{{ userStorage.weekly_leaderboard?.user_position }} of {{ userStorage.weekly_leaderboard?.total_users }}
                     </p>
                     <img
@@ -34,7 +34,7 @@
                     v-if="inviteLink"
                     class="bg-gradient-header-secondary cursor-pointer isolate relative rounded-md py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full"
                     :class="{'ring-1 ring-[#f5b418]': copied}">
-                    <input
+                    <input v-once
                         type="text"
                         disabled
                         :value="inviteLink"

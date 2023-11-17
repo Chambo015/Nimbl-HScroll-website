@@ -1,55 +1,44 @@
 <template>
-    <div
-        class="flex flex-col bg-blue-950/10 backdrop-blur backdrop-filter rounded-lg flex-grow overflow-hidden ring-1 ring-blue-500/20">
-        <div ref="containerEl" class="overflow-x-hidden sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-7">
-                <div class="overflow-y-hidden">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead
-                            class="border-b font-medium border-blue-500/30 text-white/50 font-TTOctos max-md:text-sm">
-                            <tr>
-                                <th
-                                    scope="col"
-                                    class="px-5 py-4 max-md:px-3 max-md:py-2 w-[50px] max-md:w-[30px] text-center">
-                                    #
-                                </th>
-                                <th scope="col" class="px-6 py-4 max-md:px-3 max-md:py-2 w-[40%]">Name</th>
-                                <th scope="col" class="px-6 py-4 max-md:px-1 max-md:py-2 text-center">Units</th>
-                                <th scope="col" class="px-6 py-4 max-md:px-1 max-md:py-2 text-center">Invites</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                class="border-b last:border-b-0 border-white/20 group [&>td]:z-20 [&>td]:relative [&:hover>td]:text-blue-500 animation__hover"
-                                v-for="(leader, idx) of leaders"
-                                :key="leader.id">
-                                <td
-                                    class="whitespace-nowrap px-5 py-4 max-md:px-3 max-md:py-2 font-medium text-center font-TTOctos">
-                                    {{ idx + 1 }}
-                                </td>
-                                <td
-                                    class="whitespace-normal px-6 py-4 max-md:px-3 max-md:py-2 max-w-[100px] truncate font-Rollbox text-base !leading-tight font-bold max-md:text-sm">
-                                    {{ leader.username }}
-                                </td>
-                                <td
-                                    class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">
-                                    {{ leader.units }}
-                                </td>
-                                <td
-                                    class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">
-                                    {{ leader.invite_count }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div v-show="loading" class="flex justify-center my-1">
-                    <span class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block flash-loading"></span
-                    ><span
-                        class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block flash-loading"></span
-                    ><span
-                        class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block flash-loading"></span>
-                </div>
+    <div ref="containerEl"
+        class="bg-blue-950/10 backdrop-blur backdrop-filter rounded-lg flex-grow h-full overflow-x-hidden ring-1 ring-blue-500/20">
+        <div  class="overflow-x-hidden sm:-mx-6 lg:-mx-8 min-w-full py-2 sm:px-6 lg:px-7">
+            <table class="min-w-full text-left text-sm font-light">
+                <thead class="border-b font-medium border-blue-500/30 text-white/50 font-TTOctos max-md:text-sm">
+                    <tr>
+                        <th scope="col" class="px-5 py-4 max-md:px-3 max-md:py-2 w-[50px] max-md:w-[30px] text-center">
+                            #
+                        </th>
+                        <th scope="col" class="px-6 py-4 max-md:px-3 max-md:py-2 w-[40%]">Name</th>
+                        <th scope="col" class="px-6 py-4 max-md:px-1 max-md:py-2 text-center">Units</th>
+                        <th scope="col" class="px-6 py-4 max-md:px-1 max-md:py-2 text-center">Invites</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        class="border-b last:border-b-0 border-white/20 group [&>td]:z-20 [&>td]:relative [&:hover>td]:text-blue-500 animation__hover"
+                        v-for="(leader, idx) of leaders"
+                        :key="leader.id">
+                        <td 
+                            class="whitespace-nowrap px-5 py-4 max-md:px-3 max-md:py-2 font-medium text-center font-TTOctos">
+                            {{ idx + 1 }}
+                        </td>
+                        <td 
+                            class="whitespace-normal px-6 py-4 max-md:px-3 max-md:py-2 max-w-[100px] truncate font-Rollbox text-base !leading-tight font-bold max-md:text-sm">
+                            {{ leader.username }}
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">
+                            {{ leader.units }}
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4 max-md:px-1 max-md:py-2 text-center font-TTOctos">
+                            {{ leader.invite_count }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div v-show="loading" class="flex justify-center my-1">
+                <span class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block flash-loading"></span
+                ><span class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block flash-loading"></span
+                ><span class="w-2 h-2 ml-2 rounded-full bg-gray-200 inline-block flash-loading"></span>
             </div>
         </div>
     </div>
@@ -89,14 +78,14 @@ useInfiniteScroll(containerEl, fetchNextLeaderboard, {
 }
 
 .flash-loading {
-  animation: animation-flash 1.4s infinite linear;
+    animation: animation-flash 1.4s infinite linear;
 }
 
 .flash-loading:nth-child(2) {
-  animation-delay: 0.2s;
+    animation-delay: 0.2s;
 }
 .flash-loading:nth-child(3) {
-  animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }
 
 @keyframes animation-flash {

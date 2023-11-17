@@ -4,12 +4,12 @@
             <PopoverButton
                 :disabled="!userStorage.user && !userStorage.token"
                 class="inline-flex z-10 max-w-[200px] max-md:max-w-full h-full bg-gradient-header-secondary max-md:bg-none w-full items-center leading-none rounded-md px-4 max-md:py-0 py-2 max-md:px-0 text-white focus:outline-none font-Rollbox font-bold text-base">
-                <UserAvatar :url="userStorage.twitter_avatar_url || undefined" />
-                <span class="truncate ml-2">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
+                <UserAvatar v-once :url="userStorage.twitter_avatar_url || undefined" />
+                <span v-once class="truncate ml-2">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
                 <IconChevronDown class="ml-2 mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
                 <div class="bg-gradient-header-secondary md:hidden grow-[2] self-start ml-auto py-2 px-2 chevron_mask overflow-hidden">
                     <p class="text-white font-Rollbox text-xs !leading-none">TOTAL UNITS</p>
-                    <p class="mt-2 text-[#c7972a]">{{ userStorage.user?.units }}</p>
+                    <p v-once class="mt-2 text-[#c7972a]">{{ userStorage.user?.units }}</p>
                 </div>
             </PopoverButton>
 
@@ -25,7 +25,7 @@
                     class="absolute left-0 mt-2 min-w-[260px] max-w-screen max-md:w-[90vw] origin-top-right divide-y divide-white/30 rounded-md backdrop-blur backdrop-filter shadow-lg ring-1 ring-black/5 bg-black/40 focus-visible:outline-none focus-visible:ring z-[999] font-TTOctos">
                     <div class="px-1 py-1" >
                         <div>
-                            <button
+                            <button v-once
                                 class="group flex w-full items-center rounded-md px-3 py-3 hover:bg-gradient-header-secondary text-violet-400 !leading-tight">
                                 <IconTwitter class="mr-2 h-5 w-5 text-violet-400 flex-shrink-0" aria-hidden="true" />
                                 @{{ userStorage.user?.username }}
