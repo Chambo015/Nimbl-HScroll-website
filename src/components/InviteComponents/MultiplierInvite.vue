@@ -2,7 +2,7 @@
     <div
         class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 max-md:py-0 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none">
         
-        <!-- <div v-if="currentMultiplier === MULTIPLIER['1X']" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
+        <div v-if="currentMultiplier === MULTIPLIER['1X']" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1X
                 <img
@@ -13,9 +13,9 @@
             </p>
             <div v-if="currentMultiplier === MULTIPLIER['1X']">
                 <p class="multi__text">multiplier</p>
-                <p class="multi__timer">7 days left</p>
+                <p class="multi__timer">{{ computedDate }}</p>
             </div>
-        </div> -->
+        </div>
 
         <div v-if="currentMultiplier === MULTIPLIER['1.2X']  || !isXS" class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.2X']}">
             <p class="digit__title">
@@ -145,22 +145,15 @@ import {useMediaQuery, useStorage} from "@vueuse/core";
 import IconInfoOctagon from "@/components/icons/IconInfoOctagon.vue";
 import light from "@/assets/light-multiplier.webp";
 import axios from "axios";
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, addDays } from 'date-fns';
 
 type TypeMultiplier = (typeof MULTIPLIER)[keyof typeof MULTIPLIER];
 
-const deadLine = {
-    [MULTIPLIER['1X']]: new Date('2023-11-18T23:48+06:00'),
-    [MULTIPLIER['1.2X']]: new Date('2023-11-18T23:48+06:00'),
-    [MULTIPLIER['1.5X']]: new Date('2023-11-25T23:48+06:00'),
-    [MULTIPLIER['2X']]: new Date('2023-12-02T23:48+06:00'),
-    [MULTIPLIER['3X']]: new Date('2023-12-09T23:48+06:00'),
-}
-
-const computedDate = computed(() => {
-    const targetDate = deadLine[currentMultiplier.value]
-    return `${formatDistanceToNow(targetDate)} left`
-} )
+const deadLine =  [new Date('2023-11-18T23:48+06:00'),
+    new Date('2023-11-18T23:48+06:00'),
+    new Date('2023-11-25T23:48+06:00'),
+     new Date('2023-12-02T23:48+06:00'),
+    new Date('2023-12-09T23:48+06:00'),]
 
 const isHoverPopover = ref(false);
 const isFocusPopover = ref(false);
@@ -168,11 +161,26 @@ const triggerAnim = inject(keyClaim);
 const isXS = useMediaQuery("(max-width: 700px)");
 
 const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_STORAGE, sessionStorage);
+
 const currentMultiplier = computed<TypeMultiplier>(() => {
     const multiplier = userStorage.value.multiplier;
     if (!multiplier) return MULTIPLIER["1X"];
     return multiplier;
 });
+
+const computedDate = computed(() => {
+    let targetDate = addDays(new Date(), 7);
+
+    for(let d of deadLine) {
+        let margin = d.getTime() - Date.now() 
+        if(margin > 0) {
+            targetDate = d
+            break;
+        }
+    }
+
+    return `${formatDistanceToNow(targetDate)} left`
+} )
 
 const multiWeeklyUnits = async (multi: number) => {
     if (!canClaim.value) return;

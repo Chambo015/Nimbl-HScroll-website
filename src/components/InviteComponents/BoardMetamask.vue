@@ -10,7 +10,7 @@
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
                     </p>
-                    <p v-once class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
+                    <p class="font-tt-octosquares text-lg !leading-tight text-white max-2xl:text-base">
                         #{{ userStorage.weekly_leaderboard?.user_position }} of {{ userStorage.weekly_leaderboard?.total_users }}
                     </p>
                     <img
