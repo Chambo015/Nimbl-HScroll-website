@@ -1,5 +1,5 @@
 <template>
-    <div class="main__wrap" :class="[isCompleted ? 'bg-[#f5b3183d] is-completed' : 'bg-[#2a0a42]']">
+    <div class="main__wrap group" :class="[isCompleted ? 'bg-[#f5b3183d] is-completed' : 'bg-[#2a0a42]']">
         <div
             class="main__inner"
             @mouseenter="isHover = true"
@@ -12,7 +12,7 @@
                     {{ name }}
                 </p>
                 <div
-                    class="flex gap-2 items-center bg-black/20 pt-[2px] pb-1 pl-1 pr-2 rounded-tr-md rounded-br-md rounded-tl-[15px] rounded-bl-[15px]">
+                    class="flex gap-2 items-center pt-[2px] ring-[1.5px] pb-1 pl-1 pr-2 rounded-tr-md rounded-br-md rounded-tl-[15px] rounded-bl-[15px]  transition-all" :class="[isCompleted ? 'ring-[#f5b418] group-hover:bg-[#f5b418] ': ' ring-blue-500/60 group-hover:bg-blue-800']">
                     <img :src="logo" alt="nimbl" class="w-[16px] h-[16px] translate-y-[1px]" />
                     <p class="text-xl !leading-none font-TTOctos max-md:text-xs max-2xl:text-base text-white">
                         {{ reward }} units
@@ -139,15 +139,26 @@ const isHover = ref(false);
     @apply bg-[#180e20] m-[var(--b)] w-[calc(100%_-_2*var(--b))] h-[calc(100%_-_2*var(--b))] overflow-hidden flex relative;
 }
 .card__image {
-    -webkit-box-shadow: inset 0px 0px 5px 3px rgba(0, 0, 0, 0.52);
-    box-shadow: inset 0px 0px 5px 3px rgba(0, 0, 0, 0.52);
-    @apply w-1/4 flex-shrink-0 overflow-hidden h-full relative bg-cover bg-center;
+   /*  -webkit-box-shadow: inset 0px 0px 5px 3px rgba(0, 0, 0, 0.52);
+    box-shadow: inset 0px 0px 5px 3px rgba(0, 0, 0, 0.52); */
+    @apply w-[30%] flex-shrink-0 overflow-hidden h-full relative bg-cover bg-center;
+}
+.card__image::before {
+    content: '';
+    @apply absolute right-0 h-full w-full bg-gradient-to-l from-[#15021b] via-[#15021b76]
+}
+
+.card__image::after {
+    content: '';
+    padding-top: min(70%) ;
+    display: block;
 }
 .card__content {
-    background-image: linear-gradient(180deg, #5c2786 0%, #2f0053 100%);
+    /* background-image: linear-gradient(180deg, #161317 0%, #2624314b 100%); */
+    background-color: #15021b;
     @apply flex-grow-[2] flex-shrink relative flex p-3 gap-2 items-start justify-center flex-col;
 }
-.card__content::before {
+/* .card__content::before {
     content: "";
     background-image: var(--bg);
     background-size: cover;
@@ -158,10 +169,10 @@ const isHover = ref(false);
     top: 0;
     bottom: 0;
     position: absolute;
-    opacity: 0.9;
+    opacity: 0.8;
     mix-blend-mode: hard-light;
 }
-
+ */
 .inside__shadow {
     @apply before:absolute before:z-30 before:w-full before:h-full hover:before:shadow-[0px_0px_100px_-20px_inset] 
     hover:before:shadow-blue-700/70 before:shadow-blue-500/70 before:duration-500  before:transition-shadow before:origin-center;

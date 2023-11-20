@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onBeforeMount, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import NavigationApp from "./components/NavigationApp.vue";
 import PreviewView from "./views/PreviewView.vue";
 import {onLeavePreviewPage} from "@/leaveHooks";
@@ -15,10 +15,11 @@ const mainEl = ref();
 const isModalOpen = ref(false);
 const imgUploaded = ref(false);
 
-
 const router = useRouter();
 const route = useRoute();
 const isXS = useMediaQuery("(max-width: 700px)");
+
+const isInvitePage = computed(() => route.name === 'invite')
 
 const handlePreviewClick = () => {
     ready.value = true;
@@ -60,7 +61,7 @@ onBeforeMount(async () => {
             </router-view>
         </div>
         <AppJoystick v-if="ready" @click-bottom="isModalOpen = !isModalOpen" />
-        <NavigationApp />
+        <template v-if="!isInvitePage"><NavigationApp /></template>
         <!-- Preview for Desktop  -->
         <template v-if="!isXS">
             <Transition @leave="onLeavePreviewPage" :css="false" mode="in-out">

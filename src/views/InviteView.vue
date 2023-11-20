@@ -1,7 +1,7 @@
 <template>
-    <main ref="contentEl" v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 pb-[35px] gap-5">
+    <div ref="contentEl" v-if="!mdAndSmaller" class="w-full h-full flex pt-5 pl-5 gap-5 bg-invite-bg">
         <div class="w-1/3 max-xl:w-[40%] max-lg:w-1/2 flex-shrink-0 flex flex-col space-y-5 pb-5">
-            <BoardMetamask />
+            <BoardUser />
             <BoardUsersRating />
         </div>
         <div class="flex flex-grow flex-col pb-5 gap-5">
@@ -19,8 +19,8 @@
                 <MultiplierInvite />
             </div>
         </div>
-    </main>
-    <main v-else class="w-full flex flex-col h-full overflow-x-hidden">
+    </div>
+    <div v-else class="w-full flex flex-col h-full overflow-x-hidden bg-invite-bg">
         <div class="font-Rollbox font-bold flex justify-between border-b border-[rgba(51,51,51,0.50)]">
             <button
                 class="px-2 py-2 text-center flex-grow flex-shrink-0 border-b-2 border-transparent rounded-md"
@@ -42,7 +42,7 @@
             </button>
         </div>
         <div v-if="activeMobileTab === 'invite'" class="mt-2 overflow-y-auto">
-            <BoardMetamask />
+            <BoardUser />
             <div class="mt-5">
                 <MultiplierInvite />
             </div>
@@ -72,19 +72,19 @@
         <div v-if="activeMobileTab === 'ranking'" class="overflow-y-auto">
             <BoardUsersRating />
         </div>
-    </main>
+    </div>
 </template>
 
 <script setup lang="ts">
+import {onMounted, ref, provide} from "vue";
 import {breakpointsTailwind, useBreakpoints, useMediaQuery} from "@vueuse/core";
-import BoardMetamask from "@/components/InviteComponents/BoardMetamask.vue";
+import BoardUser from "@/components/InviteComponents/BoardUser.vue";
 import BoardUsersRating from "@/components/InviteComponents/BoardUsersRating.vue";
 import CardTelegram from "@/components/InviteComponents/SocialCards/CardTelegram.vue";
 import CardXTwitter from "@/components/InviteComponents/SocialCards/CardXTwitter.vue";
 import CardContract from "@/components/InviteComponents/SocialCards/CardContract.vue";
 import MultiplierInvite from "@/components/InviteComponents/MultiplierInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
-import {onMounted, ref, provide} from "vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
 import CardTokenInfo from "@/components/InviteComponents/SocialCards/CardTokenInfo.vue";
 import gsap from "gsap";

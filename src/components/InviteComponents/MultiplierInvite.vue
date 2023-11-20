@@ -2,7 +2,7 @@
     <div
         class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 max-md:py-0 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none">
         
-        <div v-if="currentMultiplier === MULTIPLIER['1X']" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
+        <div v-if="currentMultiplier === MULTIPLIER['1X'] || !isXS" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1X
                 <img
@@ -139,9 +139,9 @@
 
 <script setup lang="ts">
 import {computed, ref, inject} from "vue";
+import {useMediaQuery, useStorage} from "@vueuse/core";
 import {DEFAULT_USER_STORAGE, MULTIPLIER, STORAGE_USER_KEY} from "@/constants";
 import {ISessionTwitter, keyClaim} from "@/types";
-import {useMediaQuery, useStorage} from "@vueuse/core";
 import IconInfoOctagon from "@/components/icons/IconInfoOctagon.vue";
 import light from "@/assets/light-multiplier.webp";
 import axios from "axios";

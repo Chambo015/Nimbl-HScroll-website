@@ -1,12 +1,11 @@
 <template>
     <div
-        class="card_metamask ring-1 ring-[#2a0a42] max-md:ring-0 flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg relative"
-        :style="{'--bg': `url(${noise})`}">
-        <div v-if="userStorage.user" class="w-full h-full py-4 px-4 flex flex-col">
-            <div class="flex max-md:flex-col relative z-30 gap-3 isolate">
+        class=" max-md:ring-0 flex-shrink-0 min-h-[350px] max-md:min-h-[250px] flex items-center overflow-hidden rounded-lg relative" :class="{'ring-1 ring-[#2a0a42]': !userStorage.user}">
+        <div v-if="userStorage.user" class="w-full h-full p-px flex max-md:px-2 flex-col">
+            <div class="flex flex-wrap relative z-30 gap-3 isolate">
                 <ProfileMenu />
                 <a href="#top10Users"
-                    class="flex-grow rounded-md flex-shrink-0 max-2xl:w-[260px] block animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] max-md:w-full cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[70px] max-2xl:pr-5">
+                    class="flex-grow ring-1 ring-blue-500/25 rounded-md flex flex-col min-w-[300px] max-2xl:w-[260px] animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] max-md:w-full cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[1%] max-2xl:pr-5">
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
                         Weekly Leaderboard
                     </p>
@@ -22,46 +21,48 @@
                 </a>
             </div>
             <BoardUnits />
-            <div class="relative z-10 font-Rollbox mt-5">
-                <p class="font-bold text-xl !leading-tight max-2xl:text-lg">INVITE LINK</p>
-                <p class="font-TTOctos text-lg mt-4 !leading-tight max-2xl:text-base max-2xl:mt-2">
-                    This is your custom referral link. Use it to invite others to sign up for Nimbl.
-                </p>
-            </div>
-            <div class="flex max-md:flex-col relative z-10 items-center mt-5 gap-5 max-md:gap-2">
-                <div
-                    @click="inviteLink && copy(inviteLink)"
-                    v-if="inviteLink"
-                    class="bg-gradient-header-secondary cursor-pointer isolate relative rounded-md py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full"
-                    :class="{'ring-1 ring-[#f5b418]': copied}">
-                    <input v-once
-                        type="text"
-                        disabled
-                        :value="inviteLink"
-                        class="bg-transparent text-white select-text flex-grow max-w-full cursor-pointer pointer-events-none" />
-                    <button
-                        @click="inviteLink && copy(inviteLink)"
-                        class="btn_copy relative w-[24px] h-[24px] flex-shrink-0">
-                        <IconContentCopy class="text-2xl" :class="{'text-[#f5b418]': copied}" />
-                    </button>
-                    <span
-                        :class="[copied ? 'opacity-100 -translate-y-full' : 'translate-y-0']"
-                        class="absolute z-[-1] left-1/2 -translate-x-1/2 top-0 transition-all bg-[#f5b418] opacity-0 text-black font-TTOctos px-1 text-xs font-bold"
-                        >COPIED</span
-                    >
-                </div>
-
-                <button
-                    @click="isModalShareOpen = true"
-                    class="btn_share active:scale-90 transition-transform ease-in-out duration-200 flex-grow justify-center rounded-md flex h-[42px] items-center px-4 max-md:w-full">
-                    <p
-                        class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none translate-y-[2px] max-2xl:items-center">
-                        Share Link
+            <div class="bg-gradient-header-secondary p-4 rounded-lg mt-5 ring-1 ring-blue-500/25">
+                <div class="relative z-10 font-Rollbox ">
+                    <p class="font-bold text-lg !leading-tight max-2xl:text-base">INVITE LINK</p>
+                    <p class="font-TTOctos text-lg mt-4 !leading-tight max-2xl:text-sm max-2xl:mt-2">
+                        This is your custom referral link. Use it to invite others to sign up for Nimbl.
                     </p>
-                    <IconShareLink class="ml-3" />
-                </button>
+                </div>
+                <div class="flex max-md:flex-col relative z-10 items-center mt-5 gap-5 max-md:gap-2">
+                    <div
+                        @click="inviteLink && copy(inviteLink)"
+                        v-if="inviteLink"
+                        class="bg-gradient-header-secondary ring-1 cursor-pointer isolate relative rounded-md py-2 px-5 flex gap-4 items-center h-[42px] flex-grow max-md:w-full"
+                        :class="{'ring-1 ring-[#f5b418]': copied}">
+                        <input v-once
+                            type="text"
+                            disabled
+                            :value="inviteLink"
+                            class="bg-transparent text-white select-text flex-grow max-w-full cursor-pointer pointer-events-none" />
+                        <button
+                            @click="inviteLink && copy(inviteLink)"
+                            class="btn_copy relative w-[24px] h-[24px] flex-shrink-0">
+                            <IconContentCopy class="text-2xl" :class="{'text-[#f5b418]': copied}" />
+                        </button>
+                        <span
+                            :class="[copied ? 'opacity-100 -translate-y-full' : 'translate-y-0']"
+                            class="absolute z-[-1] left-1/2 -translate-x-1/2 top-0 transition-all bg-[#f5b418] opacity-0 text-black font-TTOctos px-1 text-xs font-bold"
+                            >COPIED</span
+                        >
+                    </div>
+    
+                    <button
+                        @click="isModalShareOpen = true"
+                        class="btn_share active:scale-90 transition-transform ease-in-out duration-200 flex-grow justify-center rounded-md flex h-[42px] items-center px-4 max-md:w-full">
+                        <p
+                            class="uppercase font-Rollbox font-bold text-black text-lg max-2xl:text-base !leading-none translate-y-[2px] max-2xl:items-center">
+                            Share Link
+                        </p>
+                        <IconShareLink class="ml-3" />
+                    </button>
+                </div>
+                <p class="font-TTOctos ml-2 text-sm text-white/75 max-md:text-xs">Receive 10 units per invite</p>
             </div>
-            <p class="font-TTOctos ml-2 max-md:text-sm">Receive 10 units per invite</p>
         </div>
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
             <p v-if="errorLogin" class="font-Rollbox font-bold text-red-500 px-4">{{ errorLogin }}</p>
@@ -89,11 +90,10 @@
 </template>
 
 <script setup lang="ts">
-import BtnTwitterConnect from "@/components/InviteComponents/BtnTwitterConnect.vue";
-import noise from "@/assets/bg_invite_noise.webp";
-import rocket_img from "@/assets/rocket_img.png";
-import {useClipboard, useStorage} from "@vueuse/core";
 import {computed, nextTick, onMounted, ref} from "vue";
+import {useClipboard, useStorage} from "@vueuse/core";
+import BtnTwitterConnect from "@/components/InviteComponents/BtnTwitterConnect.vue";
+import rocket_img from "@/assets/rocket_img.png";
 import IconShareLink from "../icons/IconShareLink.vue";
 import {ISessionTwitter} from "@/types";
 import ModalContacts from "../ModalContacts.vue";

@@ -1,7 +1,8 @@
 <template>
     <div
-        class="font-Rollbox text-white py-3 uppercase max-2xl:text-sm flex items-center justify-around mt-5 user_stats relative"
-        :style="{'--bg': `url(${user_stat_bg})`}">
+        class="font-Rollbox ring-1 ring-white/20 text-white py-3 uppercase max-2xl:text-sm flex isolate items-center justify-around mt-5 user_stats relative"
+        >
+        
         <div class="flex flex-col items-center gap-2 relative z-20 max-md:hidden">
             <p class="max-md:text-xs">units</p>
             <p class="font-extrabold text-[40px] !leading-none max-2xl:text-[32px] max-md:text-2xl">
@@ -42,13 +43,26 @@
                 {{ invitesWithAnim.number.toFixed(0) || userStorage.total_invites || 0 }}
             </p>
         </div>
+
+        <div class="absolute inset-0 z-10 overflow-hidden">
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+            <span class="light_line"></span>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import {ref, inject, nextTick, computed} from "vue";
 import {useStorage} from "@vueuse/core";
-import user_stat_bg from "@/assets/invite/user_stat_bg.png";
 import {useAnimationDigits} from "@/composables/useAnimationDigits";
 import {DEFAULT_USER_STORAGE, MULTIPLIER, STORAGE_USER_KEY} from "@/constants";
 import {ISessionTwitter, keyClaim} from "@/types";
@@ -205,4 +219,117 @@ ul.round-list li:nth-child(6) {
         transform: translateX(-100px);
     }
 }
+
+
+.light_line {
+    width: 7px;
+    height: 100px;
+    background-image: linear-gradient(to top, transparent,  #f9f9f9 25%, transparent 50%, transparent 75%, #ffffff 100%);
+    position: absolute; 
+    opacity: 0.2;
+    top: -5px;
+    left: 50%;
+    background-size: 200% 600%;
+    transform-origin: top center;
+    transform:  perspective(100px) rotateX(60deg);
+    animation-name: gradient-liner;
+    animation-duration: 3s;
+    animation-timing-function: liner;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+.light_line:nth-child(2) {
+    width: 2px;
+    height: 100px;
+    left: 60%;
+    transform:  perspective(100px) rotateX(20deg) rotateZ(-35deg);
+    animation-duration: 2s;
+    animation-delay: 0.1;
+}
+.light_line:nth-child(3) {
+    width: 2px;
+    height: 200px;
+    left: 70%;
+    transform:  perspective(100px) rotateX(20deg) rotateZ(-55deg);
+    animation-duration: 3s;
+    animation-delay: 0.2;
+}
+.light_line:nth-child(4) {
+    width: 5px;
+    height: 200px;
+    left: 75%;
+    transform:  perspective(100px) rotateX(30deg) rotateZ(-70deg);
+    animation-duration: 3s;
+    animation-delay: 0.3;
+}
+
+.light_line:nth-child(5) {
+    width: 2px;
+    height: 100px;
+    left: 55%;
+    transform:  perspective(100px) rotateX(20deg) rotateZ(-30deg);
+    animation-duration: 3s;
+    animation-delay: 0.3;
+}
+.light_line:nth-child(6) {
+    width: 2px;
+    height: 100px;
+    left: 45%;
+    transform:  perspective(100px) rotateX(20deg) rotateZ(30deg);
+    animation-duration: 2s;
+    animation-delay: 0.2;
+}
+.light_line:nth-child(7) {
+    width: 2px;
+    height: 200px;
+    left: 30%;
+    transform:  perspective(100px) rotateX(20deg) rotateZ(56deg);
+    animation-duration: 1.5s;
+    animation-delay: 0.1;
+}
+.light_line:nth-child(8) {
+    width: 2px;
+    height: 200px;
+    left: 25%;
+    transform:  perspective(100px) rotateX(20deg) rotateZ(66deg);
+    animation-duration: 3s;
+    animation-delay: 0.2;
+}
+.light_line:nth-child(9) {
+    width: 3px;
+    height: 200px;
+    left: 33%;
+    transform:  perspective(100px) rotateX(27deg) rotateZ(48deg);
+    animation-duration: 2.5s;
+    animation-delay: 0.3;
+}
+.light_line:nth-child(10) {
+    width: 3px;
+    height: 200px;
+    left: 23%;
+    transform:  perspective(100px) rotateX(27deg) rotateZ(68deg);
+    animation-duration: 2.5s;
+    animation-delay: 0.3;
+}
+.light_line:nth-child(11) {
+    width: 3px;
+    height: 200px;
+    left: 83%;
+    transform:  perspective(100px) rotateX(27deg) rotateZ(-78deg);
+    animation-duration: 2.5s;
+    animation-delay: 0.3;
+}
+
+@keyframes gradient-liner {
+	0% {
+		background-position: 50% 0% ;
+	}
+	50% {
+		background-position:  50% 50% ;
+	}
+	100% {
+		background-position: 50% 100% ;
+	}
+}
+
 </style>
