@@ -58,7 +58,7 @@ onMounted(() => {
         duration: 1.5,
         ease: "expo.inOut",
     });
-    
+
     tl.from(
         titleEl.value.children,
         {
@@ -103,18 +103,25 @@ onMounted(() => {
 </script>
 
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="h-full flex flex-col max-3xl:pt-9 relative justify-center pb-[100px]">
+    <section
+        ref="sectionEl"
+        @wheel="onWheel"
+        class="h-full flex flex-col max-3xl:pt-9 relative justify-center pb-[100px]">
         <div ref="titleEl" data="titleEl" class="text-center">
             <h2 class="main-title">NIMBL TOKEN<span class="main-text-layer">NIMBL TOKEN</span></h2>
-            <p class="text-center text-white font-gilroy text-3xl max-sm:text-base max-2xl:text-xl max-sm:w-[80%] mx-auto">
+            <p
+                class="text-center text-white font-gilroy text-3xl max-sm:text-base max-2xl:text-xl max-sm:w-[80%] mx-auto">
                 $NIMBL is a utility token that acts as the platform currency
             </p>
         </div>
-        <div ref="contentEl" data="contentEl"
+        <div
+            ref="contentEl"
+            data="contentEl"
             class="flex flex-col justify-center items-center relative after:absolute after:w-full after:h-[40%] after:bg-gradient-to-b after:to-[#0F0722] after:bottom-0 after:from-[#0f07221f]">
             <div
                 class="bg-btn-bg-liner border-[#7351C8] border-[2px] shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)] absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10 max-2xl:translate-y-0 max-sm:static max-sm:w-[90%] max-sm:translate-x-0 max-sm:translate-y-0 max-sm:mt-7">
-                <div class="flex flex-col items-center -mt-14 w-[665px] pb-6 max-2xl:pb-3 max-2xl:-mt-7 max-2xl:w-[400px] max-sm:w-full max-2xl:h-[130px]">
+                <div
+                    class="flex flex-col items-center -mt-14 w-[665px] pb-6 max-2xl:pb-3 max-2xl:-mt-7 max-2xl:w-[400px] max-sm:w-full max-2xl:h-[130px]">
                     <picture>
                         <source :srcset="tokenCardWebp" type="image/webp" />
                         <img
@@ -129,45 +136,67 @@ onMounted(() => {
                             v-for="(item, index) in computedList"
                             :key="item.msg"
                             :data-index="index"
-                            :class="[item.msg === '$Nimbl' && 'text-[#CE54FF] font-semibold text-[40px] max-2xl:text-2xl']">
+                            :class="[
+                                item.msg === '$Nimbl' && 'text-[#CE54FF] font-semibold text-[40px] max-2xl:text-2xl',
+                            ]">
                             {{ item.msg }}
                         </li>
                     </TransitionGroup>
                 </div>
             </div>
-            <div class="flex w-[1200px] max-2xl:w-[1000px] relative translate-y-full max-sm:translate-y-0 max-sm:w-[90%] max-sm:mb-7 max-sm:mt-14">
-                <div class="border-b border-[#675059] relative shrink-0">
-                    <span class="token-gradient-text font-rfdewi text-8xl max-2xl:text-6xl font-black max-sm:text-xl">5%</span>
+            <div
+                class="flex w-[1200px] max-2xl:w-[1000px] relative translate-y-full max-sm:translate-y-0 max-sm:w-[90%] max-sm:mb-7 max-sm:mt-14">
+                <div class="border-b border-[#675059] relative shrink-0 flex items-end">
                     <span
-                        class="font-gilroy text-white font-normal text-3xl absolute bottom-0 translate-y-[120%] left-0 max-2xl:text-lg whitespace-nowrap max-sm:hidden"
+                        class="token-gradient-text font-rfdewi text-4xl max-2xl:text-2xl font-black max-sm:text-xl !leading-tight w-min max-md:w-auto"
                         >Creator Fund</span
                     >
-                    <span
-                        class="font-gilroy text-white font-normal text-base whitespace-nowrap max-sm:inline hidden"
-                        > Creator Fund</span
-                    >
+                    <!--   <span
+                        class="font-gilroy text-white font-normal text-3xl absolute bottom-0 translate-y-[120%] left-0 max-2xl:text-lg whitespace-nowrap max-sm:hidden"
+                        >Creator Fund</span
+                    > -->
+                    <!-- <span class="font-gilroy text-white font-normal text-base whitespace-nowrap max-sm:inline hidden">
+                        Creator Fund
+                    </span> -->
                 </div>
-                <div class="flex-grow border-b border-[#675059] rotate-[30deg] origin-bottom-left max-sm:rotate-0"></div>
-                <div class="flex-grow border-b border-[#675059] -rotate-[30deg] origin-bottom-right max-sm:rotate-0"></div>
-                <div class="hidden max-sm:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-[#675059] h-[150px] translate-y-full"></div>
-                <div class="border-b border-[#675059] relative shrink-0">
-                    <span
-                        class="font-gilroy text-white font-normal text-base whitespace-nowrap max-sm:inline hidden"
-                        >Building </span
-                    >
-                    <span class="token-gradient-text font-rfdewi text-8xl font-black max-2xl:text-6xl max-sm:text-xl">5%</span>
-                    <span
-                        class="font-gilroy text-white font-normal text-3xl absolute bottom-0 translate-y-[120%] left-1/2 -translate-x-1/2 max-2xl:text-lg  max-sm:hidden"
+                <div
+                    class="flex-grow border-b border-[#675059] rotate-[30deg] origin-bottom-left max-sm:rotate-0"></div>
+                <div
+                    class="flex-grow border-b border-[#675059] -rotate-[30deg] origin-bottom-right max-sm:rotate-0"></div>
+                <div
+                    class="hidden max-sm:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-[#675059] h-[150px] translate-y-full"></div>
+                <div class="border-b border-[#675059] relative shrink-0 flex items-end">
+                    <!-- <span class="font-gilroy text-white font-normal text-base whitespace-nowrap max-sm:inline hidden">
+                        Building
+                    </span> -->
+                    <span class="token-gradient-text font-rfdewi text-4xl font-black max-2xl:text-2xl max-sm:text-xl"
                         >Building</span
                     >
+                    <!-- <span
+                        class="font-gilroy text-white font-normal text-3xl absolute bottom-0 translate-y-[120%] left-1/2 -translate-x-1/2 max-2xl:text-lg max-sm:hidden"
+                        >Building</span
+                    > -->
                 </div>
             </div>
-            <picture><source :srcset="tokenCoinsWebp" type="image/webp" /><img :src="tokenCoins" alt="tokenCoins" width="618" height="392" class="relative z-10 max-2xl:w-[500px] max-sm:w-[250px]" /></picture>
-            <picture><source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="max-2xl:w-[680px] max-sm:w-[320px]" /></picture> 
+            <picture
+                ><source :srcset="tokenCoinsWebp" type="image/webp" />
+                <img
+                    :src="tokenCoins"
+                    alt="tokenCoins"
+                    width="618"
+                    height="392"
+                    class="relative z-10 max-2xl:w-[500px] max-sm:w-[250px]"
+            /></picture>
+            <picture
+                ><source :srcset="podiumWebp" type="image/webp" />
+                <img :src="podium" alt="podium" width="820" height="170" class="max-2xl:w-[680px] max-sm:w-[320px]"
+            /></picture>
         </div>
         <picture>
             <source :srcset="lightImgWebp" type="image/webp" />
-            <img ref="light2El" data="light2El"
+            <img
+                ref="light2El"
+                data="light2El"
                 :src="lightImg"
                 alt="lightImg"
                 loading="lazy"
@@ -175,19 +204,23 @@ onMounted(() => {
         </picture>
         <picture>
             <source :srcset="lightImgWebp" type="image/webp" />
-            <img ref="light1El" data="light1El"
+            <img
+                ref="light1El"
+                data="light1El"
                 :src="lightImg"
                 alt="lightImg"
                 loading="lazy"
                 class="absolute top-0 right-0 translate-x-1/2 rotate-45 origin-top z-40 select-none pointer-events-none" />
         </picture>
-        <div ref="smokeEl" data="smokeEl"
+        <div
+            ref="smokeEl"
+            data="smokeEl"
             class="absolute max-sm:hidden smoke-clouds w-full h-[110%] top-0 z-[3] bg-[url('@/assets/preview/fullWidthSmoke.webp')] bg-no-repeat bg-[length:110%_auto] bg-bottom opacity-0 transition-opacity">
             <picture>
                 <source :srcset="smoke1Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image1"
                     :src="smoke1" />
@@ -195,48 +228,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
-                    class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
-                    alt="smoke-image2"
-                    :src="smoke2" />
-            </picture>
-        <picture>
-            <source :srcset="smoke2Webp" type="image/webp" />
-                <img
-                width="1600"
-                height="850"
-                    class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
-                    alt="smoke-image4"
-                    :src="smoke2" />
-        </picture>
-            <picture>
-                <source :srcset="smoke3Webp" type="image/webp" />
-                <img
-                width="1600"
-                height="850"
-                    class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
-                    alt="smoke-image3"
-                    :src="smoke3"  />
-            </picture>
-            <picture> <source :srcset="centerSmokeWebp" type="image/webp" /><img  width="950" height="444" class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none" alt="smoke-image7" :src="centerSmoke" /></picture>
-        </div>
-        <div
-            class="absolute hidden max-sm:block smoke-clouds w-[150%] bottom-0 h-1/2 z-[3] bg-[url('@/assets/preview/mobile_smoke.webp')] bg-no-repeat bg-[length:140%_auto] bg-bottom opacity-60 transition-opacity mix-blend-screen">
-            <picture>
-                <source :srcset="smoke1Webp" type="image/webp" />
-                <img
-                width="1600"
-                height="850"
-                    class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
-                    alt="smoke-image1"
-                    :src="smoke1" />
-            </picture>
-            <picture>
-                <source :srcset="smoke2Webp" type="image/webp" />
-                <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image2"
                     :src="smoke2" />
@@ -244,8 +237,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke2Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image4"
                     :src="smoke2" />
@@ -253,8 +246,8 @@ onMounted(() => {
             <picture>
                 <source :srcset="smoke3Webp" type="image/webp" />
                 <img
-                width="1600"
-                height="850"
+                    width="1600"
+                    height="850"
                     class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image3"
                     :src="smoke3" />
@@ -262,7 +255,56 @@ onMounted(() => {
             <picture>
                 <source :srcset="centerSmokeWebp" type="image/webp" />
                 <img
-                width="950" height="444"
+                    width="950"
+                    height="444"
+                    class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
+                    alt="smoke-image7"
+                    :src="centerSmoke"
+            /></picture>
+        </div>
+        <div
+            class="absolute hidden max-sm:block smoke-clouds w-[150%] bottom-0 h-1/2 z-[3] bg-[url('@/assets/preview/mobile_smoke.webp')] bg-no-repeat bg-[length:140%_auto] bg-bottom opacity-60 transition-opacity mix-blend-screen">
+            <picture>
+                <source :srcset="smoke1Webp" type="image/webp" />
+                <img
+                    width="1600"
+                    height="850"
+                    class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
+                    alt="smoke-image1"
+                    :src="smoke1" />
+            </picture>
+            <picture>
+                <source :srcset="smoke2Webp" type="image/webp" />
+                <img
+                    width="1600"
+                    height="850"
+                    class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
+                    alt="smoke-image2"
+                    :src="smoke2" />
+            </picture>
+            <picture>
+                <source :srcset="smoke2Webp" type="image/webp" />
+                <img
+                    width="1600"
+                    height="850"
+                    class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
+                    alt="smoke-image4"
+                    :src="smoke2" />
+            </picture>
+            <picture>
+                <source :srcset="smoke3Webp" type="image/webp" />
+                <img
+                    width="1600"
+                    height="850"
+                    class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
+                    alt="smoke-image3"
+                    :src="smoke3" />
+            </picture>
+            <picture>
+                <source :srcset="centerSmokeWebp" type="image/webp" />
+                <img
+                    width="950"
+                    height="444"
                     class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
                     alt="smoke-image7"
                     :src="centerSmoke"
@@ -271,7 +313,7 @@ onMounted(() => {
     </section>
 </template>
 
-<style scoped >
+<style scoped>
 .main-title {
     background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.3) 100%);
     background-clip: text;
