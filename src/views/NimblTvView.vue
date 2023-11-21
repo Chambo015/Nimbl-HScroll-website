@@ -30,25 +30,25 @@ const {onWheel} = useMouseWheel({toDownRoute: "stakes", target: sectionEl});
 
 const parallax = reactive(useParallax(sectionEl));
 const layer0 = computed(() => ({
-  transition: ".3s ease-out all",
-  transform: `translateX(${parallax.tilt * 10}px) translateY(${parallax.roll * 10}px)`,
-}))
+    transition: ".3s ease-out all",
+    transform: `translateX(${parallax.tilt * 10}px) translateY(${parallax.roll * 10}px)`,
+}));
 const layer1 = computed(() => ({
-  transition: ".3s ease-out all",
-  transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px) rotate(140deg)`,
-}))
+    transition: ".3s ease-out all",
+    transform: `translateX(${parallax.tilt * 20}px) translateY(${parallax.roll * 20}px) rotate(140deg)`,
+}));
 const layer2 = computed(() => ({
-  transition: ".3s ease-out all",
-  transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px) rotate(120deg)`,
-}))
+    transition: ".3s ease-out all",
+    transform: `translateX(${parallax.tilt * 30}px) translateY(${parallax.roll * 30}px) rotate(120deg)`,
+}));
 const layer3 = computed(() => ({
-  transition: ".3s ease-out all",
-  transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px) rotate(140deg)`,
-}))
+    transition: ".3s ease-out all",
+    transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px) rotate(140deg)`,
+}));
 const layer4 = computed(() => ({
-  transition: ".3s ease-out all",
-  transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px) rotate(-20deg)`,
-}))
+    transition: ".3s ease-out all",
+    transform: `translateX(${parallax.tilt * 40}px) translateY(${parallax.roll * 40}px) rotate(-20deg)`,
+}));
 
 watchEffect(() => {
     if (props.ready) {
@@ -57,19 +57,27 @@ watchEffect(() => {
         tl.to(sectionInnerEl.value, {
             scale: 1,
             yPercent: -60,
-            top: '50%',
+            top: "50%",
             duration: 1,
             delay: 0.3,
         });
-        tl.to(lightEl.value, {
-            autoAlpha: 1,
-            duration: 1,
-        }, '+=0');
-        tl.to(planetsEl.value, {
-            autoAlpha: 1,
-            duration: 1.5,
-            ease: "expo.inOut",
-        }, '-=1');
+        tl.to(
+            lightEl.value,
+            {
+                autoAlpha: 1,
+                duration: 1,
+            },
+            "+=0",
+        );
+        tl.to(
+            planetsEl.value,
+            {
+                autoAlpha: 1,
+                duration: 1.5,
+                ease: "expo.inOut",
+            },
+            "-=1",
+        );
     }
 });
 
@@ -133,33 +141,19 @@ onMounted(() => {
         });
     }
 });
-
-/* function onClick() {
-    // feature detect
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-      DeviceOrientationEvent.requestPermission()
-        .then(permissionState => {
-          if (permissionState === 'granted') {
-            window.addEventListener('deviceorientation', () => {});
-          }
-        })
-        .catch(console.error);
-    } else {
-      // handle regular non iOS 13+ devices
-    }
-  } */
 </script>
 
 <template>
-    <section ref="sectionEl" @wheel="onWheel" class="relative w-full h-full max-sm:flex max-sm:items-center"><picture ref="lightEl" data="lightEl" class="opacity-0">
-                <source :srcset="lightImgWebp" type="image/webp" />
-                <img 
-                    :src="lightImg"
-                    alt="lightImg"
-                    loading="lazy"
-                    class="absolute top-[-1%] left-1/2 -translate-x-1/2 z-40 select-none pointer-events-none" />
-            </picture>
-        <div ref="sectionInnerEl" class="w-full left-0 absolute will-change-transform ">
+    <section ref="sectionEl" @wheel="onWheel" class="relative w-full h-full max-sm:flex max-sm:items-center">
+        <picture ref="lightEl" data="lightEl" class="opacity-0">
+            <source :srcset="lightImgWebp" type="image/webp" />
+            <img
+                :src="lightImg"
+                alt="lightImg"
+                loading="lazy"
+                class="absolute top-[-1%] left-1/2 -translate-x-1/2 z-40 select-none pointer-events-none" />
+        </picture>
+        <div ref="sectionInnerEl" class="w-full left-0 absolute will-change-transform">
             <div ref="titleEl" data="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[40px]">
                 <div class="inline-flex flex-col">
                     <p
@@ -172,11 +166,22 @@ onMounted(() => {
                     </h1>
                 </div>
             </div>
-            <div ref="sliderEl" class="relative ">
+            <div ref="sliderEl" class="relative">
                 <HeroSliderApp data="slider_h_El" />
-                <div class="hidden max-sm:block after:absolute after:w-full after:h-[20%] after:bg-gradient-to-b after:to-[#0F0722] after:z-20 after:bottom-0 after:translate-y-full after:from-[#0f07221f]"><picture><source :srcset="podiumWebp" type="image/webp" /><img :src="podium" alt="podium" width="820" height="170" class="w-full z-10 mx-auto absolute bottom-0 translate-y-[90%] -translate-x-1/2 left-1/2" /></picture> </div>
+                <div
+                    class="hidden max-sm:block after:absolute after:w-full after:h-[20%] after:bg-gradient-to-b after:to-[#0F0722] after:z-20 after:bottom-0 after:translate-y-full after:from-[#0f07221f]">
+                    <picture
+                        ><source :srcset="podiumWebp" type="image/webp" />
+                        <img
+                            :src="podium"
+                            alt="podium"
+                            width="820"
+                            height="170"
+                            class="w-full z-10 mx-auto absolute bottom-0 translate-y-[90%] -translate-x-1/2 left-1/2"
+                    /></picture>
+                </div>
             </div>
-           <!--  <div
+            <!--  <div
                 ref="buttonsEl"
                 data="buttonsEl"
                 class="max-sm:hidden opacity-0 absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px] shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
@@ -223,25 +228,50 @@ onMounted(() => {
 
 <style scoped>
 .main-title {
-    background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.3) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
+    background: -webkit-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
+    background-image: -webkit-linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
+    background-image:    -moz-linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
+    background-image:     -ms-linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
+    background-image:      -o-linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
+    background-image:         linear-gradient(180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.11) 100%);
     position: relative;
-    @apply text-center font-rfdewi inline-block bg-clip-text text-white text-[145px] max-sm:text-[55px] leading-none font-black uppercase -translate-x-2 -translate-y-7 max-sm:-translate-x-0 max-sm:-translate-y-6;
+    @apply text-center font-rfdewi inline-block bg-clip-text  text-[145px] max-sm:text-[55px] !leading-none font-black uppercase -translate-x-2 -translate-y-7 max-sm:-translate-x-0 max-sm:-translate-y-6;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: none;
+    color: transparent;
 }
+
 .main-text-layer {
-    background-image: url("../assets/image1895.webp");
     background-size: contain;
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-    mix-blend-mode: overlay;
     z-index: 1;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    background-color: rgb(56, 123, 255);
+    text-shadow: none;
+    color: transparent;
+}
+
+@supports (background-clip: text) and (-webkit-text-fill-color: transparent) {
+    .main-title {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text
+    }
+}
+
+@supports (mix-blend-mode: overlay) and (background-clip: text) and (-webkit-text-fill-color: transparent) {
+    .main-text-layer {
+        background-image: url("../assets/image1895.webp");
+        mix-blend-mode: overlay;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }
 </style>
