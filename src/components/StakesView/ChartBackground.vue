@@ -161,13 +161,14 @@
             :href="userImg1Webp"
             width="100px"
             height="100px"
-            transform="translate(-50,-50)">
+            transform="translate(-50,-50)"
+            class="user1">
             <!--     <animateMotion dur="12s"  
       repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1" >
             <mpath xlink:href="#curve1" />
         </animateMotion> -->
         </image>
-        <image  id="user2" :href="userImg2Webp" width="100px" height="100px" transform="translate(-50,-50)">
+        <image  id="user2" :href="userImg2Webp" width="100px" height="100px" transform="translate(-50,-50)" class="user2">
           <!--   <animateMotion dur="11s" repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1">
                 <mpath xlink:href="#curve2" />
             </animateMotion> -->
@@ -176,7 +177,7 @@
             :href="userImg3Webp"
             width="100px"
             height="100px"
-            transform="translate(-50,-50)">
+            transform="translate(-50,-50)" class="user3">
             <!-- <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear" keyPoints="0.1; 0.9" keyTimes="0; 1">
                 <mpath xlink:href="#curve3" />
             </animateMotion> -->
@@ -511,17 +512,20 @@
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core';
+import {gsap} from "gsap";
+import {onMounted} from "vue";
+import { SlowMo } from 'gsap/EasePack';
+import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import userImg1Webp from "@/assets/chart-user1.webp";
 import userImg2Webp from "@/assets/chart-user2.webp";
 import userImg3Webp from "@/assets/chart-user3.webp";
-import {gsap} from "gsap";
-import { SlowMo } from 'gsap/EasePack';
-import {MotionPathPlugin} from "gsap/MotionPathPlugin";
-import {onMounted} from "vue";
 
 gsap.registerPlugin(MotionPathPlugin);
+const isXS = useMediaQuery("(max-width: 700px)");
 
 onMounted(() => {
+    if (isXS.value) return;
     gsap.to("#user1", {
         duration: 15,
         repeat: -1,
@@ -558,4 +562,31 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+@media (max-width: 700px) {
+    .user1 {
+    motion-path: url('#curve1');
+    offset-path: url('#curve1');
+    offset-distance: 50%;
+    motion-offset: 50%;
+    offset-rotate: 0deg;
+}
+.user2 {
+    motion-path: url('#curve2');
+    offset-path: url('#curve2');
+    offset-distance: 40%;
+    motion-offset: 50%;
+    offset-rotate: 0deg;
+}
+.user3 {
+    motion-path: url('#curve3');
+    offset-path: url('#curve3');
+    offset-distance: 55%;
+    motion-offset: 50%;
+    offset-rotate: 0deg;
+}
+}
+
+</style>
