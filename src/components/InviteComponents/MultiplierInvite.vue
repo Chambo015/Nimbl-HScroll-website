@@ -1,8 +1,8 @@
 <template>
     <div
-        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 max-md:py-0 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none">
+        class="bg-gradient-header-secondary relative animation-block group cursor-default ring-1 ring-blue-500/50 flex max-md:flex-col gap-1 rounded-lg py-3 max-md:py-0 px-4 max-md:px-0 justify-around flex-wrap max-md:ring-0 max-md:bg-none max-md:mb-4">
         
-        <div v-if="currentMultiplier === MULTIPLIER['1X'] || !isXS" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
+      <!--   <div v-if="currentMultiplier === MULTIPLIER['1X'] || !isXS" class="item__block" :class="{'opacity-50 blur-[1px]': currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1X
                 <img
@@ -15,18 +15,18 @@
                 <p class="multi__text">multiplier</p>
                 <p class="multi__timer">{{ computedDate }}</p>
             </div>
-        </div>
+        </div> -->
 
-        <div v-if="currentMultiplier === MULTIPLIER['1.2X']  || !isXS" class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.2X']}">
+        <div v-if="currentMultiplier === MULTIPLIER['1.2X']  || currentMultiplier === MULTIPLIER['1X']  ||  !isXS" class="item__block" :class="{'opacity-50 blur-[2px]': currentMultiplier !== MULTIPLIER['1.2X'] && currentMultiplier !== MULTIPLIER['1X']}">
             <p class="digit__title">
                 1.2X
                 <img
-                    v-if="currentMultiplier === MULTIPLIER['1.2X']"
+                    v-if="currentMultiplier === MULTIPLIER['1.2X'] || currentMultiplier === MULTIPLIER['1X'] "
                     class="absolute top-0 z-20 right-0 translate-x-[45%] -translate-y-[33%] scale-150 animate-pulse"
                     :src="light"
                     aria-hidden="true" />
             </p>
-            <template v-if="currentMultiplier === MULTIPLIER['1.2X']">
+            <template v-if="currentMultiplier === MULTIPLIER['1.2X'] || currentMultiplier === MULTIPLIER['1X']">
                 <div>
                     <p class="multi__text">multiplier</p>
                     <p class="multi__timer">{{ computedDate }}</p>
@@ -164,7 +164,7 @@ const userStorage = useStorage<ISessionTwitter>(STORAGE_USER_KEY, DEFAULT_USER_S
 
 const currentMultiplier = computed<TypeMultiplier>(() => {
     const multiplier = userStorage.value.multiplier;
-    if (!multiplier) return MULTIPLIER["1X"];
+    if (!multiplier) return MULTIPLIER["1.2X"];
     return multiplier;
 });
 
@@ -221,7 +221,7 @@ const postMultiplyUnits = async () => {
     @apply hover:shadow-[-1px_1px_10px_1px] hover:shadow-blue-600 !shadow-blue-600 duration-500  transition-shadow delay-200 hover:delay-0;
 }
 .item__block {
-    @apply flex items-center gap-4 max-md:bg-[#333333]/50 max-md:justify-center max-md:py-2 group-hover:opacity-100 transition-opacity;
+    @apply flex items-center gap-4 max-md:bg-none max-md:justify-center max-md:py-2 group-hover:opacity-100 transition-opacity;
 }
 .digit__title {
     @apply select-none token-gradient-text font-rfdewi font-black text-[48px] max-2xl:text-[38px] max-md:text-[48px] leading-none uppercase relative;

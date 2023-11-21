@@ -4,15 +4,15 @@
             <BoardUser />
             <BoardUsersRating />
         </div>
-        <div class="flex flex-grow flex-col pb-5 gap-5">
-            <div class="flex h-[100px] gap-4 flex-shrink-0 w-full pr-5 max-xl:flex-wrap max-xl:h-auto">
+        <div class="flex flex-grow flex-col pb-5">
+            <div class="flex h-[100px] gap-4 flex-shrink-0 w-full pr-5 max-xl:flex-wrap max-xl:h-auto relative z-10">
                 <BackToNimbl />
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
                 <CardTokenInfo />
             </div>
-            <div class="w-full overflow-hidden flex-grow">
+            <div class="w-full overflow-hidden flex-grow blur_borders max-md:before:hidden max-md:after:hidden relative isolate">
                 <BoardTasks />
             </div>
             <div class="mt-auto pr-5">
@@ -115,4 +115,32 @@ provide(keyClaim, {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.blur_borders::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 20px;
+  top: 0;
+  width: 100%;
+  height: 20px;
+  display: block;
+  z-index: 20;
+  background-image: linear-gradient(to bottom , #090817 , #09081700);
+}
+
+.blur_borders::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 20px;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  display: block;
+  z-index: 20;
+  background-image: linear-gradient(to top , #090817 , #09081700);
+}
+
+</style>

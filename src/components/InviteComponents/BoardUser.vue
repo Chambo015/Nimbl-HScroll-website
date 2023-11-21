@@ -61,7 +61,7 @@
                         <IconShareLink class="ml-3" />
                     </button>
                 </div>
-                <p class="font-TTOctos ml-2 text-sm text-white/75 max-md:text-xs">Receive 10 units per invite</p>
+                <p class="font-TTOctos ml-2 text-sm text-white/75 max-md:text-xs max-md:mt-1">Receive 10 units per invite</p>
             </div>
         </div>
         <div v-else class="w-full h-full relative flex flex-col items-center justify-center">
