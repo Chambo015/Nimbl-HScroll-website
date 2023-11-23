@@ -1,18 +1,18 @@
 <template>
-    <div class="main__wrap group" :class="[isCompleted ? 'bg-[#f5b3183d] is-completed' : 'bg-[#2a0a42]']">
+    <div class="main__wrap group isolate" :class="[isCompleted ? 'bg-[#f5b3183d] is-completed' : 'bg-[#2a0a42]']">
         <div
             class="main__inner"
             @mouseenter="isHover = true"
             @mouseleave="isHover = false"
             :class="[isCompleted ? 'pointer-events-none [&>div]:opacity-50' : 'inside__shadow']">
             <div class="card__image" :style="{backgroundImage: `url(${imgUrl || defaultImgUrl})`}"></div>
-            <div class="card__content" :style="{'--bg': `url(${noise})`}">
+            <div class="card__content relative isolate" :style="{'--bg': `url(${noise})`}" :class="[isCompleted ? 'card__content_completed': '']">
                 <p
-                    class="font-tt-octosquares font-medium text-white text-xl !leading-tight max-md:text-sm max-2xl:text-lg">
+                    class="font-tt-octosquares relative z-20 font-medium text-white text-xl !leading-tight max-md:text-sm max-2xl:text-lg">
                     {{ name }}
                 </p>
                 <div
-                    class="flex gap-2 items-center pt-[2px] ring-[1.5px] pb-1 pl-1 pr-2 rounded-tr-md rounded-br-md rounded-tl-[15px] rounded-bl-[15px]  transition-all" :class="[isCompleted ? 'ring-[#f5b418] group-hover:bg-[#f5b418] ': ' ring-blue-500/60 group-hover:bg-blue-800']">
+                    class="flex gap-2 relative z-20 items-center pt-[2px] ring-[1.5px] pb-1 pl-1 pr-2 rounded-tr-md rounded-br-md rounded-tl-[15px] rounded-bl-[15px]  transition-all" :class="[isCompleted ? 'ring-[#f5b418] group-hover:bg-[#f5b418] ': ' ring-blue-500/60 group-hover:bg-blue-800']">
                     <img :src="logo" alt="nimbl" class="w-[16px] h-[16px] translate-y-[1px]" />
                     <p class="text-xl !leading-none font-TTOctos max-md:text-xs max-2xl:text-base text-white">
                         {{ reward }} units
@@ -24,6 +24,9 @@
                         }}</span>
                     </p>
                 </div>
+                <div v-if="!isCompleted" class="absolute right-0 z-0 rotate-[-0deg] h-[90%] translate-x-[30%] origin-center -translate-y-1/2 top-1/2 opacity-30 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-[25%] group-hover:translate-y-[-55%]">
+                    <img :src="logoCircle" alt="" >
+                </div>
             </div>
             <!-- <div
                 v-if="!isCompleted"
@@ -33,9 +36,10 @@
                     CLAIM
                 </p>
             </div> -->
-            <div v-if="isCompleted" class="absolute right-0 top-1/2 -translate-y-1/2 z-2 !opacity-100">
-                <Vue3Lottie :animation-data="doneTaskLottie" :height="100" :width="100" :loop="true" />
+            <div v-if="isCompleted" class="absolute right-0 top-1/2 z-30 -translate-y-1/2 z-2 !opacity-100">
+                <Vue3Lottie :animation-data="doneTaskLottie" :height="120" :width="120" :loop="true" />
             </div>
+            
         </div>
     </div>
 </template>
@@ -45,6 +49,7 @@ import {Vue3Lottie} from "vue3-lottie";
 import {PropType, ref} from "vue";
 import {ITweetsCount, ITweetsMetricsCount} from "@/types";
 import logo from "@/assets/invite/logo_white.png";
+import logoCircle from "@/assets/preview/logo-circle.webp";
 import noise from "@/assets/invite/noise_card_task.webp";
 import doneTaskLottie from "@/assets/lottie/done-task.json";
 
@@ -154,9 +159,12 @@ const isHover = ref(false);
     display: block;
 }
 .card__content {
-    /* background-image: linear-gradient(180deg, #161317 0%, #2624314b 100%); */
-    background-color: #15021b;
+    background-image: linear-gradient(to right, #15021b 0%, #080e3f 100%); 
     @apply flex-grow-[2] flex-shrink relative flex p-3 gap-2 items-start justify-center flex-col;
+}
+.card__content_completed {
+    background-color: #15021b;
+    background-image: none;
 }
 /* .card__content::before {
     content: "";
