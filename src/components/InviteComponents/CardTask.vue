@@ -24,8 +24,8 @@
                         }}</span>
                     </p>
                 </div>
-                <div v-if="!isCompleted" class="absolute right-0 z-0 rotate-[-0deg] h-[90%] translate-x-[30%] origin-center -translate-y-1/2 top-1/2 opacity-30 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-[25%] group-hover:translate-y-[-55%]">
-                    <img :src="logoCircle" alt="" >
+                <div v-if="!isCompleted" class="absolute right-0 z-0 rotate-[-0deg] h-[130%] aspect-square translate-x-[30%] origin-center translate-y-[-30%] top-1/2 opacity-30 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-[25%] group-hover:translate-y-[-35%] will-change-transform">
+                    <img :src="logoCircle" alt="" class="w-full h-full" >
                 </div>
             </div>
             <!-- <div
