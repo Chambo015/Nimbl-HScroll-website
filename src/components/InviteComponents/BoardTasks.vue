@@ -3,7 +3,7 @@
         <div v-if="loading" class="h-full w-full flex items-center justify-center">
             <Vue3Lottie :animation-data="loadingMain" :height="200" :width="200" :loop="true" />
         </div>
-        <div  v-else class="grid grid-cols-2 max-xl:grid-cols-1 gap-5 max-md:mb-5">
+        <div v-else class="grid grid-cols-2 max-xl:grid-cols-1 gap-5 max-md:mb-5">
             <CardTask
                 v-for="task of sortedTasks"
                 :key="task.id"
@@ -34,15 +34,12 @@ import ModalAMASession from "./ModalAMASession.vue";
 const showModalAMA = ref(false);
 const tasks = ref<IBoardTask[] | []>([]);
 const sortedTasks = computed(() => {
-    const sortByUnits =
-        tasks.value.length > 0
-            ? tasks.value.sort((a, b) => {
-                  if (a.task_done) return 1; // if task done go down
-                  if (a.name.includes("#NimblInvite")) return -1; // if task have hashtag #NimblInvite go top
-                  return a.reward - b.reward;
-              })
-            : [];
-    return sortByUnits;
+    if (tasks.value.length === 0) return;
+    const sortByUnits = tasks.value.sort((a, b) =>  a.reward - b.reward);
+    const sortByTagNimblInvite = sortByUnits.sort((a, b) =>  a.name.includes("#NimblInvite") ? -1 : b.name.includes("#NimblInvite") ? 1 : 0);
+    const sortByAllNimbl = sortByTagNimblInvite.sort((a, b) =>  a.name.includes("Retweet all Nimbl tv") ? -1 : b.name.includes("Retweet all Nimbl tv") ? 1 : 0);
+    const sortByDone = sortByAllNimbl.sort((a, b) =>  a.task_done ? 1 : b.task_done ? -1 : 0)
+    return sortByDone;
 });
 
 const {fetchTasks, loading} = useBoardTasks();
