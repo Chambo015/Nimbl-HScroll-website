@@ -62,7 +62,7 @@ import {PropType, computed, ref} from "vue";
 import {ITweetsCount, ITweetsMetricsCount} from "@/types";
 import logo from "@/assets/invite/logo_white.png";
 import logoCircle from "@/assets/preview/logo-circle.webp";
-import specialLogo from "@/assets/preview/special-logo.png";
+import specialLogo from "@/assets/preview/special-logo.webp";
 import noise from "@/assets/invite/noise_card_task.webp";
 import doneTaskLottie from "@/assets/lottie/done-task.json";
 
