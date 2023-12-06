@@ -67,9 +67,9 @@ onMounted(() => {
 <template>
     <div
         @click.self="$emit('clickClose')"
-        class="fixed bg-black/50 w-screen h-screen z-50 inset-x-0 inset-y-0 backdrop-blur-sm">
+        class="fixed bg-black/50 w-screen h-screen isolate z-[99999] inset-x-0 inset-y-0 backdrop-blur-sm">
         <div
-            class="absolute overflow-hidden bg-[#21193D] w-[770px] h-[383px] max-sm:w-full max-sm:h-full flex max-sm:flex-col left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 py-[50px] px-[40px] max-sm:px-5">
+            class="absolute overflow-hidden bg-[#21193D] w-[770px] h-[383px] max-sm:w-full max-sm:h-full flex max-sm:flex-col left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 py-[50px] px-[40px] max-sm:px-5 z-50">
             <button @click="$emit('clickClose')" class="absolute top-0 right-0 z-20"><IconCloseBtn /></button>
             <div>
                 <h2

@@ -1,6 +1,6 @@
 <template>
     <div class="main__wrap relative p-0.5">
-        <button v-bind="$attrs" class="shadow-xl rounded-sm overflow-hidden relative z-20 block">
+        <button v-bind="$attrs" class="shadow-xl rounded-sm overflow-hidden relative z-10 block isolate">
             <div class="flex h-[75px]">
                 <div class="w-[75px] h-[75px] bg-[#1F1127] relative">
                     <Vue3Lottie

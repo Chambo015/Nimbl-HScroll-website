@@ -60,7 +60,7 @@ const { top } = useElementBounding(target)
         <!-- Left -->
         <button
             v-if="!isInvitePage"
-            @click="$router.push({name: 'token'})"
+            @click="$router.push({name: 'beta'})"
             class="max-sm:w-[81px] max-sm:h-[72px] absolute top-1/2 -translate-y-[calc(50%+3px)] right-[120px] max-sm:right-[69px] w-[144px] h-[146px] transition-all"
             :class="[isOpenMenu ? ' translate-x-0  hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-x-1/2 hidden']">
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />

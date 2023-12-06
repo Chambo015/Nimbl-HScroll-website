@@ -93,6 +93,12 @@ export default {
                     "-webkit-background-clip": "text",
                     "-webkit-text-fill-color": "transparent",
                 },
+               ".special-gradient-text": {
+                "background": "linear-gradient(120deg, #f5b418 0%, #f5b418 30% , #fff 90%)",
+                "background-clip": "text",
+                "-webkit-background-clip": "text",
+                "-webkit-text-fill-color": "transparent",
+               },
                 ".gradient-tokemomic-text": {
                     background:
                     "linear-gradient(180deg, #FFF 59.56%, rgba(255, 255, 255, 0.50) 100%)",

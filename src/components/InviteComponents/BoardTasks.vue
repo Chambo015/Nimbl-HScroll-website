@@ -16,7 +16,7 @@
                 @click="onClickTask({link: task.embedded_url, name: task.name, completed: task.task_done})"
                 :class="[task.embedded_url || task.name.includes('AMA') ? 'cursor-pointer' : '']" />
         </div>
-        <ModalAMASession v-if="showModalAMA" @click-close="showModalAMA = false" :session-token="userStorage.token" />
+       <Teleport to="body"> <ModalAMASession v-if="showModalAMA" @click-close="showModalAMA = false" :session-token="userStorage.token" /></Teleport>
     </div>
 </template>
 
@@ -38,7 +38,8 @@ const sortedTasks = computed(() => {
     const sortByUnits = tasks.value.sort((a, b) =>  a.reward - b.reward);
     const sortByTagNimblInvite = sortByUnits.sort((a, b) =>  a.name.includes("#NimblInvite") ? -1 : b.name.includes("#NimblInvite") ? 1 : 0);
     const sortByAllNimbl = sortByTagNimblInvite.sort((a, b) =>  a.name.includes("Retweet all Nimbl tv") ? -1 : b.name.includes("Retweet all Nimbl tv") ? 1 : 0);
-    const sortByDone = sortByAllNimbl.sort((a, b) =>  a.task_done ? 1 : b.task_done ? -1 : 0)
+    const sortByLastNimbl = sortByAllNimbl.sort((a, b) =>  a.name.includes("Retweet latest post") ? -1 : b.name.includes("Retweet all Nimbl tv") ? 1 : 0);
+    const sortByDone = sortByLastNimbl.sort((a, b) =>  a.task_done ? 1 : b.task_done ? -1 : 0)
     return sortByDone;
 });
 

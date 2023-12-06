@@ -14,7 +14,7 @@
                 :class="[isCompleted && 'card__content_completed']">
                 <p
                     class="font-tt-octosquares relative z-20 font-medium text-white text-xl !leading-tight max-md:text-sm max-2xl:text-lg"
-                    :class="[ isSpecial && '!text-[#f5b418]  font-bold']">
+                    :class="[ isSpecial && 'special-gradient-text font-bold ']">
                     {{ name }}
                 </p>
                 <div
@@ -93,7 +93,7 @@ const props = defineProps({
 const defaultImgUrl = new URL("/nimbl-nimbl.png", import.meta.url).href;
 const isHover = ref(false);
 
-const isSpecial = computed(() => props.name.includes("Retweet all Nimbl tv"));
+const isSpecial = computed(() => props.name.includes("Retweet all Nimbl tv") || props.name.includes("Retweet latest post"));
 </script>
 
 <style scoped>
@@ -157,7 +157,7 @@ const isSpecial = computed(() => props.name.includes("Retweet all Nimbl tv"));
     bottom: 0;
     width: 100%;
     height: 100%;
-    background: #FFD700;
+    background: linear-gradient(to right, #15021b 0%, #ffd900b5 100%); ;
 }
 .main__inner {
     --b: max(2px, 0.3vh);
@@ -200,21 +200,6 @@ const isSpecial = computed(() => props.name.includes("Retweet all Nimbl tv"));
     background-color: #15021b;
     background-image: none;
 }
-/* .card__content::before {
-    content: "";
-    background-image: var(--bg);
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    opacity: 0.8;
-    mix-blend-mode: hard-light;
-}
- */
 .inside__shadow {
     @apply before:absolute before:z-30 before:w-full before:h-full hover:before:shadow-[0px_0px_100px_-20px_inset]
     hover:before:shadow-blue-700/70 before:shadow-blue-500/70 before:duration-500  before:transition-shadow before:origin-center;
