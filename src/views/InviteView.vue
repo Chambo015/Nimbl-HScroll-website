@@ -10,7 +10,7 @@
                 <CardTelegram />
                 <CardXTwitter />
                 <CardContract />
-                <CardTokenInfo />
+                <CardWinners />
             </div>
             <div class="w-full overflow-hidden flex-grow blur_borders max-md:before:hidden max-md:after:hidden relative isolate">
                 <BoardTasks />
@@ -86,7 +86,7 @@ import CardContract from "@/components/InviteComponents/SocialCards/CardContract
 import MultiplierInvite from "@/components/InviteComponents/MultiplierInvite.vue";
 import BoardTasks from "@/components/InviteComponents/BoardTasks.vue";
 import BackToNimbl from "@/components/InviteComponents/SocialCards/BackToNimbl.vue";
-import CardTokenInfo from "@/components/InviteComponents/SocialCards/CardTokenInfo.vue";
+import CardWinners from "@/components/InviteComponents/SocialCards/CardWinners.vue";
 import gsap from "gsap";
 import {keyClaim} from "@/types";
 const breakpoints = useBreakpoints(breakpointsTailwind);

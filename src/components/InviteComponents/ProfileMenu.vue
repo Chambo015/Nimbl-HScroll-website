@@ -7,7 +7,7 @@
                 <UserAvatar v-once :url="userStorage.twitter_avatar_url || undefined" />
                 <span v-once class="truncate ml-2 flex-shrink">{{ userStorage.user?.username || userStorage.user?.first_name || "Profile" }}</span>
                 <IconChevronDown class="ml-2 mr-1 h-5 w-5 text-violet-200 hover:text-violet-100 flex-shrink-0" :class="{'rotate-180': open}" aria-hidden="true" />
-                <div class="bg-gradient-header-secondary md:hidden grow-[2] self-start ml-auto py-2 px-2 chevron_mask overflow-hidden">
+                <div class="bg-gradient-header-secondary md:hidden grow-[2] self-start ml-auto py-2 px-2 chevron_mask overflow-hidden max-w-[200px]">
                     <p class="text-white font-Rollbox text-xs !leading-none">TOTAL UNITS</p>
                     <p v-once class="mt-2 text-[#c7972a]">{{ userStorage.user?.units }}</p>
                 </div>

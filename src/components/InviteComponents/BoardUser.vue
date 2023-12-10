@@ -4,6 +4,7 @@
         <div v-if="userStorage.user" class="w-full h-full p-px flex max-md:px-2 flex-col">
             <div class="flex flex-wrap relative z-30 gap-3 isolate">
                 <ProfileMenu />
+                <CardWinners class="md:!hidden grow max-md:!w-full !max-w-full max-md:!min-h-[50px] "  />
                 <a href="#top10Users"
                     class="flex-grow ring-1 ring-blue-500/25 rounded-md flex flex-col min-w-[300px] max-2xl:w-[260px] animation-card-hover group relative ml-auto h-[60px] max-2xl:h-[50px] max-md:w-full cursor-pointer overflow-hidden bg-gradient-header-secondary py-3 max-2xl:py-2 pl-[11px] pr-[1%] max-2xl:pr-5">
                     <p class="font-Rollbox font-bold text-lg !leading-none text-white/70 max-2xl:text-base">
@@ -103,6 +104,7 @@ import useTwitterAuth from "@/composables/useTwitterAuth";
 import ProfileMenu from "./ProfileMenu.vue";
 import IconContentCopy from "../icons/IconContentCopy.vue";
 import BoardUnits from './BoardUnits.vue';
+import CardWinners from './SocialCards/CardWinners.vue';
 
 const privacyPolicyURL = new URL("/privacy-policy.pdf", import.meta.url).href;
 const errorLogin = ref();

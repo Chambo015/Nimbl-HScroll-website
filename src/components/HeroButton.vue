@@ -1,14 +1,14 @@
 <template>
     <button
         @click="buttonClick"
-        class="wrap w-[353px] h-[67px] max-sm:w-[266px] max-sm:h-[50px] relative cursor-pointer"
+        class="wrap w-[353px] h-[67px] max-sm:w-[266px] max-sm:h-[50px] relative cursor-pointer group active:translate-y-1 will-change-transform"
         :class="[bgBtn]">
         <img
             v-if="!regular"
             :src="imgBg"
             alt="imgBg"
             class="absolute left-0 top-0 w-full object-cover mix-blend-color-burn h-full" />
-        <div v-if="!regular" class="inner-border  absolute inset-1"></div>
+        <div v-if="!regular" class="inner-border group-hover:bg-[#98b8f0] transition-colors absolute inset-1 shadow-2xl"></div>
         <div :class="['flex justify-center items-center relative', {'gap-5 max-sm:gap-2': $slots.icon}]">
             <span class="font-rfdewi text-sm font-bold"><slot></slot></span>
             <slot name="icon"></slot>
@@ -50,7 +50,6 @@ button.wrap {
         0 100%,
         0 var(--rb)
     );
-  
 }
 div.inner-border {
     --rb: v-bind(rb);

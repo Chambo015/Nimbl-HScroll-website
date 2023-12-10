@@ -1,119 +1,264 @@
 <template>
     <section class="relative w-full h-full flex flex-col max-sm:items-center">
-        <div ref="titleEl" data="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[40px]">
+        <div ref="titleEl" data="titleEl" class="container justify-center flex pt-[50px] max-sm:pt-[20px]">
             <div class="inline-flex flex-col items-center">
-                <div
-                    class="py-3 px-4 border-[#6E7DFE] border bg-[#1C0048] inline-block lg:py-4 lg:px-6 font-gilroy font-medium tracking-[0.17em] lg:text-2xl mb-5 lg:mb-6 !leading-none">
+                <div ref="secondTitleEl"
+                    class="py-2 px-4 border-[#6E7DFE] border bg-[#1C0048] inline-block lg:py-4 lg:px-6 font-gilroy font-medium tracking-[0.17em] lg:text-2xl mb-6 !leading-none">
                     BETA TESTING
                 </div>
-                <h1 class="main-title">
+                <h1 class="main-title cursor-pointer"  @click="$router.push({name: 'nimbltv'})">
                     NIMBL.TV
                     <span class="main-text-layer">NIMBL.TV</span>
                 </h1>
             </div>
         </div>
 
-        <div class="container flex grow pb-[35px] gap-24 mt-10 overflow-y-clip">
+        <div class="container flex flex-col lg:flex-row  grow pb-[35px] lg:gap-24 lg:mt-10 mt-0 overflow-y-clip">
             <div class="lg:w-[500px] w-full self-start shrink-0 pt-5">
-                <form @submit.prevent="">
-                    <div class="relative flex items-center gap-0 px-5 py-3 lg:py-5 lg:px-8">
-                        <svg
-                            class="mr-5 lg:w-8 lg:h-8 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24">
-                            <path
-                                fill="currentColor"
-                                d="M12 12q-1.65 0-2.825-1.175T8 8q0-1.65 1.175-2.825T12 4q1.65 0 2.825 1.175T16 8q0 1.65-1.175 2.825T12 12Zm-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13q1.65 0 3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20H4Z" />
-                        </svg>
+                <form ref="formEl" data="formEl" @submit.prevent="">
+                    <div class="relative flex flex-row-reverse items-center gap-0 px-5 py-3 lg:py-5 lg:px-8">
                         <input
                             @input="errorText = null"
                             type="text"
                             v-model="userName"
                             class="bg-transparent font-gilroy outline-none w-full text-sm lg:text-2xl"
                             :class="[errorText ? 'text-red-500' : 'text-white']"
-                            placeholder="Name/Pseudonym" />
+                            placeholder="Name/Pseudonym"
+                            name="user" />
+                        <IconUser class="mr-5 lg:w-8 lg:h-8 w-5 h-5 text-white" />
                         <div class="inner-border absolute inset-0"></div>
                     </div>
-                    <div class="relative flex items-center gap-0 px-5 py-3 lg:py-5 lg:px-8 mt-5 lg:mt-8">
-                        <svg
-                            class="mr-5 lg:w-8 lg:h-8 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="32"
-                            height="32"
-                            viewBox="0 0 24 24">
-                            <path
-                                fill="currentColor"
-                                d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20H4Zm8-7.175q.125 0 .263-.038t.262-.112L19.6 8.25q.2-.125.3-.312t.1-.413q0-.5-.425-.75T18.7 6.8L12 11L5.3 6.8q-.45-.275-.875-.012T4 7.525q0 .25.1.438t.3.287l7.075 4.425q.125.075.263.113t.262.037Z" />
-                        </svg>
+                    <div
+                        class="relative flex flex-row-reverse items-center gap-0 px-5 py-3 lg:py-5 lg:px-8 mt-5 lg:mt-8">
                         <input
                             @input="errorText = null"
-                            type="text"
+                            type="email"
                             v-model="userEmail"
                             class="bg-transparent font-gilroy outline-none w-full text-sm lg:text-2xl"
                             :class="[errorText ? 'text-red-500' : 'text-white']"
-                            placeholder="Email address" />
+                            placeholder="Email address"
+                            name="email" />
+                        <IconEmail class="mr-5 lg:w-8 lg:h-8 w-5 h-5 text-white" />
                         <div class="inner-border absolute inset-0"></div>
                     </div>
-                    <div class="relative flex items-center gap-0 px-5 py-3 lg:py-5 lg:px-8 mt-5 lg:mt-8">
-                        <svg
-                            class="mr-5 lg:w-8 lg:h-8 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="32"
-                            height="32"
-                            viewBox="0 0 24 24">
-                            <path
-                                fill="currentColor"
-                                d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5h-8q-1.775 0-2.887 1.113T9 9v6q0 1.775 1.113 2.888T13 19h8q0 .825-.587 1.413T19 21H5Zm8-4q-.825 0-1.412-.587T11 15V9q0-.825.588-1.412T13 7h7q.825 0 1.413.588T22 9v6q0 .825-.587 1.413T20 17h-7Zm3-3.5q.65 0 1.075-.425T17.5 12q0-.65-.425-1.075T16 10.5q-.65 0-1.075.425T14.5 12q0 .65.425 1.075T16 13.5Z" />
-                        </svg>
+                    <div
+                        class="relative flex flex-row-reverse items-center gap-0 px-5 py-3 lg:py-5 lg:px-8 mt-5 lg:mt-8">
                         <input
                             @input="errorText = null"
                             type="text"
                             v-model="userWallet"
                             class="bg-transparent font-gilroy outline-none w-full text-sm lg:text-2xl"
                             :class="[errorText ? 'text-red-500' : 'text-white']"
-                            placeholder="Wallet address" />
+                            placeholder="Wallet address"
+                            name="wallet" />
+                        <IconWallet class="mr-5 lg:w-8 lg:h-8 w-5 h-5 fill-white" />
                         <div class="inner-border absolute inset-0"></div>
                     </div>
 
-                    <HeroButton class="w-full h-[55px] mt-8 lg:mt-14" title="coming soon">
-                        <p class="font-rfdewi text-2xl max-sm:text-sm font-bold">APPLY</p>
-                        <template #icon><IconFiveDots class="w-[30px] h-[30px]" /></template>
+                    <HeroButton class="!w-full h-[55px] mt-8 lg:mt-14" title="coming soon">
+                        <p class="font-rfdewi text-2xl max-sm:text-sm font-bold tracking-widest">APPLY</p>
+                        <template #icon><IconFiveDots class="lg:w-[30px] lg:h-[30px] w-[15px] h-[15px]" /></template>
                     </HeroButton>
 
                     <div class="flex justify-center items-center mt-5">
-                        <input type="checkbox" id="Terms" />
-                        <label for="Terms" class="text-white/50 select-none"
-                            >I agree to the <a href="">Terms of Use</a></label
+                        <input type="checkbox" id="Terms" v-model="terms" />
+                        <label for="Terms" class="text-white/50 select-none lg:text-base text-xs"
+                            >I agree to the
+                            <a :href="privacyPolicyURL" target="_blank" class="text-blue-600">Terms of Use</a></label
                         >
                     </div>
                 </form>
             </div>
-            <div class="flex grow h-full relative">
+            <div class="flex grow lg:h-full relative mx-[-20px] lg:mx-0 w-full lg:w-auto">
                 <img
+                    ref="imgPhoneEl"
+                    data="imgPhoneEl"
                     :src="imgPhone"
                     alt="imgPhone"
                     loading="lazy"
-                    class="h-[125%] !w-auto !max-w-[auto] object-contain shrink-0 relative z-20" />
-                <div
-                    class="relative grow w-[50vw] z-10 before:absolute before:bottom-0 before:top-10 before:right-0 before:-left-[10%] before:bg-[#20133E]"></div>
+                    class="lg:h-[125%] lg:!w-auto !max-w-[auto] w-[140px] object-contain shrink-0 relative z-20" />
+                <div 
+                    ref="descEl"
+                    data="descEl"
+                    class="relative lg:w-[50vw] z-10 self-end before:absolute before:bottom-0 before:top-0 before:right-0 before:-left-[10%] before:bg-[#20133E]/50 before:hidden lg:before:block before:backdrop-blur-sm pt-10 isolate pl-5 flex flex-col justify-end">
+                    <div class="relative z-10">
+                        <p class="font-gilroy font-medium lg:text-2xl text-white">
+                            To apply for beta testing, you must have at least
+                        </p>
+                        <p class="font-gilroy font-medium lg:text-2xl text-white">
+                            <span
+                                class="text-xl lg:text-3xl font-bold text-[#6D7CFF] after:bg-[url('/currency-Nimbl.png')] after:w-[16px] after:h-[16px] lg:after:w-[24px] lg:after:h-[24px] after:inline-block after:bg-contain after:bg-no-repeat after:bg-center"
+                                >5000</span
+                            >
+                            NIMBL tokens
+                        </p>
+                        <div class="border-b border-[#6D29A3] lg:my-5 my-2" />
+                        <p class="font-gilroy font-medium lg:text-2xl">in return you get:</p>
+                        <div ref="stacksEl" class="flex flex-col lg:flex-row gap-5 lg:mt-16 mt-4 lg:-mb-5">
+                            <div
+                                class="relative bg-black/40 border border-[#0037ff]/50 lg:h-[280px] h-[50px]  w-[170px] px-6 flex justify-center items-center">
+                                <img
+                                    loading="lazy"
+                                    src="/beta-username.webp"
+                                    alt="beta-username"
+                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2 -translate-y-1/2 [filter:_drop-shadow(-4px_-5px_8px_#f0b903)_drop-shadow(1px_6px_15px_#0037ff)] w-10 h-10 lg:w-[60%] lg:h-auto object-contain " />
+                                <p class="font-gilroy font-medium text-white lg:text-2xl text-sm text-center">Verified username</p>
+                            </div>
+                            <div
+                                class="relative bg-black/40 border border-[#61f924]/40 lg:h-[280px] h-[50px] w-[170px] font-gilroy px-6 flex flex-col justify-center items-center">
+                                <img
+                                    loading="lazy"
+                                    src="/beta-ultra.webp"
+                                    alt="beta-username"
+                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2  -translate-y-1/2 drop-shadow-[0_4px_15px_#61f924] w-10 h-10 lg:w-[60%] lg:h-auto object-contain" />
+                                <p class="font-gilroy font-medium text-white lg:text-2xl text-sm text-center">Nimbl</p>
+                                <img src="/ultra-text.png" aria-hidden="true" class="h-3 lg:h-5 mt-0 lg:mt-2" />
+                            </div>
+                            <div
+                                class="relative bg-black/40 border border-[#9944e6]/40 lg:h-[280px] h-[50px] w-[170px] px-6 flex justify-center items-center">
+                                <img
+                                    loading="lazy"
+                                    src="/beta-rating.webp"
+                                    alt="beta-username"
+                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2  -translate-y-1/2 drop-shadow-[0_4px_15px_#9944e6] w-10 h-10 lg:w-[60%] lg:h-auto object-contain" />
+                                <p class="font-gilroy font-medium text-white lg:text-2xl text-sm text-center">Rating level 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
+import {useMediaQuery} from "@vueuse/core";
+import gsap from 'gsap'
 
 import HeroButton from "@/components/HeroButton.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import imgPhone from "@/assets/beta/nimbl-left.webp";
+import IconUser from "@/components/icons/IconUser.vue";
+import IconWallet from "@/components/icons/IconWallet.vue";
+import IconEmail from "@/components/icons/IconEmail.vue";
+
+const privacyPolicyURL = new URL("/privacy-policy.pdf", import.meta.url).href;
+const isXS = useMediaQuery("(max-width: 700px)");
+
+const titleEl = ref();
+const secondTitleEl = ref();
+const imgPhoneEl = ref();
+const descEl = ref();
+const stacksEl = ref();
+const formEl = ref();
 
 const userName = ref("");
 const userEmail = ref("");
 const userWallet = ref("");
+const terms = ref(false);
 const errorText = ref(null);
+
+onMounted(() => {
+    if (isXS.value) return;
+    const tl = gsap.timeline();
+
+    tl.from(
+        titleEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -100,
+            ease: "expo.inOut",
+        },
+    );
+    tl.from(
+        secondTitleEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+            yPercent: 100,
+            ease: "power1.inOut",
+        },
+        '=-0.6'
+    );
+    tl.from(
+        imgPhoneEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 2,
+            xPercent: 150,
+            ease: "back.inOut(2)",
+            transformStyle: 'preserve-3d',
+            rotateY: '-60deg',
+            rotate: 30,
+            transformOrigin: 'left bottom',
+            smoothOrigin: true,
+            filter: 'blur(15px)'
+        },
+        '=-1'
+    );
+    tl.from(
+        descEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 2,
+            xPercent: 100,
+            ease: "back.inOut(1.5)",
+            filter: 'blur(15px)'
+        },
+        '=-2'
+    );
+    tl.from(
+        stacksEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 2,
+            yPercent: 80,
+            ease: "back.inOut(1.5)",
+            stagger: 0.5,
+        },
+        "=-1",
+    );
+    tl.from(
+        formEl.value.children,
+        {
+            autoAlpha: 0.0,
+            duration: 1,
+            yPercent: 80,
+            ease: "back.inOut(1.5)",
+            stagger: 0.3,
+        },
+        "+1",
+    );
+
+    /*  tl.from(sliderEl.value, {
+        autoAlpha: 0.0,
+        duration: 1.5,
+        scale: 0.0,
+        ease: "expo.inOut",
+    });
+    tl.from(
+        buttonsEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: 100,
+            ease: "expo.inOut",
+        },
+        "0",
+    );
+    tl.from(
+        titleEl.value,
+        {
+            autoAlpha: 0.0,
+            duration: 1.5,
+            yPercent: -100,
+            ease: "expo.inOut",
+        },
+        "0",
+    ); */
+});
 </script>
 
 <style scoped>
@@ -184,6 +329,13 @@ div.inner-border {
         0% 100%
     );
     background-color: rgba(255, 255, 255, 0.4);
+}
+input:not(:placeholder-shown) ~ div.inner-border {
+    background-color: lightgreen;
+}
+
+input:not(:placeholder-shown) ~ svg {
+    color: lightgreen;
 }
 
 input[type="checkbox"] {

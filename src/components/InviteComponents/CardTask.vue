@@ -41,14 +41,6 @@
                     <img :src="isSpecial ? specialLogo : logoCircle" alt="" class="w-full h-full" />
                 </div>
             </div>
-            <!-- <div
-                v-if="!isCompleted"
-                class="bg_open opacity-80  flex-shrink-0 flex items-center justify-center max-md:w-[12%] w-[17%] cursor-pointer">
-                <p
-                    class="font-TTOctos font-bold text-black text-2xl text-center max-md:rotate-90 max-md:text-base max-2xl:text-lg px-1">
-                    CLAIM
-                </p>
-            </div> -->
             <div v-if="isCompleted" class="absolute right-0 top-1/2 z-30 -translate-y-1/2 z-2 !opacity-100">
                 <Vue3Lottie :animation-data="doneTaskLottie" :height="120" :width="120" :loop="true" />
             </div>

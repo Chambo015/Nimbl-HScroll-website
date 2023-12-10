@@ -26,15 +26,16 @@ export default {
             backgroundImage: {
                 "btn-bg-liner": "linear-gradient(271deg, #0D0C11 2.43%, #46387A 97.57%)",
                 "bg-play-liner": "linear-gradient(230deg, rgba(232, 0, 255, 1) 9.01%, rgba(7, 104, 214, 1) 85.51%)",
-                "bg-planet-liner": "radial-gradient(90.3% 106.3% at 91.68% 87.6%, rgba(109, 147, 173, 0.87) 0%, #101417 80.6%, #AB78FE 92.89%, #FFF 100%)",
+                "bg-planet-liner":
+                    "radial-gradient(90.3% 106.3% at 91.68% 87.6%, rgba(109, 147, 173, 0.87) 0%, #101417 80.6%, #AB78FE 92.89%, #FFF 100%)",
                 "gradient-header-secondary":
                     "radial-gradient(443.81% 434.72% at 322.31% -217.78%, #6F359C 0%, #01060C 100%)",
-                    "active-connect": "linear-gradient(180deg, #7BE22A 0%, #2A6000 100%)",
-                    "invite-bg":"radial-gradient(443.81% 434.72% at 322.31% -217.78%, #350f52 0%, #01060C 100%)"
+                "active-connect": "linear-gradient(180deg, #7BE22A 0%, #2A6000 100%)",
+                "invite-bg": "radial-gradient(443.81% 434.72% at 322.31% -217.78%, #350f52 0%, #01060C 100%)",
             },
             colors: {
-                inviteBg: '#00121B'
-            }
+                inviteBg: "#00121B",
+            },
         },
         container: {
             center: true,
@@ -88,24 +89,23 @@ export default {
                     "-webkit-text-fill-color": "transparent",
                 },
                 ".token-gradient-text": {
-                    "background": "linear-gradient(93deg, #C031FA -0.03%, #6529E0 99.97%)",
+                    background: "linear-gradient(93deg, #C031FA -0.03%, #6529E0 99.97%)",
                     "background-clip": "text",
                     "-webkit-background-clip": "text",
                     "-webkit-text-fill-color": "transparent",
                 },
-               ".special-gradient-text": {
-                "background": "linear-gradient(120deg, #f5b418 0%, #f5b418 30% , #fff 90%)",
-                "background-clip": "text",
-                "-webkit-background-clip": "text",
-                "-webkit-text-fill-color": "transparent",
-               },
+                ".special-gradient-text": {
+                    background: "linear-gradient(120deg, #f5b418 0%, #f5b418 30% , #fff 90%)",
+                    "background-clip": "text",
+                    "-webkit-background-clip": "text",
+                    "-webkit-text-fill-color": "transparent",
+                },
                 ".gradient-tokemomic-text": {
-                    background:
-                    "linear-gradient(180deg, #FFF 59.56%, rgba(255, 255, 255, 0.50) 100%)",
-                "background-clip": "text",
-                "-webkit-background-clip": "text",
-                "-webkit-text-fill-color": "transparent",
-                }
+                    background: "linear-gradient(180deg, #FFF 59.56%, rgba(255, 255, 255, 0.50) 100%)",
+                    "background-clip": "text",
+                    "-webkit-background-clip": "text",
+                    "-webkit-text-fill-color": "transparent",
+                },
             });
         }),
     ],
