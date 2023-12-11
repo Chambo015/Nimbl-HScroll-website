@@ -19,6 +19,8 @@ const containerEl = ref();
 const seasonWrapEl = ref();
 const buttonEl = ref();
 const seasonTitleEl = ref();
+const progressLeftEl = ref();
+const progressRightEl = ref();
 
 const isLoading = ref(false);
 const isEligible = ref(false);
@@ -120,6 +122,57 @@ onMounted(() => {
         },
         "=-0",
     );
+    tl.fromTo(progressLeftEl.value , {
+        rotate: 0,
+        scaleX: -0,
+        scaleY: 1,
+        duration: 2,
+        autoAlpha: 0.0,
+    }, {
+        scaleX: 1,
+        scaleY: 1,
+        duration: 3,
+        repeat: -1,
+        keyframes: {
+            '30%': {
+                autoAlpha: 1.0
+            },
+            '50%': {
+                autoAlpha: 1.0
+            },
+            '80%': {
+                autoAlpha: 0.2
+            },
+            '100%': {
+                autoAlpha: 0.0
+            }
+        }
+    }),tl.fromTo(progressRightEl.value , {
+        rotate: 0,
+        scaleX: 0,
+        scaleY: 1,
+        duration: 2,
+        autoAlpha: 0.0,
+    }, {
+        scaleX: -1,
+        scaleY: 1,
+        duration: 3,
+        repeat: -1,
+        keyframes: {
+            '30%': {
+                autoAlpha: 1.0
+            },
+            '50%': {
+                autoAlpha: 1.0
+            },
+            '80%': {
+                autoAlpha: 0.2
+            },
+            '100%': {
+                autoAlpha: 0.0
+            }
+        }
+    }, '=-3')
 });
 </script>
 
@@ -155,11 +208,13 @@ onMounted(() => {
 
             <h2
                 ref="seasonTitleEl"
-                class="mt-20 text-center font-Rollbox text-3xl font-black text-[#FFCD00] drop-shadow-[0px_-0px_2px_#FFCD00] max-md:text-2xl max-md:mt-14">
+                class="mt-20 relative text-center font-Rollbox text-3xl font-black text-[#FFCD00] drop-shadow-[0px_-0px_2px_#FFCD00] max-md:text-2xl max-md:mt-14">
                 <span v-if="currentSeason === 0">SEASON ONE</span>
                 <span v-if="currentSeason === 1">SEASON TWO</span>
                 <span v-if="currentSeason === 2">SEASON THREE</span>
                 <span v-if="currentSeason === 3">SEASON FOUR</span>
+                <div ref="progressLeftEl" class="left-line_season" />
+                <div ref="progressRightEl" class="right-line_season" />
             </h2>
 
             <Transition mode="out-in" name="slide-up"  ref="buttonEl">
@@ -333,5 +388,34 @@ div.inner-border {
 .slide-up-leave-to {
     opacity: 0;
     transform: translateY(-30px);
+}
+
+.left-line_season {
+    width: 50%;
+    height: 5px;
+    background-image: linear-gradient(to right,#0000,#FFCD00 96%,#eccb468f);
+    filter: blur(1px);
+    transform-origin: 0%;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: calc(50% - 2.5px);
+    bottom: 0%;
+    left: 0%;
+    right: auto;
+    transform:  scale(0,1); 
+}
+.right-line_season {
+    width: 50%;
+    height: 5px;
+    background-image: linear-gradient(to right,#0000,#FFCD00 96%,#eccb468f);
+    filter: blur(1px);
+    transform-origin: 0%;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: calc(50% - 2.5px);
+    bottom: 0%;
+    left: auto;
+    right: 0%;
+    transform: translateX(100%) scale(-0,1); 
 }
 </style>
