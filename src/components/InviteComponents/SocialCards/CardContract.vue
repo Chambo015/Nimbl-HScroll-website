@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_card max-md:rounded-none max-md:!bg-[70%_100%] font-Rollbox ring-1 ring-blue-500/50 text-xl max-md:text-sm leading-tight max-w-[250px] max-2xl:text-lg min-h-[100px] max-md:min-h-[75px] p-3 font-bold rounded-md">
+  <div @click="linkContract" class="bg_card max-md:rounded-none max-md:!bg-[70%_100%] font-Rollbox ring-1 ring-blue-500/50 text-xl max-md:text-sm leading-tight max-w-[250px] max-2xl:text-lg min-h-[100px] max-md:min-h-[75px] p-3 font-bold rounded-md">
     <p class="uppercase relative z-10 text_arrow">Contract <br class="hidden max-md:inline" /></p>
     <img :src="contract" alt="contract" width="118" height="72" class="absolute right-0 bottom-0 pointer-events-none mix-blend-lighten max-md:w-[90px]">
   </div>
@@ -7,6 +7,11 @@
 
 <script setup lang="ts">
 import contract from '@/assets/invite/contract.webp'
+
+const linkContract = () => {
+  let link = "https://etherscan.io/address/0xFDdB186c99b9264031144cC3f01Da0038614631F";
+  window.open(link, "_blank");
+}
 </script>
 
 <style scoped>
