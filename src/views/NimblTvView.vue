@@ -10,6 +10,7 @@ import gsap from "gsap";
 import {computed, onMounted, reactive, ref, watchEffect} from "vue";
 import useMouseWheel from "@/composables/mouseWheel";
 import {useMediaQuery, useParallax, useWindowSize} from "@vueuse/core";
+import HeroButton from "@/components/HeroButton.vue";
 
 const props = defineProps({
     ready: Boolean,
@@ -181,16 +182,15 @@ onMounted(() => {
                     /></picture>
                 </div>
             </div>
-            <!--  <div
+            <div
                 ref="buttonsEl"
                 data="buttonsEl"
-                class="max-sm:hidden opacity-0 absolute left-1/2 p-6 gap-4 bottom-16 z-10 -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px] shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
-                <HeroButton
-                    >APPLY FOR CLOSED BETA<template #icon><IconFiveDots /></template
+                class="fixed left-1/2 p-6 gap-4 bottom-10 z-10 max-md:w-[95%] -translate-x-1/2 flex justify-center mt-11 max-sm:flex-col items-center bg-btn-bg-liner border-[#7351C8] border-[2px] shadow-[0px_2px_5px_6px_rgba(101,41,225,0.35)]">
+                <HeroButton class="max-md:!w-[99%]" @click="$router.push({name: 'alpha'})"
+                    >APPLY FOR CLOSED ALPHA<template #icon><IconFiveDots /></template
                 ></HeroButton>
-                <HeroButton @click="$router.push({name: 'ai'})" regular>LAUNCH DESKTOP DEMO APP</HeroButton>
             </div>
-            <div class="w-[266px] h-[55px] mx-auto mt-5 hidden max-sm:hidden opacity-0">
+            <!-- <div class="w-[266px] h-[55px] mx-auto mt-5 hidden max-sm:hidden opacity-0">
                 <HeroButton @click="$router.push({name: 'ai'})"
                     >DOWNLOAD APP<template #icon><IconFiveDots /></template
                 ></HeroButton>

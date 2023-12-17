@@ -2,23 +2,32 @@
     <section class="relative w-full h-full flex flex-col max-sm:items-center">
         <div ref="titleEl" data="titleEl" class="container justify-center flex 2xl:pt-[50px] pt-[20px]">
             <div class="inline-flex flex-col items-center">
-                <div ref="secondTitleEl"
-                    class="py-2 px-4 border-[#6E7DFE] border bg-[#1C0048] inline-block 2xl:py-4 md:py-3 2xl:px-6  font-gilroy font-medium tracking-[0.17em] 2xl:text-2xl md:text-lg mb-6 !leading-none">
-                    BETA TESTING
+                <div
+                    ref="secondTitleEl"
+                    class="py-2 px-4 border-[#6E7DFE] border bg-[#1C0048] inline-block 2xl:py-4 md:py-3 2xl:px-6 font-gilroy font-medium tracking-[0.17em] 2xl:text-2xl md:text-lg mb-6 !leading-none">
+                    ALPHA TEST APPLICATION
                 </div>
-                <h1 class="main-title cursor-pointer"  @click="$router.push({name: 'nimbltv'})">
+                <h1 class="main-title cursor-pointer max-2xl:mt-3 max-md:mt-0" @click="$router.push({name: 'nimbltv'})">
                     NIMBL.TV
                     <span class="main-text-layer">NIMBL.TV</span>
                 </h1>
             </div>
         </div>
 
-        <div class="container flex flex-col lg:flex-row  grow pb-[35px] lg:gap-24 lg:mt-10 mt-0 overflow-y-clip">
-            <div class="2xl:w-[500px] md:w-[400px] w-full self-start shrink-0 pt-5 max-md:pt-0">
-                <form ref="formEl" data="formEl" @submit.prevent="">
+        <div
+            class="container md:-translate-x-[5%] flex flex-col lg:flex-row grow pb-[35px] lg:gap-14 lg:mt-10 mt-0 overflow-y-clip">
+            <div
+                ref="formEl"
+                data="formEl"
+                class="2xl:w-[550px] md:w-[450px] w-full self-start shrink-0 pt-5 max-md:pt-0">
+                <form v-if="userMetamaskWallet" @submit.prevent="">
+                    <div class="mb-5 flex items-center gap-5">
+                        <IconMetamask class="2xl:w-[50px] 2xl:h-[50px] w-[25px] h-[25px]" />
+                        <div class="truncate font-rfdewi">{{ userMetamaskWallet }}</div>
+                    </div>
                     <div class="relative flex flex-row-reverse items-center gap-0 px-5 py-3 2xl:py-5 2xl:px-8">
                         <input
-                            @input="errorText = null"
+                            @input="errorText = ''"
                             type="text"
                             v-model="userName"
                             class="bg-transparent font-gilroy outline-none w-full text-sm md:text-lg 2xl:text-2xl"
@@ -31,7 +40,7 @@
                     <div
                         class="relative flex flex-row-reverse items-center gap-0 px-5 py-3 2xl:py-5 2xl:px-8 mt-5 lg:mt-8">
                         <input
-                            @input="errorText = null"
+                            @input="errorText = ''"
                             type="email"
                             v-model="userEmail"
                             class="bg-transparent font-gilroy outline-none w-full text-sm md:text-lg 2xl:text-2xl"
@@ -41,22 +50,14 @@
                         <IconEmail class="mr-5 2xl:w-8 2xl:h-8 w-5 h-5 text-white" />
                         <div class="inner-border absolute inset-0"></div>
                     </div>
-                    <div
-                        class="relative flex flex-row-reverse items-center gap-0 px-5 py-3 2xl:py-5 2xl:px-8 mt-5 lg:mt-8">
-                        <input
-                            @input="errorText = null"
-                            type="text"
-                            v-model="userWallet"
-                            class="bg-transparent font-gilroy outline-none w-full text-sm md:text-lg 2xl:text-2xl"
-                            :class="[errorText ? 'text-red-500' : 'text-white']"
-                            placeholder="Wallet address"
-                            name="wallet" />
-                        <IconWallet class="mr-5 2xl:w-8 2xl:h-8 w-5 h-5 fill-white" />
-                        <div class="inner-border absolute inset-0"></div>
-                    </div>
 
-                    <HeroButton class="!w-full 2xl:!h-[75px] !h-[55px] mt-8 2xl:mt-14" title="coming soon">
-                        <p class="font-rfdewi text-2xl max-2xl:text-lg max-sm:text-sm font-bold tracking-widest">APPLY</p>
+                    <HeroButton
+                        @click="postDataToAlphaTest"
+                        class="!w-full 2xl:!h-[75px] !h-[55px] mt-8 2xl:mt-14"
+                        :class="{'opacity-50 cursor-auto active:translate-y-0 ': !terms}">
+                        <p class="font-rfdewi text-2xl max-2xl:text-lg max-sm:text-sm font-bold tracking-widest">
+                            APPLY
+                        </p>
                         <template #icon><IconFiveDots class="2xl:w-[30px] 2xl:h-[30px] w-[15px] h-[15px]" /></template>
                     </HeroButton>
 
@@ -68,8 +69,39 @@
                         >
                     </div>
                 </form>
+                <div v-else class="bg-[#0c0310bd] w-full py-9 px-6 backdrop-blur-sm max-md:py-6 max-md:px-5">
+                    <p class="text-[#C748FF] font-rfdewi text-2xl uppercase max-md:text-lg">Note:</p>
+                    <p class="font-gilroy text-2xl mt-4 max-md:text-base max-md:mt-2">
+                        We are looking for active alpha testers to provide detailed feedback on Nimbl.tv - we will
+                        reward early users with airdrop eligibility and many other early backer perks
+                    </p>
+
+                    <HeroButton
+                        @click="handleMetamaskConnect"
+                        class="!w-full 2xl:!h-[75px] !h-[55px] md:mt-6 mt-3 2xl:mt-14">
+                        <p
+                            class="font-rfdewi text-2xl max-2xl:text-lg max-sm:text-sm font-bold"
+                            :class="{'scale-90 opacity-70 blur-sm': isLoading}">
+                            CONNECT METAMASK
+                        </p>
+                        <template #icon
+                            ><IconMetamask
+                                class="2xl:w-[30px] 2xl:h-[30px] w-[20px] h-[20px]"
+                                :class="{'scale-90 opacity-70 blur-sm': isLoading}"
+                        /></template>
+                        <div v-if="isLoading" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <span
+                                class="ml-2 inline-block h-3 w-3 animate-pulse rounded-full bg-[#703f95] [animation-duration:0.7s]"></span
+                            ><span
+                                class="ml-2 inline-block h-3 w-3 animate-pulse rounded-full bg-[#703f95] [animation-duration:0.7s] [animation-delay:0.2s]"></span
+                            ><span
+                                class="ml-2 inline-block h-3 w-3 animate-pulse rounded-full bg-[#703f95] [animation-duration:0.7s] [animation-delay:0.4s]"></span>
+                        </div>
+                    </HeroButton>
+                </div>
             </div>
-            <div class="flex grow lg:h-full relative mx-[-20px] lg:mx-0 w-full lg:w-auto">
+
+            <div class="flex lg:h-auto relative mx-[-20px] lg:mx-0 w-full lg:w-auto">
                 <img
                     ref="imgPhoneEl"
                     data="imgPhoneEl"
@@ -77,10 +109,10 @@
                     alt="imgPhone"
                     loading="lazy"
                     class="md:!h-[min(125%,_650px)] md:!w-auto !max-w-[auto] w-[140px] object-contain shrink-0 relative z-20" />
-                <div 
+                <div
                     ref="descEl"
                     data="descEl"
-                    class="relative md:w-[60vw] z-10 self-stretch md:mt-8 before:absolute before:bottom-0 before:top-0 before:right-0 before:-left-[10%] before:bg-[#20133E]/50 before:hidden lg:before:block before:backdrop-blur-sm pt-10 isolate pl-5 flex flex-col justify-stretch">
+                    class="relative md:w-[60vw] z-10 self-stretch md:mt-8 before:absolute before:bottom-0 before:top-0 before:right-0 before:-left-[10%] before:bg-[#20133E]/50 before:hidden lg:before:block before:backdrop-blur-sm pt-16 max-md:pt-2 isolate pl-5 flex flex-col justify-stretch">
                     <div class="relative z-10 grow">
                         <p class="font-gilroy font-medium 2xl:text-2xl md:text-xl text-white">
                             To apply for beta testing, you must have at least
@@ -96,55 +128,101 @@
                         <p class="font-gilroy font-medium 2xl:text-2xl md:text-xl">in return you get:</p>
                         <div ref="stacksEl" class="flex flex-col lg:flex-row gap-5 lg:mt-16 mt-4 lg:-mb-5 h-full">
                             <div
-                                class="relative bg-black/40 border border-[#0037ff]/50 md:h-[280px] 2xl:h-auto h-[45px]  w-[170px] px-6 flex justify-center md:pt-[100px] pt-[12px] items-start">
+                                class="relative bg-black/40 border border-[#0037ff]/50 md:h-auto h-[45px] w-[170px] md:w-[140px] px-6 flex justify-center md:pt-[70px] 2xl:pt-[100px] pt-[12px] items-start">
                                 <img
                                     loading="lazy"
                                     src="/beta-username.webp"
                                     alt="beta-username"
-                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2 -translate-y-1/2 [filter:_drop-shadow(-4px_-5px_8px_#f0b903)_drop-shadow(1px_6px_15px_#0037ff)] w-10 h-10 2xl:w-[60%] md:w-[50%] md:h-auto object-contain " />
-                                <p class="font-gilroy font-medium text-white 2xl:text-2xl md:text-xl text-sm text-center">Verified username</p>
+                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2 -translate-y-1/2 [filter:_drop-shadow(-4px_-5px_8px_#f0b903)_drop-shadow(1px_6px_15px_#0037ff)] w-10 h-10 2xl:w-[60%] md:w-[50%] md:h-auto object-contain" />
+                                <p
+                                    class="font-gilroy font-medium text-white 2xl:text-2xl md:text-xl text-sm text-center">
+                                    Verified username
+                                </p>
                             </div>
                             <div
-                                class="relative bg-black/40 border border-[#61f924]/40  md:h-[280px] 2xl:h-auto h-[45px] w-[170px] font-gilroy px-6 flex max-md:gap-1 md:flex-col justify-center md:justify-start md:pt-[100px] pt-[6px] items-center">
+                                class="relative bg-black/40 border border-[#61f924]/40 md:h-auto h-[45px] md:w-[140px] w-[170px] font-gilroy px-6 flex max-md:gap-1 md:flex-col justify-center md:justify-start md:pt-[70px] 2xl:pt-[100px] pt-[6px] items-center">
                                 <img
                                     loading="lazy"
                                     src="/beta-ultra.webp"
                                     alt="beta-username"
-                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2  -translate-y-1/2 drop-shadow-[0_4px_15px_#61f924] w-10 h-10 2xl:w-[60%] md:w-[50%] md:h-auto object-contain" />
-                                <p class="font-gilroy font-medium text-white 2xl:text-2xl md:text-xl text-sm text-center">Nimbl</p>
+                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2 -translate-y-1/2 drop-shadow-[0_4px_15px_#61f924] w-10 h-10 2xl:w-[60%] md:w-[50%] md:h-auto object-contain" />
+                                <p
+                                    class="font-gilroy font-medium text-white 2xl:text-2xl md:text-xl text-sm text-center">
+                                    Nimbl
+                                </p>
                                 <img src="/ultra-text.png" aria-hidden="true" class="h-3 lg:h-5 mt-0 lg:mt-2" />
                             </div>
                             <div
-                                class="relative bg-black/40 border border-[#9944e6]/40  md:h-[280px] 2xl:h-auto h-[45px] w-[170px] px-6 flex justify-center md:pt-[100px] pt-[13px] items-start">
+                                class="relative bg-black/40 border border-[#9944e6]/40 md:h-auto h-[45px] md:w-[140px] w-[170px] px-6 flex justify-center md:pt-[70px] 2xl:pt-[100px] pt-[13px] items-start">
                                 <img
                                     loading="lazy"
                                     src="/beta-rating.webp"
                                     alt="beta-username"
-                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2  -translate-y-1/2 drop-shadow-[0_4px_15px_#9944e6] w-10 h-10 2xl:w-[60%] md:w-[50%] md:h-auto object-contain" />
-                                <p class="font-gilroy font-medium text-white 2xl:text-2xl md:text-xl text-sm text-center">Rating level 3</p>
+                                    class="absolute lg:top-0 top-1/2 lg:left-1/2 right-0 lg:-translate-x-1/2 translate-x-1/2 -translate-y-1/2 drop-shadow-[0_4px_15px_#9944e6] w-10 h-10 2xl:w-[60%] md:w-[50%] md:h-auto object-contain" />
+                                <p
+                                    class="font-gilroy font-medium text-white 2xl:text-2xl md:text-xl text-sm text-center">
+                                    Rating level 3
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <Teleport to="body">
+            <div v-if="errorText" class="fixed bg-black/50 inset-0 cursor-pointer" @click="errorText = ''">
+                <div
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[500px] p-3 min-h-[200px] bg-[#210000] flex flex-col justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none" viewBox="0 0 35 35">
+                        <path
+                            fill="#BA0016"
+                            fill-rule="evenodd"
+                            d="M3.513 0h27.974C33.395 0 35 1.561 35 3.513v27.974C35 33.395 33.395 35 31.487 35H3.513C1.561 35 0 33.395 0 31.487V3.513A3.498 3.498 0 0 1 3.513 0Zm2.125 7.677 2.039-2.039 9.801 9.845 9.845-9.845 1.995 2.039-9.801 9.801 9.802 9.845-1.996 1.995-9.845-9.801-9.801 9.802-2.039-1.996 9.845-9.845-9.845-9.801Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div class="border border-b border-[#712D36] my-6 w-[80%]" />
+                    <p class="font-gilroy text-2xl text-white">{{ errorText }}</p>
+                </div>
+            </div>
+        </Teleport>
+        <Teleport to="body">
+            <div v-if="isSuccess" class="fixed bg-black/50 inset-0 cursor-pointer" @click="isSuccess = false">
+                <div
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[500px] p-3 min-h-[200px] bg-[#101429] flex flex-col justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none" viewBox="0 0 35 35">
+                        <path
+                            fill="#00BA1E"
+                            fill-rule="evenodd"
+                            d="M3.513 0h27.974C33.395 0 35 1.561 35 3.513v27.974C35 33.395 33.395 35 31.487 35H3.513C1.561 35 0 33.395 0 31.487V3.513A3.498 3.498 0 0 1 3.513 0Z"
+                            clip-rule="evenodd" />
+                        <path fill="#fff" d="m15.6 26.033-7.6-7.6 1.9-1.9 5.7 5.7L27.833 10l1.9 1.9L15.6 26.033Z" />
+                    </svg>
+                    <div class="border border-b border-[#712D36] my-6 w-[80%]" />
+                    <p class="font-gilroy text-2xl text-white">Done</p>
+                </div>
+            </div>
+        </Teleport>
     </section>
 </template>
 
 <script setup lang="ts">
 import {ref, onMounted} from "vue";
 import {useMediaQuery} from "@vueuse/core";
-import gsap from 'gsap'
+import gsap from "gsap";
+import axios, {AxiosError} from "axios";
 
+import useMetamaskAuth from "@/composables/useMetamaskAuth";
 import HeroButton from "@/components/HeroButton.vue";
 import IconFiveDots from "@/components/icons/IconFiveDots.vue";
 import imgPhone from "@/assets/beta/nimbl-left.webp";
 import IconUser from "@/components/icons/IconUser.vue";
-import IconWallet from "@/components/icons/IconWallet.vue";
 import IconEmail from "@/components/icons/IconEmail.vue";
+import IconMetamask from "@/components/icons/iconMetamask.vue";
 
 const privacyPolicyURL = new URL("/privacy-policy.pdf", import.meta.url).href;
 const isXS = useMediaQuery("(max-width: 700px)");
+
+const {handleAuth} = useMetamaskAuth();
 
 const titleEl = ref();
 const secondTitleEl = ref();
@@ -153,25 +231,63 @@ const descEl = ref();
 const stacksEl = ref();
 const formEl = ref();
 
+const isLoading = ref(false);
 const userName = ref("");
 const userEmail = ref("");
-const userWallet = ref("");
+const userMetamaskWallet = ref("");
 const terms = ref(false);
-const errorText = ref(null);
+const errorText = ref("");
+const isSuccess = ref(false);
+
+const handleMetamaskConnect = async () => {
+    try {
+        isLoading.value = true;
+        const res = await handleAuth();
+        if (res && res.user) {
+            userMetamaskWallet.value = res?.user;
+        } else if (res?.error) {
+            errorText.value = res?.error;
+        }
+    } catch (error) {
+    } finally {
+        isLoading.value = false;
+    }
+};
+
+const postDataToAlphaTest = async () => {
+    try {
+        isLoading.value = true;
+        if (userName.value.trim().length > 3 && userEmail.value.trim().length > 3 && terms.value) {
+            const res = await axios.post(
+                "https://api.nimbl.tv/en/api/main/applicants/",
+                {
+                    username: userName.value,
+                    email: userEmail.value,
+                },
+                {headers: {"Content-Type": "application/json"}},
+            );
+
+            if (res.status === 200) {
+                isSuccess.value = true;
+            }
+        }
+    } catch (error) {
+        errorText.value = (error as AxiosError<{message: string}>).response?.data.message as string;
+    } finally {
+        isLoading.value = false;
+    }
+};
 
 onMounted(() => {
     if (isXS.value) return;
     const tl = gsap.timeline();
 
-    tl.from(
-        titleEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: -100,
-            ease: "expo.inOut",
-        },
-    );
+    tl.from(titleEl.value, {
+        autoAlpha: 0.0,
+        duration: 1.5,
+        yPercent: -100,
+        ease: "expo.inOut",
+    });
     tl.from(
         secondTitleEl.value,
         {
@@ -180,7 +296,7 @@ onMounted(() => {
             yPercent: 100,
             ease: "power1.inOut",
         },
-        '=-0.6'
+        "=-0.6",
     );
     tl.from(
         imgPhoneEl.value,
@@ -189,14 +305,14 @@ onMounted(() => {
             duration: 2,
             xPercent: 150,
             ease: "back.inOut(2)",
-            transformStyle: 'preserve-3d',
-            rotateY: '-60deg',
+            transformStyle: "preserve-3d",
+            rotateY: "-60deg",
             rotate: 30,
-            transformOrigin: 'left bottom',
+            transformOrigin: "left bottom",
             smoothOrigin: true,
-            filter: 'blur(15px)'
+            filter: "blur(15px)",
         },
-        '=-1'
+        "=-1",
     );
     tl.from(
         descEl.value,
@@ -205,9 +321,9 @@ onMounted(() => {
             duration: 2,
             xPercent: 100,
             ease: "back.inOut(1.5)",
-            filter: 'blur(15px)'
+            filter: "blur(15px)",
         },
-        '=-2'
+        "=-2",
     );
     tl.from(
         stacksEl.value.children,
@@ -221,43 +337,15 @@ onMounted(() => {
         "=-1",
     );
     tl.from(
-        formEl.value.children,
+        formEl.value,
         {
             autoAlpha: 0.0,
             duration: 1,
             yPercent: 80,
             ease: "back.inOut(1.5)",
-            stagger: 0.3,
         },
         "+1",
     );
-
-    /*  tl.from(sliderEl.value, {
-        autoAlpha: 0.0,
-        duration: 1.5,
-        scale: 0.0,
-        ease: "expo.inOut",
-    });
-    tl.from(
-        buttonsEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: 100,
-            ease: "expo.inOut",
-        },
-        "0",
-    );
-    tl.from(
-        titleEl.value,
-        {
-            autoAlpha: 0.0,
-            duration: 1.5,
-            yPercent: -100,
-            ease: "expo.inOut",
-        },
-        "0",
-    ); */
 });
 </script>
 

@@ -105,9 +105,9 @@ const router = createRouter({
             component: () => import("@/views/InviteView.vue"),
         },
         {
-            path: "/beta",
-            name: "beta",
-            component: () => import("@/views/BetaTestView.vue"),
+            path: "/alpha",
+            name: "alpha",
+            component: () => import("@/views/AlphaTestView.vue"),
         },
        /*  {
             path: "/invite",

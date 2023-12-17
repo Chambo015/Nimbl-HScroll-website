@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, onUnmounted, computed, ref, reactive} from "vue";
+import {onMounted, computed, ref, reactive} from "vue";
 import imgBg from "@/assets/db-bg.png";
 import imgBgWebp from "@/assets/db-bg.webp";
 import personData from "@/assets/person-data.png";

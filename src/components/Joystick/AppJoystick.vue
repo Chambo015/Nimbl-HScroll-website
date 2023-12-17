@@ -2,7 +2,7 @@
 import {ref, computed} from 'vue'
 import BottomJoystick from './BottomJoystick.vue';
 import CenterJoystick from './CenterJoystick.vue';
-// import LeftJoystick from './LeftJoystick.vue';
+import LeftJoystick from './LeftJoystick.vue';
 import TopJoystick from './TopJoystick.vue';
 import CenterJoystickTwitter from './CenterJoystickTwitter.vue';
 import { useRoute } from 'vue-router';
@@ -27,6 +27,11 @@ onClickOutside(target, () => {
     showTwitterPost.value = false;
 })
 const { top } = useElementBounding(target)
+
+const linkContract = () => {
+  let link = "https://etherscan.io/address/0xFDdB186c99b9264031144cC3f01Da0038614631F";
+  window.open(link, "_blank");
+}
 </script>
 
 <template>
@@ -58,13 +63,13 @@ const { top } = useElementBounding(target)
             <TopJoystick class="w-[144px] h-[127px] max-sm:w-[81px] max-sm:h-[72px]" />
         </button>
         <!-- Left -->
-        <!-- <button
+        <button
             v-if="!isInvitePage"
-            @click="$router.push({name: 'beta'})"
+            @click="linkContract"
             class="max-sm:w-[81px] max-sm:h-[72px] absolute top-1/2 -translate-y-[calc(50%+3px)] right-[120px] max-sm:right-[69px] w-[144px] h-[146px] transition-all"
             :class="[isOpenMenu ? ' translate-x-0  hover:[&>svg]:fill-[#0F0722]' : 'opacity-0 translate-x-1/2 hidden']">
             <LeftJoystick class="w-[144px] h-[146px] max-sm:w-[81px] max-sm:h-[72px]" />
-        </button> -->
+        </button>
         <div v-if="showTwitterPost" class="absolute top-0 right-0 -translate-y-full z-[9999] overflow-hidden" :style="{height: (top - 50) + 'px'}"><TweetContainer /></div>
     </div>
 </template>
